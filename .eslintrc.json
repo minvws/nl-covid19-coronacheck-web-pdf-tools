@@ -1,0 +1,27 @@
+{
+  "plugins": ["prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:compat/recommended"
+  ],
+  "parser": "esprima",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "polyfills": ["Promise", "Object.assign"]
+  },
+  "overrides": [
+    {
+      "files": ["scripts/*.js"],
+      "env": {
+        "node": true
+      }
+    }
+  ]
+}

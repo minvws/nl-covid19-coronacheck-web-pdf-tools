@@ -1,0 +1,32 @@
+{
+  "name": "dcc-pdf-tools",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "fix": "eslint . --fix",
+    "convert-assets": "node scripts/convert-assets.js",
+    "typescript": "tsc"
+  },
+  "dependencies": {
+    "core-js": "^3.15.1"
+  },
+  "peerDependencies": {
+    "jspdf": "^2.3.1",
+    "qrcode": "^1.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-compat": "^3.9.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jspdf": "^2.3.1",
+    "mime": "^2.5.2",
+    "prettier": "^2.3.1",
+    "qrcode": "^1.4.4",
+    "typescript": "^4.3.4"
+  }
+}
