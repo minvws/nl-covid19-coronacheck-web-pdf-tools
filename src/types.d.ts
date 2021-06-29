@@ -1,12 +1,10 @@
-export type jsPDF = import("jspdf").jsPDF;
-
 export type EventType = "negativeTest" | "vaccination";
 
 export type Locale = "nl" | "en";
 
 export type Metadata = { title: string; author: string };
 
-export type QRData = NLQRData | EUQRData;
+export type QRData = NLQRData | EUQRVaccinationData;
 
 export type NLQRData = {
   initials: string;
@@ -17,7 +15,7 @@ export type NLQRData = {
 };
 
 // TODO
-export type EUQRData = any;
+export type EUQRVaccinationData = any
 
 export type Page = NLPage | EUPage;
 
@@ -31,6 +29,6 @@ export type NLPage = {
 export type EUPage = {
   type: EventType;
   territory: "eu";
-  qr: EUQRData;
+  qr: EUQRVaccinationData;
   urlQR: string;
 };
