@@ -54,7 +54,6 @@ const questionsFrameInnerLeft = rightPartLeft + marginQuestionsFrame;
 const questionsFrameInnerWidth = partWidth - 2 * marginQuestionsFrame;
 const fontSizeStandard = 10;
 const QrPositionY = 181;
-const colSize = partWidth / 2 - marginLeft;
 /** @type {Color} */
 const lightBlack = [56, 56, 54];
 export const lineHeight = 4.5;
@@ -240,8 +239,8 @@ const getUserDetails = (page, locale) => {
         const fontSizeTinyCaps = 5;
         const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
         const fieldSpacing = lineHeightSmallCaps * 2.3;
-        const fields = ["name", "dateOfBirth", "disease"];
-        const values = [qr.fullName, qr.birthDateString, "COVID-19"];
+        const fields = ["name", "dateOfBirth"];
+        const values = [qr.fullName, qr.birthDateString];
         switch (page.type) {
             case "vaccination":
                 fields.push(
@@ -256,6 +255,7 @@ const getUserDetails = (page, locale) => {
                 break;
             case "negativetest":
                 fields.push(
+                    "disease",
                     "testType",
                     "testName",
                     "testDate",
@@ -267,6 +267,7 @@ const getUserDetails = (page, locale) => {
                     "validUntil"
                 );
                 values.push(
+                    "COVID-19",
                     qr.testType,
                     qr.testName,
                     qr.dateOfTest,
@@ -275,6 +276,24 @@ const getUserDetails = (page, locale) => {
                     qr.testManufacturer,
                     qr.countryOfTest,
                     qr.certificateIssuer,
+                    qr.validUntil
+                );
+                break;
+            case "recovery":
+                fields.push(
+                    "diseaseRecoveredFrom",
+                    "testDate",
+                    "countryOfTest",
+                    "certificateIssuer",
+                    "validFrom",
+                    "validUntil"
+                );
+                values.push(
+                    "COVID-19",
+                    qr.dateOfTest,
+                    qr.countryOfTest,
+                    qr.certificateIssuer,
+                    qr.validFrom,
                     qr.validUntil
                 );
                 break;
