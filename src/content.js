@@ -248,12 +248,12 @@ const getUserDetails = (proof, locale) => {
         switch (proof.eventType) {
             case "vaccination":
                 fields.push(
-                    "vaccin",
-                    "vaccinType",
-                    "vaccinManufacturer",
+                    "vaccineBrand",
+                    "vaccineType",
+                    "vaccineManufacturer",
                     "doses",
-                    "dateOfVaccination",
-                    "countryOfVaccination",
+                    "vaccinationDate",
+                    "vaccinationCountry",
                     "certificateIssuer"
                 );
                 break;
