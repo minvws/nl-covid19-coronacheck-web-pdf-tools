@@ -1,5 +1,3 @@
-// @ts-check
-
 import * as img from "./assets/img";
 import { t } from "./i18n";
 
@@ -67,6 +65,7 @@ export const lineHeight = 4.5;
  * @return {TextItem[]}
  */
 export const getTextItems = (page, locale) => {
+    /** @type {TextItem[]} */
     const items = [
         {
             text: t(locale, page.territory + ".title"),
@@ -155,10 +154,7 @@ export const getTextItems = (page, locale) => {
     if (page.territory === "nl") {
         items.push(
             {
-                text:
-                    page.territory === "nl"
-                        ? t(locale, "nl.propertiesLabel")
-                        : t(locale, "eu." + page.type + ".propertiesLabel"),
+                text: t(locale, "nl.propertiesLabel"),
                 fontFamily: "dejavu-sans",
                 fontWeight: 700,
                 fontSize: 10,
@@ -197,7 +193,7 @@ export const getTextItems = (page, locale) => {
 /**
  * @param {Page} page
  * @param {Locale} locale
- * @return {string}
+ * @return {TextItem[]}
  */
 const getUserDetails = (page, locale) => {
     let string = "";
@@ -218,7 +214,7 @@ const getUserDetails = (page, locale) => {
                     date: qr.validUntil,
                 }) +
                 "\n\n";
-        } else if (page.type === "negativeTest") {
+        } else if (page.type === "negativetest") {
             string +=
                 t(locale, "nl.userData.validUntil") +
                 ": " +
@@ -237,6 +233,7 @@ const getUserDetails = (page, locale) => {
             },
         ];
     } else {
+        /** @type {TextItem[]} */
         const userDetails = [];
         const qr = page.qr;
         const fontSizeSmallCaps = 6.5;
@@ -298,6 +295,7 @@ const getUserDetails = (page, locale) => {
                 userDetails.push({
                     text: t("en", "eu.userData." + field).toUpperCase(),
                     fontFamily: "dejavu-sans",
+                    fontWeight: 400,
                     fontSize: fontSizeSmallCaps,
                     position: [rightPartLeft, currentY],
                     width: partWidth,
