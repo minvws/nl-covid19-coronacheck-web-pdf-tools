@@ -18,7 +18,7 @@ import {
 
 /** @typedef {import("./types").Metadata} Metadata */
 /** @typedef {import("./types").Locale} Locale */
-/** @typedef {import("./types").Page} Page */
+/** @typedef {import("./types").Proof} Proof */
 
 /**
  * @param {Locale} locale
@@ -150,22 +150,22 @@ const drawFrames = (doc, frames) => {
 };
 
 /**
- * @param {Page[]} pages
+ * @param {Proof[]} proofs
  * @param {"en"|"nl"} locale
  * @param {number} qrSizeInCm
  * @param {Metadata} [metadata]
  * @return {Promise<jsPDF>}
  */
-export const getDocument = async (pages, locale, qrSizeInCm, metadata) => {
+export const getDocument = async (proofs, locale, qrSizeInCm, metadata) => {
     const doc = initDoc(locale, metadata);
-    for (const page of pages) {
-        if (pages.indexOf(page) > 0) {
+    for (const proof of proofs) {
+        if (proofs.indexOf(proof) > 0) {
             doc.addPage();
         }
-        const frames = getFrames(page.territory);
-        const textItems = getTextItems(page, locale);
+        const frames = getFrames(proof.territory);
+        const textItems = getTextItems(proof, locale);
         const lines = getLines();
-        const imageItems = await getImageItems(page, qrSizeInCm);
+        const imageItems = await getImageItems(proof, qrSizeInCm);
         drawFrames(doc, frames);
         drawImageItems(doc, imageItems);
         drawLines(doc, lines);

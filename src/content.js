@@ -1,7 +1,8 @@
 import * as img from "./assets/img";
+import { generateQR } from "./qr";
 import { t } from "./i18n";
 
-/** @typedef {import("./types").Page} Page */
+/** @typedef {import("./types").Proof} Proof */
 /** @typedef {import("./types").Locale} Locale */
 
 /** @typedef {[number, number, number]} Color */
@@ -60,15 +61,15 @@ const lightBlack = [56, 56, 54];
 export const lineHeight = 4.5;
 
 /**
- * @param {Page} page
+ * @param {Proof} proof
  * @param {Locale} locale
  * @return {TextItem[]}
  */
-export const getTextItems = (page, locale) => {
+export const getTextItems = (proof, locale) => {
     /** @type {TextItem[]} */
     const items = [
         {
-            text: t(locale, page.territory + ".title"),
+            text: t(locale, proof.territory + ".title"),
             fontFamily: "montserrat",
             fontWeight: 700,
             fontSize: 25,
@@ -79,7 +80,7 @@ export const getTextItems = (page, locale) => {
             lineHeight: 9,
         },
         {
-            text: t(locale, page.territory + ".intro"),
+            text: t(locale, proof.territory + ".intro"),
             fontFamily: "dejavu-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
@@ -98,9 +99,9 @@ export const getTextItems = (page, locale) => {
         },
         {
             text:
-                page.territory === "nl"
+                proof.territory === "nl"
                     ? t(locale, "nl.instructions")
-                    : t(locale, "eu." + page.type + ".instructions"),
+                    : t(locale, "eu." + proof.eventType + ".instructions"),
             fontFamily: "dejavu-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
@@ -108,7 +109,10 @@ export const getTextItems = (page, locale) => {
             width: partWidth,
         },
         {
-            text: t(locale, page.territory + "." + page.type + ".qrTitle"),
+            text: t(
+                locale,
+                proof.territory + "." + proof.eventType + ".qrTitle"
+            ),
             fontFamily: "montserrat",
             fontWeight: 700,
             fontSize: 18,
@@ -120,12 +124,12 @@ export const getTextItems = (page, locale) => {
         },
     ];
 
-    const userDetails = getUserDetails(page, locale);
+    const userDetails = getUserDetails(proof, locale);
     for (const userDetailItem of userDetails) {
         items.push(userDetailItem);
     }
 
-    if (page.territory === "eu") {
+    if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning"),
             fontFamily: "montserrat",
@@ -139,7 +143,7 @@ export const getTextItems = (page, locale) => {
 
     if (locale === "nl") {
         items.push({
-            text: t("en", page.territory + "." + page.type + ".qrTitle"),
+            text: t("en", proof.territory + "." + proof.eventType + ".qrTitle"),
             fontFamily: "montserrat",
             fontWeight: 400,
             fontSize: 18,
@@ -151,7 +155,7 @@ export const getTextItems = (page, locale) => {
         });
     }
 
-    if (page.territory === "nl") {
+    if (proof.territory === "nl") {
         items.push(
             {
                 text: t(locale, "nl.propertiesLabel"),
@@ -191,34 +195,34 @@ export const getTextItems = (page, locale) => {
 };
 
 /**
- * @param {Page} page
+ * @param {Proof} proof
  * @param {Locale} locale
  * @return {TextItem[]}
  */
-const getUserDetails = (page, locale) => {
+const getUserDetails = (proof, locale) => {
     let string = "";
-    if (page.territory === "nl") {
-        const qr = page.qr;
-        string += t(locale, "nl.userData.initials") + ": " + qr.initials + "\n";
+    if (proof.territory === "nl") {
+        string +=
+            t(locale, "nl.userData.initials") + ": " + proof.initials + "\n";
         string +=
             t(locale, "nl.userData.dateOfBirth") +
             ": " +
-            page.qr.birthDateStringShort +
+            proof.birthDateStringShort +
             "\n";
         string +=
-            t(locale, "nl.userData.validFrom") + ": " + qr.validFrom + "\n";
-        if (page.type === "vaccination") {
+            t(locale, "nl.userData.validFrom") + ": " + proof.validFrom + "\n";
+        if (proof.eventType === "vaccination") {
             string +=
                 "\n" +
                 t(locale, "nl.userData.validUntilVaccination", {
-                    date: qr.validUntil,
+                    date: proof.validUntil,
                 }) +
                 "\n\n";
-        } else if (page.type === "negativetest") {
+        } else if (proof.eventType === "negativetest") {
             string +=
                 t(locale, "nl.userData.validUntil") +
                 ": " +
-                qr.validUntil +
+                proof.validUntil +
                 "\n\n";
         }
         string += t(locale, "nl.userData.privacyNote");
@@ -235,14 +239,13 @@ const getUserDetails = (page, locale) => {
     } else {
         /** @type {TextItem[]} */
         const userDetails = [];
-        const qr = page.qr;
         const fontSizeSmallCaps = 6.5;
         const fontSizeTinyCaps = 5;
         const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
         const fieldSpacing = lineHeightSmallCaps * 2.3;
         const fields = ["name", "dateOfBirth", "disease"];
-        const values = [qr.fullName, qr.birthDateString, "COVID-19"];
-        switch (page.type) {
+        const values = [proof.fullName, proof.birthDateString, "COVID-19"];
+        switch (proof.eventType) {
             case "vaccination":
                 fields.push(
                     "vaccin",
@@ -267,15 +270,15 @@ const getUserDetails = (page, locale) => {
                     "validUntil"
                 );
                 values.push(
-                    qr.testType,
-                    qr.testName,
-                    qr.dateOfTest,
+                    proof.testType,
+                    proof.testName,
+                    proof.dateOfTest,
                     "Negative (no Corona)",
-                    qr.testLocation,
-                    qr.testManufacturer,
-                    qr.countryOfTest,
-                    qr.certificateIssuer,
-                    qr.validUntil
+                    proof.testLocation,
+                    proof.testManufacturer,
+                    proof.countryOfTest,
+                    proof.certificateIssuer,
+                    proof.validUntil
                 );
                 break;
         }
@@ -322,7 +325,7 @@ const getUserDetails = (page, locale) => {
         });
         currentY += lineHeightSmallCaps;
         userDetails.push({
-            text: qr.certificateNumber,
+            text: proof.certificateNumber,
             fontFamily: "dejavu-sans",
             fontWeight: 400,
             fontSize: fontSizeTinyCaps,
@@ -345,25 +348,25 @@ const getUserDetails = (page, locale) => {
             currentY += lineHeightSmallCaps + fieldSpacing;
         }
 
-        // if (page.type === "vaccination") {
-        //     string += "Surname(s) and first name(s): " + qr.fullName + "\n";
-        //     string += "Date of birth: " + qr.birthDateString + "\n";
+        // if (proof.type === "vaccination") {
+        //     string += "Surname(s) and first name(s): " + proof.fullName + "\n";
+        //     string += "Date of birth: " + proof.birthDateString + "\n";
         //     string += "Disease targeted: COVID-19\n";
-        //     string += "Vaccine: " + qr.vaccineBrand + "\n";
-        //     string += "Vaccine medicinal product: " + qr.vaccineType + "\n";
-        //     string += "Vaccine manufacturer: " + qr.vaccineManufacturer + "\n";
+        //     string += "Vaccine: " + proof.vaccineBrand + "\n";
+        //     string += "Vaccine medicinal product: " + proof.vaccineType + "\n";
+        //     string += "Vaccine manufacturer: " + proof.vaccineManufacturer + "\n";
         //     string +=
         //         "Vaccination doses: " +
-        //         qr.doseNumber +
+        //         proof.doseNumber +
         //         " out of " +
-        //         qr.totalDoses +
+        //         proof.totalDoses +
         //         "\n";
-        //     string += "Vaccination date: " + qr.vaccinationDate + "\n";
-        //     string += "Vaccinated in: " + qr.vaccinationCountry + "\n";
-        //     string += "Certificate issuer: " + qr.certificateIssuer + "\n";
+        //     string += "Vaccination date: " + proof.vaccinationDate + "\n";
+        //     string += "Vaccinated in: " + proof.vaccinationCountry + "\n";
+        //     string += "Certificate issuer: " + proof.certificateIssuer + "\n";
         //     string +=
-        //         "Certificate identifier: " + qr.certificateIdentifier + "\n\n";
-        //     string += "Valid from: " + qr.validFrom + "\n\n";
+        //         "Certificate identifier: " + proof.certificateIdentifier + "\n\n";
+        //     string += "Valid from: " + proof.validFrom + "\n\n";
         //     return string;
         // } else {
         //     return "UserData EU negative test (todo)";
@@ -373,25 +376,26 @@ const getUserDetails = (page, locale) => {
 };
 
 /**
- * @param {Page} page
+ * @param {Proof} proof
  * @param {number} qrSizeInCm
  * @return {Promise<ImageItem[]>}
  */
-export const getImageItems = async (page, qrSizeInCm) => {
+export const getImageItems = async (proof, qrSizeInCm) => {
+    const qrDataUrl = await generateQR(proof.qr, qrSizeInCm, proof.territory);
     const qrSize = qrSizeInCm * 10;
     const coronacheckImageHeight = 10;
     const flagWidth = 63;
     const flagHeight = 42;
     const items = [
         {
-            url: page.territory === "nl" ? img.flagNl : img.flagEu,
+            url: proof.territory === "nl" ? img.flagNl : img.flagEu,
             x: (pageWidth / 2 - flagWidth) / 2,
             y: 87,
             width: flagWidth,
             height: flagHeight,
         },
         {
-            url: page.urlQR,
+            url: qrDataUrl,
             x: (pageWidth / 2 - qrSize) / 2,
             y: QrPositionY,
             width: qrSize,
@@ -405,7 +409,7 @@ export const getImageItems = async (page, qrSizeInCm) => {
             height: 15,
         },
     ];
-    if (page.territory === "nl") {
+    if (proof.territory === "nl") {
         const questionsItem = {
             url: img.coronacheck,
             x: questionsFrameInnerLeft,
