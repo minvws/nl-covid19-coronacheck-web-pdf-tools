@@ -1,4 +1,4 @@
-export type EventType = "negativeTest" | "vaccination";
+export type EventType = "negativetest" | "vaccination";
 
 export type Locale = "nl" | "en";
 

@@ -1,8 +1,8 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
+    "allowJs": false,
+    "checkJs": false,
     "declaration": true,
     "emitDeclarationOnly": true,
     "moduleResolution": "node",
