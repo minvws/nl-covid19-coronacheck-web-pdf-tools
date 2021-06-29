@@ -1,4 +1,4 @@
-export type EventType = Proof["eventType"];
+export type EventType = "negativetest" | "vaccination" | "recovery";
 
 export type Locale = "nl" | "en";
 

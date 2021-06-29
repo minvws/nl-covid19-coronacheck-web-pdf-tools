@@ -55,7 +55,6 @@ const questionsFrameInnerLeft = rightPartLeft + marginQuestionsFrame;
 const questionsFrameInnerWidth = partWidth - 2 * marginQuestionsFrame;
 const fontSizeStandard = 10;
 const QrPositionY = 181;
-const colSize = partWidth / 2 - marginLeft;
 /** @type {Color} */
 const lightBlack = [56, 56, 54];
 export const lineHeight = 4.5;
@@ -243,9 +242,9 @@ const getUserDetails = (proof, locale) => {
         const fontSizeTinyCaps = 5;
         const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
         const fieldSpacing = lineHeightSmallCaps * 2.3;
-        const fields = ["name", "dateOfBirth", "disease"];
-        const values = [proof.fullName, proof.birthDateString, "COVID-19"];
-        switch (proof.eventType) {
+        const fields = ["name", "dateOfBirth"];
+        const values = [proof.fullName, proof.birthDateString];
+        switch (proof.type) {
             case "vaccination":
                 fields.push(
                     "vaccineBrand",
@@ -259,6 +258,7 @@ const getUserDetails = (proof, locale) => {
                 break;
             case "negativetest":
                 fields.push(
+                    "disease",
                     "testType",
                     "testName",
                     "testDate",
@@ -270,6 +270,7 @@ const getUserDetails = (proof, locale) => {
                     "validUntil"
                 );
                 values.push(
+                    "COVID-19",
                     proof.testType,
                     proof.testName,
                     proof.dateOfTest,
@@ -278,6 +279,24 @@ const getUserDetails = (proof, locale) => {
                     proof.testManufacturer,
                     proof.countryOfTest,
                     proof.certificateIssuer,
+                    proof.validUntil
+                );
+                break;
+            case "recovery":
+                fields.push(
+                    "diseaseRecoveredFrom",
+                    "testDate",
+                    "countryOfTest",
+                    "certificateIssuer",
+                    "validFrom",
+                    "validUntil"
+                );
+                values.push(
+                    "COVID-19",
+                    proof.dateOfTest,
+                    proof.countryOfTest,
+                    proof.certificateIssuer,
+                    proof.validFrom,
                     proof.validUntil
                 );
                 break;

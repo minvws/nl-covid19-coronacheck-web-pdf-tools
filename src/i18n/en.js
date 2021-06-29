@@ -7,6 +7,9 @@ export default {
     "eu.vaccination.instructions":
         "1. Print this certificate on A4 (black-and-white allowed)\n\n2. Bring a valid proof of identity to the activity you’re visiting \n\n3. Show the certificate and the proof of identity (and if needed a ticket) at the entrance",
     "eu.vaccination.propertiesLabel": "Vaccination details",
+    "eu.recovery.instructions":
+        "TODO 1. Print dit bewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+    "eu.recovery.qrTitle": "Recovery certificate",
     "eu.title": "International certificate",
     "eu.intro":
         "Are you traveling outside of the Netherlands? Then use this EU Digital COVID Certificate.<br><br>Before you leave, check which test and vaccination certificates are valid in your destination country:<br><a>https://reopen.europa.eu/en</a>",
@@ -21,6 +24,7 @@ export default {
     "eu.userData.name": "SURNAME(S) AND FIRST NAME(S)",
     "eu.userData.dateOfBirth": "Date of birth",
     "eu.userData.disease": "DISEASE TARGETED",
+    "eu.userData.diseaseRecoveredFrom": "Disease recovered from",
     "eu.userData.vaccin": "VACCIN",
     "eu.userData.vaccinType": "VACCINE MEDICINAL PRODUCT",
     "eu.userData.vaccinManufacturer": "VACCINE MANUFACTURER",
@@ -35,6 +39,7 @@ export default {
     "eu.userData.testLocation": "TESTING CENTRE",
     "eu.userData.testManufacturer": "TEST MANUFACTURER",
     "eu.userData.countryOfTest": "MEMBER STATE OF TEST",
+    "eu.userData.validFrom": "Valid from",
     "eu.userData.validUntil": "Valid to",
     "eu.userData.certificateNumber": "UNIQUE CERTIFICATE IDENTIFIER",
     "nl.qrTitle": "Coronavirus pass",

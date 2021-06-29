@@ -6,6 +6,9 @@ export default {
     "eu.vaccination.instructions":
         "1. Print dit coronabewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat je coronabewijs (en eventueel ook je toegangskaartje) zien bij de ingang",
     "eu.vaccination.propertiesLabel": "Vaccinatiegegevens",
+    "eu.recovery.instructions":
+        "1. Print dit bewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+    "eu.recovery.qrTitle": "Herstelbewijs",
     "eu.title": "Internationaal bewijs",
     "eu.intro":
         "Reis je buiten Nederland? Gebruik dan dit EU Digitaal Corona Certificaat (DCC).\n\nBekijk voor vertrek welke test-, herstel- of vaccinatiebewijzen geldig zijn in het land dat je bezoekt: www.reopen.europa.eu/en",
@@ -14,6 +17,7 @@ export default {
     "eu.userData.name": "ACHTERNAAM EN VOORNAM(EN)",
     "eu.userData.dateOfBirth": "Geboortedag",
     "eu.userData.disease": "Ziekteverwekker",
+    "eu.userData.diseaseRecoveredFrom": "Ziekte waarvan hersteld",
     "eu.userData.vaccin": "VACCIN",
     "eu.userData.vaccinType": "TYPE VACCIN",
     "eu.userData.vaccinManufacturer": "PRODUCENT",
@@ -28,6 +32,7 @@ export default {
     "eu.userData.testLocation": "TESTLOCATIE",
     "eu.userData.testManufacturer": "PRODUCENT",
     "eu.userData.countryOfTest": "GETEST IN",
+    "eu.userData.validFrom": "Geldig vanaf",
     "eu.userData.validUntil": "Geldig tot",
     "eu.userData.certificateNumber": "UNIEK CERTIFICAATNUMMER",
     "nl.instructions":
