@@ -1,6 +1,6 @@
 import "core-js/features/promise";
-
 import { jsPDF } from "jspdf";
+
 import {
   DejaVuSans,
   DejaVuSansBold,
@@ -143,24 +143,17 @@ const drawFrames = (doc, frames) => {
  * @param {Page[]} pages
  * @param {"en"|"nl"} locale
  * @param {Metadata} metadata
- * @param {Record<string, string>} labels
  * @param {number} qrSizeInCm
  * @return {Promise<jsPDF>}
  */
-export const getDocument = async (
-  pages,
-  locale,
-  metadata,
-  labels,
-  qrSizeInCm
-) => {
+export const getDocument = async (pages, locale, metadata, qrSizeInCm) => {
   const doc = initDoc(metadata, locale);
   for (const page of pages) {
     if (pages.indexOf(page) > 0) {
       doc.addPage();
     }
     const frames = getFrames();
-    const textItems = getTextItems(page, labels);
+    const textItems = getTextItems(page, locale);
     const lines = getLines();
     const imageItems = await getImageItems(page, qrSizeInCm);
     drawFrames(doc, frames);

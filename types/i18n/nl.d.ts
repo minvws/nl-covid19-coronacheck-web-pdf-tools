@@ -1,0 +1,26 @@
+declare var _default: {
+    "eu.negativeTest.instructions": string;
+    "eu.negativeTest.propertiesLabel": string;
+    "eu.vaccination.instructions": string;
+    "eu.vaccination.propertiesLabel": string;
+    "eu.title": string;
+    "eu.intro": string;
+    "eu.qrTitle": string;
+    "nl.instructions": string;
+    "nl.propertiesLabel": string;
+    "nl.title": string;
+    "nl.intro": string;
+    "nl.qrTitle": string;
+    "nl.userData.initials": string;
+    "nl.userData.dateOfBirth": string;
+    "nl.userData.validFrom": string;
+    "nl.userData.validUntil": string;
+    "nl.userData.validUntilVaccination": string;
+    "nl.userData.privacyNote": string;
+    instructions: string;
+    questions: string;
+    questionsContent: string;
+    "metadata.title": string;
+    "metadata.author": string;
+};
+export default _default;
