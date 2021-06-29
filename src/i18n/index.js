@@ -12,7 +12,7 @@ export const t = (locale, segment, data) => {
     let translation = (lang[locale] || nl)[segment] || segment;
     if (data) {
         for (const key of Object.keys(data)) {
-            translation = translation.replace("${" + key + "}", data[key]);
+            translation = translation.replace("%{" + key + "}", data[key]);
         }
     }
     return translation;

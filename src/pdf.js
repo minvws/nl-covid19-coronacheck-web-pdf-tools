@@ -1,5 +1,6 @@
 import "core-js/features/promise";
 import { jsPDF } from "jspdf";
+import { t } from "./i18n";
 
 import {
     DejaVuSans,
@@ -20,11 +21,11 @@ import {
 /** @typedef {import("./types").Page} Page */
 
 /**
- * @param {Metadata} metadata
  * @param {Locale} locale
+ * @param {Metadata} [metadata]
  * @return {jsPDF}
  */
-const initDoc = (metadata, locale) => {
+const initDoc = (locale, metadata) => {
     const doc = new jsPDF({ format: "a4", orientation: "portrait" });
 
     doc.addFileToVFS("Montserrat-Regular.ttf", MontserratRegular);
@@ -39,7 +40,12 @@ const initDoc = (metadata, locale) => {
 
     doc.setFont("dejavu-sans");
 
-    doc.setProperties(metadata);
+    doc.setProperties(
+        metadata || {
+            author: t(locale, "metadata.author"),
+            title: t(locale, "metadata.title"),
+        }
+    );
     doc.setLanguage(locale);
     doc.viewerPreferences({
         DisplayDocTitle: true,
@@ -146,12 +152,12 @@ const drawFrames = (doc, frames) => {
 /**
  * @param {Page[]} pages
  * @param {"en"|"nl"} locale
- * @param {Metadata} metadata
  * @param {number} qrSizeInCm
+ * @param {Metadata} [metadata]
  * @return {Promise<jsPDF>}
  */
-export const getDocument = async (pages, locale, metadata, qrSizeInCm) => {
-    const doc = initDoc(metadata, locale);
+export const getDocument = async (pages, locale, qrSizeInCm, metadata) => {
+    const doc = initDoc(locale, metadata);
     for (const page of pages) {
         if (pages.indexOf(page) > 0) {
             doc.addPage();
