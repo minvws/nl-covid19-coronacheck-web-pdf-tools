@@ -123,9 +123,9 @@ const europeanProofs = (data, holderConfig) => {
     if (data.dcc.t) {
         for (const credential of data.dcc.t) {
             proofs.push({
-                proofType: "european-vaccination",
+                proofType: "european-negative-test",
 
-                eventType: "vaccination",
+                eventType: "negativetest",
 
                 territory: "eu",
 
@@ -164,9 +164,9 @@ const europeanProofs = (data, holderConfig) => {
     if (data.dcc.r) {
         for (const credential of data.dcc.r) {
             proofs.push({
-                proofType: "european-vaccination",
+                proofType: "european-recovery",
 
-                eventType: "vaccination",
+                eventType: "recovery",
 
                 territory: "eu",
 
