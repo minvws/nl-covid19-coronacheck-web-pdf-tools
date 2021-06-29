@@ -1,9 +1,10 @@
 export const lineHeight: 4.5;
-export function getTextItems(page: Page, labels: Record<string, string>): TextItem[];
+export function getTextItems(page: Page, locale: Locale): TextItem[];
 export function getImageItems(page: Page, qrSizeInCm: number): Promise<ImageItem[]>;
 export function getFrames(): Frame[];
 export function getLines(): Line[];
 export type Page = import("./types").Page;
+export type Locale = import("./types").Locale;
 export type Color = [number, number, number];
 export type Position = [number, number];
 export type ImageItem = {

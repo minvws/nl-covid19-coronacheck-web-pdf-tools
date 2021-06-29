@@ -1,8 +1,10 @@
 // @ts-check
 
 import * as img from "./assets/img";
+import { t } from "./i18n";
 
 /** @typedef {import("./types").Page} Page */
+/** @typedef {import("./types").Locale} Locale */
 
 /** @typedef {[number, number, number]} Color */
 /** @typedef {[number, number]} Position */
@@ -58,13 +60,13 @@ export const lineHeight = 4.5;
 
 /**
  * @param {Page} page
- * @param {Record<string, string>} labels
+ * @param {Locale} locale
  * @return {TextItem[]}
  */
-export const getTextItems = (page, labels) => {
+export const getTextItems = (page, locale) => {
   return [
     {
-      text: labels["pdf." + page.territory + ".title"],
+      text: t(locale, page.territory + ".title"),
       fontFamily: "montserrat",
       fontWeight: 700,
       fontSize: 25,
@@ -75,7 +77,7 @@ export const getTextItems = (page, labels) => {
       lineHeight: 9,
     },
     {
-      text: labels["pdf." + page.territory + ".intro"],
+      text: t(locale, page.territory + ".intro"),
       fontFamily: "dejavu-sans",
       fontWeight: 400,
       fontSize: fontSizeStandard,
@@ -84,7 +86,7 @@ export const getTextItems = (page, labels) => {
       textAlign: "center",
     },
     {
-      text: labels["pdf.instructions"],
+      text: t(locale, "instructions"),
       fontFamily: "montserrat",
       fontWeight: 700,
       fontSize: 18,
@@ -95,8 +97,8 @@ export const getTextItems = (page, labels) => {
     {
       text:
         page.territory === "nl"
-          ? labels["pdf.nl.instructions"]
-          : labels["pdf.eu." + page.type + ".instructions"],
+          ? t(locale, "nl.instructions")
+          : t(locale, "eu." + page.type + ".instructions"),
       fontFamily: "dejavu-sans",
       fontWeight: 400,
       fontSize: fontSizeStandard,
@@ -104,7 +106,7 @@ export const getTextItems = (page, labels) => {
       width: partWidth,
     },
     {
-      text: labels["pdf.questions"],
+      text: t(locale, "questions"),
       fontFamily: "dejavu-sans",
       fontWeight: 700,
       fontSize: fontSizeStandard,
@@ -115,7 +117,7 @@ export const getTextItems = (page, labels) => {
       width: questionsFrameInnerWidth,
     },
     {
-      text: labels["pdf.questionsContent"],
+      text: t(locale, "questionsContent"),
       fontFamily: "dejavu-sans",
       fontWeight: 400,
       fontSize: fontSizeStandard,
@@ -127,7 +129,7 @@ export const getTextItems = (page, labels) => {
       lineHeight: lineHeight,
     },
     {
-      text: labels["pdf." + page.territory + ".qrTitle"],
+      text: t(locale, page.territory + ".qrTitle"),
       fontFamily: "montserrat",
       fontWeight: 700,
       fontSize: 18,
@@ -140,8 +142,8 @@ export const getTextItems = (page, labels) => {
     {
       text:
         page.territory === "nl"
-          ? labels["pdf.nl.propertiesLabel"]
-          : labels["pdf.eu." + page.type + ".propertiesLabel"],
+          ? t(locale, "nl.propertiesLabel")
+          : t(locale, "eu." + page.type + ".propertiesLabel"),
       fontFamily: "dejavu-sans",
       fontWeight: 700,
       fontSize: 10,
@@ -149,7 +151,7 @@ export const getTextItems = (page, labels) => {
       width: partWidth,
     },
     {
-      text: getUserDetails(page, labels),
+      text: getUserDetails(page, locale),
       fontFamily: "dejavu-sans",
       fontWeight: 400,
       fontSize: fontSizeStandard,
@@ -161,33 +163,32 @@ export const getTextItems = (page, labels) => {
 
 /**
  * @param {Page} page
- * @param {Record<string, string>} labels
+ * @param {Locale} locale
  * @return {string}
  */
-const getUserDetails = (page, labels) => {
+const getUserDetails = (page, locale) => {
   let string = "";
   if (page.territory === "nl") {
     const qr = page.qr;
-    string += labels["pdf.nl.userData.initials"] + ": " + qr.initials + "\n";
+    string += t(locale, "nl.userData.initials") + ": " + qr.initials + "\n";
     string +=
-      labels["pdf.nl.userData.dateOfBirth"] +
+      t(locale, "nl.userData.dateOfBirth") +
       ": " +
       page.qr.birthDateStringShort +
       "\n";
-    string += labels["pdf.nl.userData.validFrom"] + ": " + qr.validFrom + "\n";
+    string += t(locale, "nl.userData.validFrom") + ": " + qr.validFrom + "\n";
     if (page.type === "vaccination") {
       string +=
         "\n" +
-        labels["pdf.nl.userData.validUntilVaccination"].replace(
-          "%{date}",
-          qr.validUntil
-        ) +
+        t(locale, "nl.userData.validUntilVaccination", {
+          date: qr.validUntil,
+        }) +
         "\n\n";
     } else if (page.type === "negativeTest") {
       string +=
-        labels["pdf.nl.userData.validUntil"] + ": " + qr.validUntil + "\n\n";
+        t(locale, "nl.userData.validUntil") + ": " + qr.validUntil + "\n\n";
     }
-    string += labels["pdf.nl.userData.privacyNote"];
+    string += t(locale, "nl.userData.privacyNote");
     return string;
   } else {
     const qr = page.qr;
