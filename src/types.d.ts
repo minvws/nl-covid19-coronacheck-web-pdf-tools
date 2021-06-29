@@ -41,11 +41,13 @@ export type EuropeanProofData = {
     qr: string;
 };
 
-type VaccinationCredential = {
+type BaseCredentials = {
     tg: string; // e.g. "840539006"
     ci: string; // e.g. "URN:UCI:01:NL:O5V7IYVTMFEJDB5SCIRH42#N"
     co: string; // e.g. "NL"
     is: string; // e.g. "Ministry of Health Welfare and Sport"
+}
+type VaccinationCredential = BaseCredentials & {
     vp: string; // e.g. "J07BX03"
     mp: string; // e.g. "EU/1/20/1525"
     ma: string; // e.g. "ORG-100001417"
@@ -53,9 +55,19 @@ type VaccinationCredential = {
     sd: number; // e.g. 1
     dt: string; // e.g. "2021-06-01"
 };
-// TODO
-type TestCredential = any
-type RecoveryCredential = any
+type TestCredential = BaseCredentials & {
+    tt: string; // e.g. "LP6464-4";
+    nm: string; // e.g. "";
+    ma: string; // e.g. "1232";
+    sc: string; // e.g. "2021-06-29T08:28:34+00:00";
+    tr: string; // e.g. "260415000";
+    tc: string; // e.g. "Facility approved by the State of The Netherlands";
+};
+type RecoveryCredential = BaseCredentials & {
+    fr: string; // e.g. "2021-06-29";
+    df: string; // e.g. "2021-07-10";
+    du: string; // e.g. "2021-12-26";
+};
 
 export type Proof =
     | DomesticVaccinationProof
@@ -126,5 +138,6 @@ export type EuropeanRecoveryProof = EuropeanProof & {
     proofType: "european-recovery";
     eventType: "recovery";
     credential: RecoveryCredential;
-    // TODO
+    validFrom: string
+    // TODO: r.fr, r.du
 };

@@ -1,5 +1,11 @@
 import { formatBirthDate, formatDateTime, hoursInMs } from "./date";
-import { getEuBrand, getVaccineManufacturer, getVaccineType } from "./holder";
+import {
+    getEuBrand,
+    getEuTestType,
+    getTestManufacturer,
+    getVaccineManufacturer,
+    getVaccineType,
+} from "./holder";
 
 /**
  * TODO any type
@@ -70,7 +76,7 @@ const europeanProofs = (data, holderConfig) => {
     /** @type {import("./types").Proof[]} */
     const proofs = [];
     if (data.dcc.v) {
-        for (const v of data.dcc.v) {
+        for (const credential of data.dcc.v) {
             proofs.push({
                 proofType: "european-vaccination",
 
@@ -80,40 +86,107 @@ const europeanProofs = (data, holderConfig) => {
 
                 qr: data.qr,
 
-                credential: v,
+                credential: credential,
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
                 birthDateString: data.dcc.dob,
 
-                certificateNumber: v.ci,
+                certificateNumber: credential.ci,
 
                 validUntil: formatDateTime(new Date(data.expirationTime)),
 
-                vaccineBrand: getEuBrand(holderConfig, v.mp) || "-",
+                vaccineBrand: getEuBrand(holderConfig, credential.mp) || "-",
 
                 vaccineManufacturer:
-                    getVaccineManufacturer(holderConfig, v.ma) || "-",
+                    getVaccineManufacturer(holderConfig, credential.ma) || "-",
 
-                vaccineType: getVaccineType(holderConfig, v.vp) || "-",
+                vaccineType: getVaccineType(holderConfig, credential.vp) || "-",
 
-                doseNumber: v.dn,
+                doseNumber: credential.dn,
 
-                totalDoses: v.sd,
+                totalDoses: credential.sd,
 
-                vaccinationDate: v.dt,
+                vaccinationDate: credential.dt,
 
-                vaccinationCountry: v.co,
+                vaccinationCountry: credential.co,
 
-                certificateIssuer: v.is,
+                certificateIssuer: credential.is,
 
-                certificateIdentifier: v.ci,
+                certificateIdentifier: credential.ci,
 
                 // TODO
                 validFrom: "TODO",
             });
         }
     }
-    // TODO: dcc.t, dcc.r
+    if (data.dcc.t) {
+        for (const credential of data.dcc.t) {
+            proofs.push({
+                proofType: "european-vaccination",
+
+                eventType: "vaccination",
+
+                territory: "eu",
+
+                qr: data.qr,
+
+                credential: credential,
+
+                fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
+
+                birthDateString: data.dcc.dob,
+
+                certificateNumber: credential.ci,
+
+                validUntil: formatDateTime(new Date(data.expirationTime)),
+
+                testType: getEuTestType(holderConfig, credential.tt) || "",
+
+                testName: credential.nm,
+
+                dateOfTest: formatDateTime(new Date(credential.sc)),
+
+                testLocation: credential.tc,
+
+                testManufacturer:
+                    getTestManufacturer(holderConfig, credential.ma) || "",
+
+                countryOfTest: credential.co,
+
+                certificateIssuer: credential.is,
+
+                // TODO
+                validFrom: "TODO",
+            });
+        }
+    }
+    if (data.dcc.r) {
+        for (const credential of data.dcc.r) {
+            proofs.push({
+                proofType: "european-vaccination",
+
+                eventType: "vaccination",
+
+                territory: "eu",
+
+                qr: data.qr,
+
+                credential: credential,
+
+                fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
+
+                birthDateString: data.dcc.dob,
+
+                certificateNumber: credential.ci,
+
+                validUntil: formatDateTime(new Date(data.expirationTime)),
+
+                validFrom: credential.df,
+
+                // TODO: r.fr, r.du
+            });
+        }
+    }
     return proofs;
 };
