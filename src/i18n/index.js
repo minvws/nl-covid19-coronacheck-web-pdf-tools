@@ -9,11 +9,11 @@ const lang = { en, nl };
  * @param {Record<string, string>} [data]
  */
 export const t = (locale, segment, data) => {
-  let translation = (lang[locale] || nl)[segment] || segment;
-  if (data) {
-    for (const key of Object.keys(data)) {
-      translation = translation.replace("${" + key + "}", data[key]);
+    let translation = (lang[locale] || nl)[segment] || segment;
+    if (data) {
+        for (const key of Object.keys(data)) {
+            translation = translation.replace("${" + key + "}", data[key]);
+        }
     }
-  }
-  return translation;
+    return translation;
 };
