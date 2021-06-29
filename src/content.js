@@ -43,6 +43,8 @@ const marginTop = 16;
 const leftPartLeft = marginLeft;
 const leftPartTop = 30;
 const rightPartLeft = 0.5 * pageWidth + marginLeft;
+const userDataColWidth = 60;
+const rightPartRight = pageWidth - marginLeft;
 const rightPartTop = marginTop;
 const partWidth = 0.5 * pageWidth - 2 * marginLeft;
 const partWidthIntro = 0.5 * pageWidth - 2 * marginLeftIntro;
@@ -54,6 +56,7 @@ const questionsFrameInnerLeft = rightPartLeft + marginQuestionsFrame;
 const questionsFrameInnerWidth = partWidth - 2 * marginQuestionsFrame;
 const fontSizeStandard = 10;
 const QrPositionY = 181;
+const colSize = partWidth / 2 - marginLeft;
 /** @type {Color} */
 const lightBlack = [56, 56, 54];
 export const lineHeight = 4.5;
@@ -116,38 +119,22 @@ export const getTextItems = (page, locale) => {
             textAlign: "center",
             lineHeight: 6.5,
         },
-        {
-            text:
-                page.territory === "nl"
-                    ? t(locale, "nl.propertiesLabel")
-                    : t(locale, "eu." + page.type + ".propertiesLabel"),
-            fontFamily: "dejavu-sans",
-            fontWeight: 700,
-            fontSize: 10,
-            position: [rightPartLeft, bottomPartTop],
-            width: partWidth,
-        },
-        {
-            text: getUserDetails(page, locale),
-            fontFamily: "dejavu-sans",
-            fontWeight: 400,
-            fontSize: fontSizeStandard,
-            position: [rightPartLeft, bottomPartTop + 2 * lineHeight],
-            width: partWidth,
-        },
     ];
+
+    const userDetails = getUserDetails(page, locale);
+    for (const userDetailItem of userDetails) {
+        items.push(userDetailItem);
+    }
 
     if (page.territory === "eu") {
         items.push({
-            text: t(locale, "eu.waring"),
+            text: t(locale, "eu.warning"),
             fontFamily: "montserrat",
             fontWeight: 400,
-            fontSize: 8,
-            color: lightBlack,
-            position: [leftPartLeft, 200],
+            fontSize: 5,
+            position: [leftPartLeft, 280],
             width: partWidth,
-            textAlign: "center",
-            lineHeight: 4,
+            lineHeight: 2.4,
         });
     }
 
@@ -167,6 +154,17 @@ export const getTextItems = (page, locale) => {
 
     if (page.territory === "nl") {
         items.push(
+            {
+                text:
+                    page.territory === "nl"
+                        ? t(locale, "nl.propertiesLabel")
+                        : t(locale, "eu." + page.type + ".propertiesLabel"),
+                fontFamily: "dejavu-sans",
+                fontWeight: 700,
+                fontSize: 10,
+                position: [rightPartLeft, bottomPartTop],
+                width: partWidth,
+            },
             {
                 text: t(locale, "questions"),
                 fontFamily: "dejavu-sans",
@@ -228,32 +226,151 @@ const getUserDetails = (page, locale) => {
                 "\n\n";
         }
         string += t(locale, "nl.userData.privacyNote");
-        return string;
+        return [
+            {
+                text: string,
+                fontFamily: "dejavu-sans",
+                fontWeight: 400,
+                fontSize: fontSizeStandard,
+                position: [rightPartLeft, bottomPartTop + 2 * lineHeight],
+                width: partWidth,
+            },
+        ];
     } else {
+        const userDetails = [];
         const qr = page.qr;
-        if (page.type === "vaccination") {
-            string += "Surname(s) and first name(s): " + qr.fullName + "\n";
-            string += "Date of birth: " + qr.birthDateString + "\n";
-            string += "Disease targeted: COVID-19\n";
-            string += "Vaccine: " + qr.vaccineBrand + "\n";
-            string += "Vaccine medicinal product: " + qr.vaccineType + "\n";
-            string += "Vaccine manufacturer: " + qr.vaccineManufacturer + "\n";
-            string +=
-                "Vaccination doses: " +
-                qr.doseNumber +
-                " out of " +
-                qr.totalDoses +
-                "\n";
-            string += "Vaccination date: " + qr.vaccinationDate + "\n";
-            string += "Vaccinated in: " + qr.vaccinationCountry + "\n";
-            string += "Certificate issuer: " + qr.certificateIssuer + "\n";
-            string +=
-                "Certificate identifier: " + qr.certificateIdentifier + "\n\n";
-            string += "Valid from: " + qr.validFrom + "\n\n";
-            return string;
-        } else {
-            return "UserData EU negative test (todo)";
+        const fontSizeSmallCaps = 6.5;
+        const fontSizeTinyCaps = 5;
+        const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
+        const fieldSpacing = lineHeightSmallCaps * 2.3;
+        const fields = ["name", "dateOfBirth", "disease"];
+        const values = [qr.fullName, qr.birthDateString, "COVID-19"];
+        switch (page.type) {
+            case "vaccination":
+                fields.push(
+                    "vaccin",
+                    "vaccinType",
+                    "vaccinManufacturer",
+                    "doses",
+                    "dateOfVaccination",
+                    "countryOfVaccination",
+                    "certificateIssuer"
+                );
+                break;
+            case "negativetest":
+                fields.push(
+                    "testType",
+                    "testName",
+                    "testDate",
+                    "testResult",
+                    "testLocation",
+                    "testManufacturer",
+                    "countryOfTest",
+                    "certificateIssuer",
+                    "validUntil"
+                );
+                values.push(
+                    qr.testType,
+                    qr.testName,
+                    qr.dateOfTest,
+                    "Negative (no Corona)",
+                    qr.testLocation,
+                    qr.testManufacturer,
+                    qr.countryOfTest,
+                    qr.certificateIssuer,
+                    qr.validUntil
+                );
+                break;
         }
+        // fields
+        let currentY = bottomPartTop;
+        for (const field of fields) {
+            userDetails.push({
+                text: t(locale, "eu.userData." + field).toUpperCase(),
+                fontFamily: "dejavu-sans",
+                fontWeight: 700,
+                fontSize: fontSizeSmallCaps,
+                position: [rightPartLeft, currentY],
+                width: partWidth,
+            });
+            currentY += lineHeightSmallCaps;
+            if (locale === "nl") {
+                userDetails.push({
+                    text: t("en", "eu.userData." + field).toUpperCase(),
+                    fontFamily: "dejavu-sans",
+                    fontSize: fontSizeSmallCaps,
+                    position: [rightPartLeft, currentY],
+                    width: partWidth,
+                });
+            }
+            currentY += fieldSpacing;
+        }
+        // certificateNumberString
+        let certificateNumberString = t(
+            locale,
+            "eu.userData.certificateNumber"
+        ).toUpperCase();
+        if (locale === "nl") {
+            certificateNumberString +=
+                " / " + t("en", "eu.userData.certificateNumber").toUpperCase();
+        }
+        userDetails.push({
+            text: certificateNumberString,
+            fontFamily: "dejavu-sans",
+            fontWeight: 400,
+            fontSize: fontSizeTinyCaps,
+            position: [rightPartLeft, currentY],
+            width: partWidth,
+        });
+        currentY += lineHeightSmallCaps;
+        userDetails.push({
+            text: qr.certificateNumber,
+            fontFamily: "dejavu-sans",
+            fontWeight: 400,
+            fontSize: fontSizeTinyCaps,
+            position: [rightPartLeft, currentY],
+            width: partWidth,
+        });
+
+        // values
+        currentY = bottomPartTop;
+        for (const value of values) {
+            userDetails.push({
+                text: value,
+                fontFamily: "dejavu-sans",
+                fontWeight: 700,
+                fontSize: 9,
+                position: [rightPartRight, currentY],
+                width: userDataColWidth,
+                textAlign: "right",
+            });
+            currentY += lineHeightSmallCaps + fieldSpacing;
+        }
+
+        // if (page.type === "vaccination") {
+        //     string += "Surname(s) and first name(s): " + qr.fullName + "\n";
+        //     string += "Date of birth: " + qr.birthDateString + "\n";
+        //     string += "Disease targeted: COVID-19\n";
+        //     string += "Vaccine: " + qr.vaccineBrand + "\n";
+        //     string += "Vaccine medicinal product: " + qr.vaccineType + "\n";
+        //     string += "Vaccine manufacturer: " + qr.vaccineManufacturer + "\n";
+        //     string +=
+        //         "Vaccination doses: " +
+        //         qr.doseNumber +
+        //         " out of " +
+        //         qr.totalDoses +
+        //         "\n";
+        //     string += "Vaccination date: " + qr.vaccinationDate + "\n";
+        //     string += "Vaccinated in: " + qr.vaccinationCountry + "\n";
+        //     string += "Certificate issuer: " + qr.certificateIssuer + "\n";
+        //     string +=
+        //         "Certificate identifier: " + qr.certificateIdentifier + "\n\n";
+        //     string += "Valid from: " + qr.validFrom + "\n\n";
+        //     return string;
+        // } else {
+        //     return "UserData EU negative test (todo)";
+        // }
+        return userDetails;
     }
 };
 

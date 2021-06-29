@@ -10,7 +10,9 @@ export const drawTextItemOverLines = (doc, textItem, x, textAlign) => {
 
     for (const item of set) {
         const lh = textItem.lineHeight ? textItem.lineHeight : lineHeight;
-        doc.text(item, x, textItem.position[1] + index * lh, textAlign);
+        doc.text(item, x, textItem.position[1] + index * lh, {
+            align: textAlign,
+        });
         index++;
     }
 };

@@ -87,7 +87,9 @@ const drawTextItems = (doc, textItems) => {
         const textAlign = textItem.textAlign ? textItem.textAlign : "left";
         // for center align jspdf needs to now the center x
         const x =
-            textItem.textAlign && textItem.width
+            textItem.textAlign &&
+            textItem.textAlign === "center" &&
+            textItem.width
                 ? textItem.position[0] + 0.5 * textItem.width
                 : textItem.position[0];
         if (textItem.fontSize) {
@@ -115,7 +117,9 @@ const drawTextItems = (doc, textItems) => {
             }
         } else {
             // @ts-ignore
-            doc.text(textItem.text, x, textItem.position[1], textAlign);
+            doc.text(textItem.text, x, textItem.position[1], {
+                align: textAlign,
+            });
         }
     }
 };
