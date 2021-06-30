@@ -108,10 +108,10 @@ export const getTextItems = (proof, locale) => {
             width: partWidth,
         },
         {
-            text: t(
-                locale,
-                proof.territory + "." + proof.eventType + ".qrTitle"
-            ),
+            text:
+                proof.territory === "nl"
+                    ? t(locale, "nl.qrTitle")
+                    : t(locale, "eu." + proof.eventType + ".qrTitle"),
             fontFamily: "montserrat",
             fontWeight: 700,
             fontSize: 18,
