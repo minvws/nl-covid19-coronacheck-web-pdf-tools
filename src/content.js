@@ -36,7 +36,7 @@ import { t } from "./i18n";
 const pageHeight = 297;
 const pageWidth = 210;
 const marginLeft = 10;
-const marginLeftIntro = 15;
+const marginLeftIntro = 12;
 // jspdf uses the baseline of a text for an y position
 const marginTop = 16;
 const leftPartLeft = marginLeft;
