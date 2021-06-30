@@ -13,7 +13,7 @@ export default {
     "eu.recovery.qrTitle": "Recovery certificate",
     "eu.title": "International certificate",
     "eu.intro":
-        "Are you traveling outside of the Netherlands? Then use this EU Digital COVID Certificate.<br><br>Before you leave, check which test and vaccination certificates are valid in your destination country:<br><a>https://reopen.europa.eu/en</a>",
+        "Are you traveling outside of the Netherlands? Then use this EU Digital COVID Certificate.\n\nBefore you leave, check which test and vaccination certificates are valid in your destination country:https://reopen.europa.eu/en",
     "eu.qrTitle": "International QR-code",
     "nl.instructions":
         "1. Print this certificate on A4 (black-and-white allowed)\n\n2. Bring a valid proof of identity to the activity you’re visiting \n\n3. Show the certificate and the proof of identity (and if needed a ticket) at the entrance",
