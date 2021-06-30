@@ -36,9 +36,9 @@ export const parseProofData = (proofData, holderConfig) => {
 const domesticProof = (data) => {
     const validFromDate = parseInt(data.attributes.validFrom, 10) * 1000;
     return {
-        proofType: "domestic-vaccination",
+        proofType: "domestic",
 
-        eventType: "vaccination",
+        eventType: "",
 
         territory: "nl",
 

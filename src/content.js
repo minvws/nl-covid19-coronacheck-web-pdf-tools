@@ -214,20 +214,11 @@ const getUserDetails = (proof, locale) => {
             "\n";
         string +=
             t(locale, "nl.userData.validFrom") + ": " + proof.validFrom + "\n";
-        if (proof.eventType === "vaccination") {
-            string +=
-                "\n" +
-                t(locale, "validUntilVaccination", {
-                    date: proof.validUntil,
-                }) +
-                "\n\n";
-        } else if (proof.eventType === "negativetest") {
-            string +=
-                t(locale, "nl.userData.validUntil") +
-                ": " +
-                proof.validUntil +
-                "\n\n";
-        }
+        string +=
+            t(locale, "nl.userData.validUntil") +
+            ": " +
+            proof.validUntil +
+            "\n\n";
         string += t(locale, "nl.userData.privacyNote");
         return [
             {
