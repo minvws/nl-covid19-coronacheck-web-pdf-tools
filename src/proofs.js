@@ -188,11 +188,9 @@ const europeanProofs = (data, holderConfig) => {
 
                 certificateNumber: credential.ci,
 
-                validUntil: formatDate(new Date(data.expirationTime)),
+                validUntil: formatDate(new Date(credential.du)),
 
                 validFrom: formatDate(new Date(credential.df)),
-
-                // TODO: r.fr, r.du
             });
         }
     }
