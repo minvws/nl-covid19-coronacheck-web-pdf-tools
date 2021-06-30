@@ -1,7 +1,8 @@
 import * as img from "./assets/img";
+import { generateQR } from "./qr";
 import { t } from "./i18n";
 
-/** @typedef {import("./types").Page} Page */
+/** @typedef {import("./types").Proof} Proof */
 /** @typedef {import("./types").Locale} Locale */
 
 /** @typedef {[number, number, number]} Color */
@@ -35,13 +36,13 @@ import { t } from "./i18n";
 const pageHeight = 297;
 const pageWidth = 210;
 const marginLeft = 10;
-const marginLeftIntro = 15;
+const marginLeftIntro = 12;
 // jspdf uses the baseline of a text for an y position
 const marginTop = 16;
 const leftPartLeft = marginLeft;
 const leftPartTop = 30;
 const rightPartLeft = 0.5 * pageWidth + marginLeft;
-const userDataColWidth = 60;
+const userDataColWidth = 50;
 const rightPartRight = pageWidth - marginLeft;
 const rightPartTop = marginTop;
 const partWidth = 0.5 * pageWidth - 2 * marginLeft;
@@ -59,15 +60,15 @@ const lightBlack = [56, 56, 54];
 export const lineHeight = 4.5;
 
 /**
- * @param {Page} page
+ * @param {Proof} proof
  * @param {Locale} locale
  * @return {TextItem[]}
  */
-export const getTextItems = (page, locale) => {
+export const getTextItems = (proof, locale) => {
     /** @type {TextItem[]} */
     const items = [
         {
-            text: t(locale, page.territory + ".title"),
+            text: t(locale, proof.territory + ".title"),
             fontFamily: "montserrat",
             fontWeight: 700,
             fontSize: 25,
@@ -78,8 +79,8 @@ export const getTextItems = (page, locale) => {
             lineHeight: 9,
         },
         {
-            text: t(locale, page.territory + ".intro"),
-            fontFamily: "dejavu-sans",
+            text: t(locale, proof.territory + ".intro"),
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
             position: [marginLeftIntro, 51],
@@ -97,17 +98,20 @@ export const getTextItems = (page, locale) => {
         },
         {
             text:
-                page.territory === "nl"
+                proof.territory === "nl"
                     ? t(locale, "nl.instructions")
-                    : t(locale, "eu." + page.type + ".instructions"),
-            fontFamily: "dejavu-sans",
+                    : t(locale, "eu." + proof.eventType + ".instructions"),
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
             position: [rightPartLeft, 27],
             width: partWidth,
         },
         {
-            text: t(locale, page.territory + "." + page.type + ".qrTitle"),
+            text:
+                proof.territory === "nl"
+                    ? t(locale, "nl.qrTitle")
+                    : t(locale, "eu." + proof.eventType + ".qrTitle"),
             fontFamily: "montserrat",
             fontWeight: 700,
             fontSize: 18,
@@ -119,12 +123,12 @@ export const getTextItems = (page, locale) => {
         },
     ];
 
-    const userDetails = getUserDetails(page, locale);
+    const userDetails = getUserDetails(proof, locale);
     for (const userDetailItem of userDetails) {
         items.push(userDetailItem);
     }
 
-    if (page.territory === "eu") {
+    if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning"),
             fontFamily: "montserrat",
@@ -136,9 +140,10 @@ export const getTextItems = (page, locale) => {
         });
     }
 
-    if (locale === "nl") {
+    // add english translation on dutch european document
+    if (locale === "nl" && proof.territory === "eu") {
         items.push({
-            text: t("en", page.territory + "." + page.type + ".qrTitle"),
+            text: t("en", "eu." + proof.eventType + ".qrTitle"),
             fontFamily: "montserrat",
             fontWeight: 400,
             fontSize: 18,
@@ -150,11 +155,11 @@ export const getTextItems = (page, locale) => {
         });
     }
 
-    if (page.territory === "nl") {
+    if (proof.territory === "nl") {
         items.push(
             {
                 text: t(locale, "nl.propertiesLabel"),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
                 fontSize: 10,
                 position: [rightPartLeft, bottomPartTop],
@@ -162,7 +167,7 @@ export const getTextItems = (page, locale) => {
             },
             {
                 text: t(locale, "questions"),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
                 fontSize: fontSizeStandard,
                 position: [
@@ -173,7 +178,7 @@ export const getTextItems = (page, locale) => {
             },
             {
                 text: t(locale, "questionsContent"),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 400,
                 fontSize: fontSizeStandard,
                 position: [
@@ -190,41 +195,41 @@ export const getTextItems = (page, locale) => {
 };
 
 /**
- * @param {Page} page
+ * @param {Proof} proof
  * @param {Locale} locale
  * @return {TextItem[]}
  */
-const getUserDetails = (page, locale) => {
+const getUserDetails = (proof, locale) => {
     let string = "";
-    if (page.territory === "nl") {
-        const qr = page.qr;
-        string += t(locale, "nl.userData.initials") + ": " + qr.initials + "\n";
+    if (proof.territory === "nl") {
+        string +=
+            t(locale, "nl.userData.initials") + ": " + proof.initials + "\n";
         string +=
             t(locale, "nl.userData.dateOfBirth") +
             ": " +
-            page.qr.birthDateStringShort +
+            proof.birthDateStringShort +
             "\n";
         string +=
-            t(locale, "nl.userData.validFrom") + ": " + qr.validFrom + "\n";
-        if (page.type === "vaccination") {
+            t(locale, "nl.userData.validFrom") + ": " + proof.validFrom + "\n";
+        if (proof.eventType === "vaccination") {
             string +=
                 "\n" +
                 t(locale, "nl.userData.validUntilVaccination", {
-                    date: qr.validUntil,
+                    date: proof.validUntil,
                 }) +
                 "\n\n";
-        } else if (page.type === "negativetest") {
+        } else if (proof.eventType === "negativetest") {
             string +=
                 t(locale, "nl.userData.validUntil") +
                 ": " +
-                qr.validUntil +
+                proof.validUntil +
                 "\n\n";
         }
         string += t(locale, "nl.userData.privacyNote");
         return [
             {
                 text: string,
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 400,
                 fontSize: fontSizeStandard,
                 position: [rightPartLeft, bottomPartTop + 2 * lineHeight],
@@ -234,23 +239,33 @@ const getUserDetails = (page, locale) => {
     } else {
         /** @type {TextItem[]} */
         const userDetails = [];
-        const qr = page.qr;
         const fontSizeSmallCaps = 6.5;
         const fontSizeTinyCaps = 5;
         const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
         const fieldSpacing = lineHeightSmallCaps * 2.3;
         const fields = ["name", "dateOfBirth"];
-        const values = [qr.fullName, qr.birthDateString];
-        switch (page.type) {
+        const values = [proof.fullName, proof.birthDateString];
+        switch (proof.eventType) {
             case "vaccination":
                 fields.push(
-                    "vaccin",
-                    "vaccinType",
-                    "vaccinManufacturer",
+                    "disease",
+                    "vaccineBrand",
+                    "vaccineType",
+                    "vaccineManufacturer",
                     "doses",
-                    "dateOfVaccination",
-                    "countryOfVaccination",
+                    "vaccinationDate",
+                    "vaccinationCountry",
                     "certificateIssuer"
+                );
+                values.push(
+                    "COVID-19",
+                    proof.vaccineBrand,
+                    proof.vaccineType,
+                    proof.vaccineBrand,
+                    proof.doses,
+                    proof.vaccinationDate,
+                    proof.vaccinationCountry,
+                    proof.certificateIssuer
                 );
                 break;
             case "negativetest":
@@ -268,15 +283,15 @@ const getUserDetails = (page, locale) => {
                 );
                 values.push(
                     "COVID-19",
-                    qr.testType,
-                    qr.testName,
-                    qr.dateOfTest,
+                    proof.testType,
+                    proof.testName,
+                    proof.dateOfTest,
                     "Negative (no Corona)",
-                    qr.testLocation,
-                    qr.testManufacturer,
-                    qr.countryOfTest,
-                    qr.certificateIssuer,
-                    qr.validUntil
+                    proof.testLocation,
+                    proof.testManufacturer,
+                    proof.countryOfTest,
+                    proof.certificateIssuer,
+                    proof.validUntil
                 );
                 break;
             case "recovery":
@@ -290,11 +305,11 @@ const getUserDetails = (page, locale) => {
                 );
                 values.push(
                     "COVID-19",
-                    qr.dateOfTest,
-                    qr.countryOfTest,
-                    qr.certificateIssuer,
-                    qr.validFrom,
-                    qr.validUntil
+                    proof.dateOfTest,
+                    proof.countryOfTest,
+                    proof.certificateIssuer,
+                    proof.validFrom,
+                    proof.validUntil
                 );
                 break;
         }
@@ -303,7 +318,7 @@ const getUserDetails = (page, locale) => {
         for (const field of fields) {
             userDetails.push({
                 text: t(locale, "eu.userData." + field).toUpperCase(),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
                 fontSize: fontSizeSmallCaps,
                 position: [rightPartLeft, currentY],
@@ -313,7 +328,7 @@ const getUserDetails = (page, locale) => {
             if (locale === "nl") {
                 userDetails.push({
                     text: t("en", "eu.userData." + field).toUpperCase(),
-                    fontFamily: "dejavu-sans",
+                    fontFamily: "liberation-sans",
                     fontWeight: 400,
                     fontSize: fontSizeSmallCaps,
                     position: [rightPartLeft, currentY],
@@ -333,7 +348,7 @@ const getUserDetails = (page, locale) => {
         }
         userDetails.push({
             text: certificateNumberString,
-            fontFamily: "dejavu-sans",
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeTinyCaps,
             position: [rightPartLeft, currentY],
@@ -341,8 +356,8 @@ const getUserDetails = (page, locale) => {
         });
         currentY += lineHeightSmallCaps;
         userDetails.push({
-            text: qr.certificateNumber,
-            fontFamily: "dejavu-sans",
+            text: proof.certificateNumber,
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeTinyCaps,
             position: [rightPartLeft, currentY],
@@ -351,66 +366,47 @@ const getUserDetails = (page, locale) => {
 
         // values
         currentY = bottomPartTop;
-        for (const value of values) {
+        for (let value of values) {
+            if (value === "Ministry of Health Welfare and Sport") {
+                value = "Ministry of Health\nWelfare and Sport";
+            }
             userDetails.push({
                 text: value,
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
-                fontSize: 9,
+                fontSize: 8,
+                lineHeight: 3.5,
                 position: [rightPartRight, currentY],
                 width: userDataColWidth,
                 textAlign: "right",
             });
             currentY += lineHeightSmallCaps + fieldSpacing;
         }
-
-        // if (page.type === "vaccination") {
-        //     string += "Surname(s) and first name(s): " + qr.fullName + "\n";
-        //     string += "Date of birth: " + qr.birthDateString + "\n";
-        //     string += "Disease targeted: COVID-19\n";
-        //     string += "Vaccine: " + qr.vaccineBrand + "\n";
-        //     string += "Vaccine medicinal product: " + qr.vaccineType + "\n";
-        //     string += "Vaccine manufacturer: " + qr.vaccineManufacturer + "\n";
-        //     string +=
-        //         "Vaccination doses: " +
-        //         qr.doseNumber +
-        //         " out of " +
-        //         qr.totalDoses +
-        //         "\n";
-        //     string += "Vaccination date: " + qr.vaccinationDate + "\n";
-        //     string += "Vaccinated in: " + qr.vaccinationCountry + "\n";
-        //     string += "Certificate issuer: " + qr.certificateIssuer + "\n";
-        //     string +=
-        //         "Certificate identifier: " + qr.certificateIdentifier + "\n\n";
-        //     string += "Valid from: " + qr.validFrom + "\n\n";
-        //     return string;
-        // } else {
-        //     return "UserData EU negative test (todo)";
-        // }
         return userDetails;
     }
 };
 
 /**
- * @param {Page} page
+ * @param {Proof} proof
  * @param {number} qrSizeInCm
  * @return {Promise<ImageItem[]>}
  */
-export const getImageItems = async (page, qrSizeInCm) => {
+export const getImageItems = async (proof, qrSizeInCm) => {
+    const qrDataUrl = await generateQR(proof.qr, qrSizeInCm, proof.territory);
     const qrSize = qrSizeInCm * 10;
     const coronacheckImageHeight = 10;
     const flagWidth = 63;
-    const flagHeight = 42;
+    const flagHeight = 40; // (1913/2976*63)
     const items = [
         {
-            url: page.territory === "nl" ? img.flagNl : img.flagEu,
+            url: proof.territory === "nl" ? img.flagNl : img.flagEu,
             x: (pageWidth / 2 - flagWidth) / 2,
             y: 87,
             width: flagWidth,
             height: flagHeight,
         },
         {
-            url: page.urlQR,
+            url: qrDataUrl,
             x: (pageWidth / 2 - qrSize) / 2,
             y: QrPositionY,
             width: qrSize,
@@ -424,7 +420,7 @@ export const getImageItems = async (page, qrSizeInCm) => {
             height: 15,
         },
     ];
-    if (page.territory === "nl") {
+    if (proof.territory === "nl") {
         const questionsItem = {
             url: img.coronacheck,
             x: questionsFrameInnerLeft,

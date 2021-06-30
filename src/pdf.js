@@ -3,8 +3,8 @@ import { jsPDF } from "jspdf";
 import { t } from "./i18n";
 
 import {
-    DejaVuSans,
-    DejaVuSansBold,
+    LiberationSansRegular,
+    LiberationSansBold,
     MontserratRegular,
     MontserratBold,
 } from "./assets/fonts";
@@ -18,7 +18,7 @@ import {
 
 /** @typedef {import("./types").Metadata} Metadata */
 /** @typedef {import("./types").Locale} Locale */
-/** @typedef {import("./types").Page} Page */
+/** @typedef {import("./types").Proof} Proof */
 
 /**
  * @param {Locale} locale
@@ -33,12 +33,12 @@ const initDoc = (locale, metadata) => {
     doc.addFont("Montserrat-Regular.ttf", "montserrat", "normal");
     doc.addFont("Montserrat-Bold.ttf", "montserrat", "bold");
 
-    doc.addFileToVFS("DejaVuSans.ttf", DejaVuSans);
-    doc.addFileToVFS("DejaVuSansBold.ttf", DejaVuSansBold);
-    doc.addFont("DejaVuSans.ttf", "dejavu-sans", "normal");
-    doc.addFont("DejaVuSansBold.ttf", "dejavu-sans", "bold");
+    doc.addFileToVFS("LiberationSansRegular.ttf", LiberationSansRegular);
+    doc.addFileToVFS("LiberationSansBold.ttf", LiberationSansBold);
+    doc.addFont("LiberationSansRegular.ttf", "liberation-sans", "normal");
+    doc.addFont("LiberationSansBold.ttf", "liberation-sans", "bold");
 
-    doc.setFont("dejavu-sans");
+    doc.setFont("liberation-sans");
 
     doc.setProperties(
         metadata || {
@@ -150,22 +150,22 @@ const drawFrames = (doc, frames) => {
 };
 
 /**
- * @param {Page[]} pages
+ * @param {Proof[]} proofs
  * @param {"en"|"nl"} locale
  * @param {number} qrSizeInCm
  * @param {Metadata} [metadata]
  * @return {Promise<jsPDF>}
  */
-export const getDocument = async (pages, locale, qrSizeInCm, metadata) => {
+export const getDocument = async (proofs, locale, qrSizeInCm, metadata) => {
     const doc = initDoc(locale, metadata);
-    for (const page of pages) {
-        if (pages.indexOf(page) > 0) {
+    for (const proof of proofs) {
+        if (proofs.indexOf(proof) > 0) {
             doc.addPage();
         }
-        const frames = getFrames(page.territory);
-        const textItems = getTextItems(page, locale);
+        const frames = getFrames(proof.territory);
+        const textItems = getTextItems(proof, locale);
         const lines = getLines();
-        const imageItems = await getImageItems(page, qrSizeInCm);
+        const imageItems = await getImageItems(proof, qrSizeInCm);
         drawFrames(doc, frames);
         drawImageItems(doc, imageItems);
         drawLines(doc, lines);
