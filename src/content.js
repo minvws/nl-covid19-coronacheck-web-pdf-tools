@@ -392,7 +392,7 @@ export const getImageItems = async (proof, qrSizeInCm) => {
     const qrSize = qrSizeInCm * 10;
     const coronacheckImageHeight = 10;
     const flagWidth = 63;
-    const flagHeight = 42;
+    const flagHeight = 40; // (1913/2976*63)
     const items = [
         {
             url: proof.territory === "nl" ? img.flagNl : img.flagEu,
