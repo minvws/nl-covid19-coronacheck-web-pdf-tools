@@ -52,7 +52,8 @@ const domesticProof = (data) => {
 
         birthDateStringShort: formatBirthDate(
             data.attributes.birthDay,
-            data.attributes.birthMonth
+            data.attributes.birthMonth,
+            "nl"
         ),
 
         validFromDate,

@@ -1,4 +1,4 @@
-const NUM = /^\d+&/;
+const NUM = /^\d+$/;
 
 /**
  * @param {string} input

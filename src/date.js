@@ -4,23 +4,25 @@ import { t } from "./i18n";
 import { isNumeric, padLeft } from "./util";
 
 /**
- * @param {import("./types").Locale} locale
  * @param {string|number} month
+ * @param {import("./types").Locale} locale
  * @return {string}
  */
-export const monthNameShort = (locale, month) => t("date.months.abbr." + month);
+export const monthNameShort = (month, locale) =>
+    t(locale, "date.months.abbr." + month);
 
 /**
  * @param {string} birthDay
  * @param {string} birthMonth
+ * @param {import("./types").Locale} locale
  * @return {string}
  */
-export const formatBirthDate = (birthDay, birthMonth) => {
+export const formatBirthDate = (birthDay, birthMonth, locale) => {
     const birthDayShort = isNumeric(birthDay)
         ? padLeft(birthDay, 2, "0")
         : birthDay;
     const birthMonthShort = isNumeric(birthMonth)
-        ? monthNameShort(birthMonth)
+        ? monthNameShort(birthMonth, locale)
         : birthMonth;
     return birthDayShort + " " + birthMonthShort;
 };
