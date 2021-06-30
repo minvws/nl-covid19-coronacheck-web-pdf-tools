@@ -9,7 +9,7 @@ export default {
     "eu.vaccination.qrTitle": "Vaccination certificate",
     "eu.vaccination.propertiesLabel": "Vaccination details",
     "eu.recovery.instructions":
-        "TODO 1. Print dit bewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+        "1. Print this certificate on A4 (black-and-white allowed).\n\n2. Bring a valid proof of identity when travelling abroad.\n\n3. Show the certificate at the foreign border or when asked in other countries.",
     "eu.recovery.qrTitle": "Recovery certificate",
     "eu.title": "International certificate",
     "eu.intro":
@@ -21,7 +21,8 @@ export default {
     "nl.title": "Certificate for the Netherlands",
     "nl.intro":
         "Visiting locations or activities within the Netherlands? Then use this certificate.",
-    "eu.warning": "TODO",
+    "eu.warning":
+        "This certificate is not a travel document. The scientific evidence regarding COVID-19 vaccinations, testing and recovery continues to evolve, also with regard to new variants of concern. Before traveling, please check which public health measures and associated restrictions apply at the destination.",
     "eu.userData.name": "SURNAME(S) AND FIRST NAME(S)",
     "eu.userData.dateOfBirth": "Date of birth",
     "eu.userData.disease": "DISEASE TARGETED",
