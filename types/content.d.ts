@@ -1,9 +1,9 @@
 export const lineHeight: 4.5;
-export function getTextItems(page: Page, locale: Locale): TextItem[];
-export function getImageItems(page: Page, qrSizeInCm: number): Promise<ImageItem[]>;
-export function getFrames(): Frame[];
+export function getTextItems(proof: Proof, locale: Locale): TextItem[];
+export function getImageItems(proof: Proof, qrSizeInCm: number): Promise<ImageItem[]>;
+export function getFrames(territory: string): Frame[];
 export function getLines(): Line[];
-export type Page = import("./types").Page;
+export type Proof = import("./types").Proof;
 export type Locale = import("./types").Locale;
 export type Color = [number, number, number];
 export type Position = [number, number];
@@ -35,7 +35,7 @@ export type TextItem = {
     fontFamily: string;
     fontWeight: number;
     position: Position;
-    textAlign?: string;
+    textAlign?: "left" | "right" | "center" | "justify";
     fontSize?: number;
     color?: Color;
     width?: number;

@@ -36,9 +36,7 @@ export const parseProofData = (proofData, holderConfig) => {
 const domesticProof = (data) => {
     const validFromDate = parseInt(data.attributes.validFrom, 10) * 1000;
     return {
-        proofType: "domestic-vaccination",
-
-        eventType: "vaccination",
+        proofType: "domestic",
 
         territory: "nl",
 
@@ -90,11 +88,11 @@ const europeanProofs = (data, holderConfig) => {
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
-                birthDateString: data.dcc.dob,
+                birthDateString: formatDate(new Date(data.dcc.dob)),
 
                 certificateNumber: credential.ci,
 
-                validUntil: formatDateTime(new Date(data.expirationTime)),
+                validUntil: formatDate(new Date(data.expirationTime)),
 
                 vaccineBrand: getEuBrand(holderConfig, credential.mp) || "-",
 
@@ -109,7 +107,7 @@ const europeanProofs = (data, holderConfig) => {
 
                 doses: credential.dn + " / " + credential.sd,
 
-                vaccinationDate: credential.dt,
+                vaccinationDate: formatDate(new Date(credential.dt)),
 
                 vaccinationCountry: credential.co,
 
@@ -137,7 +135,7 @@ const europeanProofs = (data, holderConfig) => {
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
-                birthDateString: data.dcc.dob,
+                birthDateString: formatDate(new Date(data.dcc.dob)),
 
                 certificateNumber: credential.ci,
 
@@ -178,7 +176,7 @@ const europeanProofs = (data, holderConfig) => {
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
-                birthDateString: data.dcc.dob,
+                birthDateString: formatDate(new Date(data.dcc.dob)),
 
                 dateOfTest: formatDate(new Date(credential.fr)),
 
@@ -188,11 +186,9 @@ const europeanProofs = (data, holderConfig) => {
 
                 certificateNumber: credential.ci,
 
-                validUntil: formatDate(new Date(data.expirationTime)),
+                validUntil: formatDate(new Date(credential.du)),
 
                 validFrom: formatDate(new Date(credential.df)),
-
-                // TODO: r.fr, r.du
             });
         }
     }

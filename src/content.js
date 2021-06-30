@@ -25,7 +25,7 @@ import { t } from "./i18n";
  * @property {string} fontFamily
  * @property {number} fontWeight
  * @property {Position} position
- * @property {string} [textAlign]
+ * @property {"left"|"right"|"center"|"justify"} [textAlign]
  * @property {number} [fontSize]
  * @property {Color} [color]
  * @property {number} [width]
@@ -100,7 +100,9 @@ export const getTextItems = (proof, locale) => {
             text:
                 proof.territory === "nl"
                     ? t(locale, "nl.instructions")
-                    : t(locale, "eu." + proof.eventType + ".instructions"),
+                    : t(locale, "eu." + proof.eventType + ".instructions", {
+                          date: proof.validUntil,
+                      }),
             fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
@@ -128,6 +130,7 @@ export const getTextItems = (proof, locale) => {
         items.push(userDetailItem);
     }
 
+    // add warning for eu
     if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning"),
@@ -155,6 +158,7 @@ export const getTextItems = (proof, locale) => {
         });
     }
 
+    // some extra content (ao questions)
     if (proof.territory === "nl") {
         items.push(
             {
@@ -190,7 +194,6 @@ export const getTextItems = (proof, locale) => {
             }
         );
     }
-
     return items;
 };
 
@@ -211,20 +214,11 @@ const getUserDetails = (proof, locale) => {
             "\n";
         string +=
             t(locale, "nl.userData.validFrom") + ": " + proof.validFrom + "\n";
-        if (proof.eventType === "vaccination") {
-            string +=
-                "\n" +
-                t(locale, "nl.userData.validUntilVaccination", {
-                    date: proof.validUntil,
-                }) +
-                "\n\n";
-        } else if (proof.eventType === "negativetest") {
-            string +=
-                t(locale, "nl.userData.validUntil") +
-                ": " +
-                proof.validUntil +
-                "\n\n";
-        }
+        string +=
+            t(locale, "nl.userData.validUntil") +
+            ": " +
+            proof.validUntil +
+            "\n\n";
         string += t(locale, "nl.userData.privacyNote");
         return [
             {

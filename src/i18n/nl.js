@@ -4,7 +4,7 @@ export default {
     "eu.negativetest.qrTitle": "Testbewijs",
     "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
     "eu.vaccination.instructions":
-        "1. Print dit coronabewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat je coronabewijs (en eventueel ook je toegangskaartje) zien bij de ingang",
+        "1. Print dit coronabewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3.  Laat het vaccinatiebewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt\n\nDit papieren bewijs is geldig tot: %{date} Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
     "eu.vaccination.qrTitle": "Vaccinatiebewijs",
     "eu.vaccination.propertiesLabel": "Vaccinatiegegevens",
     "eu.recovery.instructions":
@@ -16,7 +16,7 @@ export default {
     "eu.warning":
         "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.",
     "eu.userData.name": "ACHTERNAAM EN VOORNAM(EN)",
-    "eu.userData.dateOfBirth": "Geboortedag",
+    "eu.userData.dateOfBirth": "Geboortedatum",
     "eu.userData.disease": "Ziekteverwekker",
     "eu.userData.diseaseRecoveredFrom": "Ziekte waarvan hersteld",
     "eu.userData.vaccineBrand": "VACCIN",
@@ -48,14 +48,14 @@ export default {
     "nl.userData.dateOfBirth": "Geboortedag",
     "nl.userData.validFrom": "Geldig vanaf",
     "nl.userData.validUntil": "Geldig tot",
-    "nl.userData.validUntilVaccination":
-        "Dit papieren bewijs is geldig tot %{date} Daarna kan je een nieuw Coronatoegangsbewijs maken op coronacheck.nl",
     "nl.userData.privacyNote":
         "Bovenstaande gegevens hoef je niet te laten zien bij de ingang.",
     instructions: "Instructies",
     questions: "VRAGEN?",
     questionsContent:
         "Bekijk de meestgestelde vragen op www.coronacheck.nl of stuur een e-mail naar helpdesk@coronacheck.nl of bel naar 0800-1421 (gratis)",
+    validUntilVaccination:
+        "Dit papieren bewijs is geldig tot: %{date} Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
     "metadata.title": "Coronabewijs met QR-code",
     "metadata.author": "CoronaCheck",
     "date.months.abbr.1": "JAN",

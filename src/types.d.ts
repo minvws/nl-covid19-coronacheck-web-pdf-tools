@@ -46,7 +46,7 @@ type BaseCredentials = {
     ci: string; // e.g. "URN:UCI:01:NL:O5V7IYVTMFEJDB5SCIRH42#N"
     co: string; // e.g. "NL"
     is: string; // e.g. "Ministry of Health Welfare and Sport"
-}
+};
 type VaccinationCredential = BaseCredentials & {
     vp: string; // e.g. "J07BX03"
     mp: string; // e.g. "EU/1/20/1525"
@@ -70,13 +70,13 @@ type RecoveryCredential = BaseCredentials & {
 };
 
 export type Proof =
-    | DomesticVaccinationProof
-    | DomesticNegativeTestProof
+    | DomesticProof
     | EuropeanVaccinationProof
     | EuropeanNegativeTestProof
     | EuropeanRecoveryProof;
 
 type DomesticProof = {
+    proofType: "domestic";
     territory: "nl";
     qr: string;
     initials: string;
@@ -84,16 +84,6 @@ type DomesticProof = {
     birthDateStringShort: string;
     validFrom: string;
     validUntil: string;
-};
-
-export type DomesticVaccinationProof = DomesticProof & {
-    proofType: "domestic-vaccination";
-    eventType: "vaccination";
-};
-
-export type DomesticNegativeTestProof = DomesticProof & {
-    proofType: "domestic-negative-test";
-    eventType: "negativetest";
 };
 
 type EuropeanProof = {
@@ -114,6 +104,7 @@ export type EuropeanVaccinationProof = EuropeanProof & {
     vaccineType: string;
     doseNumber: number;
     totalDoses: number;
+    doses: string;
     vaccinationDate: string;
     vaccinationCountry: string;
     certificateIssuer: string;
@@ -138,6 +129,8 @@ export type EuropeanRecoveryProof = EuropeanProof & {
     proofType: "european-recovery";
     eventType: "recovery";
     credential: RecoveryCredential;
-    validFrom: string
-    // TODO: r.fr, r.du
+    validFrom: string;
+    dateOfTest: string;
+    countryOfTest: string;
+    certificateIssuer: string;
 };
