@@ -66,6 +66,15 @@ export const lineHeight = 4.5;
  */
 export const getTextItems = (proof, locale) => {
     /** @type {TextItem[]} */
+    let instructions = t(locale, "instructions");
+    // add comment about valid until for eu-vaccination
+    if (proof.eventType === "vaccination" && proof.territory === "eu") {
+        instructions +=
+            "\n\n" +
+            t(locale, "validUntilVaccination", {
+                date: proof.validUntil,
+            });
+    }
     const items = [
         {
             text: t(locale, proof.territory + ".title"),
@@ -88,7 +97,7 @@ export const getTextItems = (proof, locale) => {
             textAlign: "center",
         },
         {
-            text: t(locale, "instructions"),
+            text: instructions,
             fontFamily: "montserrat",
             fontWeight: 700,
             fontSize: 18,
@@ -128,6 +137,7 @@ export const getTextItems = (proof, locale) => {
         items.push(userDetailItem);
     }
 
+    // add warning for eu
     if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning"),
@@ -155,6 +165,7 @@ export const getTextItems = (proof, locale) => {
         });
     }
 
+    // some extra content (ao questions)
     if (proof.territory === "nl") {
         items.push(
             {
@@ -190,7 +201,6 @@ export const getTextItems = (proof, locale) => {
             }
         );
     }
-
     return items;
 };
 
@@ -214,7 +224,7 @@ const getUserDetails = (proof, locale) => {
         if (proof.eventType === "vaccination") {
             string +=
                 "\n" +
-                t(locale, "nl.userData.validUntilVaccination", {
+                t(locale, "validUntilVaccination", {
                     date: proof.validUntil,
                 }) +
                 "\n\n";

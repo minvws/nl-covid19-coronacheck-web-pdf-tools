@@ -48,14 +48,14 @@ export default {
     "nl.userData.dateOfBirth": "Geboortedag",
     "nl.userData.validFrom": "Geldig vanaf",
     "nl.userData.validUntil": "Geldig tot",
-    "nl.userData.validUntilVaccination":
-        "Dit papieren bewijs is geldig tot %{date} Daarna kan je een nieuw Coronatoegangsbewijs maken op coronacheck.nl",
     "nl.userData.privacyNote":
         "Bovenstaande gegevens hoef je niet te laten zien bij de ingang.",
     instructions: "Instructies",
     questions: "VRAGEN?",
     questionsContent:
         "Bekijk de meestgestelde vragen op www.coronacheck.nl of stuur een e-mail naar helpdesk@coronacheck.nl of bel naar 0800-1421 (gratis)",
+    validUntilVaccination:
+        "Dit papieren bewijs is geldig tot: %{date} Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
     "metadata.title": "Coronabewijs met QR-code",
     "metadata.author": "CoronaCheck",
     "date.months.abbr.1": "JAN",
