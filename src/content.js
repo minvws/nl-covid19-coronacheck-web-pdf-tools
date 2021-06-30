@@ -140,9 +140,10 @@ export const getTextItems = (proof, locale) => {
         });
     }
 
-    if (locale === "nl") {
+    // add english translation on dutch european document
+    if (locale === "nl" && proof.territory === "eu") {
         items.push({
-            text: t("en", proof.territory + "." + proof.eventType + ".qrTitle"),
+            text: t("en", "eu." + proof.eventType + ".qrTitle"),
             fontFamily: "montserrat",
             fontWeight: 400,
             fontSize: 18,
