@@ -16,7 +16,7 @@ export default {
     "eu.warning":
         "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.",
     "eu.userData.name": "ACHTERNAAM EN VOORNAM(EN)",
-    "eu.userData.dateOfBirth": "Geboortedag",
+    "eu.userData.dateOfBirth": "Geboortedatum",
     "eu.userData.disease": "Ziekteverwekker",
     "eu.userData.diseaseRecoveredFrom": "Ziekte waarvan hersteld",
     "eu.userData.vaccineBrand": "VACCIN",
