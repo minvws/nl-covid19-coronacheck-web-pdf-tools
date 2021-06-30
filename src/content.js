@@ -42,7 +42,7 @@ const marginTop = 16;
 const leftPartLeft = marginLeft;
 const leftPartTop = 30;
 const rightPartLeft = 0.5 * pageWidth + marginLeft;
-const userDataColWidth = 60;
+const userDataColWidth = 50;
 const rightPartRight = pageWidth - marginLeft;
 const rightPartTop = marginTop;
 const partWidth = 0.5 * pageWidth - 2 * marginLeft;
@@ -366,12 +366,16 @@ const getUserDetails = (proof, locale) => {
 
         // values
         currentY = bottomPartTop;
-        for (const value of values) {
+        for (let value of values) {
+            if (value === "Ministry of Health Welfare and Sport") {
+                value = "Ministry of Health\nWelfare and Sport";
+            }
             userDetails.push({
                 text: value,
                 fontFamily: "dejavu-sans",
                 fontWeight: 700,
-                fontSize: 9,
+                fontSize: 8,
+                lineHeight: 3.5,
                 position: [rightPartRight, currentY],
                 width: userDataColWidth,
                 textAlign: "right",
