@@ -107,6 +107,8 @@ const europeanProofs = (data, holderConfig) => {
 
                 totalDoses: credential.sd,
 
+                doses: credential.dn + " / " + credential.sd,
+
                 vaccinationDate: credential.dt,
 
                 vaccinationCountry: credential.co,

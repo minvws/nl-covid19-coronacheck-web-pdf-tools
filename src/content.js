@@ -248,6 +248,7 @@ const getUserDetails = (proof, locale) => {
         switch (proof.eventType) {
             case "vaccination":
                 fields.push(
+                    "disease",
                     "vaccineBrand",
                     "vaccineType",
                     "vaccineManufacturer",
@@ -255,6 +256,16 @@ const getUserDetails = (proof, locale) => {
                     "vaccinationDate",
                     "vaccinationCountry",
                     "certificateIssuer"
+                );
+                values.push(
+                    "COVID-19",
+                    proof.vaccineBrand,
+                    proof.vaccineType,
+                    proof.vaccineBrand,
+                    proof.doses,
+                    proof.vaccinationDate,
+                    proof.vaccinationCountry,
+                    proof.certificateIssuer
                 );
                 break;
             case "negativetest":
