@@ -66,15 +66,6 @@ export const lineHeight = 4.5;
  */
 export const getTextItems = (proof, locale) => {
     /** @type {TextItem[]} */
-    let instructions = t(locale, "instructions");
-    // add comment about valid until for eu-vaccination
-    if (proof.eventType === "vaccination" && proof.territory === "eu") {
-        instructions +=
-            "\n\n" +
-            t(locale, "validUntilVaccination", {
-                date: proof.validUntil,
-            });
-    }
     const items = [
         {
             text: t(locale, proof.territory + ".title"),
@@ -97,7 +88,7 @@ export const getTextItems = (proof, locale) => {
             textAlign: "center",
         },
         {
-            text: instructions,
+            text: t(locale, "instructions"),
             fontFamily: "montserrat",
             fontWeight: 700,
             fontSize: 18,
@@ -109,7 +100,9 @@ export const getTextItems = (proof, locale) => {
             text:
                 proof.territory === "nl"
                     ? t(locale, "nl.instructions")
-                    : t(locale, "eu." + proof.eventType + ".instructions"),
+                    : t(locale, "eu." + proof.eventType + ".instructions", {
+                          date: proof.validUntil,
+                      }),
             fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
