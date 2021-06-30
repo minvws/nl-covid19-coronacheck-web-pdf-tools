@@ -378,30 +378,6 @@ const getUserDetails = (proof, locale) => {
             });
             currentY += lineHeightSmallCaps + fieldSpacing;
         }
-
-        // if (proof.type === "vaccination") {
-        //     string += "Surname(s) and first name(s): " + proof.fullName + "\n";
-        //     string += "Date of birth: " + proof.birthDateString + "\n";
-        //     string += "Disease targeted: COVID-19\n";
-        //     string += "Vaccine: " + proof.vaccineBrand + "\n";
-        //     string += "Vaccine medicinal product: " + proof.vaccineType + "\n";
-        //     string += "Vaccine manufacturer: " + proof.vaccineManufacturer + "\n";
-        //     string +=
-        //         "Vaccination doses: " +
-        //         proof.doseNumber +
-        //         " out of " +
-        //         proof.totalDoses +
-        //         "\n";
-        //     string += "Vaccination date: " + proof.vaccinationDate + "\n";
-        //     string += "Vaccinated in: " + proof.vaccinationCountry + "\n";
-        //     string += "Certificate issuer: " + proof.certificateIssuer + "\n";
-        //     string +=
-        //         "Certificate identifier: " + proof.certificateIdentifier + "\n\n";
-        //     string += "Valid from: " + proof.validFrom + "\n\n";
-        //     return string;
-        // } else {
-        //     return "UserData EU negative test (todo)";
-        // }
         return userDetails;
     }
 };
