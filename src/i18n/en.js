@@ -26,7 +26,7 @@ export default {
     "eu.userData.dateOfBirth": "Date of birth",
     "eu.userData.disease": "DISEASE TARGETED",
     "eu.userData.diseaseRecoveredFrom": "Disease recovered from",
-    "eu.userData.vaccineBrand": "VACCIN",
+    "eu.userData.vaccineBrand": "VACCINE",
     "eu.userData.vaccineType": "VACCINE MEDICINAL PRODUCT",
     "eu.userData.vaccineManufacturer": "VACCINE MANUFACTURER",
     "eu.userData.vaccinationDate": "DATE OF VACCINATION",
