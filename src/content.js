@@ -244,7 +244,7 @@ const getUserDetails = (proof, locale) => {
         const fieldSpacing = lineHeightSmallCaps * 2.3;
         const fields = ["name", "dateOfBirth"];
         const values = [proof.fullName, proof.birthDateString];
-        switch (proof.type) {
+        switch (proof.eventType) {
             case "vaccination":
                 fields.push(
                     "vaccineBrand",
