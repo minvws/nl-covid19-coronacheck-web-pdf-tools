@@ -5,6 +5,7 @@ export default {
     "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
     "eu.vaccination.instructions":
         "1. Print dit coronabewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat je coronabewijs (en eventueel ook je toegangskaartje) zien bij de ingang",
+    "eu.vaccination.qrTitle": "Vaccinatiebewijs",
     "eu.vaccination.propertiesLabel": "Vaccinatiegegevens",
     "eu.recovery.instructions":
         "1. Print dit bewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
