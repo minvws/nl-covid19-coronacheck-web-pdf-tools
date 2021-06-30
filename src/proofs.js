@@ -188,7 +188,7 @@ const europeanProofs = (data, holderConfig) => {
 
                 validUntil: formatDate(new Date(data.expirationTime)),
 
-                validFrom: credential.df,
+                validFrom: formatDate(new Date(credential.df)),
 
                 // TODO: r.fr, r.du
             });
