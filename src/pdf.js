@@ -3,8 +3,8 @@ import { jsPDF } from "jspdf";
 import { t } from "./i18n";
 
 import {
-    DejaVuSans,
-    DejaVuSansBold,
+    LiberationSansRegular,
+    LiberationSansBold,
     MontserratRegular,
     MontserratBold,
 } from "./assets/fonts";
@@ -33,12 +33,12 @@ const initDoc = (locale, metadata) => {
     doc.addFont("Montserrat-Regular.ttf", "montserrat", "normal");
     doc.addFont("Montserrat-Bold.ttf", "montserrat", "bold");
 
-    doc.addFileToVFS("DejaVuSans.ttf", DejaVuSans);
-    doc.addFileToVFS("DejaVuSansBold.ttf", DejaVuSansBold);
-    doc.addFont("DejaVuSans.ttf", "dejavu-sans", "normal");
-    doc.addFont("DejaVuSansBold.ttf", "dejavu-sans", "bold");
+    doc.addFileToVFS("LiberationSansRegular.ttf", LiberationSansRegular);
+    doc.addFileToVFS("LiberationSansBold.ttf", LiberationSansBold);
+    doc.addFont("LiberationSansRegular.ttf", "liberation-sans", "normal");
+    doc.addFont("LiberationSansBold.ttf", "liberation-sans", "bold");
 
-    doc.setFont("dejavu-sans");
+    doc.setFont("liberation-sans");
 
     doc.setProperties(
         metadata || {

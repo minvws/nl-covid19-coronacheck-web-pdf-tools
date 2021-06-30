@@ -1,7 +1,7 @@
 import { lineHeight } from "./content";
 
-export const regular = ["dejavu-sans", "normal", 400];
-export const bold = ["dejavu-sans", "normal", 700];
+export const regular = ["liberation-sans", "normal", 400];
+export const bold = ["liberation-sans", "normal", 700];
 const parser = new DOMParser();
 
 export const drawTextItemOverLines = (doc, textItem, x, textAlign) => {

@@ -80,7 +80,7 @@ export const getTextItems = (proof, locale) => {
         },
         {
             text: t(locale, proof.territory + ".intro"),
-            fontFamily: "dejavu-sans",
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
             position: [marginLeftIntro, 51],
@@ -101,7 +101,7 @@ export const getTextItems = (proof, locale) => {
                 proof.territory === "nl"
                     ? t(locale, "nl.instructions")
                     : t(locale, "eu." + proof.eventType + ".instructions"),
-            fontFamily: "dejavu-sans",
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeStandard,
             position: [rightPartLeft, 27],
@@ -159,7 +159,7 @@ export const getTextItems = (proof, locale) => {
         items.push(
             {
                 text: t(locale, "nl.propertiesLabel"),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
                 fontSize: 10,
                 position: [rightPartLeft, bottomPartTop],
@@ -167,7 +167,7 @@ export const getTextItems = (proof, locale) => {
             },
             {
                 text: t(locale, "questions"),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
                 fontSize: fontSizeStandard,
                 position: [
@@ -178,7 +178,7 @@ export const getTextItems = (proof, locale) => {
             },
             {
                 text: t(locale, "questionsContent"),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 400,
                 fontSize: fontSizeStandard,
                 position: [
@@ -229,7 +229,7 @@ const getUserDetails = (proof, locale) => {
         return [
             {
                 text: string,
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 400,
                 fontSize: fontSizeStandard,
                 position: [rightPartLeft, bottomPartTop + 2 * lineHeight],
@@ -318,7 +318,7 @@ const getUserDetails = (proof, locale) => {
         for (const field of fields) {
             userDetails.push({
                 text: t(locale, "eu.userData." + field).toUpperCase(),
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
                 fontSize: fontSizeSmallCaps,
                 position: [rightPartLeft, currentY],
@@ -328,7 +328,7 @@ const getUserDetails = (proof, locale) => {
             if (locale === "nl") {
                 userDetails.push({
                     text: t("en", "eu.userData." + field).toUpperCase(),
-                    fontFamily: "dejavu-sans",
+                    fontFamily: "liberation-sans",
                     fontWeight: 400,
                     fontSize: fontSizeSmallCaps,
                     position: [rightPartLeft, currentY],
@@ -348,7 +348,7 @@ const getUserDetails = (proof, locale) => {
         }
         userDetails.push({
             text: certificateNumberString,
-            fontFamily: "dejavu-sans",
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeTinyCaps,
             position: [rightPartLeft, currentY],
@@ -357,7 +357,7 @@ const getUserDetails = (proof, locale) => {
         currentY += lineHeightSmallCaps;
         userDetails.push({
             text: proof.certificateNumber,
-            fontFamily: "dejavu-sans",
+            fontFamily: "liberation-sans",
             fontWeight: 400,
             fontSize: fontSizeTinyCaps,
             position: [rightPartLeft, currentY],
@@ -372,7 +372,7 @@ const getUserDetails = (proof, locale) => {
             }
             userDetails.push({
                 text: value,
-                fontFamily: "dejavu-sans",
+                fontFamily: "liberation-sans",
                 fontWeight: 700,
                 fontSize: 8,
                 lineHeight: 3.5,
