@@ -38,8 +38,6 @@ const domesticProof = (data) => {
     return {
         proofType: "domestic",
 
-        eventType: "",
-
         territory: "nl",
 
         qr: data.qr,
