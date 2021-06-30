@@ -1,4 +1,4 @@
-import { formatBirthDate, formatDateTime, hoursInMs } from "./date";
+import { formatBirthDate, formatDate, formatDateTime, hoursInMs } from "./date";
 import {
     getEuBrand,
     getEuTestType,
@@ -178,9 +178,15 @@ const europeanProofs = (data, holderConfig) => {
 
                 birthDateString: data.dcc.dob,
 
+                dateOfTest: formatDate(new Date(credential.fr)),
+
+                countryOfTest: credential.co,
+
+                certificateIssuer: credential.is,
+
                 certificateNumber: credential.ci,
 
-                validUntil: formatDateTime(new Date(data.expirationTime)),
+                validUntil: formatDate(new Date(data.expirationTime)),
 
                 validFrom: credential.df,
 
