@@ -26,7 +26,7 @@ export const formatBirthDate = (birthDay, birthMonth) => {
 };
 
 /**
- * @param {number} dateTimeMs
+ * @param {number|Date} dateTimeMs
  * @return {string}
  */
 export const formatDate = (dateTimeMs) => format(dateTimeMs, "dd-MM-yyyy");
@@ -39,7 +39,7 @@ export const formatDateTime = (dateTimeMs) =>
     format(dateTimeMs, "dd-MM-yyyy, HH:mm");
 
 /**
- * @param {string|number} hours
- * @param {number}
+ * @param {string} hours
+ * @return {number}
  */
 export const hoursInMs = (hours) => parseInt(hours, 10) * 3600000;
