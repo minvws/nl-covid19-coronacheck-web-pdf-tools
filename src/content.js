@@ -255,7 +255,7 @@ const getUserDetails = (proof, locale) => {
                     "COVID-19",
                     proof.vaccineBrand,
                     proof.vaccineType,
-                    proof.vaccineBrand,
+                    proof.vaccineManufacturer,
                     proof.doses,
                     proof.vaccinationDate,
                     proof.vaccinationCountry,
