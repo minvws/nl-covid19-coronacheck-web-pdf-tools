@@ -272,8 +272,7 @@ const getUserDetails = (proof, locale) => {
                     "testLocation",
                     "testManufacturer",
                     "countryOfTest",
-                    "certificateIssuer",
-                    "validUntil"
+                    "certificateIssuer"
                 );
                 values.push(
                     "COVID-19",
@@ -284,8 +283,7 @@ const getUserDetails = (proof, locale) => {
                     proof.testLocation,
                     proof.testManufacturer,
                     proof.countryOfTest,
-                    proof.certificateIssuer,
-                    proof.validUntil
+                    proof.certificateIssuer
                 );
                 break;
             case "recovery":
