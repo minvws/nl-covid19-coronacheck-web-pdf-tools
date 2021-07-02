@@ -11,14 +11,15 @@ import {
  * TODO any type
  * @param {import("./types").ProofData} proofData
  * @param {any} holderConfig
+ * @param {import("./types").Locale} [locale]
  * @return {import("./types").Proof[]}
  */
-export const parseProofData = (proofData, holderConfig) => {
+export const parseProofData = (proofData, holderConfig, locale) => {
     /** @type {import("./types").Proof[]} */
     const proofs = [];
 
     if (proofData.domestic) {
-        proofs.push(domesticProof(proofData.domestic));
+        proofs.push(domesticProof(proofData.domestic, locale));
     }
     if (proofData.european) {
         for (const proof of europeanProofs(proofData.european, holderConfig)) {
@@ -31,9 +32,10 @@ export const parseProofData = (proofData, holderConfig) => {
 
 /**
  * @param {import("./types").DomesticProofData} data
+ * @param {import("./types").Locale} [locale]
  * @return {import("./types").Proof}
  */
-const domesticProof = (data) => {
+const domesticProof = (data, locale) => {
     const validFromDate = parseInt(data.attributes.validFrom, 10) * 1000;
     return {
         proofType: "domestic",
@@ -53,7 +55,7 @@ const domesticProof = (data) => {
         birthDateStringShort: formatBirthDate(
             data.attributes.birthDay,
             data.attributes.birthMonth,
-            "nl"
+            locale || "nl"
         ),
 
         validFromDate,
