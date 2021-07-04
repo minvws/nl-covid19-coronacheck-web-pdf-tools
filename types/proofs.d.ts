@@ -1,1 +1,1 @@
-export function parseProofData(proofData: import("./types").ProofData, holderConfig: any, locale?: import("./types").Locale): import("./types").Proof[];
+export function parseProofData(proofData: import("./types").ProofData, holderConfig: import("./types").TODO, locale?: import("./types").Locale): import("./types").Proof[];

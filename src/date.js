@@ -1,15 +1,7 @@
-import { format } from "date-fns";
-
 import { t } from "./i18n";
 import { isNumeric, padLeft } from "./util";
 
-/**
- * @param {string|number} month
- * @param {import("./types").Locale} locale
- * @return {string}
- */
-export const monthNameShort = (month, locale) =>
-    t(locale, "date.months.abbr." + month);
+const ISO8601 = /^(\d{4}-\d{2}-\d{2})(?:T(\d\d:\d\d(?::\d\d)?)(\.\d+)?(.*))?$/;
 
 /**
  * @param {string} birthDay
@@ -28,20 +20,86 @@ export const formatBirthDate = (birthDay, birthMonth, locale) => {
 };
 
 /**
- * @param {number|Date} dateTimeMs
+ * @param {string} isoDateString
  * @return {string}
  */
-export const formatDate = (dateTimeMs) => format(dateTimeMs, "dd-MM-yyyy");
+export const formatDate = (isoDateString) => {
+    const matches =
+        typeof isoDateString === "string" && isoDateString.match(ISO8601);
+    return matches ? flipDate(matches[1]) : isoDateString;
+};
 
 /**
- * @param {number|Date} dateTimeMs
+ * @param {string} isoDateString
  * @return {string}
  */
-export const formatDateTime = (dateTimeMs) =>
-    format(dateTimeMs, "dd-MM-yyyy, HH:mm");
+export const formatDateTime = (isoDateString) => {
+    const matches =
+        typeof isoDateString === "string" && isoDateString.match(ISO8601);
+    if (!matches) return isoDateString;
+    if (!matches[2]) return flipDate(matches[1]);
+    return flipDate(matches[1]) + ", " + matches[2].slice(0, 5);
+};
+
+/**
+ * @param {number} timestampMs
+ * @return {string}
+ */
+export const formatTimestamp = (timestampMs) => {
+    const date = new Date(timestampMs);
+    const offset = date.getTimezoneOffset();
+    return (
+        pad(date.getDate()) +
+        "-" +
+        pad(date.getMonth() + 1) +
+        "-" +
+        date.getFullYear() +
+        ", " +
+        pad(date.getHours()) +
+        ":" +
+        pad(date.getMinutes()) +
+        " (UTC" +
+        (offset ? formatOffset(offset) : "") +
+        ")"
+    );
+};
 
 /**
  * @param {string} hours
  * @return {number}
  */
 export const hoursInMs = (hours) => parseInt(hours, 10) * 3600000;
+
+/**
+ * @param {string} isoDate
+ * @return {string}
+ */
+const flipDate = (isoDate) => {
+    const parts = isoDate.slice(0, 10).split("-");
+    return parts[2] + "-" + parts[1] + "-" + parts[0];
+};
+
+/**
+ * @param {string|number} month
+ * @param {import("./types").Locale} locale
+ * @return {string}
+ */
+const monthNameShort = (month, locale) =>
+    t(locale, "date.months.abbr." + month);
+
+/**
+ * @param {number} n
+ * @return {string}
+ */
+const pad = (n) => (n < 10 ? "0" + n : "" + n);
+
+/**
+ * @param {number} offset
+ * @return {string}
+ */
+const formatOffset = (offset) => {
+    if (!offset) return "Z";
+    const oh = Math.floor(Math.abs(offset / 60));
+    const om = Math.floor(Math.abs(offset % 60));
+    return (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
+};
