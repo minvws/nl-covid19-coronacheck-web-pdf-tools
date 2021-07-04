@@ -41,7 +41,12 @@ export const formatDateTime = (isoDateString) => {
         typeof isoDateString === "string" && isoDateString.match(ISO8601);
     if (!matches) return isoDateString;
     if (!matches[2]) return flipDate(matches[1]);
-    return flipDate(matches[1]) + ", " + matches[2].slice(0, 5);
+    return (
+        flipDate(matches[1]) +
+        ", " +
+        matches[2].slice(0, 5) +
+        (matches[4] ? " (" + formatOffset(matches[4]) + ")" : "")
+    );
 };
 
 /**
@@ -61,8 +66,8 @@ export const formatTimestamp = (timestampMs) => {
         pad(date.getHours()) +
         ":" +
         pad(date.getMinutes()) +
-        " (UTC" +
-        (offset ? formatOffset(offset) : "") +
+        " (" +
+        formatOffset(offset) +
         ")"
     );
 };
@@ -97,12 +102,20 @@ const monthNameShort = (month, locale) =>
 const pad = (n) => (n < 10 ? "0" + n : "" + n);
 
 /**
- * @param {number} offset
+ * @param {number|string} offset
  * @return {string}
  */
 const formatOffset = (offset) => {
-    if (!offset) return "Z";
-    const oh = Math.floor(Math.abs(offset / 60));
-    const om = Math.floor(Math.abs(offset % 60));
-    return (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
+    if (!offset) return "UTC";
+    if (typeof offset === "number") {
+        const oh = Math.floor(Math.abs(offset / 60));
+        const om = Math.floor(Math.abs(offset % 60));
+        return "UTC" + (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
+    }
+    if (offset === "Z") return "UTC";
+    const parts = offset.split(":");
+    if (parseInt(parts[0], 10) || parseInt(parts[1], 10)) {
+        return "UTC" + offset;
+    }
+    return "UTC";
 };
