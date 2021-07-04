@@ -1,4 +1,10 @@
-import { formatBirthDate, formatDate, formatDateTime, hoursInMs } from "./date";
+import {
+    formatBirthDate,
+    formatDate,
+    formatDateTime,
+    formatTimestamp,
+    hoursInMs,
+} from "./date";
 import {
     getEuBrand,
     getEuTestType,
@@ -8,9 +14,8 @@ import {
 } from "./holder";
 
 /**
- * TODO any type
  * @param {import("./types").ProofData} proofData
- * @param {any} holderConfig
+ * @param {import("./types").TODO} holderConfig
  * @param {import("./types").Locale} [locale]
  * @return {import("./types").Proof[]}
  */
@@ -60,9 +65,9 @@ const domesticProof = (data, locale) => {
 
         validFromDate,
 
-        validFrom: formatDateTime(validFromDate),
+        validFrom: formatTimestamp(validFromDate),
 
-        validUntil: formatDateTime(
+        validUntil: formatTimestamp(
             validFromDate + hoursInMs(data.attributes.validForHours)
         ),
     };
@@ -91,11 +96,11 @@ const europeanProofs = (data, holderConfig) => {
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
-                birthDateString: formatDate(new Date(data.dcc.dob)),
+                birthDateString: formatDate(data.dcc.dob),
 
                 certificateNumber: credential.ci,
 
-                validUntil: formatDate(new Date(data.expirationTime)),
+                validUntil: formatDate(data.expirationTime),
 
                 vaccineBrand: getEuBrand(holderConfig, credential.mp) || "-",
 
@@ -110,7 +115,7 @@ const europeanProofs = (data, holderConfig) => {
 
                 doses: credential.dn + " / " + credential.sd,
 
-                vaccinationDate: formatDate(new Date(credential.dt)),
+                vaccinationDate: formatDate(credential.dt),
 
                 vaccinationCountry: credential.co,
 
@@ -138,17 +143,17 @@ const europeanProofs = (data, holderConfig) => {
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
-                birthDateString: formatDate(new Date(data.dcc.dob)),
+                birthDateString: formatDate(data.dcc.dob),
 
                 certificateNumber: credential.ci,
 
-                validUntil: formatDateTime(new Date(data.expirationTime)),
+                validUntil: formatDateTime(data.expirationTime),
 
                 testType: getEuTestType(holderConfig, credential.tt) || "",
 
                 testName: credential.nm,
 
-                dateOfTest: formatDateTime(new Date(credential.sc)),
+                dateOfTest: formatDateTime(credential.sc),
 
                 testLocation: credential.tc,
 
@@ -179,9 +184,9 @@ const europeanProofs = (data, holderConfig) => {
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
-                birthDateString: formatDate(new Date(data.dcc.dob)),
+                birthDateString: formatDate(data.dcc.dob),
 
-                dateOfTest: formatDate(new Date(credential.fr)),
+                dateOfTest: formatDate(credential.fr),
 
                 countryOfTest: credential.co,
 
@@ -189,9 +194,9 @@ const europeanProofs = (data, holderConfig) => {
 
                 certificateNumber: credential.ci,
 
-                validUntil: formatDate(new Date(credential.du)),
+                validUntil: formatDate(credential.du),
 
-                validFrom: formatDate(new Date(credential.df)),
+                validFrom: formatDate(credential.df),
             });
         }
     }

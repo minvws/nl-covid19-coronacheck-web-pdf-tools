@@ -1,3 +1,5 @@
+export type TODO = any;
+
 export type EventType = "negativetest" | "vaccination" | "recovery";
 
 export type Locale = "nl" | "en";
@@ -17,8 +19,8 @@ export type DomesticProofData = {
         validForHours: string; // number
         firstNameInitial: string; // e.g. "H"
         lastNameInitial: string; // e.g. "V"
-        birthDay: string; // number
-        birthMonth: string; // number
+        birthDay: string; // e.g. "31"
+        birthMonth: string; // e.g. "5"
     };
     qr: string;
 };
