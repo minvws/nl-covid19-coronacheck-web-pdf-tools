@@ -317,7 +317,7 @@ const getUserDetails = (proof, locale) => {
                 width: partWidth,
             });
             currentY += lineHeightSmallCaps;
-            if (locale === "nl") {
+            if (locale !== "en") {
                 userDetails.push({
                     text: t("en", "eu.userData." + field).toUpperCase(),
                     fontFamily: "liberation-sans",
@@ -334,7 +334,7 @@ const getUserDetails = (proof, locale) => {
             locale,
             "eu.userData.certificateNumber"
         ).toUpperCase();
-        if (locale === "nl") {
+        if (locale !== "en") {
             certificateNumberString +=
                 " / " + t("en", "eu.userData.certificateNumber").toUpperCase();
         }
