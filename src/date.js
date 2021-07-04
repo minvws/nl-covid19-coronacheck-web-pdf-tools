@@ -1,7 +1,10 @@
 import { t } from "./i18n";
 import { isNumeric, padLeft } from "./util";
 
-const ISO8601 = /^(\d{4}-\d{2}-\d{2})(?:T(\d\d:\d\d(?::\d\d)?)(\.\d+)?(.*))?$/;
+// ISO8601 date format. Does not support week number or day-of-year notation,
+// but does accept "XX" placeholders for month and date.
+const ISO8601 =
+    /^(\d{4}-(?:\d{2}|XX)-(?:\d{2}|XX))(?:T(\d\d:\d\d(?::\d\d)?)(\.\d+)?(.*))?$/i;
 
 /**
  * @param {string} birthDay
