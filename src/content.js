@@ -368,7 +368,7 @@ const getUserDetails = (proof, locale) => {
                 text: value,
                 fontFamily: "roboto",
                 fontWeight: 700,
-                fontSize: 8,
+                fontSize: 10,
                 lineHeight: 3.5,
                 position: [rightPartRight, currentY],
                 width: userDataColWidth,
