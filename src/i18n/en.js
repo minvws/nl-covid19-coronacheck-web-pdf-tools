@@ -2,7 +2,6 @@ export default {
     "eu.negativetest.instructions":
         "1. Print this certificate on A4 (black-and-white allowed)\n\n2. Bring a valid proof of identity to the activity you’re visiting \n\n3. Show the certificate and the proof of identity (and if needed a ticket) at the entrance",
     "eu.negativetest.qrTitle": "Test certificate",
-
     "eu.negativetest.propertiesLabel": "Negative test details",
     "eu.vaccination.instructions":
         "1. Print this certificate on A4 (black-and-white allowed)\n\n2. Bring a valid proof of identity to the activity you’re visiting \n\n3. Show the certificate and the proof of identity (and if needed a ticket) at the entrance",
