@@ -1,7 +1,10 @@
 import { t } from "./i18n";
 import { isNumeric, padLeft } from "./util";
 
-const ISO8601 = /^(\d{4}-\d{2}-\d{2})(?:T(\d\d:\d\d(?::\d\d)?)(\.\d+)?(.*))?$/;
+// ISO8601 date format. Does not support week number or day-of-year notation,
+// but does accept "XX" placeholders for month and date.
+const ISO8601 =
+    /^(\d{4}-(?:\d{2}|XX)-(?:\d{2}|XX))(?:T(\d\d:\d\d(?::\d\d)?)(\.\d+)?(.*))?$/i;
 
 /**
  * @param {string} birthDay
@@ -38,7 +41,12 @@ export const formatDateTime = (isoDateString) => {
         typeof isoDateString === "string" && isoDateString.match(ISO8601);
     if (!matches) return isoDateString;
     if (!matches[2]) return flipDate(matches[1]);
-    return flipDate(matches[1]) + ", " + matches[2].slice(0, 5);
+    return (
+        flipDate(matches[1]) +
+        ", " +
+        matches[2].slice(0, 5) +
+        (matches[4] ? " (" + formatOffset(matches[4]) + ")" : "")
+    );
 };
 
 /**
@@ -58,8 +66,8 @@ export const formatTimestamp = (timestampMs) => {
         pad(date.getHours()) +
         ":" +
         pad(date.getMinutes()) +
-        " (UTC" +
-        (offset ? formatOffset(offset) : "") +
+        " (" +
+        formatOffset(offset) +
         ")"
     );
 };
@@ -94,12 +102,20 @@ const monthNameShort = (month, locale) =>
 const pad = (n) => (n < 10 ? "0" + n : "" + n);
 
 /**
- * @param {number} offset
+ * @param {number|string} offset
  * @return {string}
  */
 const formatOffset = (offset) => {
-    if (!offset) return "Z";
-    const oh = Math.floor(Math.abs(offset / 60));
-    const om = Math.floor(Math.abs(offset % 60));
-    return (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
+    if (!offset) return "UTC";
+    if (typeof offset === "number") {
+        const oh = Math.floor(Math.abs(offset / 60));
+        const om = Math.floor(Math.abs(offset % 60));
+        return "UTC" + (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
+    }
+    if (offset === "Z") return "UTC";
+    const parts = offset.split(":");
+    if (parseInt(parts[0], 10) || parseInt(parts[1], 10)) {
+        return "UTC" + offset;
+    }
+    return "UTC";
 };
