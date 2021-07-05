@@ -237,8 +237,8 @@ const getUserDetails = (proof, locale) => {
         const userDetails = [];
         const fontSizeSmallCaps = 6;
         const fontSizeTinyCaps = 5;
-        const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
-        const fieldSpacing = lineHeightSmallCaps * 2.3;
+        const lineHeightSmallCaps = fontSizeSmallCaps * 0.5;
+        const fieldSpacing = lineHeightSmallCaps * 3;
         const fields = ["name", "dateOfBirth"];
         const values = [proof.fullName, proof.birthDateString];
         switch (proof.eventType) {
@@ -369,7 +369,7 @@ const getUserDetails = (proof, locale) => {
                 fontFamily: "roboto",
                 fontWeight: 700,
                 fontSize: 10,
-                lineHeight: 3.5,
+                lineHeight: 4,
                 position: [rightPartRight, currentY],
                 width: userDataColWidth,
                 textAlign: "right",
