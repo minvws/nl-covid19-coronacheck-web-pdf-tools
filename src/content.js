@@ -24,7 +24,7 @@ import { t } from "./i18n";
  * @property {string} text
  * @property {string} fontFamily
  * @property {number} fontWeight
- * @property {string} fontStyle
+ * @property {string} [fontStyle]
  * @property {Position} position
  * @property {"left"|"right"|"center"|"justify"} [textAlign]
  * @property {number} [fontSize]
