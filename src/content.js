@@ -24,6 +24,7 @@ import { t } from "./i18n";
  * @property {string} text
  * @property {string} fontFamily
  * @property {number} fontWeight
+ * @property {string} [fontStyle]
  * @property {Position} position
  * @property {"left"|"right"|"center"|"justify"} [textAlign]
  * @property {number} [fontSize]
@@ -80,7 +81,7 @@ export const getTextItems = (proof, locale) => {
         },
         {
             text: t(locale, proof.territory + ".intro"),
-            fontFamily: "liberation-sans",
+            fontFamily: "roboto",
             fontWeight: 400,
             fontSize: fontSizeStandard,
             position: [marginLeftIntro, 51],
@@ -103,7 +104,7 @@ export const getTextItems = (proof, locale) => {
                     : t(locale, "eu." + proof.eventType + ".instructions", {
                           date: proof.validUntil,
                       }),
-            fontFamily: "liberation-sans",
+            fontFamily: "roboto",
             fontWeight: 400,
             fontSize: fontSizeStandard,
             position: [rightPartLeft, 27],
@@ -134,9 +135,9 @@ export const getTextItems = (proof, locale) => {
     if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning"),
-            fontFamily: "montserrat",
+            fontFamily: "roboto",
             fontWeight: 400,
-            fontSize: 5,
+            fontSize: 6,
             position: [leftPartLeft, 280],
             width: partWidth,
             lineHeight: 2.4,
@@ -147,9 +148,10 @@ export const getTextItems = (proof, locale) => {
     if (locale === "nl" && proof.territory === "eu") {
         items.push({
             text: t("en", "eu." + proof.eventType + ".qrTitle"),
-            fontFamily: "montserrat",
+            fontFamily: "roboto",
             fontWeight: 400,
-            fontSize: 18,
+            fontSize: 14,
+            fontStyle: "italic",
             color: lightBlack,
             position: [marginLeftIntro, bottomPartTop + lineHeight * 1.5],
             width: partWidthIntro,
@@ -163,7 +165,7 @@ export const getTextItems = (proof, locale) => {
         items.push(
             {
                 text: t(locale, "nl.propertiesLabel"),
-                fontFamily: "liberation-sans",
+                fontFamily: "roboto",
                 fontWeight: 700,
                 fontSize: 10,
                 position: [rightPartLeft, bottomPartTop],
@@ -171,7 +173,7 @@ export const getTextItems = (proof, locale) => {
             },
             {
                 text: t(locale, "questions"),
-                fontFamily: "liberation-sans",
+                fontFamily: "roboto",
                 fontWeight: 700,
                 fontSize: fontSizeStandard,
                 position: [
@@ -182,7 +184,7 @@ export const getTextItems = (proof, locale) => {
             },
             {
                 text: t(locale, "questionsContent"),
-                fontFamily: "liberation-sans",
+                fontFamily: "roboto",
                 fontWeight: 400,
                 fontSize: fontSizeStandard,
                 position: [
@@ -223,7 +225,7 @@ const getUserDetails = (proof, locale) => {
         return [
             {
                 text: string,
-                fontFamily: "liberation-sans",
+                fontFamily: "roboto",
                 fontWeight: 400,
                 fontSize: fontSizeStandard,
                 position: [rightPartLeft, bottomPartTop + 2 * lineHeight],
@@ -233,10 +235,10 @@ const getUserDetails = (proof, locale) => {
     } else {
         /** @type {TextItem[]} */
         const userDetails = [];
-        const fontSizeSmallCaps = 6.5;
+        const fontSizeSmallCaps = 6;
         const fontSizeTinyCaps = 5;
-        const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
-        const fieldSpacing = lineHeightSmallCaps * 2.3;
+        const lineHeightSmallCaps = fontSizeSmallCaps * 0.5;
+        const fieldSpacing = lineHeightSmallCaps * 3;
         const fields = ["name", "dateOfBirth"];
         const values = [proof.fullName, proof.birthDateString];
         switch (proof.eventType) {
@@ -310,7 +312,7 @@ const getUserDetails = (proof, locale) => {
         for (const field of fields) {
             userDetails.push({
                 text: t(locale, "eu.userData." + field).toUpperCase(),
-                fontFamily: "liberation-sans",
+                fontFamily: "roboto",
                 fontWeight: 700,
                 fontSize: fontSizeSmallCaps,
                 position: [rightPartLeft, currentY],
@@ -320,7 +322,7 @@ const getUserDetails = (proof, locale) => {
             if (locale !== "en") {
                 userDetails.push({
                     text: t("en", "eu.userData." + field).toUpperCase(),
-                    fontFamily: "liberation-sans",
+                    fontFamily: "roboto",
                     fontWeight: 400,
                     fontSize: fontSizeSmallCaps,
                     position: [rightPartLeft, currentY],
@@ -340,7 +342,7 @@ const getUserDetails = (proof, locale) => {
         }
         userDetails.push({
             text: certificateNumberString,
-            fontFamily: "liberation-sans",
+            fontFamily: "roboto",
             fontWeight: 400,
             fontSize: fontSizeTinyCaps,
             position: [rightPartLeft, currentY],
@@ -349,7 +351,7 @@ const getUserDetails = (proof, locale) => {
         currentY += lineHeightSmallCaps;
         userDetails.push({
             text: proof.certificateNumber,
-            fontFamily: "liberation-sans",
+            fontFamily: "roboto",
             fontWeight: 400,
             fontSize: fontSizeTinyCaps,
             position: [rightPartLeft, currentY],
@@ -358,16 +360,21 @@ const getUserDetails = (proof, locale) => {
 
         // values
         currentY = bottomPartTop;
+        if (locale === "nl") {
+            // when locale is dutch, the fields have 2 lines
+            // for aligning purpose we add a mm to the value starting point
+            currentY += 1;
+        }
         for (let value of values) {
             if (value === "Ministry of Health Welfare and Sport") {
                 value = "Ministry of Health\nWelfare and Sport";
             }
             userDetails.push({
                 text: value,
-                fontFamily: "liberation-sans",
+                fontFamily: "roboto",
                 fontWeight: 700,
-                fontSize: 8,
-                lineHeight: 3.5,
+                fontSize: 10,
+                lineHeight: 4,
                 position: [rightPartRight, currentY],
                 width: userDataColWidth,
                 textAlign: "right",
@@ -405,7 +412,7 @@ export const getImageItems = async (proof, qrSizeInCm) => {
             height: qrSize,
         },
         {
-            url: img.foldInstructionsV2,
+            url: img.foldInstructionsV3,
             x: 165,
             y: 6,
             width: 40,

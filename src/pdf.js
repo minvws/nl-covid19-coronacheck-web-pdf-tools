@@ -3,10 +3,11 @@ import { jsPDF } from "jspdf";
 import { t } from "./i18n";
 
 import {
-    LiberationSansRegular,
-    LiberationSansBold,
     MontserratRegular,
     MontserratBold,
+    RobotoRegular,
+    RobotoBold,
+    RobotoItalic,
 } from "./assets/fonts";
 import { getTextItems, getImageItems, getFrames, getLines } from "./content";
 import {
@@ -30,15 +31,17 @@ const initDoc = (locale, metadata) => {
 
     doc.addFileToVFS("Montserrat-Regular.ttf", MontserratRegular);
     doc.addFileToVFS("Montserrat-Bold.ttf", MontserratBold);
-    doc.addFont("Montserrat-Regular.ttf", "montserrat", "normal");
-    doc.addFont("Montserrat-Bold.ttf", "montserrat", "bold");
+    doc.addFont("Montserrat-Regular.ttf", "montserrat", "normal", 400);
+    doc.addFont("Montserrat-Bold.ttf", "montserrat", "normal", 700);
 
-    doc.addFileToVFS("LiberationSansRegular.ttf", LiberationSansRegular);
-    doc.addFileToVFS("LiberationSansBold.ttf", LiberationSansBold);
-    doc.addFont("LiberationSansRegular.ttf", "liberation-sans", "normal");
-    doc.addFont("LiberationSansBold.ttf", "liberation-sans", "bold");
+    doc.addFileToVFS("Roboto-Regular.ttf", RobotoRegular);
+    doc.addFileToVFS("Roboto-Bold.ttf", RobotoBold);
+    doc.addFileToVFS("Roboto-Italic.ttf", RobotoItalic);
+    doc.addFont("Roboto-Regular.ttf", "roboto", "normal", 400);
+    doc.addFont("Roboto-Bold.ttf", "roboto", "normal", 700);
+    doc.addFont("Roboto-Italic.ttf", "roboto", "italic", 400);
 
-    doc.setFont("liberation-sans");
+    doc.setFont("roboto");
 
     doc.setProperties(
         metadata || {
