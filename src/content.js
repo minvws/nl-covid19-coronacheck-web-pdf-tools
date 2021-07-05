@@ -135,9 +135,9 @@ export const getTextItems = (proof, locale) => {
     if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning"),
-            fontFamily: "montserrat",
+            fontFamily: "roboto",
             fontWeight: 400,
-            fontSize: 5,
+            fontSize: 6,
             position: [leftPartLeft, 280],
             width: partWidth,
             lineHeight: 2.4,
