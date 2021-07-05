@@ -26,7 +26,14 @@ export const setFontAndWeight = (doc, textItem, chunk) => {
         : textItem.fontWeight
         ? textItem.fontWeight
         : 400;
-    const properties = [family, "normal", weight];
+    const style = chunk
+        ? chunk.fontStyle
+            ? chunk.fontStyle
+            : "normal"
+        : textItem.fontStyle
+        ? textItem.fontStyle
+        : "normal"
+    const properties = [family, style, weight];
     doc.setFont(...properties);
 };
 
