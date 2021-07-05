@@ -34,6 +34,7 @@ export type TextItem = {
     text: string;
     fontFamily: string;
     fontWeight: number;
+    fontStyle?: string;
     position: Position;
     textAlign?: "left" | "right" | "center" | "justify";
     fontSize?: number;
