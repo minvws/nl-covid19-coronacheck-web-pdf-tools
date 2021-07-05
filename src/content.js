@@ -412,7 +412,7 @@ export const getImageItems = async (proof, qrSizeInCm) => {
             height: qrSize,
         },
         {
-            url: img.foldInstructionsV2,
+            url: img.foldInstructionsV3,
             x: 165,
             y: 6,
             width: 40,
