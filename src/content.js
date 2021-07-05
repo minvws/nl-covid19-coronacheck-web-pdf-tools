@@ -148,10 +148,10 @@ export const getTextItems = (proof, locale) => {
     if (locale === "nl" && proof.territory === "eu") {
         items.push({
             text: t("en", "eu." + proof.eventType + ".qrTitle"),
-            fontFamily: "montserrat",
+            fontFamily: "roboto",
             fontWeight: 400,
             fontSize: 14,
-            fontStyle: 'italic',
+            fontStyle: "italic",
             color: lightBlack,
             position: [marginLeftIntro, bottomPartTop + lineHeight * 1.5],
             width: partWidthIntro,
