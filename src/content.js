@@ -235,7 +235,7 @@ const getUserDetails = (proof, locale) => {
     } else {
         /** @type {TextItem[]} */
         const userDetails = [];
-        const fontSizeSmallCaps = 6.5;
+        const fontSizeSmallCaps = 6;
         const fontSizeTinyCaps = 5;
         const lineHeightSmallCaps = fontSizeSmallCaps * 0.45;
         const fieldSpacing = lineHeightSmallCaps * 2.3;
