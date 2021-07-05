@@ -32,7 +32,7 @@ export const setFontAndWeight = (doc, textItem, chunk) => {
             : "normal"
         : textItem.fontStyle
         ? textItem.fontStyle
-        : "normal"
+        : "normal";
     const properties = [family, style, weight];
     doc.setFont(...properties);
 };
