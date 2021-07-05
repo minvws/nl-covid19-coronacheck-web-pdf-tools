@@ -360,6 +360,11 @@ const getUserDetails = (proof, locale) => {
 
         // values
         currentY = bottomPartTop;
+        if (locale === "nl") {
+            // when locale is dutch, the fields have 2 lines
+            // for aligning purpose we add a mm to the value starting point
+            currentY += 1;
+        }
         for (let value of values) {
             if (value === "Ministry of Health Welfare and Sport") {
                 value = "Ministry of Health\nWelfare and Sport";
