@@ -238,7 +238,7 @@ const getUserDetails = (proof, locale) => {
         const fontSizeSmallCaps = 6;
         const fontSizeTinyCaps = 5;
         const lineHeightSmallCaps = fontSizeSmallCaps * 0.5;
-        const fieldSpacing = lineHeightSmallCaps * 3;
+        const fieldSpacing = lineHeightSmallCaps * 2.5;
         const fields = ["name", "dateOfBirth"];
         const values = [proof.fullName, proof.birthDateString];
         switch (proof.eventType) {
