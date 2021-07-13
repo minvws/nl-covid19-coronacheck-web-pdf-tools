@@ -196,7 +196,7 @@ export const getTextItems = (proof, locale) => {
             }
         );
     }
-    return items;
+    return items.filter((item) => item.text !== null);
 };
 
 /**
