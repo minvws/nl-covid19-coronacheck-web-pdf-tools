@@ -50,6 +50,38 @@ export const formatDateTime = (isoDateString) => {
 };
 
 /**
+ * @return {string}
+ */
+export const getCurrentDateTime = () => {
+    const pad = (n) => (n < 10 ? "0" + n : "" + n);
+    const getOffset = (date) => {
+        const offset = date.getTimezoneOffset();
+        if (!offset) return "Z";
+        const oh = Math.floor(Math.abs(offset / 60));
+        const om = Math.floor(Math.abs(offset % 60));
+        return (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
+    };
+    const date = new Date();
+    const offset = getOffset(date);
+    return (
+        date.getFullYear() +
+        "-" +
+        (date.getMonth() + 1) +
+        "-" +
+        date.getDate() +
+        "T" +
+        +pad(date.getHours()) +
+        ":" +
+        +pad(date.getMinutes()) +
+        ":" +
+        +pad(date.getSeconds()) +
+        " (" +
+        offset +
+        ")"
+    );
+};
+
+/**
  * @param {number} timestampMs
  * @return {string}
  */

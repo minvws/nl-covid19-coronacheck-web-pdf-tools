@@ -1,6 +1,7 @@
 import * as img from "./assets/img";
 import { generateQR } from "./qr";
 import { t } from "./i18n";
+import { getCurrentDateTime } from "./date";
 
 /** @typedef {import("./types").Proof} Proof */
 /** @typedef {import("./types").Locale} Locale */
@@ -41,7 +42,7 @@ const marginLeftIntro = 12;
 // jspdf uses the baseline of a text for an y position
 const marginTop = 16;
 const leftPartLeft = marginLeft;
-const leftPartTop = 30;
+const leftPartTop = 37;
 const rightPartLeft = 0.5 * pageWidth + marginLeft;
 const userDataColWidth = 50;
 const rightPartRight = pageWidth - marginLeft;
@@ -84,7 +85,7 @@ export const getTextItems = (proof, locale) => {
             fontFamily: "roboto",
             fontWeight: 400,
             fontSize: fontSizeStandard,
-            position: [marginLeftIntro, 51],
+            position: [marginLeftIntro, leftPartTop + 21],
             width: partWidthIntro,
             textAlign: "center",
         },
@@ -134,11 +135,13 @@ export const getTextItems = (proof, locale) => {
     // add warning for eu
     if (proof.territory === "eu") {
         items.push({
-            text: t(locale, "eu.warning"),
+            text: t(locale, "eu.warning", {
+                time: getCurrentDateTime(),
+            }),
             fontFamily: "roboto",
             fontWeight: 400,
             fontSize: 6,
-            position: [leftPartLeft, 280],
+            position: [leftPartLeft, 276],
             width: partWidth,
             lineHeight: 2.4,
         });
@@ -374,7 +377,7 @@ const getUserDetails = (proof, locale) => {
                 fontFamily: "roboto",
                 fontWeight: 700,
                 fontSize: 10,
-                lineHeight: 4,
+                lineHeight: 3.4,
                 position: [rightPartRight, currentY],
                 width: userDataColWidth,
                 textAlign: "right",
@@ -396,11 +399,12 @@ export const getImageItems = async (proof, qrSizeInCm) => {
     const coronacheckImageHeight = 10;
     const flagWidth = 63;
     const flagHeight = 40; // (1913/2976*63)
+    const logoOverheidWidth = 10;
     const items = [
         {
             url: proof.territory === "nl" ? img.flagNl : img.flagEu,
             x: (pageWidth / 2 - flagWidth) / 2,
-            y: 87,
+            y: 91,
             width: flagWidth,
             height: flagHeight,
         },
@@ -417,6 +421,13 @@ export const getImageItems = async (proof, qrSizeInCm) => {
             y: 6,
             width: 40,
             height: 15,
+        },
+        {
+            url: img.logoOverheid,
+            x: pageWidth / 4 - 0.5 * logoOverheidWidth,
+            y: 0,
+            width: logoOverheidWidth,
+            height: logoOverheidWidth * 2,
         },
     ];
     if (proof.territory === "nl") {

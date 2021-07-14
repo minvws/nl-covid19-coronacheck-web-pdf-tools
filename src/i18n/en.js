@@ -21,7 +21,7 @@ export default {
     "nl.intro":
         "Visiting locations or activities within the Netherlands? Then use this certificate.",
     "eu.warning":
-        "This certificate is not a travel document. The scientific evidence regarding COVID-19 vaccinations, testing and recovery continues to evolve, also with regard to new variants of concern. Before traveling, please check which public health measures and associated restrictions apply at the destination.",
+        "This certificate is not a travel document. The scientific evidence regarding COVID-19 vaccinations, testing and recovery continues to evolve, also with regard to new variants of concern. Before traveling, please check which public health measures and associated restrictions apply at the destination.\n\nPRINTED ON %{time}",
     "eu.userData.name": "SURNAME(S) AND FIRST NAME(S)",
     "eu.userData.dateOfBirth": "Date of birth (DD-MM-YYYY)",
     "eu.userData.disease": "DISEASE TARGETED",
