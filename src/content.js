@@ -419,6 +419,13 @@ export const getImageItems = async (proof, qrSizeInCm) => {
             width: 40,
             height: 15,
         },
+        {
+            url: img.logoOverheid,
+            x: pageWidth / 4 - 0.5 * logoOverheidWidth,
+            y: 0,
+            width: logoOverheidWidth,
+            height: logoOverheidWidth * 2,
+        },
     ];
     if (proof.territory === "nl") {
         const questionsItem = {
@@ -433,16 +440,6 @@ export const getImageItems = async (proof, qrSizeInCm) => {
             height: coronacheckImageHeight,
         };
         items.push(questionsItem);
-    }
-    if (proof.territory === "eu") {
-        const logoOverheid = {
-            url: img.logoOverheid,
-            x: pageWidth / 4 - 0.5 * logoOverheidWidth,
-            y: 0,
-            width: logoOverheidWidth,
-            height: logoOverheidWidth * 2,
-        };
-        items.push(logoOverheid);
     }
     return items;
 };
