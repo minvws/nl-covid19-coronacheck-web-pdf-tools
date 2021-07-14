@@ -41,7 +41,7 @@ const marginLeftIntro = 12;
 // jspdf uses the baseline of a text for an y position
 const marginTop = 16;
 const leftPartLeft = marginLeft;
-const leftPartTop = 30;
+const leftPartTop = 37;
 const rightPartLeft = 0.5 * pageWidth + marginLeft;
 const userDataColWidth = 50;
 const rightPartRight = pageWidth - marginLeft;
@@ -84,7 +84,7 @@ export const getTextItems = (proof, locale) => {
             fontFamily: "roboto",
             fontWeight: 400,
             fontSize: fontSizeStandard,
-            position: [marginLeftIntro, 51],
+            position: [marginLeftIntro, leftPartTop + 21],
             width: partWidthIntro,
             textAlign: "center",
         },
@@ -401,7 +401,7 @@ export const getImageItems = async (proof, qrSizeInCm) => {
         {
             url: proof.territory === "nl" ? img.flagNl : img.flagEu,
             x: (pageWidth / 2 - flagWidth) / 2,
-            y: 87,
+            y: 91,
             width: flagWidth,
             height: flagHeight,
         },
