@@ -396,6 +396,7 @@ export const getImageItems = async (proof, qrSizeInCm) => {
     const coronacheckImageHeight = 10;
     const flagWidth = 63;
     const flagHeight = 40; // (1913/2976*63)
+    const logoOverheidWidth = 10;
     const items = [
         {
             url: proof.territory === "nl" ? img.flagNl : img.flagEu,
@@ -432,6 +433,16 @@ export const getImageItems = async (proof, qrSizeInCm) => {
             height: coronacheckImageHeight,
         };
         items.push(questionsItem);
+    }
+    if (proof.territory === "eu") {
+        const logoOverheid = {
+            url: img.logoOverheid,
+            x: pageWidth / 4 - 0.5 * logoOverheidWidth,
+            y: 0,
+            width: logoOverheidWidth,
+            height: logoOverheidWidth * 2,
+        };
+        items.push(logoOverheid);
     }
     return items;
 };
