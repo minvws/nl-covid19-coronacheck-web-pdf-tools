@@ -70,11 +70,11 @@ export const getCurrentDateTime = () => {
         "-" +
         date.getDate() +
         "T" +
-        +date.getHours() +
+        +pad(date.getHours()) +
         ":" +
-        +date.getMinutes() +
+        +pad(date.getMinutes()) +
         ":" +
-        +date.getSeconds() +
+        +pad(date.getSeconds()) +
         " (" +
         offset +
         ")"
