@@ -1,9 +1,4 @@
-import {
-    formatBirthDate,
-    formatDate,
-    formatDateTime,
-    hoursInMs,
-} from "./date";
+import { formatBirthDate, formatDate, formatDateTime, hoursInMs } from "./date";
 
 describe("formatBirthDate", () => {
     /** @type {["nl"|"en", string, string, string][]} */
@@ -55,7 +50,8 @@ describe("formatDateTime", () => {
 });
 
 // TODO: run tests in specific timezone? (won't work on Windows)
-test.todo("formatTimestamp")
+test.todo("formatTimestamp");
+test.todo("getCurrentDateTime");
 
 describe("hoursInMs", () => {
     test.each([

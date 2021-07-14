@@ -50,33 +50,30 @@ export const formatDateTime = (isoDateString) => {
 };
 
 /**
+ * @param {number} n
+ * @return {string}
+ */
+const pad = (n) => (n < 10 ? "0" + n : "" + n);
+
+/**
  * @return {string}
  */
 export const getCurrentDateTime = () => {
-    const pad = (n) => (n < 10 ? "0" + n : "" + n);
-    const getOffset = (date) => {
-        const offset = date.getTimezoneOffset();
-        if (!offset) return "Z";
-        const oh = Math.floor(Math.abs(offset / 60));
-        const om = Math.floor(Math.abs(offset % 60));
-        return (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
-    };
     const date = new Date();
-    const offset = getOffset(date);
     return (
-        date.getFullYear() +
+        date.getDate() +
         "-" +
         (date.getMonth() + 1) +
         "-" +
-        date.getDate() +
-        "T" +
-        +pad(date.getHours()) +
+        date.getFullYear() +
+        ", " +
+        pad(date.getHours()) +
         ":" +
-        +pad(date.getMinutes()) +
+        pad(date.getMinutes()) +
         ":" +
-        +pad(date.getSeconds()) +
+        pad(date.getSeconds()) +
         " (" +
-        offset +
+        formatOffset(date.getTimezoneOffset()) +
         ")"
     );
 };
@@ -126,12 +123,6 @@ const flipDate = (isoDate) => {
  */
 const monthNameShort = (month, locale) =>
     t(locale, "date.months.abbr." + month);
-
-/**
- * @param {number} n
- * @return {string}
- */
-const pad = (n) => (n < 10 ? "0" + n : "" + n);
 
 /**
  * @param {number|string} offset

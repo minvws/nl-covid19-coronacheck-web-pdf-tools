@@ -14,7 +14,7 @@ export default {
     "eu.intro":
         "Reis je buiten Nederland? Gebruik dan dit EU Digitaal Corona Certificaat (DCC).\n\nBekijk voor vertrek welke test-, herstel- of vaccinatiebewijzen geldig zijn in het land dat je bezoekt: https://reopen.europa.eu/nl",
     "eu.warning":
-        "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.\n\nGEPIRNT OP / PRINTED ON %{time}",
+        "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.\n\nGEPRINT OP / PRINTED ON %{time}",
     "eu.userData.name": "ACHTERNAAM EN VOORNAM(EN)",
     "eu.userData.dateOfBirth": "Geboortedatum",
     "eu.userData.disease": "Ziekteverwekker",
