@@ -1,7 +1,7 @@
 import * as img from "./assets/img";
 import { generateQR } from "./qr";
 import { t } from "./i18n";
-import { formatTimestamp } from "./date";
+import { formatDateTime } from "./date";
 
 /** @typedef {import("./types").Proof} Proof */
 /** @typedef {import("./types").Locale} Locale */
@@ -137,7 +137,7 @@ export const getTextItems = (proof, locale, createdAt) => {
     if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning", {
-                time: formatTimestamp(createdAt),
+                time: formatDateTime(createdAt),
             }),
             fontFamily: "roboto",
             fontWeight: 400,

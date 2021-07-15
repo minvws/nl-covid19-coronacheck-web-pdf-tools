@@ -33,45 +33,49 @@ export const formatDate = (isoDateString) => {
 };
 
 /**
- * @param {string} isoDateString
- * @return {string}
- */
-export const formatDateTime = (isoDateString) => {
-    const matches =
-        typeof isoDateString === "string" && isoDateString.match(ISO8601);
-    if (!matches) return isoDateString;
-    if (!matches[2]) return flipDate(matches[1]);
-    return (
-        flipDate(matches[1]) +
-        ", " +
-        matches[2].slice(0, 5) +
-        (matches[4] ? " (" + formatOffset(matches[4]) + ")" : "")
-    );
-};
-
-/**
  * @param {number} n
  * @return {string}
  */
 const pad = (n) => (n < 10 ? "0" + n : "" + n);
 
+const formatter =
+    "Intl" in window &&
+    new Intl.DateTimeFormat("nl-NL", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZoneName: "short",
+    });
+
 /**
- * @param {Date|number} timestampMs
+ * @param {Date|number|string} datetime - Date instance, timestamp in ms, or ISO8601 string
  * @return {string}
  */
-export const formatTimestamp = (timestampMs) => {
-    const date = new Date(timestampMs);
-    const offset = date.getTimezoneOffset();
+export const formatDateTime = (datetime) => {
+    if (!(datetime instanceof Date)) datetime = new Date(datetime);
+    if (
+        formatter &&
+        formatter.resolvedOptions &&
+        formatter.resolvedOptions().timeZone
+    ) {
+        try {
+            const parts = formatter.format(datetime).split(" ");
+            return parts[0] + ", " + parts[1] + " (" + parts[2] + ")";
+        } catch (e) {}
+    }
+    const offset = datetime.getTimezoneOffset();
     return (
-        pad(date.getDate()) +
+        pad(datetime.getDate()) +
         "-" +
-        pad(date.getMonth() + 1) +
+        pad(datetime.getMonth() + 1) +
         "-" +
-        date.getFullYear() +
+        datetime.getFullYear() +
         ", " +
-        pad(date.getHours()) +
+        pad(datetime.getHours()) +
         ":" +
-        pad(date.getMinutes()) +
+        pad(datetime.getMinutes()) +
         " (" +
         formatOffset(offset) +
         ")"
@@ -110,7 +114,9 @@ const formatOffset = (offset) => {
     if (typeof offset === "number") {
         const oh = Math.floor(Math.abs(offset / 60));
         const om = Math.floor(Math.abs(offset % 60));
-        return "UTC" + (offset < 0 ? "+" : "-") + pad(oh) + ":" + pad(om);
+        return (
+            "UTC" + (offset < 0 ? "+" : "-") + oh + (om ? ":" + pad(om) : "")
+        );
     }
     if (offset === "Z") return "UTC";
     const parts = offset.split(":");

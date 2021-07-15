@@ -30,27 +30,8 @@ describe("formatDate", () => {
     });
 });
 
-describe("formatDateTime", () => {
-    test.each([
-        ["1970-01-01", "01-01-1970"],
-        ["2021-07-27T07:41:10", "27-07-2021, 07:41"],
-        ["2021-07-27T07:41:10Z", "27-07-2021, 07:41 (UTC)"],
-        ["2021-07-27T07:41:10+00:00", "27-07-2021, 07:41 (UTC)"],
-        ["2021-07-27T09:41:10+02:00", "27-07-2021, 09:41 (UTC+02:00)"],
-        ["2021-07-27T09:41:10.1234+02:00", "27-07-2021, 09:41 (UTC+02:00)"],
-        ["2021-07-27T04:41:10-3", "27-07-2021, 04:41 (UTC-3)"],
-        ["2021-12-31T13:37Z", "31-12-2021, 13:37 (UTC)"],
-        ["12/31/2020", "12/31/2020"],
-        ["1970-XX-XX", "XX-XX-1970"],
-        ["yesterday", "yesterday"],
-        ["", ""],
-    ])("%j => %j", (input, expected) => {
-        expect(formatDateTime(input)).toBe(expected);
-    });
-});
-
 // TODO: run tests in specific timezone? (won't work on Windows)
-test.todo("formatTimestamp");
+test.todo("formatDateTime");
 
 describe("hoursInMs", () => {
     test.each([
