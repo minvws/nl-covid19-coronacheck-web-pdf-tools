@@ -56,30 +56,7 @@ export const formatDateTime = (isoDateString) => {
 const pad = (n) => (n < 10 ? "0" + n : "" + n);
 
 /**
- * @return {string}
- */
-export const getCurrentDateTime = () => {
-    const date = new Date();
-    return (
-        date.getDate() +
-        "-" +
-        (date.getMonth() + 1) +
-        "-" +
-        date.getFullYear() +
-        ", " +
-        pad(date.getHours()) +
-        ":" +
-        pad(date.getMinutes()) +
-        ":" +
-        pad(date.getSeconds()) +
-        " (" +
-        formatOffset(date.getTimezoneOffset()) +
-        ")"
-    );
-};
-
-/**
- * @param {number} timestampMs
+ * @param {Date|number} timestampMs
  * @return {string}
  */
 export const formatTimestamp = (timestampMs) => {

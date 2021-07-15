@@ -153,22 +153,27 @@ const drawFrames = (doc, frames) => {
 };
 
 /**
- * @param {Proof[]} proofs
- * @param {"en"|"nl"} locale
- * @param {number} qrSizeInCm
- * @param {Metadata} [metadata]
+ * @param {Object} args
+ * @param {Proof[]} args.proofs
+ * @param {"en"|"nl"} args.locale
+ * @param {number} args.qrSizeInCm
+ * @param {Date|number} args.createdAt - Date or timestamp in ms
+ * @param {Metadata} [args.metadata]
  * @return {Promise<jsPDF>}
  */
-export const getDocument = async (proofs, locale, qrSizeInCm, metadata) => {
-    const doc = initDoc(locale, metadata);
-    for (const proof of proofs) {
-        if (proofs.indexOf(proof) > 0) {
+export const getDocument = async (args) => {
+    if (args.createdAt instanceof Date && isNaN(args.createdAt.getTime())) {
+        throw new Error("Invalid createdAt");
+    }
+    const doc = initDoc(args.locale, args.metadata);
+    for (const proof of args.proofs) {
+        if (args.proofs.indexOf(proof) > 0) {
             doc.addPage();
         }
         const frames = getFrames(proof.territory);
-        const textItems = getTextItems(proof, locale);
+        const textItems = getTextItems(proof, args.locale, args.createdAt);
         const lines = getLines();
-        const imageItems = await getImageItems(proof, qrSizeInCm);
+        const imageItems = await getImageItems(proof, args.qrSizeInCm);
         drawFrames(doc, frames);
         drawImageItems(doc, imageItems);
         drawLines(doc, lines);

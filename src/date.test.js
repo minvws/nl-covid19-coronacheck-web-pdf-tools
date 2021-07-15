@@ -51,7 +51,6 @@ describe("formatDateTime", () => {
 
 // TODO: run tests in specific timezone? (won't work on Windows)
 test.todo("formatTimestamp");
-test.todo("getCurrentDateTime");
 
 describe("hoursInMs", () => {
     test.each([
