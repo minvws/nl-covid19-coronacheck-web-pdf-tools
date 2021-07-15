@@ -1,7 +1,7 @@
 import * as img from "./assets/img";
 import { generateQR } from "./qr";
 import { t } from "./i18n";
-import { getCurrentDateTime } from "./date";
+import { formatDateTime } from "./date";
 
 /** @typedef {import("./types").Proof} Proof */
 /** @typedef {import("./types").Locale} Locale */
@@ -64,9 +64,10 @@ export const lineHeight = 4.5;
 /**
  * @param {Proof} proof
  * @param {Locale} locale
+ * @param {Date|number} createdAt
  * @return {TextItem[]}
  */
-export const getTextItems = (proof, locale) => {
+export const getTextItems = (proof, locale, createdAt) => {
     /** @type {TextItem[]} */
     const items = [
         {
@@ -136,7 +137,7 @@ export const getTextItems = (proof, locale) => {
     if (proof.territory === "eu") {
         items.push({
             text: t(locale, "eu.warning", {
-                time: getCurrentDateTime(),
+                time: formatDateTime(createdAt),
             }),
             fontFamily: "roboto",
             fontWeight: 400,

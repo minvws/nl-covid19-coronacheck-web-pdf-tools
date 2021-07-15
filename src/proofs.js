@@ -2,7 +2,6 @@ import {
     formatBirthDate,
     formatDate,
     formatDateTime,
-    formatTimestamp,
     hoursInMs,
 } from "./date";
 import {
@@ -65,9 +64,9 @@ const domesticProof = (data, locale) => {
 
         validFromDate,
 
-        validFrom: formatTimestamp(validFromDate),
+        validFrom: formatDateTime(validFromDate),
 
-        validUntil: formatTimestamp(
+        validUntil: formatDateTime(
             validFromDate + hoursInMs(data.attributes.validForHours)
         ),
     };
