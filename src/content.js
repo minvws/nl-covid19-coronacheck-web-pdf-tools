@@ -371,7 +371,7 @@ const getUserDetails = (proof, locale) => {
         }
         for (let value of values) {
             if (value === "Ministry of Health Welfare and Sport") {
-                value = "Ministry of Health\nWelfare and Sport";
+                value = "Ministry of Health,\nWelfare and Sport";
             }
             userDetails.push({
                 text: value,
