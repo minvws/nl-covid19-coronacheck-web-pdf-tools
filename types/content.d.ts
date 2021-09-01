@@ -1,5 +1,5 @@
 export const lineHeight: 4.5;
-export function getTextItems(proof: Proof, locale: Locale): TextItem[];
+export function getTextItems(proof: Proof, locale: Locale, createdAt: Date | number): TextItem[];
 export function getImageItems(proof: Proof, qrSizeInCm: number): Promise<ImageItem[]>;
 export function getFrames(territory: string): Frame[];
 export function getLines(): Line[];

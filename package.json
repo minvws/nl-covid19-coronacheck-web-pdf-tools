@@ -1,37 +1,51 @@
 {
-  "name": "dcc-pdf-tools",
-  "version": "1.0.0",
-  "private": true,
-  "main": "src/index.js",
-  "types": "types/index.d.ts",
-  "scripts": {
-    "test": "jest",
-    "lint": "eslint .",
-    "fix": "eslint . --fix",
-    "convert-assets": "node scripts/convert-assets.js",
-    "typescript": "tsc"
-  },
-  "dependencies": {
-    "core-js": "^3.15.1"
-  },
-  "peerDependencies": {
-    "jspdf": "^2.3.1",
-    "qrcode": "^1.4.4"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
-    "@types/jest": "^26.0.23",
-    "babel-jest": "^27.0.6",
-    "eslint": "^7.29.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-compat": "^3.9.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^27.0.6",
-    "jspdf": "^2.3.1",
-    "mime": "^2.5.2",
-    "prettier": "^2.3.1",
-    "qrcode": "^1.4.4",
-    "typescript": "^4.3.4"
-  }
+    "name": "dcc-pdf-tools",
+    "private": true,
+    "type": "module",
+    "module": "src/index.js",
+    "types": "types/index.d.ts",
+    "scripts": {
+        "test": "jest",
+        "lint": "eslint .",
+        "fix": "eslint . --fix",
+        "types": "tsc",
+        "convert-assets": "node scripts/convert-assets.js"
+    },
+    "dependencies": {
+        "core-js": "^3.15.1",
+        "pdfkit": "^0.12.3"
+    },
+    "peerDependencies": {
+        "qrcode": "^1.4.4"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.6",
+        "@babel/preset-env": "^7.14.7",
+        "@types/jest": "^26.0.23",
+        "babel-jest": "^27.0.6",
+        "compare-pdf": "^1.1.5",
+        "eslint": "^7.29.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-compat": "^3.9.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "jest": "^27.0.6",
+        "jsdom": "^16.7.0",
+        "jspdf": "^2.3.1",
+        "mime": "^2.5.2",
+        "prettier": "^2.3.1",
+        "qrcode": "^1.4.4",
+        "typescript": "^4.3.4"
+    },
+    "babel": {
+        "presets": [
+            [
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ]
+    }
 }

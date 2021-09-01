@@ -1,9 +1,9 @@
-import { t } from "./i18n";
-import { isNumeric, padLeft } from "./util";
+import { t } from "./i18n/index.js";
+import { isNumeric, padLeft } from "./util.js";
 
 // ISO8601 date format. Does not support week number or day-of-year notation,
 // but does accept "XX" placeholders for month and date.
-const ISO8601 =
+var ISO8601 =
     /^(\d{4}-(?:\d{2}|XX)-(?:\d{2}|XX))(?:T(\d\d:\d\d(?::\d\d)?)(\.\d+)?(.*))?$/i;
 
 /**
@@ -12,34 +12,36 @@ const ISO8601 =
  * @param {import("./types").Locale} locale
  * @return {string}
  */
-export const formatBirthDate = (birthDay, birthMonth, locale) => {
-    const birthDayShort = isNumeric(birthDay)
+export function formatBirthDate(birthDay, birthMonth, locale) {
+    var birthDayShort = isNumeric(birthDay)
         ? padLeft(birthDay, 2, "0")
         : birthDay;
-    const birthMonthShort = isNumeric(birthMonth)
+    var birthMonthShort = isNumeric(birthMonth)
         ? monthNameShort(birthMonth, locale)
         : birthMonth;
     return birthDayShort + " " + birthMonthShort;
-};
+}
 
 /**
  * @param {string} isoDateString
  * @return {string}
  */
-export const formatDate = (isoDateString) => {
-    const matches =
+export function formatDate(isoDateString) {
+    var matches =
         typeof isoDateString === "string" && isoDateString.match(ISO8601);
     return matches ? flipDate(matches[1]) : isoDateString;
-};
+}
 
 /**
  * @param {number} n
  * @return {string}
  */
-const pad = (n) => (n < 10 ? "0" + n : "" + n);
+function pad(n) {
+    return n < 10 ? "0" + n : "" + n;
+}
 
-const formatter =
-    "Intl" in window &&
+var formatter =
+    typeof Intl !== "undefined" &&
     new Intl.DateTimeFormat("nl-NL", {
         year: "numeric",
         month: "2-digit",
@@ -53,7 +55,22 @@ const formatter =
  * @param {Date|number|string} datetime - Date instance, timestamp in ms, or ISO8601 string
  * @return {string}
  */
-export const formatDateTime = (datetime) => {
+export function formatLocalDate(datetime) {
+    if (!(datetime instanceof Date)) datetime = new Date(datetime);
+    return (
+        pad(datetime.getDate()) +
+        "-" +
+        pad(datetime.getMonth() + 1) +
+        "-" +
+        datetime.getFullYear()
+    );
+}
+
+/**
+ * @param {Date|number|string} datetime - Date instance, timestamp in ms, or ISO8601 string
+ * @return {string}
+ */
+export function formatLocalDateTime(datetime) {
     if (!(datetime instanceof Date)) datetime = new Date(datetime);
     if (
         formatter &&
@@ -61,11 +78,11 @@ export const formatDateTime = (datetime) => {
         formatter.resolvedOptions().timeZone
     ) {
         try {
-            const parts = formatter.format(datetime).split(" ");
+            var parts = formatter.format(datetime).split(" ");
             return parts[0] + ", " + parts[1] + " (" + parts[2] + ")";
         } catch (e) {}
     }
-    const offset = datetime.getTimezoneOffset();
+    var offset = datetime.getTimezoneOffset();
     return (
         pad(datetime.getDate()) +
         "-" +
@@ -80,48 +97,51 @@ export const formatDateTime = (datetime) => {
         formatOffset(offset) +
         ")"
     );
-};
+}
 
 /**
  * @param {string} hours
  * @return {number}
  */
-export const hoursInMs = (hours) => parseInt(hours, 10) * 3600000;
+export function hoursInMs(hours) {
+    return parseInt(hours, 10) * 3600000;
+}
 
 /**
  * @param {string} isoDate
  * @return {string}
  */
-const flipDate = (isoDate) => {
-    const parts = isoDate.slice(0, 10).split("-");
+function flipDate(isoDate) {
+    var parts = isoDate.slice(0, 10).split("-");
     return parts[2] + "-" + parts[1] + "-" + parts[0];
-};
+}
 
 /**
  * @param {string|number} month
  * @param {import("./types").Locale} locale
  * @return {string}
  */
-const monthNameShort = (month, locale) =>
-    t(locale, "date.months.abbr." + month);
+function monthNameShort(month, locale) {
+    return t(locale, "date.months.abbr." + month);
+}
 
 /**
  * @param {number|string} offset
  * @return {string}
  */
-const formatOffset = (offset) => {
+function formatOffset(offset) {
     if (!offset) return "UTC";
     if (typeof offset === "number") {
-        const oh = Math.floor(Math.abs(offset / 60));
-        const om = Math.floor(Math.abs(offset % 60));
+        var oh = Math.floor(Math.abs(offset / 60));
+        var om = Math.floor(Math.abs(offset % 60));
         return (
             "UTC" + (offset < 0 ? "+" : "-") + oh + (om ? ":" + pad(om) : "")
         );
     }
     if (offset === "Z") return "UTC";
-    const parts = offset.split(":");
+    var parts = offset.split(":");
     if (parseInt(parts[0], 10) || parseInt(parts[1], 10)) {
         return "UTC" + offset;
     }
     return "UTC";
-};
+}

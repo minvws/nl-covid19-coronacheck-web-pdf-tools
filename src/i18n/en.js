@@ -1,27 +1,31 @@
 export default {
-    "eu.negativetest.instructions":
-        "1. Print this certificate on A4 (black-and-white allowed)\n\n2. Bring a valid proof of identity to the activity you’re visiting \n\n3. Show the certificate and the proof of identity (and if needed a ticket) at the entrance",
+    "eu.instructions":
+        "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
+    "eu.validUntil": "This paper certificate is valid until:",
+    "eu.createNew":
+        "After this date, you can make a new coronavirus pass via coronacheck.nl",
     "eu.negativetest.qrTitle": "Test certificate",
     "eu.negativetest.propertiesLabel": "Negative test details",
-    "eu.vaccination.instructions":
-        "1. Print this certificate on A4 (black-and-white allowed)\n\n2. Bring a valid proof of identity to the activity you’re visiting \n\n3. Show the certificate and the proof of identity (and if needed a ticket) at the entrance",
     "eu.vaccination.qrTitle": "Vaccination certificate",
     "eu.vaccination.propertiesLabel": "Vaccination details",
-    "eu.recovery.instructions":
-        "1. Print this certificate on A4 (black-and-white allowed).\n\n2. Bring a valid proof of identity when travelling abroad.\n\n3. Show the certificate at the foreign border or when asked in other countries.",
     "eu.recovery.qrTitle": "Recovery certificate",
     "eu.title": "International certificate",
+    "eu.titleVaccination":
+        "International vaccination certificate\ndose %{doseNumber}/%{totalDoses}",
     "eu.intro":
         "Are you traveling outside of the Netherlands? Then use this EU Digital COVID Certificate.\n\nBefore you leave, check which test and vaccination certificates are valid in your destination country: https://reopen.europa.eu/en",
+    "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
     "nl.instructions":
-        "1. Print this certificate on A4 (black-and-white allowed)\n\n2. Bring a valid proof of identity to the activity you’re visiting \n\n3. Show the certificate and the proof of identity (and if needed a ticket) at the entrance",
+        "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
     "nl.propertiesLabel": "Details",
     "nl.title": "Certificate for the Netherlands",
     "nl.intro":
         "Visiting locations or activities within the Netherlands? Then use this certificate.",
-    "eu.warning":
-        "This certificate is not a travel document. The scientific evidence regarding COVID-19 vaccinations, testing and recovery continues to evolve, also with regard to new variants of concern. Before traveling, please check which public health measures and associated restrictions apply at the destination.\n\nCreated at %{time}",
+    "nl.alt.flag": "Dutch flag",
+    "eu.travelWarning":
+        "This certificate is not a travel document. The scientific evidence regarding COVID-19 vaccinations, testing and recovery continues to evolve, also with regard to new variants of concern. Before traveling, please check which public health measures and associated restrictions apply at the destination.",
+    "eu.createdAt": "Created at %{time}",
     "eu.userData.name": "SURNAME(S) AND FIRST NAME(S)",
     "eu.userData.dateOfBirth": "Date of birth (DD-MM-YYYY)",
     "eu.userData.disease": "DISEASE TARGETED",
@@ -49,10 +53,13 @@ export default {
     "nl.userData.dateOfBirth": "Day of birth",
     "nl.userData.validFrom": "Valid from",
     "nl.userData.validUntil": "Valid until",
-    "nl.userData.validUntilVaccination":
-        "This paper certificate is valid until %{date}. After this date, you can make a new coronavirus pass via coronacheck.nl",
     "nl.userData.privacyNote": "You can keep your details to yourself",
     instructions: "Instructions",
+    "alt.foldInstructions":
+        "Folding instructions. First fold in half widthwise, with the printed side out. Then fold in half again to a form a booklet with these instructions on the inside.",
+    "alt.logoRijksoverheid": "Logo Government of the Netherlands",
+    "alt.logoCoronacheck": "Logo CoronaCheck",
+    "alt.qr": "QR code",
     questions: "QUESTIONS?",
     questionsContent:
         "Please find frequently asked questions on www.coronacheck.nl. You can also send an email to helpdesk@coronacheck.nl or reach us (for free) on 0800-1421",
@@ -70,4 +77,19 @@ export default {
     "date.months.abbr.10": "OCT",
     "date.months.abbr.11": "NOV",
     "date.months.abbr.12": "DEC",
+    "cover.issuedOn": "Issued on %{date}",
+    "cover.title": "About your international certificates",
+    "cover.intro":
+        "In this PDF you'll find two international vaccination certificates, each with a separate QR code.",
+    "cover.yourProofs.title": "You have a certificate with a QR code for your:",
+    "cover.dose.1": "first vaccination dose",
+    "cover.dose.2": "second vaccination dose",
+    "cover.dose.3": "third vaccination dose",
+    "cover.dose.extra": "extra vaccination dose",
+    "cover.whichCode.title": "Which QR code should I use?",
+    "cover.whichCode.recent-double-dose": "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.\n\nAt this time, most countries will require the QR code of your dose 2/2. Did you recently receive your second dose? In many countries, a vaccination certificate will become valid from 14 to 28 days after getting the shot.",
+    "cover.whichCode.double-dose": "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change. At this time, most countries will require the QR code of your dose 2/2.",
+    "cover.whichCode.triple-dose": "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.\n\nYou've received more than two vaccination doses. QR codes of extra doses aren't widely accepted yet. At this time, most countries will require the QR code of your dose 2/2.",
+    "cover.beforeTravel":
+        "Before leaving, please always check which certificate you need at your destination at www.netherlandsworldwide.nl.",
 };

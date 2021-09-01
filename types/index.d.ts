@@ -1,3 +1,3 @@
-export { parseProofData } from "./proofs";
-export { getDocument } from "./pdf";
-export { generateQR } from "./qr";
+export { parseProofData } from "./proofs.js";
+export { getDocument } from "./pdf.js";
+export { generateQR } from "./qr.js";

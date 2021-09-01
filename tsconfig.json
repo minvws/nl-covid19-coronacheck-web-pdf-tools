@@ -1,12 +1,13 @@
 {
-  "include": ["src/**/*"],
-  "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "moduleResolution": "node",
-    "outDir": "types",
-    "target": "es6"
-  }
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "isolatedModules": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "outDir": "types"
+    }
 }

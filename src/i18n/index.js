@@ -1,5 +1,5 @@
-import en from "./en";
-import nl from "./nl";
+import en from "./en.js";
+import nl from "./nl.js";
 
 const lang = { en, nl };
 

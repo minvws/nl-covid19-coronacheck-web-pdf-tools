@@ -1,46 +1,51 @@
 import {
     formatBirthDate,
     formatDate,
-    formatDateTime,
+    formatLocalDateTime,
     hoursInMs,
-} from "./date";
+} from "../date.js";
 import {
     getEuBrand,
     getEuTestType,
     getTestManufacturer,
     getVaccineManufacturer,
     getVaccineType,
-} from "./holder";
+} from "../holder.js";
 
 /**
- * @param {import("./types").ProofData} proofData
- * @param {import("./types").TODO} holderConfig
- * @param {import("./types").Locale} [locale]
- * @return {import("./types").Proof[]}
+ * @param {import("../types").ProofData} proofData
+ * @param {import("../types").TODO} holderConfig
+ * @param {import("../types").Locale} [locale]
+ * @return {import("../types").Proof[]}
  */
-export const parseProofData = (proofData, holderConfig, locale) => {
-    /** @type {import("./types").Proof[]} */
-    const proofs = [];
+export function parseProofData(proofData, holderConfig, locale) {
+    /** @type {import("../types").Proof[]} */
+    var proofs = [];
 
     if (proofData.domestic) {
         proofs.push(domesticProof(proofData.domestic, locale));
     }
     if (proofData.european) {
-        for (const proof of europeanProofs(proofData.european, holderConfig)) {
-            proofs.push(proof);
+        var european = Array.isArray(proofData.european)
+            ? proofData.european
+            : [proofData.european];
+        for (var item of european) {
+            for (var proof of europeanProofs(item, holderConfig)) {
+                proofs.push(proof);
+            }
         }
     }
 
     return proofs;
-};
+}
 
 /**
- * @param {import("./types").DomesticProofData} data
- * @param {import("./types").Locale} [locale]
- * @return {import("./types").Proof}
+ * @param {import("../types").DomesticProofData} data
+ * @param {import("../types").Locale} [locale]
+ * @return {import("../types").Proof}
  */
-const domesticProof = (data, locale) => {
-    const validFromDate = parseInt(data.attributes.validFrom, 10) * 1000;
+function domesticProof(data, locale) {
+    var validFromDate = parseInt(data.attributes.validFrom, 10) * 1000;
     return {
         proofType: "domestic",
 
@@ -64,24 +69,25 @@ const domesticProof = (data, locale) => {
 
         validFromDate,
 
-        validFrom: formatDateTime(validFromDate),
+        validFrom: formatLocalDateTime(validFromDate),
 
-        validUntil: formatDateTime(
+        validUntil: formatLocalDateTime(
             validFromDate + hoursInMs(data.attributes.validForHours)
         ),
     };
-};
+}
 
 /**
- * @param {import("./types").EuropeanProofData} data
+ * @param {import("../types").EuropeanProofData} data
  * @param {any} holderConfig
- * @return {import("./types").Proof[]}
+ * @return {import("../types").Proof[]}
  */
-const europeanProofs = (data, holderConfig) => {
-    /** @type {import("./types").Proof[]} */
-    const proofs = [];
+function europeanProofs(data, holderConfig) {
+    /** @type {import("../types").Proof[]} */
+    var proofs = [];
+    var credential;
     if (data.dcc.v) {
-        for (const credential of data.dcc.v) {
+        for (credential of data.dcc.v) {
             proofs.push({
                 proofType: "european-vaccination",
 
@@ -128,7 +134,7 @@ const europeanProofs = (data, holderConfig) => {
         }
     }
     if (data.dcc.t) {
-        for (const credential of data.dcc.t) {
+        for (credential of data.dcc.t) {
             proofs.push({
                 proofType: "european-negative-test",
 
@@ -146,13 +152,13 @@ const europeanProofs = (data, holderConfig) => {
 
                 certificateNumber: credential.ci,
 
-                validUntil: formatDateTime(data.expirationTime),
+                validUntil: formatLocalDateTime(data.expirationTime),
 
                 testType: getEuTestType(holderConfig, credential.tt) || "",
 
                 testName: credential.nm,
 
-                dateOfTest: formatDateTime(credential.sc),
+                dateOfTest: formatLocalDateTime(credential.sc),
 
                 testLocation: credential.tc,
 
@@ -169,7 +175,7 @@ const europeanProofs = (data, holderConfig) => {
         }
     }
     if (data.dcc.r) {
-        for (const credential of data.dcc.r) {
+        for (credential of data.dcc.r) {
             proofs.push({
                 proofType: "european-recovery",
 
@@ -200,4 +206,4 @@ const europeanProofs = (data, holderConfig) => {
         }
     }
     return proofs;
-};
+}

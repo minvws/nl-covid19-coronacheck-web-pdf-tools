@@ -6,9 +6,16 @@ export type Locale = "nl" | "en";
 
 export type Metadata = { title: string; author: string };
 
-export type ProofData = {
+export type ProofData = ProofDataV5 | ProofDataV6
+
+export type ProofDataV5 = {
     domestic?: DomesticProofData;
     european?: EuropeanProofData;
+};
+
+export type ProofDataV6 = {
+    domestic?: DomesticProofData;
+    european?: EuropeanProofData[];
 };
 
 export type DomesticProofData = {

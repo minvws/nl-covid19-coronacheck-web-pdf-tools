@@ -1,3 +1,5 @@
-export { parseProofData } from "./proofs";
-export { getDocument } from "./pdf";
-export { generateQR } from "./qr";
+import "core-js/features/promise";
+
+export { parseProofData } from "./proof/parse.js";
+export { getDocument } from "./pdf/document.js";
+export { generateQR } from "./qr.js";
