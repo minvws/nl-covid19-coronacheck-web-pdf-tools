@@ -24,7 +24,7 @@ export default {
     "eu.userData.vaccineManufacturer": "PRODUCENT",
     "eu.userData.vaccinationDate": "VACCINATIEDATUM",
     "eu.userData.vaccinationCountry": "GEVACCINEERD IN",
-    "eu.userData.doses": "DOSES",
+    "eu.userData.doses": "DOSIS",
     "eu.userData.dateOfVaccination": "VACCINATIEDATUM",
     "eu.userData.certificateIssuer": "AFGEVER CERTIFICAAT",
     "eu.userData.testType": "TYPE TEST",
