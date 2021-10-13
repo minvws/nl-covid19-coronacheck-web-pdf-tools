@@ -80,16 +80,21 @@ export default {
     "cover.issuedOn": "Uitgegeven op %{date}",
     "cover.title": "Over jouw internationale bewijzen",
     "cover.intro":
-        "In deze PDF vind je twee internationale vaccinatiebewijzen met elk een aparte QR-code.",
+        "In dit document vind je meerdere internationale coronabewijzen met elk een aparte QR-code.",
     "cover.yourProofs.title": "Je hebt een bewijs met QR-code voor jouw:",
-    "cover.dose.1": "eerste vaccinatie-dosis",
-    "cover.dose.2": "tweede vaccinatie-dosis",
-    "cover.dose.3": "derde vaccinatie-dosis",
-    "cover.dose.extra": "extra vaccinatie-dosis",
+    "cover.vaccination.1": "eerste vaccinatie-dosis",
+    "cover.vaccination.2": "tweede vaccinatie-dosis",
+    "cover.vaccination.3": "derde vaccinatie-dosis",
+    "cover.vaccination.extra": "extra vaccinatie-dosis",
+    "cover.recoveryProof": "herstelbewijs",
+    "cover.otherProof": "testbewijs",
     "cover.whichCode.title": "Welke QR-code moet ik gebruiken?",
-    "cover.whichCode.recent-double-dose": "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nDe meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen. Heb je kort geleden je tweede dosis gehad? In veel landen wordt een vaccinatiebewijs pas geldig vanaf 14 tot 28 dagen na het zetten van de prik.",
-    "cover.whichCode.double-dose": "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
-    "cover.whichCode.triple-dose": "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nJij hebt meer dan twee vaccinatie doses gehad. De QR-codes van extra doses worden nog niet overal geaccepteerd. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
+    "cover.whichCode.recent-double-dose":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nDe meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen. Heb je kort geleden je tweede dosis gehad? In veel landen wordt een vaccinatiebewijs pas geldig vanaf 14 tot 28 dagen na het zetten van de prik.",
+    "cover.whichCode.double-dose":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
+    "cover.whichCode.triple-dose":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nJij hebt meer dan twee vaccinatie doses gehad. De QR-codes van extra doses worden nog niet overal geaccepteerd. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
     "cover.beforeTravel":
         "Controleer altijd voor vertrek op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
 };

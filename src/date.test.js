@@ -1,4 +1,4 @@
-import { formatBirthDate, formatDate, formatLocalDateTime, hoursInMs } from "./date";
+import { formatBirthDate, formatDate, hoursInMs } from "./date";
 
 describe("formatBirthDate", () => {
     /** @type {["nl"|"en", string, string, string][]} */

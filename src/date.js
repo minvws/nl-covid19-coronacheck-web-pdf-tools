@@ -80,7 +80,9 @@ export function formatLocalDateTime(datetime) {
         try {
             var parts = formatter.format(datetime).split(" ");
             return parts[0] + ", " + parts[1] + " (" + parts[2] + ")";
-        } catch (e) {}
+        } catch (e) {
+            // fall back to non-Intl method
+        }
     }
     var offset = datetime.getTimezoneOffset();
     return (

@@ -1,0 +1,77 @@
+{
+    "domestic": {
+        "attributes": {
+            "isSpecimen": "1",
+            "isPaperProof": "1",
+            "validFrom": "1635206400",
+            "validForHours": "8760",
+            "firstNameInitial": "B",
+            "lastNameInitial": "B",
+            "birthDay": "1",
+            "birthMonth": "1"
+        },
+        "qr": "NL2:2QFE0Z9HZS88 T1J4QRIY0292 38E:G4+I8PB+B50ORT7EQKT.7I*0 N-34KM*SDYO9HT++*+Q1KIKP4-VI71/-6P*-T0T4G$UCA/:X%HT$BV3T 3-ZWX-1*WKM-IHF2JES08N 6284VKS9VYA76S $5R050L*+ X.H%ID8WN0F*%+AOP6E72AUQY.116TZQYAD.G3AOKM:7155$++BLI93$+9XDWM1V8J/7ZQZV%-N *KLH2+COCTTLNO0DJMZWXWWIDESC-L+DRZQ7T+V694LLZ8Q1$RJBU+9VMVG-ERQ$FS5 67KP2B QNS99UVKR6X5:21:/WJ/OMH6F5IE/.C/SQ1SS$3QGHL2FWUY++G1SAG$L /7C8K$DMJ9KP:94P69/MZM86NCV5OSU4$%4A5CC7TEC QUM1KJ5$6*T4P*T3W $GMJSE$7PYUIVX2W6-V-AG-6Z7+VK5+K6/MBCYX$M:J 6-961BS.:8:GH7C1UBE-/G29THJ%$$.DKHMVAE6P QF KX E 0FOV:M 0/Q3JTX3.ALDR SAE4UP1K0:RC43-ZON9ZVZIQEAENNTNN A.DESLY:HQ$VDV02/II8/8/B:9A6:KX+9S/9S%F Z$UKQMZ8AL84VPSLHNLXBL3:RLC55D:Q$S6T% *BC3HF1.XV.1RX.:X842I58O.PW6H$7N8GPARE:1*FDRP.9S21YPZWALI5$6TI0 D:OCF II3E8EF97-K1 /D6*RGVSF UHEL.Z8SOO+433BCQVHOWC-9-T-887Y6EDH8CIRXFLUP%VXOS.QJ$X6J/R6MGQS1%UR*D1WAPTSKS5Z/QY7XC.TTRILYJ4YV.45M44KDMZINODJ.9KUYW3RK:Z5NY720L0V9$00*8:V7OFT5UHZ/+*UASY-M7V4+Z-BJ6%9:5PYLEGDRJLF7KWWZ3V%1GNKB71B4OW:P:-FOM1HPSBO$ZR$002 I74/.SEG-ZE5H7EHZLIUUVLTAKOR%:6OMIPYNU9SPU0W2Y: UOR2:MZE$M /%3ENJ4-5XY4-GM-UP$ZFU $0P72MH4X3IYJ54L134$*C0U1H6+N7M6/9RHCK*O9WH-FE-GTEM$0NYXZ1CQBJZI5VCF74ZSJL 14K9$ZGW%72$U%8.B8*J%PU/THKK4S5ZL88HFEXLXPC5+Z71P:EAOQ97D7$O+SAA.C./0BPQRZK54ITVVBQE3W26NSTEIZFW$1SNV3UOR.L+-KVLE O74/U0RA4ZA/N/4H1PN$-GNMAC3SUEL:DL-ZZ-12Y:OH1T28BCTL2Q$CGPY%K+$DA:OQCCF984+1XD.:2PFH"
+    },
+    "european": [
+        {
+            "expirationTime": "2022-10-12T11:08:42+00:00",
+            "dcc": {
+                "ver": "1.3.0",
+                "nam": {
+                    "fn": "Bouwer",
+                    "fnt": "BOUWER",
+                    "gn": "Bob",
+                    "gnt": "BOB"
+                },
+                "dob": "1960-01-01",
+                "v": [
+                    {
+                        "tg": "840539006",
+                        "ci": "URN:UCI:01:NL:OMSRQ75IKFCMVJH3S3TV42#0",
+                        "co": "NL",
+                        "is": "Ministry of Health Welfare and Sport",
+                        "vp": "1119349007",
+                        "mp": "EU/1/20/1528",
+                        "ma": "ORG-100030215",
+                        "dn": 1,
+                        "sd": 2,
+                        "dt": "2021-10-08"
+                    }
+                ],
+                "t": null,
+                "r": null
+            },
+            "qr": "HC1:NCF220E90T9WTWGVLK-49NJ3B0J$OCC*AX*4FBBZ$0*70J+9DN03E53F3: CIONY50.FK8ZKO/EZKEZ967L6C56GVC*JC1A6C%63W5Y96746TPCBEC7ZKW.CX-C34EA4FXKEW.C8WEAH8MZAGY8 JC:.D.H8WJCI3D5WEAH8SH87:EDOL9WEQDD+Q6TW6FA7C466KCN9E%961A6DL6FA7D46.JCP9EJY8L/5M/5546.96VF6.JCBECB1A-:8$966469L6OF6VX6FVC*70KQEPD0LVC6JD846Y96$963W5Y57UPCBJCOT9+EDL8FHZ95/D QEALEN44:+C%69AECAWE:34: CJ.CZKE9440/D+34S9E5LEWJC0FD3%4AIA%G7ZM81G72A6J+9WG7+Y9DIA3:6/B9W*8/Y9QH9:L60M6I+AAF6156L68SX1$WU0R7DYF0TAK3M63EO8GKQNR%7XH4 V8S.7DH6VXUF-NDY9TAC1WBLH1ZCKB407R8E0Q*O0MCR1$JVM75+8IEORO3*/J000FGWKPOFVE"
+        },
+        {
+            "expirationTime": "2022-10-12T11:08:42+00:00",
+            "dcc": {
+                "ver": "1.3.0",
+                "nam": {
+                    "fn": "Bouwer",
+                    "fnt": "BOUWER",
+                    "gn": "Bob",
+                    "gnt": "BOB"
+                },
+                "dob": "1960-01-01",
+                "v": [
+                    {
+                        "tg": "840539006",
+                        "ci": "URN:UCI:01:NL:PK6QPGKXAZEDTDIZO37V42#V",
+                        "co": "NL",
+                        "is": "Ministry of Health Welfare and Sport",
+                        "vp": "1119349007",
+                        "mp": "EU/1/20/1528",
+                        "ma": "ORG-100030215",
+                        "dn": 2,
+                        "sd": 2,
+                        "dt": "2021-10-12"
+                    }
+                ],
+                "t": null,
+                "r": null
+            },
+            "qr": "HC1:NCF220E90T9WTWGVLK-49NJ3B0J$OCC*AX*4FBBZ$0*70J+9DN03E53F3: CIONY50.FK8ZKO/EZKEZ967L6C56GVC*JC1A6C%63W5Y96746TPCBEC7ZKW.CX-C34EA4FXKEW.C8WEAH8MZAGY8 JC:.D.H8WJCI3D5WEAH8SH87:EDOL9WEQDD+Q6TW6FA7C466KCN9E%961A6DL6FA7D46.JCP9EJY8L/5M/5546.96VF6.JCBECB1A-:8$966469L6OF6VX6FVCPD0KQEPD0LVC6JD846Y96$964W5SG6UPCBJCOT9+EDL8FHZ95/D QEALEN44:+C%69AECAWE:34: CJ.CZKE9440/D+34S9E5LEWJC0FD3%4AIA%G7ZM81G72A6J+9XG7*M9QCAQ0937BOIBWS8LS8YIBGL6I+AAF69-AO483*UWA18IFIMFKJBRZO:XSVAUOS0V5KX8LUEQ$0T-27242KGFHY3G+50PEOFQ+5J.F7PG6MQ8P40OASNGHB7U*+7QV2QZS212000FGWZ41E+E"
+        }
+    ]
+}

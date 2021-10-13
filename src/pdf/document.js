@@ -1,8 +1,9 @@
-import PDFDocument from "pdfkit";
+import PDFDocument from "pdfkit/js/pdfkit.standalone.js";
+import blobStream from "blob-stream";
+import FileSaver from "file-saver";
 import { t } from "../i18n/index.js";
 import { addDccCoverPage } from "./dccCoverPage.js";
 import { addProofPage } from "./proofPage.js";
-import { atob } from "../util.js";
 
 /** @typedef {import("../types").Metadata} Metadata */
 /** @typedef {import("../types").Locale} Locale */
@@ -16,19 +17,20 @@ import { atob } from "../util.js";
  */
 
 /**
+ * @typedef {Object} LegacyDocument
+ * @property {(type: 'datauristring') => string} output
+ * @property {(filename: string) => void} save
+ * @property {Blob} blob
+ */
+
+/**
  * @param {Locale} locale
  * @param {Metadata} [metadata]
  * @return {Document}
  */
 export function createDocument(locale, metadata) {
-    var author =
-        (metadata && metadata.author) ||
-        "TESTauthor" ||
-        t(locale, "metadata.author");
-    var title =
-        (metadata && metadata.title) ||
-        "TESTdocument" ||
-        t(locale, "metadata.title");
+    var author = (metadata && metadata.author) || t(locale, "metadata.author");
+    var title = (metadata && metadata.title) || t(locale, "metadata.title");
 
     var pdf = new PDFDocument({
         autoFirstPage: false,
@@ -73,7 +75,7 @@ export function createDocument(locale, metadata) {
  * @param {number} args.qrSizeInCm
  * @param {Date|number} args.createdAt - Date or timestamp in ms
  * @param {Metadata} [args.metadata]
- * @return {Promise<Document>}
+ * @return {Promise<LegacyDocument>}
  */
 export function getDocument(args) {
     if (args.createdAt instanceof Date && isNaN(args.createdAt.getTime())) {
@@ -89,9 +91,56 @@ export function getDocument(args) {
             return addProofPage(doc, proof, args.createdAt);
         });
     });
-    return result.then(function () {
-        return doc;
+    return result
+        .then(function () {
+            return documentToBlob(doc);
+        })
+        .then(function (blob) {
+            return blobToDataURI(blob).then(function (dataURI) {
+                return {
+                    output: function () {
+                        return dataURI;
+                    },
+                    save: function (filename) {
+                        FileSaver.saveAs(blob, filename);
+                    },
+                    blob: blob,
+                };
+            });
+        });
+}
+
+/**
+ * @param {Document} doc
+ * @return {Promise<Blob>}
+ */
+function documentToBlob(doc) {
+    return new Promise(function (resolve, reject) {
+        var stream = blobStream();
+        doc._pdf.pipe(stream);
+        stream.on("finish", function () {
+            resolve(stream.toBlob("application/pdf"));
+        });
+        stream.on("error", function (error) {
+            reject(error);
+        });
+        doc._pdf.end();
     });
 }
 
-export function toDataURI(doc) {}
+/**
+ * @param {Blob} blob
+ * @return {Promise<string>}
+ */
+function blobToDataURI(blob) {
+    return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.addEventListener("error", function () {
+            reject(reader.error);
+        });
+        reader.addEventListener("load", function () {
+            resolve(String(reader.result));
+        });
+        reader.readAsDataURL(blob);
+    });
+}

@@ -43,7 +43,6 @@ var fontSizeSmallCaps = 6;
 var fontSizeTinyCaps = 5;
 var fieldSpacing = fontSizeSmallCaps * 1.6;
 var qrPositionY = 181;
-var textColor = "#000000";
 var titleColor = "#383836";
 
 export function addProofPage(doc, proof, createdAt) {
@@ -161,7 +160,7 @@ function structIntro(doc, territory) {
             font: "RobotoRegular",
             size: fontSizeStandard,
             position: [marginLeftIntro, null],
-            width: partWidthIntro + 1,
+            width: partWidthIntro,
             align: "center",
             lineGap: 1,
         });
@@ -314,7 +313,7 @@ function structProofTitle(doc, proof) {
             size: fontSizeH2,
             color: titleColor,
             position: [marginLeftIntro, bottomPartTop],
-            width: partWidth,
+            width: partWidthIntro,
             align: "center",
         });
         if (doc.locale === "nl" && proof.territory === "eu") {
@@ -326,7 +325,7 @@ function structProofTitle(doc, proof) {
                         size: 14,
                         color: titleColor,
                         position: [marginLeftIntro, bottomPartTop + 9],
-                        width: partWidth,
+                        width: partWidthIntro,
                         align: "center",
                     });
                 })

@@ -11,23 +11,18 @@
         "sourceType": "module"
     },
     "env": {
-        "browser": true
+        "browser": true,
+        "es6": true
     },
     "settings": {
-        "polyfills": ["Promise", "Object.assign"]
+        "polyfills": ["Promise", "Object.assign", "ArrayBuffer", "Uint8Array"]
     },
     "overrides": [
         {
-            "files": ["scripts/*.js", "/*.config.js"],
+            "files": ["jest.config.js", "*.test.js"],
             "env": {
+                "jest": true,
                 "node": true
-            }
-        },
-        {
-            "files": "*.test.js",
-            "env": {
-                "node": true,
-                "jest": true
             }
         }
     ]

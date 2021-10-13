@@ -2,19 +2,20 @@ var MONTH_MS = 28 * 24 * 60 * 60 * 1000;
 
 /**
  * @param {import("../types").Proof[]} proofs
- * @return {import("../types").EuropeanVaccinationProof[]}
+ * @return {import("../types").EuropeanProof[]}
  */
-export function getSortedVaccinations(proofs) {
-    return proofs.filter(isVaccination).sort(byDoseNumber);
+export function getEuropeanProofs(proofs) {
+    // @ts-ignore
+    return proofs.filter(isEuropeanProof).sort(byDoseNumber);
 }
 
 /**
  * @param {import("../types").Proof[]} proofs
  * @param {Date|number} createdAt
- * @return {'unvaccinated'|'single-dose'|'recent-double-dose'|'double-dose'|'triple-dose'|'unknown'}
+ * @return {import("../types").VaccinationStatus}
  */
 export function getVaccinationStatus(proofs, createdAt) {
-    var vaccinations = getSortedVaccinations(proofs);
+    var vaccinations = proofs.filter(isVaccination).sort(byDoseNumber);
 
     if (vaccinations.length === 0) {
         return "unvaccinated";
@@ -34,25 +35,44 @@ export function getVaccinationStatus(proofs, createdAt) {
     }
 
     if (best.totalDoses === 1) {
-        return "single-dose";
+        var recovery = proofs.filter(isRecovery)[0];
+        return recovery ? "single-dose-and-recovery" : "single-dose";
     }
 
     return "unknown";
 }
 
 /**
- * @param {import("../types").Proof} proof
- * @return {boolean}
- */
-function isVaccination(proof) {
-    return proof.eventType === "vaccination";
-}
-
-/**
- * @param {import("../types").EuropeanVaccinationProof} a
- * @param {import("../types").EuropeanVaccinationProof} b
+ * @param {import("../types").Proof} a
+ * @param {import("../types").Proof} b
  * @return {number}
  */
 function byDoseNumber(a, b) {
-    a.doseNumber - b.doseNumber;
+    var doseA = isVaccination(a) ? a.doseNumber : 0;
+    var doseB = isVaccination(b) ? b.doseNumber : 0;
+    return doseA - doseB;
+}
+
+/**
+ * @param {import("../types").Proof} proof
+ * @return {proof is import("../types").EuropeanProof}
+ */
+function isEuropeanProof(proof) {
+    return proof.territory === "eu" && proof.eventType === "vaccination";
+}
+
+/**
+ * @param {import("../types").Proof} proof
+ * @return {proof is import("../types").EuropeanVaccinationProof}
+ */
+export function isVaccination(proof) {
+    return proof.territory === "eu" && proof.eventType === "vaccination";
+}
+
+/**
+ * @param {import("../types").EuropeanProof} proof
+ * @return {proof is import("../types").EuropeanRecoveryProof}
+ */
+export function isRecovery(proof) {
+    return proof.territory === "eu" && proof.eventType === "recovery";
 }

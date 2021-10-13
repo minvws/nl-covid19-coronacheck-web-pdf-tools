@@ -9,14 +9,14 @@ import {
 import { formatLocalDate } from "../date.js";
 import {
     drawLogoCoronaCheck,
-    drawList,
     drawLogoRijksoverheidA4,
     drawText,
-    drawQrSvg,
 } from "./draw.js";
 import {
-    getSortedVaccinations,
+    getEuropeanProofs,
     getVaccinationStatus,
+    isRecovery,
+    isVaccination,
 } from "../proof/status.js";
 
 var pageHeight = 297;
@@ -34,7 +34,10 @@ var titleColor = "#383836";
 
 export function addDccCoverPage(doc, proofs, createdAt) {
     var vaccinationStatus = getVaccinationStatus(proofs, createdAt);
-    if (vaccinationStatus === "unvaccinated" || vaccinationStatus === "single-dose") {
+    if (
+        vaccinationStatus === "unvaccinated" ||
+        vaccinationStatus === "single-dose"
+    ) {
         return false;
     }
 
@@ -65,6 +68,7 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                     color: titleColor,
                     position: [marginX, textStart],
                     width: textWidth,
+                    lineGap: 2,
                 });
             }),
             doc._pdf.struct("P", function () {
@@ -73,6 +77,7 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                     font: "ROSansRegular",
                     size: fontSizeStandard,
                     width: textWidth,
+                    lineGap: 2,
                 });
             }),
             doc._pdf.struct("Sect", [
@@ -81,10 +86,12 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         text: "\n" + t(doc.locale, "cover.yourProofs.title"),
                         font: "ROSansBold",
                         size: fontSizeStandard,
+                        position: [marginX, null],
                         width: textWidth,
+                        lineGap: 2,
                     });
                 }),
-                vaccinationsList(doc, proofs),
+                proofsList(doc, proofs),
             ]),
             doc._pdf.struct("Sect", [
                 doc._pdf.struct("H", function () {
@@ -94,18 +101,30 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         size: fontSizeStandard,
                         position: [marginX, null],
                         width: textWidth,
+                        lineGap: 2,
                     });
                 }),
                 doc._pdf.struct("P", function () {
-                    var vaccinationStatus = getVaccinationStatus(proofs, createdAt);
-                    var text = t(doc.locale, "cover.whichCode."+vaccinationStatus);
-                    if (!text) throw new Error("Unhandled vaccination status "+vaccinationStatus);
+                    var vaccinationStatus = getVaccinationStatus(
+                        proofs,
+                        createdAt
+                    );
+                    var text = t(
+                        doc.locale,
+                        "cover.whichCode." + vaccinationStatus
+                    );
+                    if (!text)
+                        throw new Error(
+                            "Unhandled vaccination status " + vaccinationStatus
+                        );
 
                     drawText(doc, {
                         text: text,
                         font: "ROSansRegular",
                         size: fontSizeStandard,
+                        position: [marginX, null],
                         width: textWidth,
+                        lineGap: 2,
                     });
                 }),
             ]),
@@ -117,6 +136,7 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         size: fontSizeStandard,
                         position: [marginX, null],
                         width: textWidth,
+                        lineGap: 2,
                     });
                 }),
             ]),
@@ -147,7 +167,7 @@ export function addDccCoverPage(doc, proofs, createdAt) {
         text: t(doc.locale, "cover.issuedOn", {
             date: formatLocalDate(createdAt),
         }),
-        font: "RobotoRegular",
+        font: "ROSansRegular",
         size: fontSizeStandard,
         width: 50,
         align: "right",
@@ -156,34 +176,38 @@ export function addDccCoverPage(doc, proofs, createdAt) {
     });
 }
 
-function vaccinationsList(doc, proofs) {
-    var vaccinations = getSortedVaccinations(proofs);
-    var listItems = vaccinations.map(function (vaccination) {
-        return (
-            t(
-                doc.locale,
-                "cover.dose." +
-                    (vaccination.totalDoses > 3
-                        ? "extra"
-                        : vaccination.totalDoses)
-            ) +
-            " (" +
-            vaccination.doseNumber +
-            "/" +
-            vaccination.totalDoses +
-            ")"
-        );
+function proofsList(doc, proofs) {
+    var vaccinations = getEuropeanProofs(proofs);
+    var listItems = vaccinations.map(function (proof) {
+        if (isVaccination(proof)) {
+            return (
+                t(
+                    doc.locale,
+                    "cover.vaccination." +
+                        (proof.totalDoses > 3 ? "extra" : proof.totalDoses)
+                ) +
+                " (" +
+                proof.doseNumber +
+                "/" +
+                proof.totalDoses +
+                ")"
+            );
+        }
+        if (isRecovery(proof)) {
+            return t(doc.local, "cover.recoveryProof");
+        }
+        return t(doc.local, "cover.otherProof");
     });
 
-    var vaccinationsList = doc._pdf.struct("L", function () {
-        doc._pdf.moveDown(0.5);
+    var proofsList = doc._pdf.struct("L", function () {
         doc._pdf
             .font("ROSansRegular")
             .list(listItems, (marginX + 3) * dpmm, null, {
                 bulletRadius: 2,
                 textIndent: 6 * dpmm,
+                lineGap: 2,
             });
     });
 
-    return vaccinationsList;
+    return proofsList;
 }

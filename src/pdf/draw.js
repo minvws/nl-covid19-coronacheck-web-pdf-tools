@@ -52,8 +52,6 @@ export function drawLogoCoronaCheck(doc, x, y, width = 9) {
     });
 }
 
-export function drawRijksoverheidLogo(doc, x, y, width = 210) {}
-
 export function drawLine(doc, line, margin = 10) {
     var x1 = line.x1 * dpmm;
     var y1 = line.y1 * dpmm;
@@ -154,7 +152,7 @@ export function drawList(doc, list) {
     );
 }
 
-export function drawQrSvg(doc, svg, x, y, size) {
+export function drawQrSvg(doc, svg, x, y) {
     var path = qrSvgPath(svg);
     var scale = qrSvgScale(svg);
     if (!path) throw new Error("QR parse error");

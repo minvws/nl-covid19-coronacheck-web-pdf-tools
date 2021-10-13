@@ -40,13 +40,3 @@ export function parseSVG(input) {
     if (!domParser) domParser = new DOMParser();
     return domParser.parseFromString(input, "image/svg+xml");
 }
-
-/**
- * @param {string} input Base64-encoded string
- * @return {string} Binary string
- */
-export function atob(input) {
-    return typeof window === "undefined"
-        ? Buffer.from(input, "base64").toString("binary")
-        : window.atob(input);
-}

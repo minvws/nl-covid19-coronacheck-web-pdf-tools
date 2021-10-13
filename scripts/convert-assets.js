@@ -57,6 +57,7 @@ function dataUri(filename, data) {
 }
 
 function camelize(filename) {
-    return basename(filename, extname(filename))
-        .replace(/-./g, (match) => match[1].toUpperCase());
+    return basename(filename, extname(filename)).replace(/-./g, (match) =>
+        match[1].toUpperCase()
+    );
 }

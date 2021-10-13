@@ -1,19 +1,19 @@
 import en from "./en.js";
 import nl from "./nl.js";
 
-const lang = { en, nl };
+var lang = { en, nl };
 
 /**
  * @param {import("../types").Locale} locale
  * @param {string} segment
  * @param {Record<string, string>} [data]
  */
-export const t = (locale, segment, data) => {
+export function t(locale, segment, data) {
     let translation = (lang[locale] || nl)[segment] || segment;
     if (data) {
-        for (const key of Object.keys(data)) {
+        for (var key of Object.keys(data)) {
             translation = translation.replace("%{" + key + "}", data[key]);
         }
     }
     return translation;
-};
+}
