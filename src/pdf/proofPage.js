@@ -341,7 +341,7 @@ function structQrImage(doc, qrSvg) {
         function () {
             var qrx = (pageWidth / 2 - 80) / 2;
             var qry = qrPositionY;
-            drawQrSvg(doc, qrSvg, qrx, qry, qrSvg);
+            drawQrSvg(doc, qrSvg, qrx, qry);
         }
     );
 }
@@ -456,6 +456,11 @@ function structEuDetailsSection(doc, details, certificateNumber) {
             details
                 .map(function (item, i) {
                     var y = bottomPartTop + i * fieldSpacing;
+                    var baseline;
+                    if (doc.locale === "en") {
+                        y += 0.5 * fieldSpacing;
+                        baseline = "middle";
+                    }
                     return doc._pdf.struct("LI", [
                         doc._pdf.struct("Lbl", function () {
                             drawText(doc, {
@@ -466,6 +471,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                                 font: "RobotoBold",
                                 size: fontSizeSmallCaps,
                                 position: [rightPartLeft, y],
+                                baseline: baseline,
                                 width: partWidth,
                             });
                             if (doc.locale !== "en") {
@@ -498,6 +504,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                                     rightPartRight - userDataColWidth,
                                     y,
                                 ],
+                                baseline: baseline,
                                 width: userDataColWidth,
                                 lineGap: -0.5,
                             });
@@ -509,8 +516,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                         doc._pdf.struct("Lbl", function () {
                             var y =
                                 bottomPartTop +
-                                details.length * fieldSpacing +
-                                fieldSpacing * 0.25;
+                                (details.length + 1.25) * fieldSpacing;
 
                             var text = t(
                                 doc.locale,

@@ -17876,12 +17876,20 @@ function structNlDetailsSection(doc, details) {
 function structEuDetailsSection(doc, details, certificateNumber) {
   return doc._pdf.struct("Sect", [doc._pdf.struct("L", details.map(function (item, i) {
     var y = bottomPartTop + i * fieldSpacing;
+    var baseline;
+
+    if (doc.locale === "en") {
+      y += 0.5 * fieldSpacing;
+      baseline = "alphabetic";
+    }
+
     return doc._pdf.struct("LI", [doc._pdf.struct("Lbl", function () {
       drawText(doc, {
         text: t(doc.locale, "eu.userData." + item[0]).toUpperCase(),
         font: "RobotoBold",
         size: fontSizeSmallCaps,
         position: [rightPartLeft, y],
+        baseline: baseline,
         width: partWidth
       });
 
@@ -17905,12 +17913,13 @@ function structEuDetailsSection(doc, details, certificateNumber) {
         size: 10,
         align: "right",
         position: [rightPartRight - userDataColWidth, y],
+        baseline: baseline,
         width: userDataColWidth,
         lineGap: -0.5
       });
     })]);
   }).concat([doc._pdf.struct("LI", [doc._pdf.struct("Lbl", function () {
-    var y = bottomPartTop + details.length * fieldSpacing + fieldSpacing * 0.25;
+    var y = bottomPartTop + (details.length + 1.25) * fieldSpacing;
     var text = t(doc.locale, "eu.userData.certificateNumber");
 
     if (doc.locale !== "en") {
