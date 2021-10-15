@@ -17452,7 +17452,7 @@ function proofsList(doc, proofs) {
   var vaccinations = getEuropeanProofs(proofs);
   var listItems = vaccinations.map(function (proof) {
     if (isVaccination(proof)) {
-      return t(doc.locale, "cover.vaccination." + (proof.totalDoses > 3 ? "extra" : proof.totalDoses)) + " (" + proof.doseNumber + "/" + proof.totalDoses + ")";
+      return t(doc.locale, "cover.vaccination." + (proof.doseNumber > 3 ? "extra" : proof.doseNumber)) + " (" + proof.doseNumber + "/" + proof.totalDoses + ")";
     }
 
     if (isRecovery(proof)) {
