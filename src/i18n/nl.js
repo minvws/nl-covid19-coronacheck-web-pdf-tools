@@ -1,20 +1,24 @@
 export default {
-    "eu.negativetest.instructions":
-        "1. Print dit bewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+    "eu.instructions":
+        "Print dit bewijs op A4 (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+    "eu.validUntil": "Dit papieren bewijs is geldig tot:",
+    "eu.createNew":
+        "Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
+    "eu.negativetest.title": "Internationaal testbewijs",
     "eu.negativetest.qrTitle": "Testbewijs",
     "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
-    "eu.vaccination.instructions":
-        "1. Print dit coronabewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3.  Laat het vaccinatiebewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt\n\nDit papieren bewijs is geldig tot:\n%{date}\nDaarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
+    "eu.vaccination.title":
+        "Internationaal vaccinatiebewijs\ndosis %{doseNumber}/%{totalDoses}",
     "eu.vaccination.qrTitle": "Vaccinatiebewijs",
     "eu.vaccination.propertiesLabel": "Vaccinatiegegevens",
-    "eu.recovery.instructions":
-        "1. Print dit bewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee op reis\n\n3. Laat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+    "eu.recovery.title": "Internationaal herstelbewijs",
     "eu.recovery.qrTitle": "Herstelbewijs",
-    "eu.title": "Internationaal bewijs",
     "eu.intro":
-        "Reis je buiten Nederland? Gebruik dan dit EU Digitaal Corona Certificaat (DCC).\n\nBekijk voor vertrek welke test-, herstel- of vaccinatiebewijzen geldig zijn in het land dat je bezoekt: https://reopen.europa.eu/nl",
-    "eu.warning":
-        "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.\n\nGemaakt op / created at %{time}",
+        "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Controleer voor vertrek ook altijd op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
+    "eu.alt.flag": "Vlag van de Europese Unie met de letters NL erop",
+    "eu.travelWarning":
+        "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.",
+    "eu.createdAt": "Gemaakt op / created at %{time}",
     "eu.userData.name": "ACHTERNAAM EN VOORNAMEN",
     "eu.userData.dateOfBirth": "Geboortedatum",
     "eu.userData.disease": "Ziekteverwekker",
@@ -38,12 +42,13 @@ export default {
     "eu.userData.validUntil": "Geldig tot",
     "eu.userData.certificateNumber": "UNIEK CERTIFICAATNUMMER",
     "nl.instructions":
-        "1. Print dit coronabewijs op A4 (mag in zwart-wit)\n\n2. Neem een geldig identiteitsbewijs mee naar de activiteit\n\n3. Laat je coronabewijs en je identiteitsbewijs (en eventueel ook je toegangskaartje) zien bij de ingang",
+        "Print dit coronabewijs op A4 (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de activiteit\n\nLaat je coronabewijs en je identiteitsbewijs (en eventueel ook je toegangskaartje) zien bij de ingang",
     "nl.propertiesLabel": "Gegevens",
     "nl.title": "Bewijs voor in Nederland",
     "nl.intro":
         "Bezoek je locaties of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
-    "nl.qrTitle": "Coronatoegangs- bewijs",
+    "nl.alt.flag": "Nederlandse vlag",
+    "nl.qrTitle": "Coronatoegangs-\nbewijs",
     "nl.userData.initials": "Initialen",
     "nl.userData.dateOfBirth": "Geboortedag",
     "nl.userData.validFrom": "Geldig vanaf",
@@ -51,11 +56,14 @@ export default {
     "nl.userData.privacyNote":
         "Bovenstaande gegevens hoef je niet te laten zien bij de ingang.",
     instructions: "Instructies",
+    "alt.foldInstructions":
+        "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden met deze instructies aan de binnenzijde.",
+    "alt.logoRijksoverheid": "Logo Rijksoverheid",
+    "alt.logoCoronacheck": "Logo CoronaCheck",
+    "alt.qr": "QR-code",
     questions: "VRAGEN?",
     questionsContent:
         "Bekijk de meestgestelde vragen op www.coronacheck.nl of stuur een e-mail naar helpdesk@coronacheck.nl of bel naar 0800-1421 (gratis)",
-    validUntilVaccination:
-        "Dit papieren bewijs is geldig tot: %{date} Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
     "metadata.title": "Coronabewijs met QR-code",
     "metadata.author": "CoronaCheck",
     "date.months.abbr.1": "JAN",
@@ -70,4 +78,30 @@ export default {
     "date.months.abbr.10": "OKT",
     "date.months.abbr.11": "NOV",
     "date.months.abbr.12": "DEC",
+    "cover.issuedOn": "Uitgegeven op %{date}",
+    "cover.title": "Over jouw internationale bewijzen",
+    "cover.intro":
+        "In dit document vind je meerdere internationale coronabewijzen met elk een aparte QR-code.",
+    "cover.yourProofs.title": "Je hebt een bewijs met QR-code voor jouw:",
+    "cover.vaccination.1": "eerste vaccinatie-dosis",
+    "cover.vaccination.2": "tweede vaccinatie-dosis",
+    "cover.vaccination.3": "derde vaccinatie-dosis",
+    "cover.vaccination.4": "vierde vaccinatie-dosis",
+    "cover.vaccination.5": "vijfde vaccinatie-dosis",
+    "cover.vaccination.6": "zesde vaccinatie-dosis",
+    "cover.vaccination.7": "zevende vaccinatie-dosis",
+    "cover.vaccination.8": "achtste vaccinatie-dosis",
+    "cover.vaccination.9": "negende vaccinatie-dosis",
+    "cover.vaccination.extra": "extra vaccinatie-dosis",
+    "cover.recoveryProof": "herstelbewijs",
+    "cover.otherProof": "testbewijs",
+    "cover.whichCode.title": "Welke QR-code moet ik gebruiken?",
+    "cover.whichCode.recent-double-dose":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nDe meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen. Heb je kort geleden je tweede dosis gehad? In veel landen wordt een vaccinatiebewijs pas geldig vanaf 14 tot 28 dagen na het zetten van de prik.",
+    "cover.whichCode.double-dose":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
+    "cover.whichCode.triple-dose":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nJij hebt meer dan twee vaccinatie doses gehad. De QR-codes van extra doses worden nog niet overal geaccepteerd. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
+    "cover.beforeTravel":
+        "Controleer altijd voor vertrek op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
 };

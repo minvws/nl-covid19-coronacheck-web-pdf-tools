@@ -1,22 +1,34 @@
-export const getEuBrand = (holderConfig, euBrandCode) =>
-    findNameByCode(holderConfig.euBrands, euBrandCode);
+export function getEuBrand(holderConfig, euBrandCode) {
+    return findNameByCode(holderConfig.euBrands, euBrandCode);
+}
 
-export const getEuTestType = (holderConfig, testTypeCode) =>
-    findNameByCode(holderConfig.euTestTypes, testTypeCode);
+export function getEuTestType(holderConfig, testTypeCode) {
+    return findNameByCode(holderConfig.euTestTypes, testTypeCode);
+}
 
-export const getTestManufacturer = (holderConfig, testManufacturerCode) =>
-    findNameByCode(holderConfig.euTestManufacturers, testManufacturerCode);
+export function getTestManufacturer(holderConfig, testManufacturerCode) {
+    return findNameByCode(
+        holderConfig.euTestManufacturers,
+        testManufacturerCode
+    );
+}
 
-export const getVaccineType = (holderConfig, vaccineTypeCode) =>
-    findNameByCode(holderConfig.euVaccinations, vaccineTypeCode);
+export function getVaccineType(holderConfig, vaccineTypeCode) {
+    return findNameByCode(holderConfig.euVaccinations, vaccineTypeCode);
+}
 
-export const getVaccineManufacturer = (holderConfig, vaccineManufacturerCode) =>
-    findNameByCode(holderConfig.euManufacturers, vaccineManufacturerCode);
+export function getVaccineManufacturer(holderConfig, vaccineManufacturerCode) {
+    return findNameByCode(
+        holderConfig.euManufacturers,
+        vaccineManufacturerCode
+    );
+}
 
-export const getNlTestType = (holderConfig, testTypeCode) =>
-    findNameByCode(holderConfig.euTestTypes, testTypeCode);
+export function getNlTestType(holderConfig, testTypeCode) {
+    return findNameByCode(holderConfig.euTestTypes, testTypeCode);
+}
 
-const findNameByCode = (arr, code) => {
-    const found = arr.find((item) => item.code === code);
+export function findNameByCode(arr, code) {
+    var found = arr.find((item) => item.code === code);
     return found && found.name;
-};
+}

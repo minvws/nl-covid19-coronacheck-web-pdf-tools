@@ -1,5 +1,9 @@
 node_modules/
+/coverage/
 .DS_Store
+/tmp
+/*.tgz
+/*.pdf
 /*.log
 .vscode
 .idea

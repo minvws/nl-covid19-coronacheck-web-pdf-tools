@@ -1,14 +1,30 @@
 export type TODO = any;
 
+export type VaccinationStatus =
+    | "unvaccinated"
+    | "single-dose"
+    | "single-dose-and-recovery"
+    | "recent-double-dose"
+    | "double-dose"
+    | "triple-dose"
+    | "unknown";
+
 export type EventType = "negativetest" | "vaccination" | "recovery";
 
 export type Locale = "nl" | "en";
 
 export type Metadata = { title: string; author: string };
 
-export type ProofData = {
+export type ProofData = ProofDataV5 | ProofDataV6;
+
+export type ProofDataV5 = {
     domestic?: DomesticProofData;
     european?: EuropeanProofData;
+};
+
+export type ProofDataV6 = {
+    domestic?: DomesticProofData;
+    european?: EuropeanProofData[];
 };
 
 export type DomesticProofData = {
@@ -71,11 +87,7 @@ type RecoveryCredential = BaseCredentials & {
     du: string; // e.g. "2021-12-26";
 };
 
-export type Proof =
-    | DomesticProof
-    | EuropeanVaccinationProof
-    | EuropeanNegativeTestProof
-    | EuropeanRecoveryProof;
+export type Proof = DomesticProof | EuropeanProof;
 
 type DomesticProof = {
     proofType: "domestic";
@@ -88,16 +100,12 @@ type DomesticProof = {
     validUntil: string;
 };
 
-type EuropeanProof = {
-    territory: "eu";
-    qr: string;
-    fullName: string;
-    birthDateString: string;
-    certificateNumber: string;
-    validUntil: string;
-};
+export type EuropeanProof =
+    | EuropeanVaccinationProof
+    | EuropeanNegativeTestProof
+    | EuropeanRecoveryProof;
 
-export type EuropeanVaccinationProof = EuropeanProof & {
+export type EuropeanVaccinationProof = EuropeanProofBase & {
     proofType: "european-vaccination";
     eventType: "vaccination";
     credential: VaccinationCredential;
@@ -114,7 +122,7 @@ export type EuropeanVaccinationProof = EuropeanProof & {
     validFrom: string;
 };
 
-export type EuropeanNegativeTestProof = EuropeanProof & {
+export type EuropeanNegativeTestProof = EuropeanProofBase & {
     proofType: "european-negative-test";
     eventType: "negativetest";
     credential: TestCredential;
@@ -127,7 +135,7 @@ export type EuropeanNegativeTestProof = EuropeanProof & {
     certificateIssuer: string;
     validFrom: string;
 };
-export type EuropeanRecoveryProof = EuropeanProof & {
+export type EuropeanRecoveryProof = EuropeanProofBase & {
     proofType: "european-recovery";
     eventType: "recovery";
     credential: RecoveryCredential;
@@ -135,4 +143,13 @@ export type EuropeanRecoveryProof = EuropeanProof & {
     dateOfTest: string;
     countryOfTest: string;
     certificateIssuer: string;
+};
+
+type EuropeanProofBase = {
+    territory: "eu";
+    qr: string;
+    fullName: string;
+    birthDateString: string;
+    certificateNumber: string;
+    validUntil: string;
 };

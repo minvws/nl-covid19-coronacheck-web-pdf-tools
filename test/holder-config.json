@@ -1,0 +1,956 @@
+{
+  "androidMinimumVersion": 1851,
+  "androidRecommendedVersion": 2137,
+  "androidMinimumVersionMessage": "Om de app te gebruiken heb je de laatste versie uit de store nodig.",
+  "playStoreURL": "https://play.google.com/store/apps/details?id=nl.rijksoverheid.ctr.holder",
+  "iosMinimumVersion": "2.2.2",
+  "iosRecommendedVersion": "2.3.1",
+  "iosMinimumVersionMessage": "Om de app te gebruiken heb je de laatste versie uit de store nodig.",
+  "iosAppStoreURL": "https://apps.apple.com/nl/app/coronacheck/id1548269870",
+  "appDeactivated": false,
+  "configTTL": 864000,
+  "upgradeRecommendationInterval": 24,
+  "maxValidityHours": 24,
+  "informationURL": "https://coronacheck.nl",
+  "requireUpdateBefore": 1620781181,
+  "ggdEnabled": true,
+  "euLaunchDate": "2021-06-30T22:00:00Z",
+  "temporarilyDisabled": false,
+  "vaccinationEventValidity": 14600,
+  "recoveryEventValidity": 8760,
+  "recoveryExpirationDays": 180,
+  "testEventValidity": 96,
+  "domesticCredentialValidity": 24,
+  "credentialRenewalDays": 5,
+  "clockDeviationThresholdSeconds": 30,
+  "domesticQRRefreshSeconds": 30,
+  "luhnCheckEnabled": false,
+  "euTestResults": [
+    {
+      "code": "260415000",
+      "name": "Negatief (geen corona)"
+    },
+    {
+      "code": "260373001",
+      "name": "Positief (corona)"
+    }
+  ],
+  "hpkCodes": [
+    {
+      "code": "2924528",
+      "name": "Pfizer (Comirnaty)",
+      "vp": "1119349007",
+      "mp": "EU/1/20/1528",
+      "ma": "ORG-100030215"
+    },
+    {
+      "code": "2924536",
+      "name": "Moderna (COVID-19 Vaccin Moderna)",
+      "vp": "1119349007",
+      "mp": "EU/1/20/1507",
+      "ma": "ORG-100031184"
+    },
+    {
+      "code": "2925508",
+      "name": "AstraZeneca (Vaxzevria)",
+      "vp": "J07BX03",
+      "mp": "EU/1/21/1529",
+      "ma": "ORG-100001699"
+    },
+    {
+      "code": "2934701",
+      "name": "Janssen (COVID-19 Vaccin Janssen)",
+      "vp": "J07BX03",
+      "mp": "EU/1/20/1525",
+      "ma": "ORG-100001417"
+    }
+  ],
+  "euBrands": [
+    {
+      "code": "EU/1/20/1528",
+      "name": "Pfizer (Comirnaty)"
+    },
+    {
+      "code": "EU/1/20/1507",
+      "name": "Moderna (Spikevax)"
+    },
+    {
+      "code": "EU/1/21/1529",
+      "name": "AstraZeneca (Vaxzevria)"
+    },
+    {
+      "code": "EU/1/20/1525",
+      "name": "Janssen (COVID-19 Vaccin Janssen)"
+    },
+    {
+      "code": "CVnCoV",
+      "name": "CVnCoV"
+    },
+    {
+      "code": "Sputnik-V",
+      "name": "Sputnik-V"
+    },
+    {
+      "code": "Convidecia",
+      "name": "Convidecia"
+    },
+    {
+      "code": "EpiVacCorona",
+      "name": "EpiVacCorona"
+    },
+    {
+      "code": "BBIBP-CorV",
+      "name": "BBIBP-CorV"
+    },
+    {
+      "code": "Inactivated-SARS-CoV-2-Vero-Cell",
+      "name": "Inactivated SARS-CoV-2 (Vero Cell)"
+    },
+    {
+      "code": "CoronaVac",
+      "name": "CoronaVac"
+    },
+    {
+      "code": "Covaxin",
+      "name": "Covaxin (also known as BBV152 A, B, C)"
+    },
+    {
+      "code": "Covishield",
+      "name": "Covishield (ChAdOx1_nCoV-19)"
+    }
+  ],
+  "nlTestTypes": [
+    {
+      "code": "pcr",
+      "name": "PCR Test"
+    },
+    {
+      "code": "pcr-lamp",
+      "name": "PCR Test (LAMP)"
+    },
+    {
+      "code": "antigen",
+      "name": "Antigen Test"
+    },
+    {
+      "code": "breath",
+      "name": "Breath Test"
+    }
+  ],
+  "euVaccinations": [
+    {
+      "code": "1119349007",
+      "name": "SARS-CoV-2 mRNA vaccine"
+    },
+    {
+      "code": "1119305005",
+      "name": "SARS-CoV-2 antigen vaccine"
+    },
+    {
+      "code": "J07BX03",
+      "name": "covid-19 vaccines"
+    }
+  ],
+  "euManufacturers": [
+    {
+      "code": "ORG-100001699",
+      "name": "AstraZeneca AB"
+    },
+    {
+      "code": "ORG-100030215",
+      "name": "Biontech Manufacturing GmbH"
+    },
+    {
+      "code": "ORG-100001417",
+      "name": "Janssen-Cilag International"
+    },
+    {
+      "code": "ORG-100031184",
+      "name": "Moderna Biotech Spain S.L."
+    },
+    {
+      "code": "ORG-100006270",
+      "name": "Curevac AG"
+    },
+    {
+      "code": "ORG-100013793",
+      "name": "CanSino Biologics"
+    },
+    {
+      "code": "ORG-100020693",
+      "name": "China Sinopharm International Corp. - Beijing location"
+    },
+    {
+      "code": "ORG-100010771",
+      "name": "Sinopharm Weiqida Europe Pharmaceutical s.r.o. - Prague location"
+    },
+    {
+      "code": "ORG-100024420",
+      "name": "Sinopharm Zhijun (Shenzhen) Pharmaceutical Co. Ltd. - Shenzhen location"
+    },
+    {
+      "code": "ORG-100032020",
+      "name": "Novavax CZ AS"
+    },
+    {
+      "code": "Gamaleya-Research-Institute",
+      "name": "Gamaleya Research Institute"
+    },
+    {
+      "code": "Vector-Institute",
+      "name": "Vector Institute"
+    },
+    {
+      "code": "Sinovac-Biotech",
+      "name": "Sinovac Biotech"
+    },
+    {
+      "code": "Bharat-Biotech",
+      "name": "Bharat Biotech"
+    },
+    {
+      "code": "ORG-100001981",
+      "name": "Serum Institute Of India Private Limited"
+    }
+  ],
+  "euTestTypes": [
+    {
+      "code": "LP6464-4",
+      "name": "PCR (NAAT)"
+    },
+    {
+      "code": "LP217198-3",
+      "name": "Sneltest (RAT)"
+    },
+    {
+      "code": "NL:BREATH",
+      "name": "Breathomix, Spironose"
+    },
+    {
+      "code": "NL:BIKKER",
+      "name": "Amendment Bikker test type"
+    },
+    {
+      "code": "NL:AGOB",
+      "name": "Antigen"
+    }
+  ],
+  "euTestManufacturers": [
+    {
+      "code": "1341",
+      "name": "Qingdao Hightop Biotech Co."
+    },
+    {
+      "code": "1065",
+      "name": "Becton Dickinson"
+    },
+    {
+      "code": "1581",
+      "name": "CTK Biotech"
+    },
+    {
+      "code": "2031",
+      "name": "Bio-Rad Laboratories / Zhejiang Orient Gene Biotech"
+    },
+    {
+      "code": "1180",
+      "name": "MEDsan GmbH"
+    },
+    {
+      "code": "1855",
+      "name": "GA Generic Assays GmbH"
+    },
+    {
+      "code": "1216",
+      "name": "Guangdong Longsee Biomedical Co."
+    },
+    {
+      "code": "2029",
+      "name": "Merlin Biomedical (Xiamen) Co."
+    },
+    {
+      "code": "1215",
+      "name": "Hangzhou Laihe Biotech Co."
+    },
+    {
+      "code": "1457",
+      "name": "Acon Biotech (Hangzhou) Co."
+    },
+    {
+      "code": "1456",
+      "name": "Xiamen Wiz Biotech Co."
+    },
+    {
+      "code": "1610",
+      "name": "Hangzhou Clongene Biotech Co."
+    },
+    {
+      "code": "1333",
+      "name": "Joinstar Biomedical Technology Co."
+    },
+    {
+      "code": "2147",
+      "name": "Fujirebio"
+    },
+    {
+      "code": "1574",
+      "name": "Shenzhen Zhenrui Biotechnology Co."
+    },
+    {
+      "code": "1178",
+      "name": "Shenzhen Microprofit Biotech Co."
+    },
+    {
+      "code": "1331",
+      "name": "Beijing Lepu Medical Technology Co."
+    },
+    {
+      "code": "1739",
+      "name": "Eurobio Scientific"
+    },
+    {
+      "code": "1618",
+      "name": "Artron Laboratories Inc"
+    },
+    {
+      "code": "1736",
+      "name": "Anhui Deep Blue Medical Technology Co."
+    },
+    {
+      "code": "1218",
+      "name": "Siemens Healthineers"
+    },
+    {
+      "code": "1190",
+      "name": "möLab"
+    },
+    {
+      "code": "1197",
+      "name": "Goldsite Diagnostics Inc"
+    },
+    {
+      "code": "2317",
+      "name": "Hangzhou Immuno Biotech Co."
+    },
+    {
+      "code": "1501",
+      "name": "New Gene (Hangzhou) Bioengineering Co."
+    },
+    {
+      "code": "1468",
+      "name": "ACON Laboratories"
+    },
+    {
+      "code": "1225",
+      "name": "DDS DIAGNOSTIC"
+    },
+    {
+      "code": "1466",
+      "name": "TODA PHARMA"
+    },
+    {
+      "code": "1465",
+      "name": "Triplex International Biosciences Co."
+    },
+    {
+      "code": "1223",
+      "name": "BIOSYNEX S.A."
+    },
+    {
+      "code": "1343",
+      "name": "Zhezhiang Orient Gene Biotech Co."
+    },
+    {
+      "code": "2035",
+      "name": "BioMaxima SA"
+    },
+    {
+      "code": "1906",
+      "name": "Azure Biotech Inc"
+    },
+    {
+      "code": "768",
+      "name": "ArcDia International Ltd"
+    },
+    {
+      "code": "1747",
+      "name": "Guangdong Hecin Scientific"
+    },
+    {
+      "code": "1989",
+      "name": "Boditech Med Inc"
+    },
+    {
+      "code": "2290",
+      "name": "Rapid Pathogen Screening"
+    },
+    {
+      "code": "1919",
+      "name": "Core Technology Co."
+    },
+    {
+      "code": "1363",
+      "name": "Hangzhou Clongene Biotech Co."
+    },
+    {
+      "code": "1242",
+      "name": "Bionote"
+    },
+    {
+      "code": "1484",
+      "name": "Beijing Wantai Biological Pharmacy Enterprise Co."
+    },
+    {
+      "code": "1481",
+      "name": "MP Biomedicals"
+    },
+    {
+      "code": "1360",
+      "name": "Guangdong Wesail Biotech Co."
+    },
+    {
+      "code": "2052",
+      "name": "SD BIOSENSOR Inc"
+    },
+    {
+      "code": "770",
+      "name": "Assure Tech. (Hangzhou) Co."
+    },
+    {
+      "code": "1357",
+      "name": "SGA Medikal"
+    },
+    {
+      "code": "1236",
+      "name": "BTNX Inc"
+    },
+    {
+      "code": "1599",
+      "name": "Biomerica"
+    },
+    {
+      "code": "1114",
+      "name": "Sugentech"
+    },
+    {
+      "code": "1199",
+      "name": "Oncosem Onkolojik Sistemler San. ve Tic. A.S."
+    },
+    {
+      "code": "2200",
+      "name": "NanoRepro AG"
+    },
+    {
+      "code": "1870",
+      "name": "Beijing Hotgen Biotech Co."
+    },
+    {
+      "code": "1232",
+      "name": "Abbott Rapid Diagnostics"
+    },
+    {
+      "code": "1759",
+      "name": "Hubei Jinjian Biology Co."
+    },
+    {
+      "code": "1495",
+      "name": "Prognosis Biotech"
+    },
+    {
+      "code": "1253",
+      "name": "GenSure Biotech Inc"
+    },
+    {
+      "code": "2067",
+      "name": "BIOTEKE CORPORATION (WUXI) CO."
+    },
+    {
+      "code": "1494",
+      "name": "BIOSYNEX S.A."
+    },
+    {
+      "code": "1097",
+      "name": "Quidel Corporation"
+    },
+    {
+      "code": "1490",
+      "name": "Safecare Biotech (Hangzhou) Co. Ltd"
+    },
+    {
+      "code": "2183",
+      "name": "Getein Biotech"
+    },
+    {
+      "code": "1767",
+      "name": "Healgen Scientific"
+    },
+    {
+      "code": "1800",
+      "name": "AVALUN SAS"
+    },
+    {
+      "code": "1920",
+      "name": "Jiangsu Diagnostics Biotechnology Co."
+    },
+    {
+      "code": "1489",
+      "name": "Safecare Biotech (Hangzhou) Co. Ltd"
+    },
+    {
+      "code": "1764",
+      "name": "JOYSBIO (Tianjin) Biotechnology Co."
+    },
+    {
+      "code": "1884",
+      "name": "Xiamen Wiz Biotech Co."
+    },
+    {
+      "code": "1763",
+      "name": "Xiamen AmonMed Biotechnology Co."
+    },
+    {
+      "code": "1762",
+      "name": "Novatech"
+    },
+    {
+      "code": "1365",
+      "name": "Hangzhou Clongene Biotech Co."
+    },
+    {
+      "code": "1244",
+      "name": "GenBody"
+    },
+    {
+      "code": "1243",
+      "name": "Edinburgh Genetics Limited"
+    },
+    {
+      "code": "1485",
+      "name": "Beijing Wantai Biological Pharmacy Enterprise Co."
+    },
+    {
+      "code": "308",
+      "name": "PCL Inc"
+    },
+    {
+      "code": "1769",
+      "name": "Shenzhen Watmind Medical Co."
+    },
+    {
+      "code": "1768",
+      "name": "Shenzhen Watmind Medical Co."
+    },
+    {
+      "code": "2078",
+      "name": "ArcDia International Oy Ltd"
+    },
+    {
+      "code": "1263",
+      "name": "Humasis"
+    },
+    {
+      "code": "2350",
+      "name": "Assure Tech. (Hangzhou) Co."
+    },
+    {
+      "code": "2074",
+      "name": "Triplex International Biosciences (China) Co."
+    },
+    {
+      "code": "2072",
+      "name": "Beijing Jinwofu Bioengineering Technology Co."
+    },
+    {
+      "code": "2108",
+      "name": "AESKU.DIAGNOSTICS GmbH & Co. KG"
+    },
+    {
+      "code": "2228",
+      "name": "Roche (SD BIOSENSOR)"
+    },
+    {
+      "code": "2107",
+      "name": "Jiangsu Bioperfectus Technologies Co."
+    },
+    {
+      "code": "1775",
+      "name": "MEXACARE GmbH"
+    },
+    {
+      "code": "1654",
+      "name": "Asan Pharmaceutical CO."
+    },
+    {
+      "code": "2104",
+      "name": "Nal von minden GmbH"
+    },
+    {
+      "code": "1257",
+      "name": "Hangzhou AllTest Biotech Co."
+    },
+    {
+      "code": "1773",
+      "name": "Wuhan Life Origin Biotech Joint Stock Co."
+    },
+    {
+      "code": "2103",
+      "name": "VivaChek Biotech (Hangzhou) Co."
+    },
+    {
+      "code": "1375",
+      "name": "DIALAB GmbH"
+    },
+    {
+      "code": "2101",
+      "name": "AXIOM Gesellschaft für Diagnostica und Biochemica mbH"
+    },
+    {
+      "code": "1815",
+      "name": "Anhui Deep Blue Medical Technology Co."
+    },
+    {
+      "code": "1934",
+      "name": "Tody Laboratories Int."
+    },
+    {
+      "code": "2109",
+      "name": "Shenzhen Lvshiyuan Biotechnology Co."
+    },
+    {
+      "code": "2243",
+      "name": "PCL Inc."
+    },
+    {
+      "code": "2242",
+      "name": "DNA Diagnostic"
+    },
+    {
+      "code": "2241",
+      "name": "NESAPOR EUROPA SL"
+    },
+    {
+      "code": "1271",
+      "name": "Precision Biosensor"
+    },
+    {
+      "code": "1392",
+      "name": "Hangzhou Testsea Biotechnology Co."
+    },
+    {
+      "code": "1822",
+      "name": "Anbio (Xiamen) Biotechnology Co."
+    },
+    {
+      "code": "1304",
+      "name": "AMEDA Labordiagnostik GmbH"
+    },
+    {
+      "code": "1820",
+      "name": "Getein Biotech"
+    },
+    {
+      "code": "2116",
+      "name": "PerGrande BioTech Development Co."
+    },
+    {
+      "code": "1268",
+      "name": "LumiraDX"
+    },
+    {
+      "code": "1267",
+      "name": "LumiQuick Diagnostics Inc"
+    },
+    {
+      "code": "1420",
+      "name": "NanoEntek"
+    },
+    {
+      "code": "1266",
+      "name": "Labnovation Technologies Inc"
+    },
+    {
+      "code": "1144",
+      "name": "Green Cross Medical Science Corp."
+    },
+    {
+      "code": "2079",
+      "name": "ArcDia International Oy Ltd"
+    },
+    {
+      "code": "2090",
+      "name": "Wuhan UNscience Biotechnology Co."
+    },
+    {
+      "code": "2012",
+      "name": "Genrui Biotech Inc"
+    },
+    {
+      "code": "1286",
+      "name": "BIOHIT HealthCare (Hefei) Co."
+    },
+    {
+      "code": "2098",
+      "name": "Wuhan EasyDiagnosis Biomedicine Co."
+    },
+    {
+      "code": "2010",
+      "name": "Atlas Link Technology Co."
+    },
+    {
+      "code": "1162",
+      "name": "Nal von minden GmbH"
+    },
+    {
+      "code": "2130",
+      "name": "Affimedix"
+    },
+    {
+      "code": "1437",
+      "name": "Guangzhou Wondfo Biotech Co."
+    },
+    {
+      "code": "1833",
+      "name": "AAZ-LMB"
+    },
+    {
+      "code": "2128",
+      "name": "Lumigenex (Suzhou) Co."
+    },
+    {
+      "code": "2006",
+      "name": "Jiangsu Medomics medical technology Co."
+    },
+    {
+      "code": "2247",
+      "name": "BioGnost Ltd"
+    },
+    {
+      "code": "1278",
+      "name": "Xiamen Boson Biotech Co. Ltd"
+    },
+    {
+      "code": "1957",
+      "name": "Zhuhai Lituo Biotechnology Co."
+    },
+    {
+      "code": "1319",
+      "name": "SGA Medikal"
+    },
+    {
+      "code": "1296",
+      "name": "Zhejiang Anji Saianfu Biotech Co."
+    },
+    {
+      "code": "1295",
+      "name": "Zhejiang Anji Saianfu Biotech Co."
+    },
+    {
+      "code": "1173",
+      "name": "CerTest Biotec"
+    },
+    {
+      "code": "1844",
+      "name": "Hangzhou Immuno Biotech Co."
+    },
+    {
+      "code": "2139",
+      "name": "HANGZHOU LYSUN BIOTECHNOLOGY CO."
+    },
+    {
+      "code": "2017",
+      "name": "Shenzhen Ultra-Diagnostics Biotec.Co."
+    },
+    {
+      "code": "344",
+      "name": "SD BIOSENSOR Inc"
+    },
+    {
+      "code": "1324",
+      "name": "Guangzhou Decheng Biotechnology Co."
+    },
+    {
+      "code": "345",
+      "name": "SD BIOSENSOR Inc"
+    },
+    {
+      "code": "1443",
+      "name": "Vitrosens Biotechnology Co."
+    },
+    {
+      "code": "1201",
+      "name": "ScheBo Biotech AG"
+    },
+    {
+      "code": "2013",
+      "name": "Biotical Health S.L.U."
+    },
+    {
+      "code": "1606",
+      "name": "RapiGEN Inc"
+    },
+    {
+      "code": "1967",
+      "name": "Shenzhen Microprofit Biotech Co."
+    },
+    {
+      "code": "1604",
+      "name": "Roche (SD BIOSENSOR)"
+    }
+  ],
+  "providerIdentifiers": [
+    {
+      "name": "CTP-TEST-MVWS",
+      "code": "ZZZ"
+    },
+    {
+      "name": "SPT",
+      "code": "SPT"
+    },
+    {
+      "name": "CXL",
+      "code": "CXL"
+    },
+    {
+      "name": "GLZ",
+      "code": "GLZ"
+    },
+    {
+      "name": "GTS",
+      "code": "GTS"
+    },
+    {
+      "name": "RLB",
+      "code": "RLB"
+    },
+    {
+      "name": "UQC",
+      "code": "UQC"
+    },
+    {
+      "name": "XBT",
+      "code": "XBT"
+    },
+    {
+      "name": "XYG",
+      "code": "XYG"
+    },
+    {
+      "name": "FQJ",
+      "code": "FQJ"
+    },
+    {
+      "name": "ZUY",
+      "code": "ZUY"
+    },
+    {
+      "name": "RQC",
+      "code": "RQC"
+    },
+    {
+      "name": "BVX",
+      "code": "BVX"
+    },
+    {
+      "name": "GLX",
+      "code": "GLX"
+    },
+    {
+      "name": "CGJ",
+      "code": "CGJ"
+    },
+    {
+      "name": "BYQ",
+      "code": "BYQ"
+    },
+    {
+      "name": "GUT",
+      "code": "GUT"
+    },
+    {
+      "name": "YCF",
+      "code": "YCF"
+    },
+    {
+      "name": "XCC",
+      "code": "XCC"
+    },
+    {
+      "name": "UZS",
+      "code": "UZS"
+    },
+    {
+      "name": "BYS",
+      "code": "BYS"
+    },
+    {
+      "name": "LUZ",
+      "code": "LUZ"
+    },
+    {
+      "name": "LFS",
+      "code": "LFS"
+    },
+    {
+      "name": "BFB",
+      "code": "BFB"
+    },
+    {
+      "name": "YXQ",
+      "code": "YXQ"
+    },
+    {
+      "name": "UJJ",
+      "code": "UJJ"
+    },
+    {
+      "name": "JQJ",
+      "code": "JQJ"
+    },
+    {
+      "name": "JXT",
+      "code": "JXT"
+    },
+    {
+      "name": "LCT",
+      "code": "LCT"
+    },
+    {
+      "name": "STQ",
+      "code": "STQ"
+    },
+    {
+      "name": "USL",
+      "code": "USL"
+    },
+    {
+      "name": "RFU",
+      "code": "RFU"
+    },
+    {
+      "name": "RBG",
+      "code": "RBG"
+    },
+    {
+      "name": "CJT",
+      "code": "CJT"
+    },
+    {
+      "name": "RIVM",
+      "code": "RVV"
+    },
+    {
+      "name": "GGD",
+      "code": "GGD"
+    }
+  ],
+  "universalLinkDomains": [
+    {
+      "url": "downloadclose.com",
+      "name": "Close app"
+    },
+    {
+      "url": "www.ajax.nl",
+      "name": "Ajax app"
+    }
+  ]
+}
