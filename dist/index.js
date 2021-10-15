@@ -274,8 +274,8 @@ var en = {
   "eu.vaccination.propertiesLabel": "Vaccination details",
   "eu.recovery.qrTitle": "Recovery certificate",
   "eu.title": "International certificate",
-  "eu.titleVaccination": "International vaccination certificate\ndose %{doseNumber}/%{totalDoses}",
-  "eu.intro": "Are you traveling outside of the Netherlands? Then use this EU Digital COVID Certificate.\n\nBefore you leave, check which test and vaccination certificates are valid in your destination country: https://reopen.europa.eu/en",
+  "eu.titleVaccination": "International vaccination certificate dose %{doseNumber}/%{totalDoses}",
+  "eu.intro": "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: www.netherlandsworldwide.nl.",
   "eu.alt.flag": "Flag of the European Union with the letters NL on it",
   "eu.qrTitle": "International QR-code",
   "nl.instructions": "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
@@ -17526,17 +17526,20 @@ function throwOnUnhandledEventType(proof) {
 var pageHeight = 297;
 var pageWidth = 210;
 var marginLeft = 10;
-var marginLeftIntro = 14;
 var marginTop = 10;
-var leftPartLeft = marginLeft;
 var leftPartTop = 30;
 var rightPartLeft = 0.5 * pageWidth + marginLeft;
 var userDataColWidth = 50;
 var rightPartRight = pageWidth - marginLeft;
 var rightPartTop = marginTop;
 var partWidth = 0.5 * pageWidth - 2 * marginLeft;
-var partWidthIntro = 0.5 * pageWidth - 2 * marginLeftIntro;
 var bottomPartTop = 0.5 * pageHeight + marginTop;
+var flagWidth = 70;
+var flagTopNl = 83;
+var flagTopEu = 90;
+var flagLeft = pageWidth / 4 - flagWidth / 2;
+var marginLeftIntro = flagLeft;
+var partWidthIntro = flagWidth;
 var marginQuestionsFrame = 4;
 var questionsFrameHeight = 54;
 var questionsFrameTop = pageHeight / 2 - marginLeft - questionsFrameHeight;
@@ -17549,10 +17552,12 @@ var fontSizeStandard = 10;
 var fontSizeSmallCaps = 6;
 var fontSizeTinyCaps = 5;
 var fieldSpacing = fontSizeSmallCaps * 1.6;
-var qrPositionY = 181;
+var partWidthProofSection = 80;
+var marginLeftProofSection = (pageWidth / 2 - partWidthProofSection) / 2;
+var qrTop = 181;
 var titleColor = "#383836";
 function addProofPage(doc, proof, createdAt) {
-  return qrDataToSvg(proof.qr, 80, proof.territory).then(function (qrSvg) {
+  return qrDataToSvg(proof.qr, partWidthProofSection, proof.territory).then(function (qrSvg) {
     doc.loadFont("MontserratBold", MontserratBold);
     doc.loadFont("RobotoRegular", RobotoRegular);
     doc.loadFont("RobotoBold", RobotoBold);
@@ -17596,8 +17601,8 @@ function structNlTitle(doc) {
       font: "MontserratBold",
       size: fontSizeH1,
       color: titleColor,
-      position: [leftPartLeft, leftPartTop],
-      width: partWidth,
+      position: [marginLeftIntro, leftPartTop],
+      width: partWidthIntro,
       align: "center"
     });
   });
@@ -17614,8 +17619,8 @@ function structEuTitle(doc, proof) {
       font: "MontserratBold",
       size: fontSizeH1,
       color: titleColor,
-      position: [leftPartLeft, leftPartTop],
-      width: partWidth,
+      position: [marginLeftIntro, leftPartTop],
+      width: partWidthIntro,
       align: "center"
     });
   });
@@ -17639,7 +17644,7 @@ function structFlag(doc, territory) {
   return doc._pdf.struct("Figure", {
     alt: t(doc.locale, territory + ".alt.flag")
   }, function () {
-    territory == "nl" ? drawFlagNL(doc, 210 / 4 - 63 / 2, 91, 63) : drawFlagEU(doc, 210 / 4 - 63 / 2, 93, 63);
+    territory == "nl" ? drawFlagNL(doc, flagLeft, flagTopNl, flagWidth) : drawFlagEU(doc, flagLeft, flagTopEu, flagWidth);
   });
 }
 
@@ -17754,8 +17759,8 @@ function structProofTitle(doc, proof) {
       font: "MontserratBold",
       size: fontSizeH2,
       color: titleColor,
-      position: [marginLeftIntro, bottomPartTop],
-      width: partWidthIntro,
+      position: [marginLeftProofSection, bottomPartTop],
+      width: partWidthProofSection,
       align: "center"
     });
 
@@ -17768,8 +17773,8 @@ function structProofTitle(doc, proof) {
           font: "RobotoRegular",
           size: 14,
           color: titleColor,
-          position: [marginLeftIntro, bottomPartTop + 9],
-          width: partWidthIntro,
+          position: [marginLeftProofSection, bottomPartTop + 9],
+          width: partWidthProofSection,
           align: "center"
         });
       }));
@@ -17781,9 +17786,7 @@ function structQrImage(doc, qrSvg) {
   return doc._pdf.struct("Figure", {
     alt: t(doc.locale, "alt.qr")
   }, function () {
-    var qrx = (pageWidth / 2 - 80) / 2;
-    var qry = qrPositionY;
-    drawQrSvg(doc, qrSvg, qrx, qry);
+    drawQrSvg(doc, qrSvg, marginLeftProofSection, qrTop);
   });
 }
 
@@ -17801,8 +17804,8 @@ function structTravelWarning(doc) {
       text: t(doc.locale, "eu.travelWarning"),
       font: "RobotoRegular",
       size: 6,
-      position: [leftPartLeft, 270],
-      width: partWidth
+      position: [marginLeftProofSection, 270],
+      width: partWidthProofSection
     });
   });
 }
@@ -17817,7 +17820,7 @@ function structCreatedAt(doc, createdAt) {
       }),
       font: "RobotoRegular",
       size: 6,
-      width: partWidth
+      width: partWidthProofSection
     });
   });
 }

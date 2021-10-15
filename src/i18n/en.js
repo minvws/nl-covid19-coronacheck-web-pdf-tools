@@ -11,9 +11,9 @@ export default {
     "eu.recovery.qrTitle": "Recovery certificate",
     "eu.title": "International certificate",
     "eu.titleVaccination":
-        "International vaccination certificate\ndose %{doseNumber}/%{totalDoses}",
+        "International vaccination certificate dose %{doseNumber}/%{totalDoses}",
     "eu.intro":
-        "Are you traveling outside of the Netherlands? Then use this EU Digital COVID Certificate.\n\nBefore you leave, check which test and vaccination certificates are valid in your destination country: https://reopen.europa.eu/en",
+        "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: www.netherlandsworldwide.nl.",
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
     "nl.instructions":
