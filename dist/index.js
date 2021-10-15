@@ -17268,18 +17268,18 @@ function getVaccinationStatus(proofs, createdAt) {
 
   var best = vaccinations[vaccinations.length - 1];
 
-  if (best.totalDoses >= 3) {
+  if (best.doseNumber >= 3) {
     return "triple-dose";
   }
 
-  if (best.totalDoses === 2) {
+  if (best.doseNumber === 2) {
     if (createdAt instanceof Date) createdAt = createdAt.getTime();
     var vaccinationDate = new Date(best.credential.dt).getTime();
     var recent = createdAt - vaccinationDate < MONTH_MS;
     return recent ? "recent-double-dose" : "double-dose";
   }
 
-  if (best.totalDoses === 1) {
+  if (best.doseNumber === 1) {
     var recovery = proofs.filter(isRecovery)[0];
     return recovery ? "single-dose-and-recovery" : "single-dose";
   }
