@@ -56,7 +56,7 @@ export default {
         "Bovenstaande gegevens hoef je niet te laten zien bij de ingang.",
     instructions: "Instructies",
     "alt.foldInstructions":
-        "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden om een boekje te vormen met deze instructies aan de binnenzijde.",
+        "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden met deze instructies aan de binnenzijde.",
     "alt.logoRijksoverheid": "Logo Rijksoverheid",
     "alt.logoCoronacheck": "Logo CoronaCheck",
     "alt.qr": "QR-code",

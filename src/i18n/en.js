@@ -56,7 +56,7 @@ export default {
     "nl.userData.privacyNote": "You can keep your details to yourself",
     instructions: "Instructions",
     "alt.foldInstructions":
-        "Folding instructions. First fold in half widthwise, with the printed side out. Then fold in half again to a form a booklet with these instructions on the inside.",
+        "Folding instructions. First fold in half widthwise, with the printed side out. Then fold in half again with these instructions on the inside.",
     "alt.logoRijksoverheid": "Logo Government of the Netherlands",
     "alt.logoCoronacheck": "Logo CoronaCheck",
     "alt.qr": "QR code",
