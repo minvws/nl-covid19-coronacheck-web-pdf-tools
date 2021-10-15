@@ -516,7 +516,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                         doc._pdf.struct("Lbl", function () {
                             var y =
                                 bottomPartTop +
-                                (details.length + 1.25) * fieldSpacing;
+                                (details.length + 0.25) * fieldSpacing;
 
                             var text = t(
                                 doc.locale,

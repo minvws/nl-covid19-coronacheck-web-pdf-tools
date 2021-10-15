@@ -17880,7 +17880,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
 
     if (doc.locale === "en") {
       y += 0.5 * fieldSpacing;
-      baseline = "alphabetic";
+      baseline = "middle";
     }
 
     return doc._pdf.struct("LI", [doc._pdf.struct("Lbl", function () {
@@ -17919,7 +17919,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
       });
     })]);
   }).concat([doc._pdf.struct("LI", [doc._pdf.struct("Lbl", function () {
-    var y = bottomPartTop + (details.length + 1.25) * fieldSpacing;
+    var y = bottomPartTop + (details.length + 0.25) * fieldSpacing;
     var text = t(doc.locale, "eu.userData.certificateNumber");
 
     if (doc.locale !== "en") {
