@@ -184,7 +184,7 @@ function proofsList(doc, proofs) {
                 t(
                     doc.locale,
                     "cover.vaccination." +
-                        (proof.doseNumber > 3 ? "extra" : proof.doseNumber)
+                        (proof.doseNumber > 9 ? "extra" : proof.doseNumber)
                 ) +
                 " (" +
                 proof.doseNumber +

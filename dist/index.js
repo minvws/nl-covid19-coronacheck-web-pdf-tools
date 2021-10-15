@@ -341,6 +341,12 @@ var en = {
   "cover.vaccination.1": "first vaccination dose",
   "cover.vaccination.2": "second vaccination dose",
   "cover.vaccination.3": "third vaccination dose",
+  "cover.vaccination.4": "fourth vaccinatie-dosis",
+  "cover.vaccination.5": "fifth vaccinatie-dosis",
+  "cover.vaccination.6": "sixth vaccinatie-dosis",
+  "cover.vaccination.7": "seventh vaccinatie-dosis",
+  "cover.vaccination.8": "eighth vaccinatie-dosis",
+  "cover.vaccination.9": "ninth vaccinatie-dosis",
   "cover.vaccination.extra": "extra vaccination dose",
   "cover.recoveryProof": "recovery from coronavirus",
   "cover.otherProof": "other coronavirus-related event",
@@ -427,6 +433,12 @@ var nl = {
   "cover.vaccination.1": "eerste vaccinatie-dosis",
   "cover.vaccination.2": "tweede vaccinatie-dosis",
   "cover.vaccination.3": "derde vaccinatie-dosis",
+  "cover.vaccination.4": "vierde vaccinatie-dosis",
+  "cover.vaccination.5": "vijfde vaccinatie-dosis",
+  "cover.vaccination.6": "zesde vaccinatie-dosis",
+  "cover.vaccination.7": "zevende vaccinatie-dosis",
+  "cover.vaccination.8": "achtste vaccinatie-dosis",
+  "cover.vaccination.9": "negende vaccinatie-dosis",
   "cover.vaccination.extra": "extra vaccinatie-dosis",
   "cover.recoveryProof": "herstelbewijs",
   "cover.otherProof": "testbewijs",
@@ -17452,7 +17464,7 @@ function proofsList(doc, proofs) {
   var vaccinations = getEuropeanProofs(proofs);
   var listItems = vaccinations.map(function (proof) {
     if (isVaccination(proof)) {
-      return t(doc.locale, "cover.vaccination." + (proof.doseNumber > 3 ? "extra" : proof.doseNumber)) + " (" + proof.doseNumber + "/" + proof.totalDoses + ")";
+      return t(doc.locale, "cover.vaccination." + (proof.doseNumber > 9 ? "extra" : proof.doseNumber)) + " (" + proof.doseNumber + "/" + proof.totalDoses + ")";
     }
 
     if (isRecovery(proof)) {
