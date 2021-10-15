@@ -142,11 +142,11 @@ function structNlTitle(doc) {
 function structEuTitle(doc, proof) {
     var text =
         proof.eventType == "vaccination"
-            ? t(doc.locale, "eu.titleVaccination", {
+            ? t(doc.locale, "eu.vaccination.title", {
                   doseNumber: proof.doseNumber,
                   totalDoses: proof.totalDoses,
               })
-            : t(doc.locale, "eu.title");
+            : t(doc.locale, "eu." + proof.eventType + ".title");
     return doc._pdf.struct("H", function () {
         drawText(doc, {
             text: text,

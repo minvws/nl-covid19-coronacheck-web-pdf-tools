@@ -268,13 +268,14 @@ var en = {
   "eu.instructions": "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
   "eu.validUntil": "This paper certificate is valid until:",
   "eu.createNew": "After this date, you can make a new coronavirus pass via coronacheck.nl",
+  "eu.negativetest.title": "International test certificate",
   "eu.negativetest.qrTitle": "Test certificate",
   "eu.negativetest.propertiesLabel": "Negative test details",
+  "eu.vaccination.title": "International vaccination certificate dose %{doseNumber}/%{totalDoses}",
   "eu.vaccination.qrTitle": "Vaccination certificate",
   "eu.vaccination.propertiesLabel": "Vaccination details",
+  "eu.recovery.title": "International recovery certificate",
   "eu.recovery.qrTitle": "Recovery certificate",
-  "eu.title": "International certificate",
-  "eu.titleVaccination": "International vaccination certificate dose %{doseNumber}/%{totalDoses}",
   "eu.intro": "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: www.netherlandsworldwide.nl.",
   "eu.alt.flag": "Flag of the European Union with the letters NL on it",
   "eu.qrTitle": "International QR-code",
@@ -361,13 +362,14 @@ var nl = {
   "eu.instructions": "Print dit bewijs op A4 (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
   "eu.validUntil": "Dit papieren bewijs is geldig tot:",
   "eu.createNew": "Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
+  "eu.negativetest.title": "Internationaal testbewijs",
   "eu.negativetest.qrTitle": "Testbewijs",
   "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
+  "eu.vaccination.title": "Internationaal vaccinatiebewijs\ndosis %{doseNumber}/%{totalDoses}",
   "eu.vaccination.qrTitle": "Vaccinatiebewijs",
   "eu.vaccination.propertiesLabel": "Vaccinatiegegevens",
+  "eu.recovery.title": "Internationaal herstelbewijs",
   "eu.recovery.qrTitle": "Herstelbewijs",
-  "eu.title": "Internationaal bewijs",
-  "eu.titleVaccination": "Internationaal vaccinatiebewijs\ndosis %{doseNumber}/%{totalDoses}",
   "eu.intro": "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Controleer voor vertrek ook altijd op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
   "eu.alt.flag": "Vlag van de Europese Unie met de letters NL erop",
   "eu.travelWarning": "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.",
@@ -17535,7 +17537,7 @@ var rightPartTop = marginTop;
 var partWidth = 0.5 * pageWidth - 2 * marginLeft;
 var bottomPartTop = 0.5 * pageHeight + marginTop;
 var flagWidth = 70;
-var flagTopNl = 83;
+var flagTopNl = 84.5;
 var flagTopEu = 90;
 var flagLeft = pageWidth / 4 - flagWidth / 2;
 var marginLeftIntro = flagLeft;
@@ -17609,10 +17611,10 @@ function structNlTitle(doc) {
 }
 
 function structEuTitle(doc, proof) {
-  var text = proof.eventType == "vaccination" ? t(doc.locale, "eu.titleVaccination", {
+  var text = proof.eventType == "vaccination" ? t(doc.locale, "eu.vaccination.title", {
     doseNumber: proof.doseNumber,
     totalDoses: proof.totalDoses
-  }) : t(doc.locale, "eu.title");
+  }) : t(doc.locale, "eu." + proof.eventType + ".title");
   return doc._pdf.struct("H", function () {
     drawText(doc, {
       text: text,

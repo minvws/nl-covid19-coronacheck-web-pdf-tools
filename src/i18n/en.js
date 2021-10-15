@@ -4,14 +4,15 @@ export default {
     "eu.validUntil": "This paper certificate is valid until:",
     "eu.createNew":
         "After this date, you can make a new coronavirus pass via coronacheck.nl",
+    "eu.negativetest.title": "International test certificate",
     "eu.negativetest.qrTitle": "Test certificate",
     "eu.negativetest.propertiesLabel": "Negative test details",
+    "eu.vaccination.title":
+        "International vaccination certificate dose %{doseNumber}/%{totalDoses}",
     "eu.vaccination.qrTitle": "Vaccination certificate",
     "eu.vaccination.propertiesLabel": "Vaccination details",
+    "eu.recovery.title": "International recovery certificate",
     "eu.recovery.qrTitle": "Recovery certificate",
-    "eu.title": "International certificate",
-    "eu.titleVaccination":
-        "International vaccination certificate dose %{doseNumber}/%{totalDoses}",
     "eu.intro":
         "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: www.netherlandsworldwide.nl.",
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",

@@ -4,14 +4,15 @@ export default {
     "eu.validUntil": "Dit papieren bewijs is geldig tot:",
     "eu.createNew":
         "Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
+    "eu.negativetest.title": "Internationaal testbewijs",
     "eu.negativetest.qrTitle": "Testbewijs",
     "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
+    "eu.vaccination.title":
+        "Internationaal vaccinatiebewijs\ndosis %{doseNumber}/%{totalDoses}",
     "eu.vaccination.qrTitle": "Vaccinatiebewijs",
     "eu.vaccination.propertiesLabel": "Vaccinatiegegevens",
+    "eu.recovery.title": "Internationaal herstelbewijs",
     "eu.recovery.qrTitle": "Herstelbewijs",
-    "eu.title": "Internationaal bewijs",
-    "eu.titleVaccination":
-        "Internationaal vaccinatiebewijs\ndosis %{doseNumber}/%{totalDoses}",
     "eu.intro":
         "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Controleer voor vertrek ook altijd op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
     "eu.alt.flag": "Vlag van de Europese Unie met de letters NL erop",
