@@ -342,12 +342,12 @@ var en = {
   "cover.vaccination.1": "first vaccination dose",
   "cover.vaccination.2": "second vaccination dose",
   "cover.vaccination.3": "third vaccination dose",
-  "cover.vaccination.4": "fourth vaccinatie-dosis",
-  "cover.vaccination.5": "fifth vaccinatie-dosis",
-  "cover.vaccination.6": "sixth vaccinatie-dosis",
-  "cover.vaccination.7": "seventh vaccinatie-dosis",
-  "cover.vaccination.8": "eighth vaccinatie-dosis",
-  "cover.vaccination.9": "ninth vaccinatie-dosis",
+  "cover.vaccination.4": "fourth vaccination dose",
+  "cover.vaccination.5": "fifth vaccination dose",
+  "cover.vaccination.6": "sixth vaccination dose",
+  "cover.vaccination.7": "seventh vaccination dose",
+  "cover.vaccination.8": "eighth vaccination dose",
+  "cover.vaccination.9": "ninth vaccination dose",
   "cover.vaccination.extra": "extra vaccination dose",
   "cover.recoveryProof": "recovery from coronavirus",
   "cover.otherProof": "other coronavirus-related event",
@@ -17351,9 +17351,10 @@ var dpmm = 72 / 25.4; // dots per mm at 72dpi
 
 var titleColor$1 = "#383836";
 function addDccCoverPage(doc, proofs, createdAt) {
+  proofs = getEuropeanProofs(proofs);
   var vaccinationStatus = getVaccinationStatus(proofs, createdAt);
 
-  if (vaccinationStatus === "unvaccinated" || vaccinationStatus === "single-dose") {
+  if (proofs.length < 2 || vaccinationStatus === "unvaccinated" || vaccinationStatus === "single-dose") {
     return false;
   }
 
