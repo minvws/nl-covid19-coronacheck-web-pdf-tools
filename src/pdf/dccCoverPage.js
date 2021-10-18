@@ -33,8 +33,10 @@ var dpmm = 72 / 25.4; // dots per mm at 72dpi
 var titleColor = "#383836";
 
 export function addDccCoverPage(doc, proofs, createdAt) {
+    proofs = getEuropeanProofs(proofs);
     var vaccinationStatus = getVaccinationStatus(proofs, createdAt);
     if (
+        proofs.length < 2 ||
         vaccinationStatus === "unvaccinated" ||
         vaccinationStatus === "single-dose"
     ) {
