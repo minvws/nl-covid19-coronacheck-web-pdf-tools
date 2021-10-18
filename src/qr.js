@@ -9,6 +9,7 @@ var dpi = 300;
  * @param {number} sizeInCm
  * @param {string} territory
  * @return {Promise<string>} PNG data URL string
+ * @deprecated
  */
 export function generateQR(qrCode, sizeInCm, territory) {
     var sizeInPixels = Math.round(sizeInCm * cmToInch * dpi);

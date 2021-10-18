@@ -23,17 +23,12 @@ export function parseProofData(proofData, holderConfig, locale) {
     var proofs = [];
 
     if (proofData.domestic) {
-        proofs.push(domesticProof(proofData.domestic, locale));
+        proofs.push(parseDomesticProof(proofData.domestic, locale));
     }
     if (proofData.european) {
-        var european = Array.isArray(proofData.european)
-            ? proofData.european
-            : [proofData.european];
-        for (var item of european) {
-            for (var proof of europeanProofs(item, holderConfig)) {
-                proofs.push(proof);
-            }
-        }
+        proofs = proofs.concat(
+            parseEuropeanProofs(proofData.european, holderConfig)
+        );
     }
 
     return proofs;
@@ -44,7 +39,7 @@ export function parseProofData(proofData, holderConfig, locale) {
  * @param {import("../types").Locale} [locale]
  * @return {import("../types").Proof}
  */
-function domesticProof(data, locale) {
+export function parseDomesticProof(data, locale) {
     var validFromDate = parseInt(data.attributes.validFrom, 10) * 1000;
     return {
         proofType: "domestic",
@@ -78,16 +73,25 @@ function domesticProof(data, locale) {
 }
 
 /**
- * @param {import("../types").EuropeanProofData} data
+ * @param {import("../types").EuropeanProofData|import("../types").EuropeanProofData[]} data
  * @param {any} holderConfig
  * @return {import("../types").Proof[]}
  */
-function europeanProofs(data, holderConfig) {
+export function parseEuropeanProofs(data, holderConfig) {
     /** @type {import("../types").Proof[]} */
     var proofs = [];
-    var credential;
+    var i;
+
+    if (Array.isArray(data)) {
+        for (i = 0; i < data.length; i++) {
+            proofs = proofs.concat(parseEuropeanProofs(data[i], holderConfig));
+        }
+        return proofs;
+    }
+
     if (data.dcc.v) {
-        for (credential of data.dcc.v) {
+        for (i = 0; i < data.dcc.v.length; i++) {
+            var vaccination = data.dcc.v[i];
             proofs.push({
                 proofType: "european-vaccination",
 
@@ -97,36 +101,37 @@ function europeanProofs(data, holderConfig) {
 
                 qr: data.qr,
 
-                credential: credential,
+                credential: vaccination,
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
                 birthDateString: formatDate(data.dcc.dob),
 
-                certificateNumber: credential.ci,
+                certificateNumber: vaccination.ci,
 
                 validUntil: formatDate(data.expirationTime),
 
-                vaccineBrand: getEuBrand(holderConfig, credential.mp) || "-",
+                vaccineBrand: getEuBrand(holderConfig, vaccination.mp) || "-",
 
                 vaccineManufacturer:
-                    getVaccineManufacturer(holderConfig, credential.ma) || "-",
+                    getVaccineManufacturer(holderConfig, vaccination.ma) || "-",
 
-                vaccineType: getVaccineType(holderConfig, credential.vp) || "-",
+                vaccineType:
+                    getVaccineType(holderConfig, vaccination.vp) || "-",
 
-                doseNumber: credential.dn,
+                doseNumber: vaccination.dn,
 
-                totalDoses: credential.sd,
+                totalDoses: vaccination.sd,
 
-                doses: credential.dn + " / " + credential.sd,
+                doses: vaccination.dn + " / " + vaccination.sd,
 
-                vaccinationDate: formatDate(credential.dt),
+                vaccinationDate: formatDate(vaccination.dt),
 
-                vaccinationCountry: credential.co,
+                vaccinationCountry: vaccination.co,
 
-                certificateIssuer: credential.is,
+                certificateIssuer: vaccination.is,
 
-                certificateIdentifier: credential.ci,
+                certificateIdentifier: vaccination.ci,
 
                 // TODO
                 validFrom: "TODO",
@@ -134,7 +139,8 @@ function europeanProofs(data, holderConfig) {
         }
     }
     if (data.dcc.t) {
-        for (credential of data.dcc.t) {
+        for (i = 0; i < data.dcc.t.length; i++) {
+            var test = data.dcc.t[i];
             proofs.push({
                 proofType: "european-negative-test",
 
@@ -144,30 +150,30 @@ function europeanProofs(data, holderConfig) {
 
                 qr: data.qr,
 
-                credential: credential,
+                credential: test,
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
                 birthDateString: formatDate(data.dcc.dob),
 
-                certificateNumber: credential.ci,
+                certificateNumber: test.ci,
 
                 validUntil: formatLocalDateTime(data.expirationTime),
 
-                testType: getEuTestType(holderConfig, credential.tt) || "",
+                testType: getEuTestType(holderConfig, test.tt) || "",
 
-                testName: credential.nm,
+                testName: test.nm,
 
-                dateOfTest: formatLocalDateTime(credential.sc),
+                dateOfTest: formatLocalDateTime(test.sc),
 
-                testLocation: credential.tc,
+                testLocation: test.tc,
 
                 testManufacturer:
-                    getTestManufacturer(holderConfig, credential.ma) || "",
+                    getTestManufacturer(holderConfig, test.ma) || "",
 
-                countryOfTest: credential.co,
+                countryOfTest: test.co,
 
-                certificateIssuer: credential.is,
+                certificateIssuer: test.is,
 
                 // TODO
                 validFrom: "TODO",
@@ -175,7 +181,8 @@ function europeanProofs(data, holderConfig) {
         }
     }
     if (data.dcc.r) {
-        for (credential of data.dcc.r) {
+        for (i = 0; i < data.dcc.r.length; i++) {
+            var recovery = data.dcc.r[i];
             proofs.push({
                 proofType: "european-recovery",
 
@@ -185,23 +192,23 @@ function europeanProofs(data, holderConfig) {
 
                 qr: data.qr,
 
-                credential: credential,
+                credential: recovery,
 
                 fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
 
                 birthDateString: formatDate(data.dcc.dob),
 
-                dateOfTest: formatDate(credential.fr),
+                dateOfTest: formatDate(recovery.fr),
 
-                countryOfTest: credential.co,
+                countryOfTest: recovery.co,
 
-                certificateIssuer: credential.is,
+                certificateIssuer: recovery.is,
 
-                certificateNumber: credential.ci,
+                certificateNumber: recovery.ci,
 
-                validUntil: formatDate(credential.du),
+                validUntil: formatDate(recovery.du),
 
-                validFrom: formatDate(credential.df),
+                validFrom: formatDate(recovery.df),
             });
         }
     }

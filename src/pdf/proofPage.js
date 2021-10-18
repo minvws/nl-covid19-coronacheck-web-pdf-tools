@@ -51,8 +51,12 @@ var qrTop = 181;
 var titleColor = "#383836";
 
 export function addProofPage(doc, proof, createdAt) {
-    return qrDataToSvg(proof.qr, partWidthProofSection, proof.territory).then(
-        function (qrSvg) {
+    doc._addPage(function () {
+        return qrDataToSvg(
+            proof.qr,
+            partWidthProofSection,
+            proof.territory
+        ).then(function (qrSvg) {
             doc.loadFont("MontserratBold", MontserratBold);
             doc.loadFont("RobotoRegular", RobotoRegular);
             doc.loadFont("RobotoBold", RobotoBold);
@@ -64,8 +68,8 @@ export function addProofPage(doc, proof, createdAt) {
                     ? structNlProof(doc, qrSvg, proof)
                     : structEuProof(doc, qrSvg, proof, createdAt)
             );
-        }
-    );
+        });
+    });
 }
 
 function structNlProof(doc, qrSvg, proof) {

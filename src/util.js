@@ -40,3 +40,20 @@ export function parseSVG(input) {
     if (!domParser) domParser = new DOMParser();
     return domParser.parseFromString(input, "image/svg+xml");
 }
+
+/**
+ * @param {Blob} blob
+ * @return {Promise<string>}
+ */
+export function blobToDataURI(blob) {
+    return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.addEventListener("error", function () {
+            reject(reader.error);
+        });
+        reader.addEventListener("load", function () {
+            resolve(String(reader.result));
+        });
+        reader.readAsDataURL(blob);
+    });
+}
