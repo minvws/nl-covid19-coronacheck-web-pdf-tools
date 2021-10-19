@@ -59,6 +59,7 @@ export default {
     "alt.foldInstructions":
         "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden met deze instructies aan de binnenzijde.",
     "alt.logoRijksoverheid": "Logo Rijksoverheid",
+    "als.logoMinVws": "Logo Ministerie van Volksgezondheid, Welzijn en Sport",
     "alt.logoCoronacheck": "Logo CoronaCheck",
     "alt.qr": "QR-code",
     questions: "VRAGEN?",

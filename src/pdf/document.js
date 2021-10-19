@@ -2,6 +2,7 @@ import PDFDocument from "pdfkit/js/pdfkit.standalone.js";
 import blobStream from "blob-stream";
 import FileSaver from "file-saver";
 import { t } from "../i18n/index.js";
+import { blobToDataURI } from "../util.js";
 import { addDccCoverPage } from "./dccCoverPage.js";
 import { addProofPage } from "./proofPage.js";
 
@@ -12,8 +13,11 @@ import { addProofPage } from "./proofPage.js";
 /**
  * @typedef {Object} Document
  * @property {Locale} locale
- * @property {(string) => void} loadFont
+ * @property {(name: string, data: string) => void} loadFont
  * @property {PDFDocument} _pdf
+ * @property {Promise<void>} _pageQueue
+ * @property {boolean} _finalized
+ * @property {(fn: () => void|Promise<unknown>) => void} _addPage
  */
 
 /**
@@ -61,11 +65,21 @@ export function createDocument(locale, metadata) {
         loadedFonts.push(name);
     }
 
-    return {
+    var doc = {
         locale: locale,
         loadFont: loadFont,
         _pdf: pdf,
+        _pageQueue: Promise.resolve(),
+        _finalized: false,
+        _addPage: function (fn) {
+            if (doc._finalized) {
+                throw new Error("Document finalized, unable to add new page");
+            }
+            doc._pageQueue = doc._pageQueue.then(fn);
+        },
     };
+
+    return doc;
 }
 
 /**
@@ -111,36 +125,34 @@ export function getDocument(args) {
 }
 
 /**
+ * NB: using this will finalize the document, making it impossible to add further pages.
  * @param {Document} doc
  * @return {Promise<Blob>}
  */
-function documentToBlob(doc) {
-    return new Promise(function (resolve, reject) {
-        var stream = blobStream();
-        doc._pdf.pipe(stream);
-        stream.on("finish", function () {
-            resolve(stream.toBlob("application/pdf"));
+export function documentToBlob(doc) {
+    return doc._pageQueue.then(function () {
+        return new Promise(function (resolve, reject) {
+            var stream = blobStream();
+            doc._pdf.pipe(stream);
+            stream.on("finish", function () {
+                resolve(stream.toBlob("application/pdf"));
+            });
+            stream.on("error", function (error) {
+                reject(error);
+            });
+            doc._finalized = true;
+            doc._pdf.end();
         });
-        stream.on("error", function (error) {
-            reject(error);
-        });
-        doc._pdf.end();
     });
 }
 
 /**
- * @param {Blob} blob
- * @return {Promise<string>}
+ * NB: using this will finalize the document, making it impossible to add further pages.
+ * @param {Document} doc
+ * @return {Promise<void>}
  */
-function blobToDataURI(blob) {
-    return new Promise(function (resolve, reject) {
-        var reader = new FileReader();
-        reader.addEventListener("error", function () {
-            reject(reader.error);
-        });
-        reader.addEventListener("load", function () {
-            resolve(String(reader.result));
-        });
-        reader.readAsDataURL(blob);
+export function saveDocument(doc, filename) {
+    return documentToBlob(doc).then(function (blob) {
+        FileSaver.saveAs(blob, filename);
     });
 }

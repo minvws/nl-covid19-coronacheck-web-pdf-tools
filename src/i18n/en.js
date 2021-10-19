@@ -59,6 +59,7 @@ export default {
     "alt.foldInstructions":
         "Folding instructions. First fold in half widthwise, with the printed side out. Then fold in half again with these instructions on the inside.",
     "alt.logoRijksoverheid": "Logo Government of the Netherlands",
+    "als.logoMinVws": "Logo Ministry of Health, Welfare and Sport",
     "alt.logoCoronacheck": "Logo CoronaCheck",
     "alt.qr": "QR code",
     questions: "QUESTIONS?",

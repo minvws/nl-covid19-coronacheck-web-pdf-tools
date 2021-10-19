@@ -4,6 +4,7 @@ import {
     logoCoronacheck,
     logoRijksoverheidA4,
     logoRijksoverheidA5,
+    minvws,
 } from "../assets/img.js";
 import { qrSvgPath, qrSvgScale } from "../qr.js";
 
@@ -35,6 +36,15 @@ export function drawLogoRijksoverheidA5(doc, x, y) {
     // rijkshuisstijl.nl.
     doc._pdf.image(logoRijksoverheidA5, (x - 4.55) * dpmm, y * dpmm, {
         width: 9.1 * dpmm,
+    });
+}
+
+export function drawLogoMinVwsA4(doc, x, y) {
+    doc._pdf.image(logoRijksoverheidA4, (x - 6.5) * dpmm, y * dpmm, {
+        width: 13 * dpmm,
+    });
+    doc._pdf.image(minvws, (x + 10.565) * dpmm, (y + 26.384) * dpmm, {
+        width: 59.142 * dpmm,
     });
 }
 
@@ -145,6 +155,45 @@ export function drawList(doc, list) {
                         width: textWidth,
                         lineGap: lineGap,
                     });
+                    doc._pdf.moveDown();
+                }),
+            ]);
+        })
+    );
+}
+
+export function drawDynamicList(doc, options) {
+    var drawLabel =
+        options.drawLabel ||
+        function (n, x, y) {
+            doc._pdf.font(options.font);
+            doc._pdf.fillColor(options.color || "#000000");
+            doc._pdf.fontSize(options.size);
+            doc._pdf.text(n + ".", x, y);
+        };
+
+    var x = options.position && options.position[0];
+    var startY = options.position && options.position[1];
+    x = x != null ? x * dpmm : doc._pdf.x;
+    startY = startY != null ? startY * dpmm : doc._pdf.y;
+    var indent = (options.indent || 5) * dpmm;
+    var width = options.width * dpmm - indent;
+    var y;
+
+    return doc._pdf.struct(
+        "L",
+        options.items.map(function (drawBody, i) {
+            return doc._pdf.struct("LI", [
+                doc._pdf.struct("Lbl", function () {
+                    drawLabel(i + 1, x, startY);
+                    startY = null;
+                    y = doc._pdf.y - doc._pdf.currentLineHeight();
+                }),
+                doc._pdf.struct("LBody", function () {
+                    drawBody(x + indent, y, width);
+                    doc._pdf.font(options.font);
+                    doc._pdf.fillColor(options.color || "#000000");
+                    doc._pdf.fontSize(options.size);
                     doc._pdf.moveDown();
                 }),
             ]);
