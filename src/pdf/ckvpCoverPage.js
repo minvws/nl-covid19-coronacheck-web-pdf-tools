@@ -6,7 +6,7 @@ import {
     kix,
 } from "../assets/fonts.js";
 import { formatSalutation, formatAddress, formatKixCode } from "../postal.js";
-import { drawText, drawLogoMinVwsA4 } from "./draw.js";
+import { drawText, drawLogoMinVwsA4, drawDynamicList } from "./draw.js";
 
 // var pageHeight = 297;
 var pageWidth = 210;
@@ -215,6 +215,24 @@ function structLetterBody(doc, args) {
         });
     }
 
+    function list(items) {
+        doc._pdf.addStructure(
+            drawDynamicList(doc, {
+                font: "LiberationSansRegular",
+                size: fontSizeStandard,
+                indent: 5,
+                position: [marginLeft, null],
+                width: bodyWidth,
+                drawLabel: function (_n, x, y) {
+                    doc._pdf.font("LiberationSansRegular");
+                    doc._pdf.fillColor("#000000");
+                    doc._pdf.text("  •  ", x, y);
+                },
+                items: items,
+            })
+        );
+    }
+
     return doc._pdf.struct("Sect", function () {
         paragraph(formatSalutation(args.address) + ",", bodyTop);
         if (args.proofsFound) {
@@ -236,28 +254,100 @@ function structLetterBody(doc, args) {
             );
         } else {
             paragraph(
-                "U heeft ons gebeld om uw coronabewijzen per post op te sturen. We kunnen u echter geen coronabewijzen toesturen."
+                "U heeft ons gevraagd uw coronabewijzen per post op te sturen. We kunnen u helaas geen coronabewijzen toesturen. In deze brief leggen we uit hoe dat komt. "
             );
+            heading("Waarom ontvangt u geen coronabewijzen?");
             paragraph(
-                "De reden hiervoor is dat we geen vaccinatiegegevens van u hebben gevonden bij de GGD of het RIVM."
+                "Hieronder staan de mogelijke redenen waarom u geen coronabewijzen heeft ontvangen."
             );
-            heading("Heeft u wel een vaccin gehad?");
+
+            list([
+                function (x, y, width) {
+                    doc._pdf.font("LiberationSansItalic");
+                    doc._pdf.text(
+                        "U bent niet gevaccineerd, en u bent niet positief getest op corona.",
+                        x,
+                        y,
+                        { width: width }
+                    );
+                },
+                function (x, y, width) {
+                    doc._pdf.font("LiberationSansItalic");
+                    doc._pdf.text(
+                        "U bent niet gevaccineerd. U bent wél hersteld van corona, maar de positieve test is langer dan 180 dagen geleden afgenomen. ",
+                        x,
+                        y,
+                        { width: width, continued: true }
+                    );
+                    doc._pdf.font("LiberationSansRegular");
+                    doc._pdf.text(
+                        "De test is niet meer geldig. Deze kunt u dus niet gebruiken voor de aanvraag van uw coronabewijzen.",
+                        { width: width }
+                    );
+                },
+                function (x, y, width) {
+                    doc._pdf.font("LiberationSansItalic");
+                    doc._pdf.text(
+                        "U bent in de afgelopen 3 dagen gevaccineerd. Of u bent in de afgelopen 30 uur positief op corona getest. ",
+                        x,
+                        y,
+                        { width: width, continued: true }
+                    );
+                    doc._pdf.font("LiberationSansRegular");
+                    doc._pdf.text(
+                        "Hierdoor staan uw gegevens misschien nog niet in het systeem. Vraag over een paar dagen opnieuw uw coronabewijzen aan.",
+                        { width: width }
+                    );
+                },
+            ]);
+            heading("Gelden de redenen hierboven niet voor u?");
             paragraph(
-                "Het kan zijn dat gegevens niet goed in het registratiesysteem staan. Controleer samen met de zorgverlener die u gevaccineerd heeft of deze gegevens goed in het registratiesysteem staan."
+                "Misschien staan uw gegevens dan niet goed in het systeem. De oplossing hiervoor hangt af van uw situatie. Welke situatie geldt voor u?"
             );
-            paragraph(
-                "Het gaat om de volgende gegevens:\n   -   BSN\n   -   Naam\n   -   Geboortedatum\n   -   Vaccinatiegegevens (datum, merk en aantal)"
-            );
-            paragraph(
-                "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs op te sturen."
-            );
-            heading("Heeft u een paar dagen terug uw vaccin gehad?");
-            paragraph(
-                "Bel dan over een paar dagen nog een keer. Het duurt een paar dagen voordat de gegevens geregistreerd en verwerkt zijn."
-            );
+            list([
+                function (x, y, width) {
+                    doc._pdf.font("LiberationSansItalic");
+                    doc._pdf.text("U bent door de GGD gevaccineerd. ", x, y, {
+                        width: width,
+                        continued: true,
+                    });
+                    doc._pdf.font("LiberationSansRegular");
+                    doc._pdf.text(
+                        "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
+                        { width: width }
+                    );
+                },
+                function (x, y, width) {
+                    doc._pdf.font("LiberationSansItalic");
+                    doc._pdf.text(
+                        "U bent door iemand anders dan de GGD gevaccineerd. ",
+                        x,
+                        y,
+                        { width: width, continued: true }
+                    );
+                    doc._pdf.font("LiberationSansRegular");
+                    doc._pdf.text(
+                        "Neem contact op met de zorgverlener die u heeft gevaccineerd. Dat kan uw huisarts, arts van het ziekenhuis of een zorginstelling zijn. Zij controleren of uw gegevens goed staan en helpen u verder.",
+                        { width: width }
+                    );
+                },
+                function (x, y, width) {
+                    doc._pdf.font("LiberationSansItalic");
+                    doc._pdf.text("U bent positief getest op corona. ", x, y, {
+                        width: width,
+                        continued: true,
+                    });
+                    doc._pdf.font("LiberationSansRegular");
+                    doc._pdf.text(
+                        "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
+                        { width: width }
+                    );
+                },
+            ]);
         }
+        heading("Heeft u nog vragen over corona? ");
         paragraph(
-            "Heeft u nog vragen, dan kunt u bellen met het algemene informatienummer van de Rijksoverheid 0800 – 1351."
+            "Bel ons via 0800 - 1351. Dit nummer is iedere dag open van 08.00 tot 20.00 uur. Wij helpen u graag verder. "
         );
     });
 }
