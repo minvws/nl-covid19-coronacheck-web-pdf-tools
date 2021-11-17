@@ -17,7 +17,7 @@ var retourAddressTop = 61.5;
 var retourAddressWidth = 40;
 var metaTop = 108;
 var bodyTop = 126;
-var bodyWidth = 120;
+var bodyWidth = pageWidth - 2 * marginLeft;
 var pageNumberTop = 273.75;
 var pageNumberLeft = 150;
 
