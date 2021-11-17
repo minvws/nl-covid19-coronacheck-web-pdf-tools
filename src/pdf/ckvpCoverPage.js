@@ -25,6 +25,10 @@ var fontSizeStandard = 9;
 var fontSizeSmall = 6.5;
 var fontSizeKix = 10;
 
+var lineSpace = 1;
+var dpmm = 72 / 25.4; // dots per mm at 72dpi
+var rawLineGap = lineSpace * dpmm;
+
 var months = [
     "Januari",
     "Februari",
@@ -192,7 +196,7 @@ function structLetterHeading(doc, createdAt) {
  * @param {Date|number} args.createdAt
  */
 function structLetterBody(doc, args) {
-    function paragraph(text, top) {
+    function paragraph(text, top, space) {
         drawText(doc, {
             text: text,
             font: "LiberationSansRegular",
@@ -201,7 +205,7 @@ function structLetterBody(doc, args) {
             width: bodyWidth,
             lineGap: 1,
         });
-        doc._pdf.moveDown();
+        doc._pdf.moveDown(space || lineSpace);
     }
 
     function heading(text) {
@@ -223,6 +227,8 @@ function structLetterBody(doc, args) {
                 indent: 5,
                 position: [marginLeft, null],
                 width: bodyWidth,
+                lineGap: 1,
+                itemGap: lineSpace / 2,
                 drawLabel: function (_n, x, y) {
                     doc._pdf.font("LiberationSansRegular");
                     doc._pdf.fillColor("#000000");
@@ -258,7 +264,9 @@ function structLetterBody(doc, args) {
             );
             heading("Waarom ontvangt u geen coronabewijzen?");
             paragraph(
-                "Hieronder staan de mogelijke redenen waarom u geen coronabewijzen heeft ontvangen."
+                "Hieronder staan de mogelijke redenen waarom u geen coronabewijzen heeft ontvangen.",
+                null,
+                lineSpace / 2
             );
 
             list([
@@ -268,7 +276,7 @@ function structLetterBody(doc, args) {
                         "U bent niet gevaccineerd, en u bent niet positief getest op corona.",
                         x,
                         y,
-                        { width: width }
+                        { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
@@ -277,12 +285,12 @@ function structLetterBody(doc, args) {
                         "U bent niet gevaccineerd. U bent wél hersteld van corona, maar de positieve test is langer dan 180 dagen geleden afgenomen. ",
                         x,
                         y,
-                        { width: width, continued: true }
+                        { width: width, continued: true, lineGap: rawLineGap }
                     );
                     doc._pdf.font("LiberationSansRegular");
                     doc._pdf.text(
                         "De test is niet meer geldig. Deze kunt u dus niet gebruiken voor de aanvraag van uw coronabewijzen.",
-                        { width: width }
+                        { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
@@ -291,18 +299,22 @@ function structLetterBody(doc, args) {
                         "U bent in de afgelopen 3 dagen gevaccineerd. Of u bent in de afgelopen 30 uur positief op corona getest. ",
                         x,
                         y,
-                        { width: width, continued: true }
+                        { width: width, continued: true, lineGap: rawLineGap }
                     );
                     doc._pdf.font("LiberationSansRegular");
                     doc._pdf.text(
                         "Hierdoor staan uw gegevens misschien nog niet in het systeem. Vraag over een paar dagen opnieuw uw coronabewijzen aan.",
-                        { width: width }
+                        { width: width, lineGap: rawLineGap }
                     );
+
+                    doc._pdf.moveDown(lineSpace / 2);
                 },
             ]);
             heading("Gelden de redenen hierboven niet voor u?");
             paragraph(
-                "Misschien staan uw gegevens dan niet goed in het systeem. De oplossing hiervoor hangt af van uw situatie. Welke situatie geldt voor u?"
+                "Misschien staan uw gegevens dan niet goed in het systeem. De oplossing hiervoor hangt af van uw situatie. Welke situatie geldt voor u?",
+                null,
+                lineSpace / 2
             );
             list([
                 function (x, y, width) {
@@ -310,11 +322,12 @@ function structLetterBody(doc, args) {
                     doc._pdf.text("U bent door de GGD gevaccineerd. ", x, y, {
                         width: width,
                         continued: true,
+                        lineGap: rawLineGap,
                     });
                     doc._pdf.font("LiberationSansRegular");
                     doc._pdf.text(
                         "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
-                        { width: width }
+                        { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
@@ -323,12 +336,12 @@ function structLetterBody(doc, args) {
                         "U bent door iemand anders dan de GGD gevaccineerd. ",
                         x,
                         y,
-                        { width: width, continued: true }
+                        { width: width, continued: true, lineGap: rawLineGap }
                     );
                     doc._pdf.font("LiberationSansRegular");
                     doc._pdf.text(
                         "Neem contact op met de zorgverlener die u heeft gevaccineerd. Dat kan uw huisarts, arts van het ziekenhuis of een zorginstelling zijn. Zij controleren of uw gegevens goed staan en helpen u verder.",
-                        { width: width }
+                        { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
@@ -336,12 +349,14 @@ function structLetterBody(doc, args) {
                     doc._pdf.text("U bent positief getest op corona. ", x, y, {
                         width: width,
                         continued: true,
+                        lineGap: rawLineGap,
                     });
                     doc._pdf.font("LiberationSansRegular");
                     doc._pdf.text(
                         "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
-                        { width: width }
+                        { width: width, lineGap: rawLineGap }
                     );
+                    doc._pdf.moveDown(lineSpace / 2);
                 },
             ]);
         }
