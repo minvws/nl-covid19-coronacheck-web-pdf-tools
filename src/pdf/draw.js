@@ -194,7 +194,7 @@ export function drawDynamicList(doc, options) {
                     doc._pdf.font(options.font);
                     doc._pdf.fillColor(options.color || "#000000");
                     doc._pdf.fontSize(options.size);
-                    doc._pdf.moveDown();
+                    doc._pdf.moveDown(options.itemGap || 1);
                 }),
             ]);
         })
