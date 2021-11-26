@@ -1,8 +1,7 @@
 {
-    "name": "dcc-pdf-tools",
+    "name": "@91divoc-ln/dcc-pdf-tools",
     "license": "EUPL-1.2",
     "version": "2.3.0",
-    "private": true,
     "type": "module",
     "main": "dist/index.js",
     "files": [
