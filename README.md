@@ -4,11 +4,17 @@ This is a JavaScript library for generating PDFs for (static) Dutch `domestic` a
 
 ## Usage
 
-1. Follow the instruction for [installing an npm package from GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package), adding the `91divoc-ln` owner to your project's `.npmrc`:
+Follow the instruction for [installing an npm package from GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package):
+
+1. Create a [Personal Access Token](https://github.com/settings/tokens) with the `repo` and `read:packages` scopes and add it to your local `~/.npmrc`:
+    ```
+    //npm.pkg.github.com/:_authToken=TOKEN
+    ```
+2. Add the `@91divoc-ln` package scope to your project's `.npmrc`:
     ```
     @91divoc-ln:registry=https://npm.pkg.github.com
     ```
-2. Install and import the `@91divoc-ln/dcc-pdf-tools` package.
+3. Install and import the `@91divoc-ln/dcc-pdf-tools` package.
 
 ### In Node.js
 
