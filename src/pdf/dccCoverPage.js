@@ -202,7 +202,7 @@ function proofsList(doc, proofs) {
         if (isRecovery(proof)) {
             return t(doc.locale, "cover.recoveryProof");
         }
-        return t(doc.local, "cover.otherProof");
+        return t(doc.locale, "cover.otherProof");
     });
 
     var proofsList = doc._pdf.struct("L", function () {
