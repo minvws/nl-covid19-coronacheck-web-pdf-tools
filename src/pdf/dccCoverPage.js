@@ -200,7 +200,7 @@ function proofsList(doc, proofs) {
             );
         }
         if (isRecovery(proof)) {
-            return t(doc.local, "cover.recoveryProof");
+            return t(doc.locale, "cover.recoveryProof");
         }
         return t(doc.local, "cover.otherProof");
     });
