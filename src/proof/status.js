@@ -58,7 +58,7 @@ function byDoseNumber(a, b) {
  * @return {proof is import("../types").EuropeanProof}
  */
 function isEuropeanProof(proof) {
-    return proof.territory === "eu" && proof.eventType === "vaccination";
+    return proof.territory === "eu";
 }
 
 /**
