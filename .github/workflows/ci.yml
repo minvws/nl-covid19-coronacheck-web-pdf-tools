@@ -1,0 +1,40 @@
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+            - name: "Setup node.js"
+              uses: actions/setup-node@v2
+              with: { node-version: 14 }
+            - name: "Restore npm cache (if available)"
+              uses: actions/cache@v2
+              with:
+                  path: ~/.npm
+                  key: npm-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: npm-
+            - name: "Install dependencies"
+              run: npm ci
+            - name: "Audit dependencies"
+              run: npm audit
+            - name: "Run the tests"
+              run: npm run test
+            - name: "Run the linter"
+              run: npm run lint
+            - name: "Run the build"
+              run: npm run build
+            - name: "Check if build is up-to-date with source"
+              run: |
+                  git update-index -q --really-refresh
+                  if [ -n "$(git diff-index HEAD --)" ]; then
+                    echo "The build is not up-to-date with the source."
+                    exit 1
+                  fi

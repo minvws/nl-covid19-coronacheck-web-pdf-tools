@@ -9,12 +9,13 @@
         "dist/index.js"
     ],
     "scripts": {
+        "prepare": "husky install",
         "test": "jest",
         "lint": "eslint .",
         "fix": "eslint . --fix",
-        "convert-assets": "node scripts/convert-assets.js",
         "build": "rollup -c",
-        "watch": "rollup -c -w"
+        "watch": "rollup -c -w",
+        "convert-assets": "node scripts/convert-assets.js"
     },
     "devDependencies": {
         "@babel/core": "^7.15.8",
@@ -30,6 +31,7 @@
         "eslint-plugin-compat": "^3.13.0",
         "eslint-plugin-prettier": "^4.0.0",
         "file-saver": "^2.0.5",
+        "husky": "^7.0.4",
         "jest": "^27.3.0",
         "jsdom": "^18.0.0",
         "mime": "^2.5.2",
