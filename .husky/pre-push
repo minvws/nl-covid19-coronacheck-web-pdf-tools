@@ -1,0 +1,43 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+function get_changes {
+        git update-index -q --really-refresh
+        git diff-index HEAD --
+}
+
+# Check if there are any uncommited changes
+changes=$(get_changes)
+
+# Stash said uncommitted changes, if any
+if [ -n "$changes" ]; then
+        git stash save --quiet --include-untracked "pre-push"
+fi
+
+# Run the build
+set +e
+npm run build
+exitcode=$?
+set -e
+
+# Warn the user of any new changes
+if [ $exitcode -eq 0 ] && [ -n "$(get_changes)" ]; then
+        echo -e "\n\e[1mThere are uncommited changes to the build:\e[0m"
+        git status --short --untracked-files=no
+        if [ -n "$changes" ]; then
+                echo -e "\n\e[1mPlease stash your changes, run the build, commit the result, and try again.\e[0m\n"
+        else
+                echo -e "\n\e[1mPlease commit the updated build and try again.\e[0m\n"
+        fi
+        exitcode=1
+fi
+
+# Clean up after the build and restore any previously stashed changes
+if [ -n "$changes" ]; then
+        git reset --hard --quiet
+        git stash pop --quiet
+elif [ $exitcode -ne 0 ]; then
+        git reset --hard --quiet
+fi
+
+exit $exitcode
