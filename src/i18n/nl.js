@@ -103,6 +103,8 @@ export default {
         "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
     "cover.whichCode.triple-dose":
         "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nJij hebt meer dan twee vaccinatie doses gehad. De QR-codes van extra doses worden nog niet overal geaccepteerd. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
+    "cover.whichCode.single-dose-and-recovery":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.",
     "cover.beforeTravel":
         "Controleer altijd voor vertrek op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
 };
