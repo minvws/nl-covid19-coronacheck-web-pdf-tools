@@ -94,7 +94,7 @@ export default {
     "cover.vaccination.8": "achtste vaccinatie-dosis",
     "cover.vaccination.9": "negende vaccinatie-dosis",
     "cover.vaccination.extra": "extra vaccinatie-dosis",
-    "cover.recoveryProof": "herstelbewijs",
+    "cover.recoveryProof": "herstel van corona",
     "cover.otherProof": "testbewijs",
     "cover.whichCode.title": "Welke QR-code moet ik gebruiken?",
     "cover.whichCode.recent-double-dose":
