@@ -16,6 +16,7 @@ fi
 
 # Run the build
 set +e
+npm install
 npm run build
 exitcode=$?
 set -e
