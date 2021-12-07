@@ -103,6 +103,8 @@ export default {
         "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change. At this time, most countries will require the QR code of your dose 2/2.",
     "cover.whichCode.triple-dose":
         "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.\n\nYou've received more than two vaccination doses. QR codes of extra doses aren't widely accepted yet. At this time, most countries will require the QR code of your dose 2/2.",
+    "cover.whichCode.single-dose-and-recovery":
+        "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.",
     "cover.beforeTravel":
         "Before leaving, please always check which certificate you need at your destination at www.netherlandsworldwide.nl.",
 };
