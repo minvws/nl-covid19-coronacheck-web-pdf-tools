@@ -70,7 +70,7 @@ export function isVaccination(proof) {
 }
 
 /**
- * @param {import("../types").EuropeanProof} proof
+ * @param {import("../types").Proof} proof
  * @return {proof is import("../types").EuropeanRecoveryProof}
  */
 export function isRecovery(proof) {

@@ -3,7 +3,7 @@ export default {
         "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
     "eu.validUntil": "This paper certificate is valid until:",
     "eu.createNew":
-        "After this date, you can make a new coronavirus pass via coronacheck.nl",
+        "After this date, you can make a new coronavirus pass via [coronacheck.nl](https://coronacheck.nl)",
     "eu.negativetest.title": "International test certificate",
     "eu.negativetest.qrTitle": "Test certificate",
     "eu.negativetest.propertiesLabel": "Negative test details",
@@ -14,7 +14,7 @@ export default {
     "eu.recovery.title": "International recovery certificate",
     "eu.recovery.qrTitle": "Recovery certificate",
     "eu.intro":
-        "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: www.netherlandsworldwide.nl.",
+        "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
     "nl.instructions":
@@ -64,9 +64,9 @@ export default {
     "alt.qr": "QR code",
     questions: "QUESTIONS?",
     questionsContent:
-        "Please find frequently asked questions on www.coronacheck.nl. You can also send an email to helpdesk@coronacheck.nl or reach us (for free) on 0800-1421",
+        "Please find frequently asked questions on [coronacheck.nl](https://coronacheck.nl). You can also send an email to [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) or reach us (for free) on 0800-1421",
     "metadata.title": "Certificate containing QR-code",
-    "metadata.author": "CoronaCheck",
+    "metadata.author": "Government of the Netherlands",
     "date.months.abbr.1": "JAN",
     "date.months.abbr.2": "FEB",
     "date.months.abbr.3": "MAR",
@@ -106,5 +106,5 @@ export default {
     "cover.whichCode.single-dose-and-recovery":
         "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.",
     "cover.beforeTravel":
-        "Before leaving, please always check which certificate you need at your destination at www.netherlandsworldwide.nl.",
+        "Before leaving, please always check which certificate you need at your destination at [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
 };

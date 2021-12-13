@@ -5,7 +5,8 @@ import {
     ROSansWebTextBold,
 } from "../assets/fonts.js";
 import { menuIcon } from "../assets/img.js";
-import { drawLogoCoronaCheck, drawText, drawDynamicList } from "./draw.js";
+import { drawLogoCoronaCheck, drawText } from "./draw.js";
+import { structText, structFigure, structDynamicList } from "./struct.js";
 
 var pageWidth = 210;
 var marginTop = 28;
@@ -29,46 +30,45 @@ var titleColor = "#383836";
 var warningBackgroundColor = "#F2F2F7";
 var dpmm = 72 / 25.4; // dots per mm at 72dpi
 
+/**
+ * @param {import("./document.js").Document} doc
+ * @param {string} couplingCode
+ */
 export function addCouplingCodePage(doc, couplingCode) {
-    doc._addPage(function () {
+    doc.addPart(function () {
+        drawCodeBoxBorder(doc);
+        drawWarningBoxBackground(doc);
         doc.loadFont("MontserratBold", MontserratBold);
         doc.loadFont("ROSansRegular", ROSansWebTextRegular);
         doc.loadFont("ROSansBold", ROSansWebTextBold);
-        doc._pdf.addPage({ margin: 0, size: "A4" });
-        doc._pdf.addStructure(
-            doc._pdf.struct("Sect", [
-                doc._pdf.struct("H", function () {
-                    drawText(doc, {
-                        text: "Deze bewijzen op uw telefoon gebruiken?",
+        doc.addStruct("Article", [
+            doc.pdf.struct("Sect", [
+                structText(doc, "H1", {
+                    text: "Deze bewijzen op uw telefoon gebruiken?",
+                    font: "MontserratBold",
+                    size: fontSizeH1,
+                    color: titleColor,
+                    position: [marginLeft, marginTop],
+                    emptyLineAfter: true,
+                }),
+                structText(doc, "P", {
+                    text: "U heeft nu uw coronabewijs op papier. Als u wilt is het ook mogelijk om uw papieren bewijs in de CoronaCheck-app te zetten, zodat u het bewijs op uw telefoon kan gebruiken.",
+                    font: "ROSansRegular",
+                    size: fontSizeStandard,
+                    position: [marginLeft, null],
+                    lineGap: 1,
+                    width: contentWidth,
+                }),
+                doc.pdf.struct("Sect", [
+                    structText(doc, "H2", {
+                        text: "Volg deze stappen:",
                         font: "MontserratBold",
-                        size: fontSizeH1,
+                        size: fontSizeH2,
                         color: titleColor,
-                        position: [marginLeft, marginTop],
-                    });
-                    doc._pdf.moveDown();
-                }),
-                doc._pdf.struct("P", function () {
-                    drawText(doc, {
-                        text: "U heeft nu uw coronabewijs op papier. Als u wilt is het ook mogelijk om uw papieren bewijs in de CoronaCheck-app te zetten, zodat u het bewijs op uw telefoon kan gebruiken.",
-                        font: "ROSansRegular",
-                        size: fontSizeStandard,
-                        position: [marginLeft, null],
-                        lineGap: 1,
-                        width: contentWidth,
-                    });
-                }),
-                doc._pdf.struct("Sect", [
-                    doc._pdf.struct("H", function () {
-                        drawText(doc, {
-                            text: "Volg deze stappen:",
-                            font: "MontserratBold",
-                            size: fontSizeH2,
-                            color: titleColor,
-                            position: [marginLeft, stepsTop],
-                        });
-                        doc._pdf.moveDown();
+                        position: [marginLeft, stepsTop],
+                        emptyLineAfter: true,
                     }),
-                    drawDynamicList(doc, {
+                    structDynamicList(doc, {
                         font: "ROSansRegular",
                         size: fontSizeStandard,
                         indent: 5,
@@ -76,41 +76,31 @@ export function addCouplingCodePage(doc, couplingCode) {
                         width: contentWidth,
                         items: [
                             function (x, y) {
-                                doc._pdf.text(
+                                doc.pdf.text(
                                     "Download en open de CoronaCheck-app",
                                     x,
                                     y
                                 );
                             },
                             function (x, y) {
-                                doc._pdf.text("Open het menu   ", x, y);
-                                doc._pdf.addStructure(
-                                    doc._pdf.struct(
-                                        "Figure",
-                                        {
-                                            alt: "menu-icoon",
-                                        },
-                                        function () {
-                                            doc._pdf.image(
-                                                menuIcon,
-                                                x + 25 * dpmm,
-                                                y + dpmm,
-                                                {
-                                                    width: 2.5 * dpmm,
-                                                }
-                                            );
-                                        }
-                                    )
+                                doc.pdf.text("Open het menu   ", x, y);
+                                doc.pdf.image(
+                                    menuIcon,
+                                    x + 25 * dpmm,
+                                    y + dpmm,
+                                    {
+                                        width: 2.5 * dpmm,
+                                    }
                                 );
                             },
                             function (x, y) {
-                                doc._pdf
+                                doc.pdf
                                     .text("Ga naar ", x, y, { continued: true })
                                     .font("ROSansBold")
                                     .text("‘Papieren bewijs toevoegen’");
                             },
                             function (x, y, width) {
-                                doc._pdf
+                                doc.pdf
                                     .text("Vul uw ", x, y, {
                                         continued: true,
                                         width: width,
@@ -141,17 +131,8 @@ export function addCouplingCodePage(doc, couplingCode) {
                             },
                         ],
                     }),
-                    doc._pdf.struct("P", function () {
-                        doc._pdf
-                            .roundedRect(
-                                marginLeft * dpmm,
-                                codeTop * dpmm,
-                                codeWidth * dpmm,
-                                codeHeight * dpmm,
-                                2 * dpmm
-                            )
-                            .stroke(codeBorderColor);
-                        drawText(doc, {
+                    doc.pdf.struct("P", [
+                        structText(doc, "Span", {
                             text: "Uw lettercombinatie: ",
                             font: "ROSansRegular",
                             size: fontSizeStandard,
@@ -160,8 +141,8 @@ export function addCouplingCodePage(doc, couplingCode) {
                                 codeTop + codeHeight / 2,
                             ],
                             baseline: "middle",
-                        });
-                        drawText(doc, {
+                        }),
+                        structText(doc, "Span", {
                             text: couplingCode,
                             font: "ROSansRegular",
                             size: 28,
@@ -170,38 +151,29 @@ export function addCouplingCodePage(doc, couplingCode) {
                                 codeTop + codeHeight / 2,
                             ],
                             baseline: "middle",
-                        });
-                    }),
-                    doc._pdf.struct("P", function () {
-                        doc._pdf
-                            .roundedRect(
-                                marginLeft * dpmm,
-                                warningTop * dpmm,
-                                contentWidth * dpmm,
-                                warningHeight * dpmm,
-                                2 * dpmm
-                            )
-                            .fill(warningBackgroundColor);
-                        drawText(doc, {
-                            text: "Let op: bewaar uw coronabewijs en lettercombinatie goed",
-                            font: "ROSansBold",
-                            size: fontSizeWarning,
-                            position: [
-                                marginLeft,
-                                warningTop + warningHeight / 2,
-                            ],
-                            width: contentWidth,
-                            baseline: "middle",
-                            align: "center",
-                        });
+                        }),
+                    ]),
+                    structText(doc, "P", {
+                        text: "Let op: bewaar uw coronabewijs en lettercombinatie goed",
+                        font: "ROSansBold",
+                        size: fontSizeWarning,
+                        position: [marginLeft, warningTop + warningHeight / 2],
+                        width: contentWidth,
+                        baseline: "middle",
+                        align: "center",
                     }),
                 ]),
-            ])
-        );
-        doc._pdf.addStructure(
-            doc._pdf.struct(
-                "Figure",
-                { alt: t(doc.locale, "alt.logoCoronacheck") },
+            ]),
+            structFigure(
+                doc,
+                {
+                    x: marginLeft,
+                    y: coronacheckLogoTop,
+                    width: 46,
+                    height: 9,
+
+                    alt: t(doc.locale, "alt.logoCoronacheck"),
+                },
                 function () {
                     var x = marginLeft;
                     var y = coronacheckLogoTop;
@@ -215,7 +187,37 @@ export function addCouplingCodePage(doc, couplingCode) {
                         baseline: "middle",
                     });
                 }
-            )
-        );
+            ),
+        ]);
     });
+}
+
+function drawCodeBoxBorder(doc) {
+    doc.pdf.markContent("Artifact", { type: "Layout" });
+    doc.pdf
+        .strokeColor(codeBorderColor)
+        .roundedRect(
+            marginLeft * dpmm,
+            codeTop * dpmm,
+            codeWidth * dpmm,
+            codeHeight * dpmm,
+            2 * dpmm
+        )
+        .stroke();
+    doc.pdf.endMarkedContent();
+}
+
+function drawWarningBoxBackground(doc) {
+    doc.pdf.markContent("Artifact", { type: "Layout" });
+    doc.pdf
+        .fillColor(warningBackgroundColor)
+        .roundedRect(
+            marginLeft * dpmm,
+            warningTop * dpmm,
+            contentWidth * dpmm,
+            warningHeight * dpmm,
+            2 * dpmm
+        )
+        .fill();
+    doc.pdf.endMarkedContent();
 }

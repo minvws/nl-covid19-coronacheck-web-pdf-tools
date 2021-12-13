@@ -6,18 +6,12 @@ import {
     ROSansWebTextRegular,
     ROSansWebTextBold,
 } from "../assets/fonts.js";
+import { logoRijksoverheidA4 } from "../assets/img.js";
 import { formatLocalDate } from "../date.js";
-import {
-    drawLogoCoronaCheck,
-    drawLogoRijksoverheidA4,
-    drawText,
-} from "./draw.js";
-import {
-    getEuropeanProofs,
-    getVaccinationStatus,
-    isRecovery,
-    isVaccination,
-} from "../proof/status.js";
+import { drawImage, drawText, drawLogoCoronaCheck } from "./draw.js";
+import { structFigure, structText, structList } from "./struct.js";
+import { getEuropeanProofs, getVaccinationStatus } from "../proof/status.js";
+import { formatEuProofEvents } from "../proof/format.js";
 
 var pageHeight = 297;
 var pageWidth = 210;
@@ -27,43 +21,52 @@ var textWidth = pageWidth - 2 * marginX;
 var fontSizeH1 = 22;
 var fontSizeStandard = 12;
 var textStart = 52; // 13mm below logo, as prescribed by rijkshuisstijl.nl
-
-var dpmm = 72 / 25.4; // dots per mm at 72dpi
-
 var titleColor = "#383836";
 
+/**
+ * @param {import("./document.js").Document} doc
+ * @param {import("../types").Proof[]} proofs
+ * @param {Date|number} createdAt
+ */
 export function addDccCoverPage(doc, proofs, createdAt) {
-    proofs = getEuropeanProofs(proofs);
-    var vaccinationStatus = getVaccinationStatus(proofs, createdAt);
+    var euProofs = getEuropeanProofs(proofs);
+    var vaccinationStatus = getVaccinationStatus(euProofs, createdAt);
     if (
-        proofs.length < 2 ||
+        euProofs.length < 2 ||
         vaccinationStatus === "unvaccinated" ||
         vaccinationStatus === "single-dose"
     ) {
         return false;
     }
 
-    doc._addPage(function () {
+    doc.addPart(function () {
         doc.loadFont("MontserratBold", MontserratBold);
         doc.loadFont("RobotoRegular", RobotoRegular);
         doc.loadFont("RobotoBold", RobotoBold);
         doc.loadFont("ROSansRegular", ROSansWebTextRegular);
         doc.loadFont("ROSansBold", ROSansWebTextBold);
-        doc._pdf.addPage({ margin: 0, size: "A4" });
 
-        doc._pdf.addStructure(
-            doc._pdf.struct(
-                "Figure",
-                { alt: t(doc.locale, "alt.logoRijksoverheid") },
-                function () {
-                    drawLogoRijksoverheidA4(doc, pageWidth / 2, 0);
-                }
-            )
-        );
-
-        doc._pdf.addStructure(
-            doc._pdf.struct("Sect", [
-                doc._pdf.struct("H", function () {
+        doc.addStruct("Article", [
+            doc.pdf.struct("Sect", [
+                structFigure(
+                    doc,
+                    {
+                        x: pageWidth / 2 - 6.5,
+                        y: 0,
+                        width: 13,
+                        height: 39,
+                        alt: t(doc.locale, "alt.logoRijksoverheid"),
+                    },
+                    function () {
+                        drawImage(doc, {
+                            x: pageWidth / 2 - 6.5,
+                            y: 0,
+                            width: 13,
+                            image: logoRijksoverheidA4,
+                        });
+                    }
+                ),
+                doc.pdf.struct("H1", function () {
                     drawText(doc, {
                         text: t(doc.locale, "cover.title"),
                         font: "MontserratBold",
@@ -74,17 +77,18 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         lineGap: 2,
                     });
                 }),
-                doc._pdf.struct("P", function () {
+                doc.pdf.struct("P", function () {
                     drawText(doc, {
                         text: "\n" + t(doc.locale, "cover.intro"),
                         font: "ROSansRegular",
                         size: fontSizeStandard,
+                        position: [marginX, null],
                         width: textWidth,
                         lineGap: 2,
                     });
                 }),
-                doc._pdf.struct("Sect", [
-                    doc._pdf.struct("H", function () {
+                doc.pdf.struct("Sect", [
+                    doc.pdf.struct("H2", function () {
                         drawText(doc, {
                             text:
                                 "\n" + t(doc.locale, "cover.yourProofs.title"),
@@ -95,10 +99,18 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                             lineGap: 2,
                         });
                     }),
-                    proofsList(doc, proofs),
+                    structList(doc, {
+                        items: formatEuProofEvents(euProofs, doc.locale),
+                        font: "ROSansRegular",
+                        size: fontSizeStandard,
+                        position: [marginX + 3, null],
+                        label: "•",
+                        indent: 6,
+                        lineGap: 1,
+                    }),
                 ]),
-                doc._pdf.struct("Sect", [
-                    doc._pdf.struct("H", function () {
+                doc.pdf.struct("Sect", [
+                    doc.pdf.struct("H2", function () {
                         drawText(doc, {
                             text: "\n" + t(doc.locale, "cover.whichCode.title"),
                             font: "ROSansBold",
@@ -108,9 +120,9 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                             lineGap: 2,
                         });
                     }),
-                    doc._pdf.struct("P", function () {
+                    doc.pdf.struct("P", function () {
                         var vaccinationStatus = getVaccinationStatus(
-                            proofs,
+                            euProofs,
                             createdAt
                         );
                         var text = t(
@@ -133,25 +145,26 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         });
                     }),
                 ]),
-                doc._pdf.struct("Sect", [
-                    doc._pdf.struct("P", function () {
-                        drawText(doc, {
-                            text: "\n" + t(doc.locale, "cover.beforeTravel"),
-                            font: "ROSansBold",
-                            size: fontSizeStandard,
-                            position: [marginX, null],
-                            width: textWidth,
-                            lineGap: 2,
-                        });
-                    }),
-                ]),
-            ])
-        );
-
-        doc._pdf.addStructure(
-            doc._pdf.struct(
-                "Figure",
-                { alt: t(doc.locale, "alt.logoCoronacheck") },
+            ]),
+            doc.pdf.struct("Sect", [
+                structText(doc, "P", {
+                    text: "\n" + t(doc.locale, "cover.beforeTravel"),
+                    font: "ROSansBold",
+                    size: fontSizeStandard,
+                    position: [marginX, null],
+                    width: textWidth,
+                    lineGap: 2,
+                }),
+            ]),
+            structFigure(
+                doc,
+                {
+                    x: marginX,
+                    y: pageHeight - marginY - 9,
+                    width: 46,
+                    height: 9,
+                    alt: t(doc.locale, "alt.logoCoronacheck"),
+                },
                 function () {
                     var x = marginX;
                     var y = pageHeight - marginY - 9;
@@ -165,55 +178,21 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         baseline: "middle",
                     });
                 }
-            )
-        );
-
-        drawText(doc, {
-            text: t(doc.locale, "cover.issuedOn", {
-                date: formatLocalDate(createdAt),
+            ),
+            structText(doc, "P", {
+                text: t(doc.locale, "cover.issuedOn", {
+                    date: formatLocalDate(createdAt),
+                }),
+                font: "ROSansRegular",
+                size: fontSizeStandard,
+                width: 50,
+                align: "right",
+                position: [
+                    pageWidth - marginX - 50,
+                    pageHeight - marginY - 4.5,
+                ],
+                baseline: "middle",
             }),
-            font: "ROSansRegular",
-            size: fontSizeStandard,
-            width: 50,
-            align: "right",
-            position: [pageWidth - marginX - 50, pageHeight - marginY - 4.5],
-            baseline: "middle",
-        });
+        ]);
     });
-}
-
-function proofsList(doc, proofs) {
-    var vaccinations = getEuropeanProofs(proofs);
-    var listItems = vaccinations.map(function (proof) {
-        if (isVaccination(proof)) {
-            return (
-                t(
-                    doc.locale,
-                    "cover.vaccination." +
-                        (proof.doseNumber > 9 ? "extra" : proof.doseNumber)
-                ) +
-                " (" +
-                proof.doseNumber +
-                "/" +
-                proof.totalDoses +
-                ")"
-            );
-        }
-        if (isRecovery(proof)) {
-            return t(doc.locale, "cover.recoveryProof");
-        }
-        return t(doc.locale, "cover.otherProof");
-    });
-
-    var proofsList = doc._pdf.struct("L", function () {
-        doc._pdf
-            .font("ROSansRegular")
-            .list(listItems, (marginX + 3) * dpmm, null, {
-                bulletRadius: 2,
-                textIndent: 6 * dpmm,
-                lineGap: 2,
-            });
-    });
-
-    return proofsList;
 }

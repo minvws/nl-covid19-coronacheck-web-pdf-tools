@@ -6,7 +6,8 @@ import {
     kix,
 } from "../assets/fonts.js";
 import { formatSalutation, formatAddress, formatKixCode } from "../postal.js";
-import { drawText, drawLogoMinVwsA4, drawDynamicList } from "./draw.js";
+import { drawText, drawLogoMinVwsA4 } from "./draw.js";
+import { structDynamicList } from "./struct.js";
 
 // var pageHeight = 297;
 var pageWidth = 210;
@@ -52,18 +53,17 @@ var months = [
  * @param {Date|number} args.createdAt
  */
 export function addCkvpCoverPage(doc, args) {
-    doc._addPage(function () {
+    doc.addPart(function () {
         doc.loadFont("LiberationSansRegular", LiberationSansRegular);
         doc.loadFont("LiberationSansBold", LiberationSansBold);
         doc.loadFont("LiberationSansItalic", LiberationSansItalic);
         doc.loadFont("kix", kix);
-        doc._pdf.addPage({ margin: 0, size: "A4" });
-        doc._pdf.addStructure(structLogo(doc));
-        doc._pdf.addStructure(structAddress(doc, args.address));
-        doc._pdf.addStructure(structRetourAddress(doc));
-        doc._pdf.addStructure(structLetterHeading(doc, args.createdAt));
-        doc._pdf.addStructure(structLetterBody(doc, args));
-        doc._pdf.addStructure(structPageNumber(doc));
+        doc.pdf.addStructure(structLogo(doc));
+        doc.pdf.addStructure(structAddress(doc, args.address));
+        doc.pdf.addStructure(structRetourAddress(doc));
+        doc.pdf.addStructure(structLetterHeading(doc, args.createdAt));
+        doc.pdf.addStructure(structLetterBody(doc, args));
+        doc.pdf.addStructure(structPageNumber(doc));
     });
 }
 
@@ -71,7 +71,7 @@ export function addCkvpCoverPage(doc, args) {
  * @param {import("./document.js").Document} doc
  */
 function structLogo(doc) {
-    return doc._pdf.struct(
+    return doc.pdf.struct(
         "Figure",
         { alt: t(doc.locale, "alt.logoMinVws") },
         function () {
@@ -85,7 +85,7 @@ function structLogo(doc) {
  * @param {import("../postal.js").Address} address
  */
 function structAddress(doc, address) {
-    return doc._pdf.struct("Sect", function () {
+    return doc.pdf.struct("Sect", function () {
         drawText(doc, {
             text: "> Retouradres Postbus 3175 6401 DR Heerlen",
             font: "LiberationSansRegular",
@@ -93,7 +93,7 @@ function structAddress(doc, address) {
             position: [marginLeft, addressTop],
             lineGap: 1,
         });
-        doc._pdf.moveDown(0.2);
+        doc.pdf.moveDown(0.2);
         var addressLines = formatAddress(address);
         for (var i = 0; i < addressLines.length; i++) {
             drawText(doc, {
@@ -104,7 +104,7 @@ function structAddress(doc, address) {
                 lineGap: 1,
             });
         }
-        doc._pdf.moveDown(0.5);
+        doc.pdf.moveDown(0.5);
         drawText(doc, {
             text: formatKixCode(address),
             font: "kix",
@@ -118,7 +118,7 @@ function structAddress(doc, address) {
  * @param {import("./document.js").Document} doc
  */
 function structRetourAddress(doc) {
-    return doc._pdf.struct("Sect", function () {
+    return doc.pdf.struct("Sect", function () {
         drawText(doc, {
             text: "Ministerie van Volksgezondheid, Welzijn en Sport",
             font: "LiberationSansBold",
@@ -127,7 +127,7 @@ function structRetourAddress(doc) {
             width: retourAddressWidth,
             lineGap: 1,
         });
-        doc._pdf.moveDown();
+        doc.pdf.moveDown();
         drawText(doc, {
             text: "t.a.v. ScanPlaza, kamer 4.031\nPostbus 20350\n2500 EJ  Den Haag",
             font: "LiberationSansRegular",
@@ -136,8 +136,8 @@ function structRetourAddress(doc) {
             width: retourAddressWidth,
             lineGap: 1,
         });
-        doc._pdf.moveDown();
-        doc._pdf.moveDown();
+        doc.pdf.moveDown();
+        doc.pdf.moveDown();
         drawText(doc, {
             text: "Correspondentie uitsluitend richten aan het hierboven vermelde postadres met vermelding van de datum en het kenmerk van deze brief.",
             font: "LiberationSansItalic",
@@ -154,7 +154,7 @@ function structRetourAddress(doc) {
  * @param {Date|number} createdAt
  */
 function structLetterHeading(doc, createdAt) {
-    return doc._pdf.struct("Sect", function () {
+    return doc.pdf.struct("Sect", function () {
         drawText(doc, {
             text: "Datum",
             font: "LiberationSansRegular",
@@ -205,7 +205,7 @@ function structLetterBody(doc, args) {
             width: bodyWidth,
             lineGap: 1,
         });
-        doc._pdf.moveDown(space || lineSpace);
+        doc.pdf.moveDown(space || lineSpace);
     }
 
     function heading(text) {
@@ -220,8 +220,8 @@ function structLetterBody(doc, args) {
     }
 
     function list(items) {
-        doc._pdf.addStructure(
-            drawDynamicList(doc, {
+        doc.pdf.addStructure(
+            structDynamicList(doc, {
                 font: "LiberationSansRegular",
                 size: fontSizeStandard,
                 indent: 5,
@@ -230,16 +230,16 @@ function structLetterBody(doc, args) {
                 lineGap: 1,
                 itemGap: lineSpace / 2,
                 drawLabel: function (_n, x, y) {
-                    doc._pdf.font("LiberationSansRegular");
-                    doc._pdf.fillColor("#000000");
-                    doc._pdf.text("  •  ", x, y);
+                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.fillColor("#000000");
+                    doc.pdf.text("  •  ", x, y);
                 },
                 items: items,
             })
         );
     }
 
-    return doc._pdf.struct("Sect", function () {
+    return doc.pdf.struct("Sect", function () {
         paragraph(formatSalutation(args.address) + ",", bodyTop);
         if (args.proofsFound) {
             paragraph(
@@ -271,8 +271,8 @@ function structLetterBody(doc, args) {
 
             list([
                 function (x, y, width) {
-                    doc._pdf.font("LiberationSansItalic");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.text(
                         "U bent niet gevaccineerd, en u bent niet positief getest op corona.",
                         x,
                         y,
@@ -280,34 +280,34 @@ function structLetterBody(doc, args) {
                     );
                 },
                 function (x, y, width) {
-                    doc._pdf.font("LiberationSansItalic");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.text(
                         "U bent niet gevaccineerd. U bent wél hersteld van corona, maar de positieve test is langer dan 180 dagen geleden afgenomen. ",
                         x,
                         y,
                         { width: width, continued: true, lineGap: rawLineGap }
                     );
-                    doc._pdf.font("LiberationSansRegular");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.text(
                         "De test is niet meer geldig. Deze kunt u dus niet gebruiken voor de aanvraag van uw coronabewijzen.",
                         { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
-                    doc._pdf.font("LiberationSansItalic");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.text(
                         "U bent in de afgelopen 3 dagen gevaccineerd. Of u bent in de afgelopen 30 uur positief op corona getest. ",
                         x,
                         y,
                         { width: width, continued: true, lineGap: rawLineGap }
                     );
-                    doc._pdf.font("LiberationSansRegular");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.text(
                         "Hierdoor staan uw gegevens misschien nog niet in het systeem. Vraag over een paar dagen opnieuw uw coronabewijzen aan.",
                         { width: width, lineGap: rawLineGap }
                     );
 
-                    doc._pdf.moveDown(lineSpace / 2);
+                    doc.pdf.moveDown(lineSpace / 2);
                 },
             ]);
             heading("Gelden de redenen hierboven niet voor u?");
@@ -318,45 +318,45 @@ function structLetterBody(doc, args) {
             );
             list([
                 function (x, y, width) {
-                    doc._pdf.font("LiberationSansItalic");
-                    doc._pdf.text("U bent door de GGD gevaccineerd. ", x, y, {
+                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.text("U bent door de GGD gevaccineerd. ", x, y, {
                         width: width,
                         continued: true,
                         lineGap: rawLineGap,
                     });
-                    doc._pdf.font("LiberationSansRegular");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.text(
                         "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
                         { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
-                    doc._pdf.font("LiberationSansItalic");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.text(
                         "U bent door iemand anders dan de GGD gevaccineerd. ",
                         x,
                         y,
                         { width: width, continued: true, lineGap: rawLineGap }
                     );
-                    doc._pdf.font("LiberationSansRegular");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.text(
                         "Neem contact op met de zorgverlener die u heeft gevaccineerd. Dat kan uw huisarts, arts van het ziekenhuis of een zorginstelling zijn. Zij controleren of uw gegevens goed staan en helpen u verder.",
                         { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
-                    doc._pdf.font("LiberationSansItalic");
-                    doc._pdf.text("U bent positief getest op corona. ", x, y, {
+                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.text("U bent positief getest op corona. ", x, y, {
                         width: width,
                         continued: true,
                         lineGap: rawLineGap,
                     });
-                    doc._pdf.font("LiberationSansRegular");
-                    doc._pdf.text(
+                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.text(
                         "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
                         { width: width, lineGap: rawLineGap }
                     );
-                    doc._pdf.moveDown(lineSpace / 2);
+                    doc.pdf.moveDown(lineSpace / 2);
                 },
             ]);
         }
@@ -371,7 +371,7 @@ function structLetterBody(doc, args) {
  * @param {import("./document.js").Document} doc
  */
 function structPageNumber(doc) {
-    return doc._pdf.struct("Sect", function () {
+    return doc.pdf.struct("Sect", function () {
         drawText(doc, {
             text: "Pagina 1 van 1",
             font: "LiberationSansRegular",

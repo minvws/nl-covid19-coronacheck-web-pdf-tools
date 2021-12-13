@@ -1,26 +1,6 @@
 import qrcode from "qrcode";
 import { parseSVG } from "./util.js";
 
-var cmToInch = 10 / 25.4;
-var dpi = 300;
-
-/**
- * @param {string} qrCode
- * @param {number} sizeInCm
- * @param {string} territory
- * @return {Promise<string>} PNG data URL string
- * @deprecated
- */
-export function generateQR(qrCode, sizeInCm, territory) {
-    var sizeInPixels = Math.round(sizeInCm * cmToInch * dpi);
-    var qrOptions = {
-        width: sizeInPixels,
-        margin: 0,
-        errorCorrectionLevel: territory === "nl" ? "L" : "Q",
-    };
-    return qrcode.toDataURL(qrCode, qrOptions);
-}
-
 /**
  * @param {string} qrCode
  * @param {number} size
@@ -49,10 +29,18 @@ export function qrSvgPath(svg) {
 
 /**
  * @param {XMLDocument} svg
- * @return {number}
+ * @return {number} QR scale (i.e. ratio between SVG's width attribute and viewBox width)
  */
 export function qrSvgScale(svg) {
     var width = svg.documentElement.getAttribute("width");
     var size = svg.documentElement.getAttribute("viewBox").split(" ")[2];
     return parseFloat(size) / parseFloat(width);
+}
+
+/**
+ * @param {XMLDocument} svg
+ * @return {number} QR size in milimeters (i.e. the SVG's width attribute)
+ */
+export function qrSvgSize(svg) {
+    return parseFloat(svg.documentElement.getAttribute("width"));
 }
