@@ -51,8 +51,8 @@ export function structText(doc, type, textItem) {
     var lineGap = textItem.lineGap && textItem.lineGap * dpmm;
     var parts =
         textItem.parseLinks === false
-            ? [textItem.text]
-            : parseMarkdownLinks(textItem.text);
+            ? [textItem.text || ""]
+            : parseMarkdownLinks(textItem.text || "");
     var after;
     if (textItem.emptyLineAfter) {
         after = function (i) {
