@@ -1,7 +1,9 @@
+.env
 node_modules/
 /coverage/
+/dist/
+/tmp/
 .DS_Store
-/tmp
 /*.tgz
 /*.pdf
 /*.log

@@ -13,8 +13,6 @@ export type EventType = "negativetest" | "vaccination" | "recovery";
 
 export type Locale = "nl" | "en";
 
-export type Metadata = { title: string; author: string };
-
 export type ProofData = ProofDataV5 | ProofDataV6;
 
 export type ProofDataV5 = {

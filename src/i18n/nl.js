@@ -3,7 +3,7 @@ export default {
         "Print dit bewijs op A4 (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
     "eu.validUntil": "Dit papieren bewijs is geldig tot:",
     "eu.createNew":
-        "Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op coronacheck.nl",
+        "Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op [coronacheck.nl](https://coronacheck.nl)",
     "eu.negativetest.title": "Internationaal testbewijs",
     "eu.negativetest.qrTitle": "Testbewijs",
     "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
@@ -14,7 +14,7 @@ export default {
     "eu.recovery.title": "Internationaal herstelbewijs",
     "eu.recovery.qrTitle": "Herstelbewijs",
     "eu.intro":
-        "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Controleer voor vertrek ook altijd op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
+        "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Controleer voor vertrek ook altijd op [wijsopreis.nl](https://wijsopreis.nl) welk bewijs je nodig hebt in het land dat je bezoekt.",
     "eu.alt.flag": "Vlag van de Europese Unie met de letters NL erop",
     "eu.travelWarning":
         "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.",
@@ -64,9 +64,9 @@ export default {
     "alt.qr": "QR-code",
     questions: "VRAGEN?",
     questionsContent:
-        "Bekijk de meestgestelde vragen op www.coronacheck.nl of stuur een e-mail naar helpdesk@coronacheck.nl of bel naar 0800-1421 (gratis)",
+        "Bekijk de meestgestelde vragen op [coronacheck.nl](https://coronacheck.nl) of stuur een e-mail naar [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) of bel naar 0800-1421 (gratis)",
     "metadata.title": "Coronabewijs met QR-code",
-    "metadata.author": "CoronaCheck",
+    "metadata.author": "Rijksoverheid",
     "date.months.abbr.1": "JAN",
     "date.months.abbr.2": "FEB",
     "date.months.abbr.3": "MAA",
@@ -106,5 +106,5 @@ export default {
     "cover.whichCode.single-dose-and-recovery":
         "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.",
     "cover.beforeTravel":
-        "Controleer altijd voor vertrek op www.wijsopreis.nl welk bewijs je nodig hebt in het land dat je bezoekt.",
+        "Controleer altijd voor vertrek op [wijsopreis.nl](https://wijsopreis.nl) welk bewijs je nodig hebt in het land dat je bezoekt.",
 };

@@ -38,6 +38,17 @@ writeFileSync(
     ].join("\n")
 );
 
+writeFileSync(
+    fileURLToPath(outDir + "/metadata.js"),
+    [
+        ...outputHeader,
+        ...readFiles(assetsDir + "/metadata").map(
+            ({ filename, data }) =>
+                `export var ${camelize(filename)} = "${data}";`
+        ),
+    ].join("\n")
+);
+
 function readFiles(dirname) {
     return readdirSync(fileURLToPath(dirname))
         .filter(
