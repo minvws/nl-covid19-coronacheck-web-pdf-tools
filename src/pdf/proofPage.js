@@ -72,7 +72,7 @@ export function addProofPage(doc, proof, createdAt) {
             doc.loadFont("MontserratBold", MontserratBold);
             doc.loadFont("RobotoRegular", RobotoRegular);
             doc.loadFont("RobotoBold", RobotoBold);
-            doc.addStruct("Article", [
+            doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
                 proof.territory === "nl"
                     ? structNlProof(doc, qrSvg, proof)
