@@ -82,7 +82,7 @@ export default {
     "cover.issuedOn": "Issued on %{date}",
     "cover.title": "About your international certificates",
     "cover.intro":
-        "In this document you'll find two international corona certificates, each with a separate QR code.",
+        "In this document you'll find multiple international corona certificates, each with a separate QR code.",
     "cover.yourProofs.title": "You have a certificate with a QR code for your:",
     "cover.vaccination.1": "first vaccination dose",
     "cover.vaccination.2": "second vaccination dose",
