@@ -97,14 +97,6 @@ export default {
     "cover.recoveryProof": "herstel van corona",
     "cover.otherProof": "testbewijs",
     "cover.whichCode.title": "Welke QR-code moet ik gebruiken?",
-    "cover.whichCode.recent-double-dose":
-        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nDe meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen. Heb je kort geleden je tweede dosis gehad? In veel landen wordt een vaccinatiebewijs pas geldig vanaf 14 tot 28 dagen na het zetten van de prik.",
-    "cover.whichCode.double-dose":
-        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
-    "cover.whichCode.triple-dose":
-        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.\n\nJij hebt meer dan twee vaccinatie doses gehad. De QR-codes van extra doses worden nog niet overal geaccepteerd. De meeste landen zullen op dit moment om de QR-code van jouw dosis 2/2 vragen.",
-    "cover.whichCode.single-dose-and-recovery":
-        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Let op: deze eisen kunnen veranderen.",
-    "cover.beforeTravel":
-        "Controleer altijd voor vertrek op [wijsopreis.nl](https://wijsopreis.nl) welk bewijs je nodig hebt in het land dat je bezoekt.",
+    "cover.whichCode.text":
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Controleer daarom altijd voor vertrek op [wijsopreis.nl](https://wijsopreis.nl) welk bewijs je nodig hebt.",
 };
