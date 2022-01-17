@@ -98,5 +98,5 @@ export default {
     "cover.otherProof": "other coronavirus-related event",
     "cover.whichCode.title": "Which QR code should I use?",
     "cover.whichCode.text":
-        "Which QR code you have to show depends on the demands of the country you're visiting.  Before leaving, please always check which certificate you need at your destination at [netherlandsworldwide.nl](https://netherlandsworldwide.nl)."
+        "Which QR code you have to show depends on the demands of the country you're visiting.  Before leaving, please always check which certificate you need at your destination at [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
 };
