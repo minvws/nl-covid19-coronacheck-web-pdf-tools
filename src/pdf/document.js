@@ -140,6 +140,8 @@ export function createDocument(locale, args) {
  * @param {import("../types").Proof[]} args.proofs
  * @param {"en"|"nl"} args.locale
  * @param {Date|number} args.createdAt - Date or timestamp in ms
+ * @param {boolean} [args.nlPrintIssuedOn] - Include "issued on" footer on NL proof (default false).
+ * @param {string} [args.nlKeyId] - If provided, include in footer on NL proof.
  * @param {string} [args.title]
  * @param {string} [args.author]
  * @param {number} [args.qrSizeInCm] DEPRECATED
@@ -158,8 +160,12 @@ export function getDocument(args) {
         createdAt: args.createdAt,
     });
     addDccCoverPage(doc, args.proofs, args.createdAt);
+    var proofArgs = {
+        nlPrintIssuedOn: args.nlPrintIssuedOn || false,
+        nlKeyId: args.nlKeyId,
+    };
     args.proofs.forEach(function (proof) {
-        addProofPage(doc, proof, args.createdAt);
+        addProofPage(doc, proof, args.createdAt, proofArgs);
     });
     return documentToBlob(doc).then(function (blob) {
         return blobToDataURI(blob).then(function (dataURI) {

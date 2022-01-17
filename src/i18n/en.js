@@ -55,6 +55,8 @@ export default {
     "nl.userData.validFrom": "Valid from",
     "nl.userData.validUntil": "Valid until",
     "nl.userData.privacyNote": "You can keep your details to yourself",
+    "nl.issuedOn": "Issued on %{date}",
+    "nl.keyId": "Key identifier: %{keyId}",
     instructions: "Instructions",
     "alt.foldInstructions":
         "Folding instructions. First fold in half widthwise, with the printed side out. Then fold in half again with these instructions on the inside.",

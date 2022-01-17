@@ -55,6 +55,8 @@ export default {
     "nl.userData.validUntil": "Geldig tot",
     "nl.userData.privacyNote":
         "Bovenstaande gegevens hoef je niet te laten zien bij de ingang.",
+    "nl.issuedOn": "Uitgegeven op %{date}",
+    "nl.keyId": "Sleutelnummer: %{keyId}",
     instructions: "Instructies",
     "alt.foldInstructions":
         "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden met deze instructies aan de binnenzijde.",

@@ -58,8 +58,13 @@ var titleColor = "#383836";
  * @param {import("./document.js").Document} doc
  * @param {import("../types").Proof} proof
  * @param {Date|number} createdAt
+ * @param {Object} [args]
+ * @param {boolean} [args.nlPrintIssuedOn] - Include "issued on" footer on NL proof (default false).
+ * @param {string} [args.nlKeyId] - If provided, include in footer on NL proof.
  */
-export function addProofPage(doc, proof, createdAt) {
+export function addProofPage(doc, proof, createdAt, args) {
+    var nlPrintIssuedOn = args && args.nlPrintIssuedOn;
+    var nlKeyId = args && args.nlKeyId;
     doc.addPart(function () {
         return qrDataToSvg(
             proof.qr,
@@ -75,14 +80,20 @@ export function addProofPage(doc, proof, createdAt) {
             doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
                 proof.territory === "nl"
-                    ? structNlProof(doc, qrSvg, proof)
+                    ? structNlProof(
+                          doc,
+                          qrSvg,
+                          proof,
+                          nlPrintIssuedOn ? createdAt : undefined,
+                          nlKeyId
+                      )
                     : structEuProof(doc, qrSvg, proof, createdAt),
             ]);
         });
     });
 }
 
-function structNlProof(doc, qrSvg, proof) {
+function structNlProof(doc, qrSvg, proof, createdAt, keyId) {
     var instructionsContent = [
         structInstructionsHeading(doc),
         structFoldInstructions(doc),
@@ -96,13 +107,19 @@ function structNlProof(doc, qrSvg, proof) {
         structNlDetailsSection(doc, getProofDetails(proof)),
     ];
 
-    return doc.pdf.struct("Sect", [
+    var content = [
         structNlTitle(doc),
         structIntro(doc, "nl"),
         structFlag(doc, "nl"),
         doc.pdf.struct("Sect", instructionsContent),
         doc.pdf.struct("Sect", proofContent),
-    ]);
+    ];
+
+    if (createdAt || keyId) {
+        content.push(structNlFooter(doc, createdAt, keyId));
+    }
+
+    return doc.pdf.struct("Sect", content);
 }
 
 function structEuProof(doc, qrSvg, proof, createdAt) {
@@ -571,4 +588,31 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                 ])
         ),
     ]);
+}
+
+function structNlFooter(doc, createdAt, keyId) {
+    var x = pageWidth - marginLeft - 100;
+    var y = pageHeight - marginTop - (createdAt && keyId ? 9 : 4.5);
+    var content = [];
+    if (keyId) {
+        content.push(t(doc.locale, "nl.keyId", { keyId: keyId }));
+    }
+    if (createdAt) {
+        var date = formatLocalDateTime(createdAt);
+        content.push(t(doc.locale, "nl.issuedOn", { date: date }));
+    }
+    return doc.pdf.struct(
+        "P",
+        content.map(function (text, i) {
+            return structText(doc, "Span", {
+                text: text,
+                font: "RobotoRegular",
+                size: fontSizeStandard,
+                width: 100,
+                align: "right",
+                position: [x, i > 0 ? null : y],
+                baseline: "middle",
+            });
+        })
+    );
 }
