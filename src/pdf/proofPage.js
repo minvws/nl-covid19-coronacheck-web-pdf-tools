@@ -428,6 +428,7 @@ function structCreatedAt(doc, createdAt) {
         }),
         font: "RobotoRegular",
         size: 6,
+        position: [marginLeftProofSection, null],
         width: partWidthProofSection,
     });
 }
@@ -447,6 +448,7 @@ function structValidUntil(doc, validUntil) {
             font: "RobotoBold",
             size: fontSizeStandard,
             width: partWidth,
+            position: [rightPartLeft, null],
             lineGap: 1,
             emptyLineAfter: true,
         }),
@@ -458,7 +460,8 @@ function structValidUntilInstructions(doc) {
         text: t(doc.locale, "eu.createNew"),
         font: "RobotoRegular",
         size: fontSizeStandard,
-        width: partWidth / 2,
+        position: [rightPartLeft, null],
+        width: partWidth,
         lineGap: 1,
     });
 }
@@ -484,12 +487,14 @@ function structNlDetailsSection(doc, details) {
             font: "RobotoRegular",
             size: fontSizeStandard,
             lineGap: 5,
+            position: [rightPartLeft, null],
             emptyLineAfter: true,
         }),
         structText(doc, "P", {
             text: t(doc.locale, "nl.userData.privacyNote"),
             font: "RobotoRegular",
             size: fontSizeStandard,
+            position: [rightPartLeft, null],
         }),
     ]);
 }
