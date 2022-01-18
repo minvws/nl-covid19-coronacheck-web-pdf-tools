@@ -121,22 +121,8 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         });
                     }),
                     doc.pdf.struct("P", function () {
-                        var vaccinationStatus = getVaccinationStatus(
-                            euProofs,
-                            createdAt
-                        );
-                        var text = t(
-                            doc.locale,
-                            "cover.whichCode." + vaccinationStatus
-                        );
-                        if (!text)
-                            throw new Error(
-                                "Unhandled vaccination status " +
-                                    vaccinationStatus
-                            );
-
                         drawText(doc, {
-                            text: text,
+                            text: t(doc.locale, "cover.whichCode.text"),
                             font: "ROSansRegular",
                             size: fontSizeStandard,
                             position: [marginX, null],
@@ -145,16 +131,6 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         });
                     }),
                 ]),
-            ]),
-            doc.pdf.struct("Sect", [
-                structText(doc, "P", {
-                    text: "\n" + t(doc.locale, "cover.beforeTravel"),
-                    font: "ROSansBold",
-                    size: fontSizeStandard,
-                    position: [marginX, null],
-                    width: textWidth,
-                    lineGap: 2,
-                }),
             ]),
             structFigure(
                 doc,
