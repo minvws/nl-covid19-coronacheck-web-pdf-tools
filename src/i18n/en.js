@@ -84,7 +84,7 @@ export default {
     "cover.issuedOn": "Issued on %{date}",
     "cover.title": "About your international certificates",
     "cover.intro":
-        "In this document you'll find two international corona certificates, each with a separate QR code.",
+        "In this document you'll find multiple international corona certificates, each with a separate QR code.",
     "cover.yourProofs.title": "You have a certificate with a QR code for your:",
     "cover.vaccination.1": "first vaccination dose",
     "cover.vaccination.2": "second vaccination dose",
@@ -99,14 +99,6 @@ export default {
     "cover.recoveryProof": "recovery from coronavirus",
     "cover.otherProof": "other coronavirus-related event",
     "cover.whichCode.title": "Which QR code should I use?",
-    "cover.whichCode.recent-double-dose":
-        "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.\n\nAt this time, most countries will require the QR code of your dose 2/2. Did you recently receive your second dose? In many countries, a vaccination certificate will become valid from 14 to 28 days after getting the shot.",
-    "cover.whichCode.double-dose":
-        "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change. At this time, most countries will require the QR code of your dose 2/2.",
-    "cover.whichCode.triple-dose":
-        "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.\n\nYou've received more than two vaccination doses. QR codes of extra doses aren't widely accepted yet. At this time, most countries will require the QR code of your dose 2/2.",
-    "cover.whichCode.single-dose-and-recovery":
-        "Which QR code you have to show depends on the demands of the country you're visiting. Please note: these demands can change.",
-    "cover.beforeTravel":
-        "Before leaving, please always check which certificate you need at your destination at [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
+    "cover.whichCode.text":
+        "Which QR code you have to show depends on the demands of the country you're visiting.  Before leaving, please always check which certificate you need at your destination at [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
 };
