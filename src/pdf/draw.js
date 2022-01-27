@@ -135,12 +135,13 @@ export function drawBackgroundArtifact(
     y,
     width,
     height,
-    cornerRadius = 4
+    cornerRadius = 4,
+    color = "#f0f7fa"
 ) {
     cornerRadius = cornerRadius * dpmm;
     doc.pdf.markContent("Artifact", { type: "Layout" });
     doc.pdf
-        .fillColor("#f0f7fa")
+        .fillColor(color)
         .roundedRect(
             x * dpmm,
             y * dpmm,

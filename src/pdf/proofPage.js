@@ -57,18 +57,18 @@ var partWidthProofSection = 80;
 var marginLeftProofSection = (pageWidth / 2 - partWidthProofSection) / 2;
 var qrTop = 181;
 var titleColor = "#383836";
+var footerMargin = 5.65;
+var footerHeight = 7.4;
+var footerPadding = 2.1;
+var fontSizeFooter = 8;
 
 /**
  * @param {import("./document.js").Document} doc
  * @param {import("../types").Proof} proof
  * @param {Date|number} createdAt
- * @param {Object} [args]
- * @param {boolean} [args.nlPrintIssuedOn] - Include "issued on" footer on NL proof (default false).
- * @param {string} [args.nlKeyId] - If provided, include in footer on NL proof.
+ * args.nlPrintIssuedOn and args.nlKeyId are DEPRECATED
  */
-export function addProofPage(doc, proof, createdAt, args) {
-    var nlPrintIssuedOn = args && args.nlPrintIssuedOn;
-    var nlKeyId = args && args.nlKeyId;
+export function addProofPage(doc, proof, createdAt) {
     doc.addPart(function () {
         return qrDataToSvg(
             proof.qr,
@@ -77,27 +77,26 @@ export function addProofPage(doc, proof, createdAt, args) {
         ).then(function (qrSvg) {
             drawFoldLineHorizontal(doc);
             drawFoldLineVertical(doc);
-            if (proof.territory === "nl") drawQuestionsInfoFrame(doc);
+            if (proof.territory === "nl") {
+                drawQuestionsInfoFrame(doc);
+                if (proof.keyIdentifier) {
+                    drawNlFooterBar(doc);
+                }
+            }
             doc.loadFont("MontserratBold", MontserratBold);
             doc.loadFont("ROSansRegular", ROSansWebTextRegular);
             doc.loadFont("ROSansBold", ROSansWebTextBold);
             doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
                 proof.territory === "nl"
-                    ? structNlProof(
-                          doc,
-                          qrSvg,
-                          proof,
-                          nlPrintIssuedOn ? createdAt : undefined,
-                          nlKeyId
-                      )
+                    ? structNlProof(doc, qrSvg, proof, createdAt)
                     : structEuProof(doc, qrSvg, proof, createdAt),
             ]);
         });
     });
 }
 
-function structNlProof(doc, qrSvg, proof, createdAt, keyId) {
+function structNlProof(doc, qrSvg, proof, createdAt) {
     var instructionsContent = [
         structInstructionsHeading(doc),
         structFoldInstructions(doc),
@@ -108,7 +107,7 @@ function structNlProof(doc, qrSvg, proof, createdAt, keyId) {
     var proofContent = [
         structProofTitle(doc, "nl.qrTitle"),
         structNlQrSection(doc, qrSvg),
-        structNlDetailsSection(doc, getProofDetails(proof)),
+        structNlDetailsSection(doc, proof, createdAt),
     ];
 
     var content = [
@@ -119,8 +118,8 @@ function structNlProof(doc, qrSvg, proof, createdAt, keyId) {
         doc.pdf.struct("Sect", proofContent),
     ];
 
-    if (createdAt || keyId) {
-        content.push(structNlFooter(doc, createdAt, keyId));
+    if (proof.keyIdentifier) {
+        content.push(structNlFooter(doc));
     }
 
     return doc.pdf.struct("Sect", content);
@@ -273,6 +272,18 @@ function drawQuestionsInfoFrame(doc) {
         questionsFrameTop,
         partWidth,
         questionsFrameHeight
+    );
+}
+
+function drawNlFooterBar(doc) {
+    drawBackgroundArtifact(
+        doc,
+        footerMargin,
+        pageHeight - footerMargin - footerHeight,
+        pageWidth - 2 * footerMargin,
+        footerHeight,
+        0.5,
+        "#154273"
     );
 }
 
@@ -470,37 +481,86 @@ function structValidUntilInstructions(doc) {
     });
 }
 
-function structNlDetailsSection(doc, details) {
-    var text = details
-        .map(function (item) {
-            return t(doc.locale, "nl.userData." + item[0]) + ": " + item[1];
-        })
-        .join("\n");
-    return doc.pdf.struct("Sect", [
+function structNlDetailsSection(doc, proof, createdAt) {
+    var contents = [
         structText(doc, "H2", {
             text: t(doc.locale, "nl.propertiesLabel"),
             font: "MontserratBold",
             size: fontSizeH3,
+            lineGap: 1,
             color: titleColor,
             position: [rightPartLeft, bottomPartTop],
             width: partWidth,
-            emptyLineAfter: true,
         }),
         structText(doc, "P", {
-            text: text,
+            text: t(doc.locale, "nl.userData", {
+                initials: proof.initials,
+                dateOfBirth: proof.birthDateStringShort,
+            }),
             font: "ROSansRegular",
             size: fontSizeStandard,
-            lineGap: 5,
+            lineGap: 1,
             position: [rightPartLeft, null],
             emptyLineAfter: true,
         }),
+        structText(doc, "H2", {
+            text: t(doc.locale, "nl.validityLabel"),
+            font: "MontserratBold",
+            size: fontSizeH3,
+            lineGap: 1,
+            color: titleColor,
+            position: [rightPartLeft, null],
+            width: partWidth,
+        }),
         structText(doc, "P", {
-            text: t(doc.locale, "nl.userData.privacyNote"),
+            text: t(doc.locale, "nl.validityDetails", {
+                validFrom: proof.validFrom,
+                validUntil: proof.validUntil,
+            }),
             font: "ROSansRegular",
             size: fontSizeStandard,
+            lineGap: 1,
             position: [rightPartLeft, null],
+            emptyLineAfter: true,
         }),
-    ]);
+    ];
+    if (proof.keyIdentifier) {
+        if (!proof.validAtMost25Hours) {
+            contents.push(
+                structText(doc, "P", {
+                    text: t(doc.locale, "nl.maxValidityExplanation", {
+                        days: "90",
+                    }),
+                    font: "ROSansRegular",
+                    size: fontSizeStandard,
+                    lineGap: 1,
+                    position: [rightPartLeft, null],
+                    emptyLineAfter: true,
+                })
+            );
+        }
+        contents.push(
+            structText(doc, "P", {
+                text: t(doc.locale, "nl.issuedOn", {
+                    date: formatLocalDateTime(createdAt),
+                }),
+                font: "ROSansRegular",
+                size: fontSizeStandard,
+                lineGap: 1,
+                position: [rightPartLeft, null],
+            }),
+            structText(doc, "P", {
+                text: t(doc.locale, "nl.keyId", {
+                    keyId: proof.keyIdentifier,
+                }),
+                font: "ROSansRegular",
+                size: fontSizeStandard,
+                lineGap: 1,
+                position: [rightPartLeft, null],
+            })
+        );
+    }
+    return doc.pdf.struct("Sect", contents);
 }
 
 function structEuDetailsSection(doc, details, certificateNumber) {
@@ -599,29 +659,16 @@ function structEuDetailsSection(doc, details, certificateNumber) {
     ]);
 }
 
-function structNlFooter(doc, createdAt, keyId) {
-    var x = pageWidth - marginLeft - 100;
-    var y = pageHeight - marginTop - (createdAt && keyId ? 9 : 4.5);
-    var content = [];
-    if (keyId) {
-        content.push(t(doc.locale, "nl.keyId", { keyId: keyId }));
-    }
-    if (createdAt) {
-        var date = formatLocalDateTime(createdAt);
-        content.push(t(doc.locale, "nl.issuedOn", { date: date }));
-    }
-    return doc.pdf.struct(
-        "P",
-        content.map(function (text, i) {
-            return structText(doc, "Span", {
-                text: text,
-                font: "ROSansRegular",
-                size: fontSizeStandard,
-                width: 100,
-                align: "right",
-                position: [x, i > 0 ? null : y],
-                baseline: "middle",
-            });
-        })
-    );
+function structNlFooter(doc) {
+    var x = rightPartLeft;
+    var y = pageHeight - footerMargin - footerHeight + footerPadding;
+    return structText(doc, "P", {
+        text: t(doc.locale, "nl.maxValidity", { days: "90" }),
+        font: "ROSansBold",
+        size: fontSizeFooter,
+        color: "#ffffff",
+        width: 100,
+        height: footerHeight,
+        position: [x, y],
+    });
 }

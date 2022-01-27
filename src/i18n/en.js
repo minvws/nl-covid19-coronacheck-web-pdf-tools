@@ -19,7 +19,8 @@ export default {
     "eu.qrTitle": "International QR-code",
     "nl.instructions":
         "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
-    "nl.propertiesLabel": "Details",
+    "nl.propertiesLabel": "Your credentials:",
+    "nl.validityLabel": "Certificate validity:",
     "nl.title": "Certificate for the Netherlands",
     "nl.intro":
         "Visiting locations or activities within the Netherlands? Then use this certificate.",
@@ -50,13 +51,14 @@ export default {
     "eu.userData.validUntil": "Valid to",
     "eu.userData.certificateNumber": "UNIQUE CERTIFICATE IDENTIFIER",
     "nl.qrTitle": "Coronavirus pass",
-    "nl.userData.initials": "Initials",
-    "nl.userData.dateOfBirth": "Day of birth",
-    "nl.userData.validFrom": "Valid from",
-    "nl.userData.validUntil": "Valid until",
-    "nl.userData.privacyNote": "You can keep your details to yourself",
-    "nl.issuedOn": "Issued on %{date}",
+    "nl.userData": "Initials: %{initials}\nDay of birth: %{dateOfBirth}",
+    "nl.validityDetails":
+        "Valid from: %{validFrom}\nValid until: %{validUntil}",
+    "nl.issuedOn": "Printed on %{date}",
     "nl.keyId": "Key identifier: %{keyId}",
+    "nl.maxValidityExplanation":
+        "* This paper certificate is valid for a maximum of %{days} days. After this you can print a new certificate via [coronacheck.nl/print](https://coronacheck.nl/print) (as long as your vaccination or recovery is still valid). For more information on the requirements and validity of certificates, please visit [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs).",
+    "nl.maxValidity": "Valid for a maximum of %{days} days*",
     instructions: "Instructions",
     "alt.foldInstructions":
         "Folding instructions. First fold in half widthwise, with the printed side out. Then fold in half again with these instructions on the inside.",
