@@ -1,8 +1,6 @@
 import { t } from "../i18n/index.js";
 import {
     MontserratBold,
-    RobotoRegular,
-    RobotoBold,
     ROSansWebTextRegular,
     ROSansWebTextBold,
 } from "../assets/fonts.js";
@@ -41,8 +39,6 @@ export function addDccCoverPage(doc, proofs, createdAt) {
 
     doc.addPart(function () {
         doc.loadFont("MontserratBold", MontserratBold);
-        doc.loadFont("RobotoRegular", RobotoRegular);
-        doc.loadFont("RobotoBold", RobotoBold);
         doc.loadFont("ROSansRegular", ROSansWebTextRegular);
         doc.loadFont("ROSansBold", ROSansWebTextBold);
 
