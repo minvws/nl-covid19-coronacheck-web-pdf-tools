@@ -1,5 +1,9 @@
 import { t } from "../i18n/index.js";
-import { MontserratBold, RobotoRegular, RobotoBold } from "../assets/fonts.js";
+import {
+    MontserratBold,
+    ROSansWebTextRegular,
+    ROSansWebTextBold,
+} from "../assets/fonts.js";
 import { qrDataToSvg, qrSvgSize } from "../qr.js";
 import { formatLocalDateTime } from "../date.js";
 import { getProofDetails } from "../proof/details.js";
@@ -75,8 +79,8 @@ export function addProofPage(doc, proof, createdAt, args) {
             drawFoldLineVertical(doc);
             if (proof.territory === "nl") drawQuestionsInfoFrame(doc);
             doc.loadFont("MontserratBold", MontserratBold);
-            doc.loadFont("RobotoRegular", RobotoRegular);
-            doc.loadFont("RobotoBold", RobotoBold);
+            doc.loadFont("ROSansRegular", ROSansWebTextRegular);
+            doc.loadFont("ROSansBold", ROSansWebTextBold);
             doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
                 proof.territory === "nl"
@@ -191,7 +195,7 @@ function structEuTitle(doc, proof) {
 function structIntro(doc, territory) {
     return structText(doc, "P", {
         text: "\n" + t(doc.locale, territory + ".intro"),
-        font: "RobotoRegular",
+        font: "ROSansRegular",
         size: fontSizeStandard,
         position: [marginLeftIntro, null],
         width: partWidthIntro,
@@ -233,7 +237,7 @@ function structInstructionsHeading(doc) {
 function structInstructionsList(doc, listKey, replacements) {
     return structList(doc, {
         items: t(doc.locale, listKey, replacements).split("\n\n"),
-        font: "RobotoRegular",
+        font: "ROSansRegular",
         size: fontSizeStandard,
         position: [rightPartLeft, 23],
         width: partWidth,
@@ -316,7 +320,7 @@ function structNlQuestionsPanel(doc) {
         }),
         structText(doc, "P", {
             text: t(doc.locale, "questionsContent"),
-            font: "RobotoRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             position: [questionsFrameInnerLeft, null],
             width: questionsFrameInnerWidth,
@@ -369,7 +373,7 @@ function structProofTitle(doc, proof) {
             structText(doc, "Span", {
                 lang: "en",
                 text: t("en", "eu." + proof.eventType + ".qrTitle"),
-                font: "RobotoRegular",
+                font: "ROSansRegular",
                 size: 14,
                 color: titleColor,
                 position: [marginLeftProofSection, bottomPartTop + 9],
@@ -413,7 +417,7 @@ function structEuQrSection(doc, qrSvg, createdAt) {
 function structTravelWarning(doc) {
     return structText(doc, "P", {
         text: t(doc.locale, "eu.travelWarning"),
-        font: "RobotoRegular",
+        font: "ROSansRegular",
         size: 6,
         position: [marginLeftProofSection, 270],
         width: partWidthProofSection,
@@ -426,7 +430,7 @@ function structCreatedAt(doc, createdAt) {
         text: t(doc.locale, "eu.createdAt", {
             time: formatLocalDateTime(createdAt),
         }),
-        font: "RobotoRegular",
+        font: "ROSansRegular",
         size: 6,
         position: [marginLeftProofSection, null],
         width: partWidthProofSection,
@@ -437,7 +441,7 @@ function structValidUntil(doc, validUntil) {
     return doc.pdf.struct("P", [
         structText(doc, "Span", {
             text: t(doc.locale, "eu.validUntil"),
-            font: "RobotoRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             width: partWidth,
             position: [rightPartLeft, null],
@@ -445,7 +449,7 @@ function structValidUntil(doc, validUntil) {
         }),
         structText(doc, "Span", {
             text: validUntil,
-            font: "RobotoBold",
+            font: "ROSansBold",
             size: fontSizeStandard,
             width: partWidth,
             position: [rightPartLeft, null],
@@ -458,7 +462,7 @@ function structValidUntil(doc, validUntil) {
 function structValidUntilInstructions(doc) {
     return structText(doc, "P", {
         text: t(doc.locale, "eu.createNew"),
-        font: "RobotoRegular",
+        font: "ROSansRegular",
         size: fontSizeStandard,
         position: [rightPartLeft, null],
         width: partWidth,
@@ -484,7 +488,7 @@ function structNlDetailsSection(doc, details) {
         }),
         structText(doc, "P", {
             text: text,
-            font: "RobotoRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             lineGap: 5,
             position: [rightPartLeft, null],
@@ -492,7 +496,7 @@ function structNlDetailsSection(doc, details) {
         }),
         structText(doc, "P", {
             text: t(doc.locale, "nl.userData.privacyNote"),
-            font: "RobotoRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             position: [rightPartLeft, null],
         }),
@@ -517,7 +521,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                                 doc.locale,
                                 "eu.userData." + item[0]
                             ).toUpperCase(),
-                            font: "RobotoBold",
+                            font: "ROSansBold",
                             size: fontSizeSmallCaps,
                             position: [rightPartLeft, y],
                             baseline: baseline,
@@ -534,7 +538,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                                         "en",
                                         "eu.userData." + item[0]
                                     ).toUpperCase(),
-                                    font: "RobotoRegular",
+                                    font: "ROSansRegular",
                                     size: fontSizeSmallCaps,
                                 });
                             })
@@ -544,7 +548,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                         doc.pdf.struct("Lbl", label),
                         structText(doc, "LBody", {
                             text: item[1],
-                            font: "RobotoBold",
+                            font: "ROSansBold",
                             size: 10,
                             align: "right",
                             position: [rightPartRight - userDataColWidth, y],
@@ -575,7 +579,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
 
                             drawText(doc, {
                                 text: text.toUpperCase(),
-                                font: "RobotoRegular",
+                                font: "ROSansRegular",
                                 size: fontSizeTinyCaps,
                                 position: [rightPartLeft, y],
                                 width: partWidth,
@@ -585,7 +589,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                             doc.pdf.moveDown(0.3);
                             drawText(doc, {
                                 text: certificateNumber,
-                                font: "RobotoRegular",
+                                font: "ROSansRegular",
                                 size: fontSizeTinyCaps,
                             });
                         }),
@@ -611,7 +615,7 @@ function structNlFooter(doc, createdAt, keyId) {
         content.map(function (text, i) {
             return structText(doc, "Span", {
                 text: text,
-                font: "RobotoRegular",
+                font: "ROSansRegular",
                 size: fontSizeStandard,
                 width: 100,
                 align: "right",
