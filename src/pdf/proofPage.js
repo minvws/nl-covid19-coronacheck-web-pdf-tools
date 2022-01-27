@@ -69,6 +69,7 @@ var fontSizeFooter = 8;
  * args.nlPrintIssuedOn and args.nlKeyId are DEPRECATED
  */
 export function addProofPage(doc, proof, createdAt) {
+    var structProof = proof.territory === "nl" ? structNlProof : structEuProof;
     doc.addPart(function () {
         return qrDataToSvg(
             proof.qr,
@@ -88,9 +89,7 @@ export function addProofPage(doc, proof, createdAt) {
             doc.loadFont("ROSansBold", ROSansWebTextBold);
             doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
-                proof.territory === "nl"
-                    ? structNlProof(doc, qrSvg, proof, createdAt)
-                    : structEuProof(doc, qrSvg, proof, createdAt),
+                structProof(doc, qrSvg, proof, createdAt),
             ]);
         });
     });
