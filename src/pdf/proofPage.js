@@ -117,7 +117,7 @@ function structNlProof(doc, qrSvg, proof, createdAt) {
         doc.pdf.struct("Sect", proofContent),
     ];
 
-    if (proof.keyIdentifier) {
+    if (proof.keyIdentifier && !proof.validAtMost25Hours) {
         content.push(structNlFooter(doc));
     }
 
