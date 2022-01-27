@@ -56,7 +56,7 @@ export default {
     "nl.issuedOn": "Geprint op %{date}",
     "nl.keyId": "Sleutelnummer: %{keyId}",
     "nl.maxValidityExplanation":
-        "Dit papieren bewijs is maximaal %{days} dagen geldig. Hierna kun je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print) (zolang je vaccinatie of herstel nog geldig is). Kijk op [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs) voor meer informatie over de eisen en geldigheid van coronabewijzen.",
+        "* Dit papieren bewijs is maximaal %{days} dagen geldig. Hierna kun je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print) (zolang je vaccinatie of herstel nog geldig is). Kijk op [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs) voor meer informatie over de eisen en geldigheid van coronabewijzen.",
     "nl.maxValidity": "Maixmaal %{days} dagen geldig*",
     instructions: "Instructies",
     "alt.foldInstructions":
