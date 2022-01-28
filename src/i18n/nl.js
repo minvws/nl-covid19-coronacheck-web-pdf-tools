@@ -41,13 +41,17 @@ export default {
     "eu.userData.validFrom": "Geldig vanaf",
     "eu.userData.validUntil": "Geldig tot",
     "eu.userData.certificateNumber": "UNIEK CERTIFICAATNUMMER",
-    "nl.instructions":
+    "nl.instructions.test":
+        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang",
+    "nl.instructions.prePrinted":
         "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang\n\nVraag een nieuw bewijs aan als deze is verlopen",
+    "nl.instructions.selfPrinted":
+        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang\n\nPrint een nieuw bewijs uit als deze is verlopen",
     "nl.propertiesLabel": "Jouw gegevens:",
     "nl.validityLabel": "Geldigheid bewijs:",
     "nl.title": "Bewijs voor in Nederland",
     "nl.intro":
-        "Bezoek je locaties of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
+        "Bezoek je plekken of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
     "nl.alt.flag": "Nederlandse vlag",
     "nl.qrTitle": "Coronatoegangs-\nbewijs",
     "nl.userData": "Initialen: %{initials}\nGeboortedag: %{dateOfBirth}",
@@ -57,7 +61,7 @@ export default {
     "nl.keyId": "Sleutelnummer: %{keyId}",
     "nl.maxValidityExplanation":
         "* Dit papieren bewijs is maximaal %{days} dagen geldig. Hierna kun je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print) (zolang je vaccinatie of herstel nog geldig is). Kijk op [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs) voor meer informatie over de eisen en geldigheid van coronabewijzen.",
-    "nl.maxValidity": "Maixmaal %{days} dagen geldig*",
+    "nl.maxValidity": "Maximaal %{days} dagen geldig*",
     instructions: "Instructies",
     "alt.foldInstructions":
         "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden met deze instructies aan de binnenzijde.",
@@ -67,7 +71,7 @@ export default {
     "alt.qr": "QR-code",
     questions: "VRAGEN?",
     questionsContent:
-        "Bekijk de meestgestelde vragen op [coronacheck.nl](https://coronacheck.nl) of stuur een e-mail naar [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) of bel naar 0800-1421 (gratis)",
+        "Bekijk de meestgestelde vragen op [coronacheck.nl](https://coronacheck.nl), stuur een e-mail naar [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) of bel naar 0800-1421 (gratis)",
     "metadata.title": "Coronabewijs met QR-code",
     "metadata.author": "Rijksoverheid",
     "date.months.abbr.1": "JAN",

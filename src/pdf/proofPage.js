@@ -66,10 +66,13 @@ var fontSizeFooter = 8;
  * @param {import("./document.js").Document} doc
  * @param {import("../types").Proof} proof
  * @param {Date|number} createdAt
- * args.nlPrintIssuedOn and args.nlKeyId are DEPRECATED
+ * @param {Object} [args]
+ * @param {boolean} [args.selfPrinted] - Whether the recipient still needs to print the PDF themselves. Default false.
+ * @param {boolean} [args.nlPrintIssuedOn] - DEPRECATED
+ * @param {string} [args.nlKeyId] - DEPRECATED
  */
-export function addProofPage(doc, proof, createdAt) {
-    var structProof = proof.territory === "nl" ? structNlProof : structEuProof;
+export function addProofPage(doc, proof, createdAt, args) {
+    var selfPrinted = args && args.selfPrinted;
     doc.addPart(function () {
         return qrDataToSvg(
             proof.qr,
@@ -89,17 +92,25 @@ export function addProofPage(doc, proof, createdAt) {
             doc.loadFont("ROSansBold", ROSansWebTextBold);
             doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
-                structProof(doc, qrSvg, proof, createdAt),
+                proof.territory === "nl"
+                    ? structNlProof(doc, qrSvg, proof, createdAt, selfPrinted)
+                    : structEuProof(doc, qrSvg, proof, createdAt),
             ]);
         });
     });
 }
 
-function structNlProof(doc, qrSvg, proof, createdAt) {
+function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
+    var instructionsVariant = proof.validAtMost25Hours
+        ? "test"
+        : selfPrinted
+        ? "selfPrinted"
+        : "prePrinted";
+
     var instructionsContent = [
         structInstructionsHeading(doc),
         structFoldInstructions(doc),
-        structInstructionsList(doc, "nl.instructions"),
+        structInstructionsList(doc, "nl.instructions." + instructionsVariant),
         structNlQuestionsPanel(doc),
     ];
 
@@ -520,6 +531,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
             size: fontSizeStandard,
             lineGap: 1,
             position: [rightPartLeft, null],
+            width: partWidth,
             emptyLineAfter: true,
         }),
     ];
@@ -534,6 +546,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
                     size: fontSizeStandard,
                     lineGap: 1,
                     position: [rightPartLeft, null],
+                    width: partWidth,
                     emptyLineAfter: true,
                 })
             );
@@ -547,6 +560,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
                 size: fontSizeStandard,
                 lineGap: 1,
                 position: [rightPartLeft, null],
+                width: partWidth,
             }),
             structText(doc, "P", {
                 text: t(doc.locale, "nl.keyId", {
@@ -556,6 +570,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
                 size: fontSizeStandard,
                 lineGap: 1,
                 position: [rightPartLeft, null],
+                width: partWidth,
             })
         );
     }

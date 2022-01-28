@@ -17,8 +17,12 @@ export default {
         "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
-    "nl.instructions":
+    "nl.instructions.test":
+        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance",
+    "nl.instructions.prePrinted":
         "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance\n\nRequest a new certificate if this one is expired",
+    "nl.instructions.selfPrinted":
+        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance\n\nPrint a new certificate if this one is expired",
     "nl.propertiesLabel": "Your credentials:",
     "nl.validityLabel": "Certificate validity:",
     "nl.title": "Certificate for the Netherlands",
@@ -57,7 +61,7 @@ export default {
     "nl.issuedOn": "Printed on %{date}",
     "nl.keyId": "Key identifier: %{keyId}",
     "nl.maxValidityExplanation":
-        "* This paper certificate is valid for a maximum of %{days} days. After this you can print a new certificate via [coronacheck.nl/print](https://coronacheck.nl/print) (as long as your vaccination or recovery is still valid). For more information on the requirements and validity of certificates, please visit [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs).",
+        "* This paper certificate is valid for a maximum of %{days} days. After this you can print a new certificate via [coronacheck.nl/en/print](https://coronacheck.nl/en/print) (as long as your vaccination or recovery is still valid). For more information on the requirements and validity of certificates, please visit [government.nl/covid-certificate](https://government.nl/covid-certificate).",
     "nl.maxValidity": "Valid for a maximum of %{days} days*",
     instructions: "Instructions",
     "alt.foldInstructions":
@@ -68,7 +72,7 @@ export default {
     "alt.qr": "QR code",
     questions: "QUESTIONS?",
     questionsContent:
-        "Please find frequently asked questions on [coronacheck.nl](https://coronacheck.nl). You can also send an email to [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) or reach us (for free) on 0800-1421",
+        "Please find frequently asked questions on [coronacheck.nl](https://coronacheck.nl). You can also send an email to [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) or reach us on 0800-1421 (free of charge)",
     "metadata.title": "Certificate containing QR-code",
     "metadata.author": "Government of the Netherlands",
     "date.months.abbr.1": "JAN",
