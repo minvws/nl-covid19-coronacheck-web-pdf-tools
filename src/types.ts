@@ -37,6 +37,8 @@ export type DomesticProofData = {
         birthMonth: string; // e.g. "5"
     };
     qr: string;
+    proofIdentifier: string;
+    keyIdentifier?: string | null;
 };
 
 export type EuropeanProofData = {
@@ -55,6 +57,8 @@ export type EuropeanProofData = {
         r: RecoveryCredential[] | null;
     };
     qr: string;
+    proofIdentifier: string;
+    keyIdentifier?: string | null;
 };
 
 type BaseCredentials = {
@@ -96,6 +100,8 @@ type DomesticProof = {
     birthDateStringShort: string;
     validFrom: string;
     validUntil: string;
+    keyIdentifier: string | null;
+    validAtMost25Hours?: boolean;
 };
 
 export type EuropeanProof =

@@ -69,6 +69,10 @@ export function parseDomesticProof(data, locale) {
         validUntil: formatLocalDateTime(
             validFromDate + hoursInMs(data.attributes.validForHours)
         ),
+
+        keyIdentifier: data.keyIdentifier || null,
+
+        validAtMost25Hours: parseInt(data.attributes.validForHours, 10) <= 25,
     };
 }
 

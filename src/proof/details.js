@@ -1,16 +1,8 @@
 /**
- * @param {import("../types").Proof} proof
+ * @param {import("../types").EuropeanProof} proof
  * @return {string[][]}
  */
 export function getProofDetails(proof) {
-    if (proof.territory === "nl") {
-        return [
-            ["initials", proof.initials],
-            ["dateOfBirth", proof.birthDateStringShort],
-            ["validFrom", proof.validFrom],
-            ["validUntil", proof.validUntil],
-        ];
-    }
     if (proof.eventType === "vaccination") {
         return [
             ["name", proof.fullName],

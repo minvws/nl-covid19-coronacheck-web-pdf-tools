@@ -43,20 +43,21 @@ export default {
     "eu.userData.certificateNumber": "UNIEK CERTIFICAATNUMMER",
     "nl.instructions":
         "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang\n\nVraag een nieuw bewijs aan als deze is verlopen",
-    "nl.propertiesLabel": "Gegevens",
+    "nl.propertiesLabel": "Jouw gegevens:",
+    "nl.validityLabel": "Geldigheid bewijs:",
     "nl.title": "Bewijs voor in Nederland",
     "nl.intro":
         "Bezoek je locaties of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
     "nl.alt.flag": "Nederlandse vlag",
     "nl.qrTitle": "Coronatoegangs-\nbewijs",
-    "nl.userData.initials": "Initialen",
-    "nl.userData.dateOfBirth": "Geboortedag",
-    "nl.userData.validFrom": "Geldig vanaf",
-    "nl.userData.validUntil": "Geldig tot",
-    "nl.userData.privacyNote":
-        "Bovenstaande gegevens hoef je niet te laten zien bij de ingang.",
-    "nl.issuedOn": "Uitgegeven op %{date}",
+    "nl.userData": "Initialen: %{initials}\nGeboortedag: %{dateOfBirth}",
+    "nl.validityDetails":
+        "Geldig vanaf: %{validFrom}\nGeldig tot: %{validUntil}",
+    "nl.issuedOn": "Geprint op %{date}",
     "nl.keyId": "Sleutelnummer: %{keyId}",
+    "nl.maxValidityExplanation":
+        "* Dit papieren bewijs is maximaal %{days} dagen geldig. Hierna kun je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print) (zolang je vaccinatie of herstel nog geldig is). Kijk op [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs) voor meer informatie over de eisen en geldigheid van coronabewijzen.",
+    "nl.maxValidity": "Maixmaal %{days} dagen geldig*",
     instructions: "Instructies",
     "alt.foldInstructions":
         "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden met deze instructies aan de binnenzijde.",
