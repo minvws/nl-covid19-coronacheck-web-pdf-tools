@@ -51,7 +51,7 @@ export default {
     "nl.validityLabel": "Geldigheid bewijs:",
     "nl.title": "Bewijs voor in Nederland",
     "nl.intro":
-        "Bezoek je locaties of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
+        "Bezoek je plekken of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
     "nl.alt.flag": "Nederlandse vlag",
     "nl.qrTitle": "Coronatoegangs-\nbewijs",
     "nl.userData": "Initialen: %{initials}\nGeboortedag: %{dateOfBirth}",
