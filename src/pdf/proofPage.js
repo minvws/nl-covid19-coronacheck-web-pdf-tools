@@ -531,6 +531,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
             size: fontSizeStandard,
             lineGap: 1,
             position: [rightPartLeft, null],
+            width: partWidth,
             emptyLineAfter: true,
         }),
     ];
@@ -545,6 +546,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
                     size: fontSizeStandard,
                     lineGap: 1,
                     position: [rightPartLeft, null],
+                    width: partWidth,
                     emptyLineAfter: true,
                 })
             );
@@ -558,6 +560,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
                 size: fontSizeStandard,
                 lineGap: 1,
                 position: [rightPartLeft, null],
+                width: partWidth,
             }),
             structText(doc, "P", {
                 text: t(doc.locale, "nl.keyId", {
@@ -567,6 +570,7 @@ function structNlDetailsSection(doc, proof, createdAt) {
                 size: fontSizeStandard,
                 lineGap: 1,
                 position: [rightPartLeft, null],
+                width: partWidth,
             })
         );
     }
