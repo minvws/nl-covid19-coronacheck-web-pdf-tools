@@ -1,6 +1,6 @@
 export default {
     "eu.instructions":
-        "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
+        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity on your travels\n\nShow your certificate at the border, or upon request",
     "eu.validUntil": "This paper certificate is valid until:",
     "eu.createNew":
         "After this date, you can make a new coronavirus pass via [coronacheck.nl](https://coronacheck.nl)",
@@ -18,7 +18,7 @@ export default {
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
     "nl.instructions":
-        "Print this certificate on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and the proof of identity (and if needed a ticket) at the entrance",
+        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance\n\nRequest a new certificate if this one is expired",
     "nl.propertiesLabel": "Your credentials:",
     "nl.validityLabel": "Certificate validity:",
     "nl.title": "Certificate for the Netherlands",

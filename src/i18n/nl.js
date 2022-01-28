@@ -1,6 +1,6 @@
 export default {
     "eu.instructions":
-        "Print dit bewijs op A4 (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het testbewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het vaccinatiebewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
     "eu.validUntil": "Dit papieren bewijs is geldig tot:",
     "eu.createNew":
         "Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op [coronacheck.nl](https://coronacheck.nl)",
@@ -42,7 +42,7 @@ export default {
     "eu.userData.validUntil": "Geldig tot",
     "eu.userData.certificateNumber": "UNIEK CERTIFICAATNUMMER",
     "nl.instructions":
-        "Print dit coronabewijs op A4 (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de activiteit\n\nLaat je coronabewijs en je identiteitsbewijs (en eventueel ook je toegangskaartje) zien bij de ingang",
+        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang\n\nVraag een nieuw bewijs aan als deze is verlopen",
     "nl.propertiesLabel": "Jouw gegevens:",
     "nl.validityLabel": "Geldigheid bewijs:",
     "nl.title": "Bewijs voor in Nederland",
