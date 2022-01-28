@@ -17,8 +17,12 @@ export default {
         "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
-    "nl.instructions":
+    "nl.instructions.test":
+        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance",
+    "nl.instructions.prePrinted":
         "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance\n\nRequest a new certificate if this one is expired",
+    "nl.instructions.selfPrinted":
+        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance\n\nPrint a new certificate if this one is expired",
     "nl.propertiesLabel": "Your credentials:",
     "nl.validityLabel": "Certificate validity:",
     "nl.title": "Certificate for the Netherlands",

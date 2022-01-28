@@ -161,7 +161,7 @@ export function getDocument(args) {
     });
     addDccCoverPage(doc, args.proofs, args.createdAt);
     args.proofs.forEach(function (proof) {
-        addProofPage(doc, proof, args.createdAt);
+        addProofPage(doc, proof, args.createdAt, { selfPrinted: true });
     });
     return documentToBlob(doc).then(function (blob) {
         return blobToDataURI(blob).then(function (dataURI) {
