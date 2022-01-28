@@ -1,6 +1,7 @@
 import { t } from "../i18n/index.js";
 import {
     MontserratBold,
+    RobotoBold,
     ROSansWebTextRegular,
     ROSansWebTextBold,
 } from "../assets/fonts.js";
@@ -88,6 +89,7 @@ export function addProofPage(doc, proof, createdAt, args) {
             drawFoldLineHorizontal(doc);
             drawFoldLineVertical(doc);
             doc.loadFont("MontserratBold", MontserratBold);
+            doc.loadFont("RobotoBold", RobotoBold);
             doc.loadFont("ROSansRegular", ROSansWebTextRegular);
             doc.loadFont("ROSansBold", ROSansWebTextBold);
             doc.addStruct("Art", [
@@ -595,7 +597,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                                 doc.locale,
                                 "eu.userData." + item[0]
                             ).toUpperCase(),
-                            font: "ROSansBold",
+                            font: "RobotoBold",
                             size: fontSizeSmallCaps,
                             position: [rightPartLeft, y],
                             baseline: baseline,
