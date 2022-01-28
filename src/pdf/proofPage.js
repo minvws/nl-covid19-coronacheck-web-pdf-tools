@@ -79,14 +79,14 @@ export function addProofPage(doc, proof, createdAt, args) {
             partWidthProofSection,
             proof.territory
         ).then(function (qrSvg) {
-            drawFoldLineHorizontal(doc);
-            drawFoldLineVertical(doc);
             if (proof.territory === "nl") {
                 drawQuestionsInfoFrame(doc);
                 if (proof.keyIdentifier) {
                     drawNlFooterBar(doc);
                 }
             }
+            drawFoldLineHorizontal(doc);
+            drawFoldLineVertical(doc);
             doc.loadFont("MontserratBold", MontserratBold);
             doc.loadFont("ROSansRegular", ROSansWebTextRegular);
             doc.loadFont("ROSansBold", ROSansWebTextBold);
@@ -129,7 +129,7 @@ function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     ];
 
     if (proof.keyIdentifier && !proof.validAtMost25Hours) {
-        content.push(structNlFooter(doc));
+        content.push(structNlFooterText(doc));
     }
 
     return doc.pdf.struct("Sect", content);
@@ -673,7 +673,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
     ]);
 }
 
-function structNlFooter(doc) {
+function structNlFooterText(doc) {
     var x = rightPartLeft;
     var y = pageHeight - footerMargin - footerHeight + footerPadding;
     return structText(doc, "P", {
