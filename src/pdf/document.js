@@ -41,6 +41,8 @@ export function createDocument(locale, args) {
     var creator = (args && args.creator) || "CoronaCheck";
     var createdAt =
         (args && args.createdAt && new Date(args.createdAt)) || new Date();
+    var doubleSided = Boolean(args && args.doubleSided);
+    var printMode = Boolean(args && args.printMode);
 
     var pdf = new PDFDocument({
         autoFirstPage: false,
@@ -73,7 +75,7 @@ export function createDocument(locale, args) {
     }
 
     var documentStruct;
-    if (!args.printMode) {
+    if (!printMode) {
         documentStruct = pdf.struct("Document");
         pdf.addStructure(documentStruct);
     }
@@ -88,7 +90,7 @@ export function createDocument(locale, args) {
             throw new Error("Cannot _addPart, document already finalized");
         }
         pageQueue = pageQueue.then(addPage).then(fn);
-        if (args && args.doubleSided && (sides == null || sides % 2)) {
+        if (doubleSided && (sides == null || sides % 2)) {
             pageQueue = pageQueue.then(addPage);
         }
     }
@@ -97,7 +99,7 @@ export function createDocument(locale, args) {
         if (finalized) {
             throw new Error("Cannot addStruct, document already finalized");
         }
-        if (args.printMode) {
+        if (printMode) {
             pdf.addStructure(pdf.struct(type, contents));
         } else {
             documentStruct.add(pdf.struct(type, contents));
