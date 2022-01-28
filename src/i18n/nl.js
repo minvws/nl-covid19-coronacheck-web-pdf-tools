@@ -1,9 +1,9 @@
 export default {
     "eu.instructions":
-        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het vaccinatiebewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
+        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het bewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
     "eu.validUntil": "Dit papieren bewijs is geldig tot:",
     "eu.createNew":
-        "Daarna kan je een nieuw papieren bewijs maken van je vaccinatie op [coronacheck.nl](https://coronacheck.nl)",
+        "Daarna kan je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print).",
     "eu.negativetest.title": "Internationaal testbewijs",
     "eu.negativetest.qrTitle": "Testbewijs",
     "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
@@ -14,7 +14,7 @@ export default {
     "eu.recovery.title": "Internationaal herstelbewijs",
     "eu.recovery.qrTitle": "Herstelbewijs",
     "eu.intro":
-        "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Controleer voor vertrek ook altijd op [wijsopreis.nl](https://wijsopreis.nl) welk bewijs je nodig hebt in het land dat je bezoekt.",
+        "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Bekijk voor vertrek welk bewijs je nodig hebt in het land dat je bezoekt op [wijsopreis.nl](https://wijsopreis.nl).",
     "eu.alt.flag": "Vlag van de Europese Unie met de letters NL erop",
     "eu.travelWarning":
         "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.",
