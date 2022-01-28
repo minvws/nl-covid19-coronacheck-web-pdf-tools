@@ -3,7 +3,7 @@ export default {
         "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity on your travels\n\nShow your certificate at the border, or upon request",
     "eu.validUntil": "This paper certificate is valid until:",
     "eu.createNew":
-        "After this date, you can make a new coronavirus pass via [coronacheck.nl](https://coronacheck.nl)",
+        "After this date you print a new certificate via [coronacheck.nl/en/print](https://coronacheck.nl/en/print)",
     "eu.negativetest.title": "International test certificate",
     "eu.negativetest.qrTitle": "Test certificate",
     "eu.negativetest.propertiesLabel": "Negative test details",
@@ -14,7 +14,7 @@ export default {
     "eu.recovery.title": "International recovery certificate",
     "eu.recovery.qrTitle": "Recovery certificate",
     "eu.intro":
-        "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at: [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
+        "Are you abroad or crossing the border? Then use this EU Digital Corona Certificate (DCC). Before leaving, please check which certificate you need at your destination at [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
     "nl.instructions.test":
