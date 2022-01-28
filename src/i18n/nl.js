@@ -71,7 +71,7 @@ export default {
     "alt.qr": "QR-code",
     questions: "VRAGEN?",
     questionsContent:
-        "Bekijk de meestgestelde vragen op [coronacheck.nl](https://coronacheck.nl) of stuur een e-mail naar [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) of bel naar 0800-1421 (gratis)",
+        "Bekijk de meestgestelde vragen op [coronacheck.nl](https://coronacheck.nl), stuur een e-mail naar [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) of bel naar 0800-1421 (gratis)",
     "metadata.title": "Coronabewijs met QR-code",
     "metadata.author": "Rijksoverheid",
     "date.months.abbr.1": "JAN",

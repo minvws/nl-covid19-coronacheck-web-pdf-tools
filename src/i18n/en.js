@@ -72,7 +72,7 @@ export default {
     "alt.qr": "QR code",
     questions: "QUESTIONS?",
     questionsContent:
-        "Please find frequently asked questions on [coronacheck.nl](https://coronacheck.nl). You can also send an email to [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) or reach us (for free) on 0800-1421",
+        "Please find frequently asked questions on [coronacheck.nl](https://coronacheck.nl). You can also send an email to [helpdesk@coronacheck.nl](mailto:helpdesk@coronacheck.nl) or reach us on 0800-1421 (free of charge)",
     "metadata.title": "Certificate containing QR-code",
     "metadata.author": "Government of the Netherlands",
     "date.months.abbr.1": "JAN",
