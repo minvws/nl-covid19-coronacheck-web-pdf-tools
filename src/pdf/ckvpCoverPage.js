@@ -254,7 +254,7 @@ function structLetterBody(doc, args) {
             );
             heading("International bewijs", 5);
             paragraph(
-                "U krijg een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat uw bezoekt door te kijken op www.wijsopreis.nl of te bellen naar +31 247 247 247.",
+                "U krijg een Internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat uw bezoekt door te kijken op www.wijsopreis.nl of te bellen naar +31 247 247 247.",
                 null,
                 null,
                 5
@@ -264,7 +264,7 @@ function structLetterBody(doc, args) {
                 "Een Nederlands papieren bewijs is 90 dagen geldig. U kunt op het Nederlandse bewijs zien tot wanneer het papieren bewijs geldig is. U kunt een nieuw papieren bewijs aanvragen door te bellen naar 0800-1421."
             );
             paragraph(
-                "U kunt uw bewijs ook in de CoronaCheck-app op uw telefoon te zetten. Dan is uw bewijs langer geldig. Bij deze brief zit een pagina met een lettercombinatie en uitleg. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
+                "U kunt uw bewijs ook in de CoronaCheck-app op uw telefoon zetten. Dan is uw bewijs langer geldig. Bij deze brief zit een pagina met een lettercombinatie en uitleg. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
             );
             heading("Kloppen uw gegevens niet?");
             paragraph(
