@@ -51,6 +51,7 @@ var months = [
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
+ * @param {1|2} [args.version]
  */
 export function addCkvpCoverPage(doc, args) {
     doc.addPart(function () {
@@ -194,27 +195,28 @@ function structLetterHeading(doc, createdAt) {
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
+ * @param {1|2} [args.version]
  */
 function structLetterBody(doc, args) {
-    function paragraph(text, top, space) {
+    function paragraph(text, top, space, indent) {
         drawText(doc, {
             text: text,
             font: "LiberationSansRegular",
             size: fontSizeStandard,
-            position: [marginLeft, top || null],
-            width: bodyWidth,
+            position: [marginLeft + (indent || 0), top || null],
+            width: bodyWidth - (indent || 0),
             lineGap: 1,
         });
         doc.pdf.moveDown(space || lineSpace);
     }
 
-    function heading(text) {
+    function heading(text, indent) {
         drawText(doc, {
             text: text,
             font: "LiberationSansBold",
             size: fontSizeStandard,
-            position: [marginLeft, null],
-            width: bodyWidth,
+            position: [marginLeft + (indent || 0), null],
+            width: bodyWidth - (indent || 0),
             lineGap: 1,
         });
     }
@@ -241,7 +243,7 @@ function structLetterBody(doc, args) {
 
     return doc.pdf.struct("Sect", function () {
         paragraph(formatSalutation(args.address) + ",", bodyTop);
-        if (args.proofsFound) {
+        if (args.proofsFound && args.version === 1) {
             paragraph(
                 "Bij deze brief zitten de coronabewijzen die u bij ons heeft aangevraagd."
             );
@@ -250,6 +252,38 @@ function structLetterBody(doc, args) {
             );
             paragraph(
                 "Heeft u nog maar 1 vaccinatie gekregen met Pfizer of Moderna? Dan bent u vaak nog niet volledig gevaccineerd. U ontvangt dan alleen een coronabewijs dat u in sommige gevallen al kunt gebruiken voor reizen binnen Europa. Op wijsopreis.nl vindt u alle reisadviezen per land die nu gelden. Een corona-toegangsbewijs dat geldig is in Nederland, krijgt u pas als u volledig gevaccineerd bent."
+            );
+            heading("Kloppen uw gegevens niet?");
+            paragraph(
+                "Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken."
+            );
+            paragraph(
+                "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
+            );
+        } else if (args.proofsFound) {
+            paragraph(
+                "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
+            );
+            heading("Nederlands bewijs", 5);
+            paragraph(
+                "In Nederland krijgt u een vaccinatiebewijs als u in de afgelopen 270 dagen volledig bent gevaccineerd, of als u een boostervaccinatie heeft gehad. Een Nederlands herstelbewijs krijgt u alleen als u in de afgelopen 180 dagen een positieve test heeft gehad.",
+                null,
+                null,
+                5
+            );
+            heading("Internationaal bewijs", 5);
+            paragraph(
+                "U krijg een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat uw bezoekt door te kijken op www.wijsopreis.nl of te bellen naar +31 247 247 247.",
+                null,
+                null,
+                5
+            );
+            heading("Geldigheid van uw papieren coronabewijs");
+            paragraph(
+                "Een Nederlands papieren bewijs is 90 dagen geldig. U kunt op het Nederlandse bewijs zien tot wanneer het papieren bewijs geldig is. U kunt een nieuw papieren bewijs aanvragen door te bellen naar 0800-1421."
+            );
+            paragraph(
+                "U kunt uw bewijs ook in de CoronaCheck-app op uw telefoon zetten. Dan is uw bewijs langer geldig. Bij deze brief zit een pagina met een lettercombinatie en uitleg. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
             );
             heading("Kloppen uw gegevens niet?");
             paragraph(
