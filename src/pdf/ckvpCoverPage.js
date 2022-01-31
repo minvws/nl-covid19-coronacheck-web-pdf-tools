@@ -51,6 +51,7 @@ var months = [
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
+ * @param {1|2} [args.version]
  */
 export function addCkvpCoverPage(doc, args) {
     doc.addPart(function () {
@@ -194,6 +195,7 @@ function structLetterHeading(doc, createdAt) {
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
+ * @param {1|2} [args.version]
  */
 function structLetterBody(doc, args) {
     function paragraph(text, top, space, indent) {
@@ -241,7 +243,24 @@ function structLetterBody(doc, args) {
 
     return doc.pdf.struct("Sect", function () {
         paragraph(formatSalutation(args.address) + ",", bodyTop);
-        if (args.proofsFound) {
+        if (args.proofsFound && args.version === 1) {
+            paragraph(
+                "Bij deze brief zitten de coronabewijzen die u bij ons heeft aangevraagd."
+            );
+            paragraph(
+                "Bij de brief zit ook een pagina met een lettercombinatie. Daarmee kunt u de papieren bewijzen in de CoronaCheck-app zetten. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
+            );
+            paragraph(
+                "Heeft u nog maar 1 vaccinatie gekregen met Pfizer of Moderna? Dan bent u vaak nog niet volledig gevaccineerd. U ontvangt dan alleen een coronabewijs dat u in sommige gevallen al kunt gebruiken voor reizen binnen Europa. Op wijsopreis.nl vindt u alle reisadviezen per land die nu gelden. Een corona-toegangsbewijs dat geldig is in Nederland, krijgt u pas als u volledig gevaccineerd bent."
+            );
+            heading("Kloppen uw gegevens niet?");
+            paragraph(
+                "Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken."
+            );
+            paragraph(
+                "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
+            );
+        } else if (args.proofsFound) {
             paragraph(
                 "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
             );
