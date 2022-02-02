@@ -62,38 +62,31 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                         });
                     }
                 ),
-                doc.pdf.struct("H1", function () {
-                    drawText(doc, {
-                        text: t(doc.locale, "cover.title"),
-                        font: "MontserratBold",
-                        size: fontSizeH1,
-                        color: titleColor,
-                        position: [marginX, textStart],
-                        width: textWidth,
-                        lineGap: 2,
-                    });
+                structText(doc, "H1", {
+                    text: t(doc.locale, "cover.title"),
+                    font: "MontserratBold",
+                    size: fontSizeH1,
+                    color: titleColor,
+                    position: [marginX, textStart],
+                    width: textWidth,
+                    lineGap: 2,
                 }),
-                doc.pdf.struct("P", function () {
-                    drawText(doc, {
-                        text: "\n" + t(doc.locale, "cover.intro"),
-                        font: "ROSansRegular",
+                structText(doc, "P", {
+                    text: "\n" + t(doc.locale, "cover.intro"),
+                    font: "ROSansRegular",
+                    size: fontSizeStandard,
+                    position: [marginX, null],
+                    width: textWidth,
+                    lineGap: 2,
+                }),
+                doc.pdf.struct("Sect", [
+                    structText(doc, "H2", {
+                        text: "\n" + t(doc.locale, "cover.yourProofs.title"),
+                        font: "ROSansBold",
                         size: fontSizeStandard,
                         position: [marginX, null],
                         width: textWidth,
                         lineGap: 2,
-                    });
-                }),
-                doc.pdf.struct("Sect", [
-                    doc.pdf.struct("H2", function () {
-                        drawText(doc, {
-                            text:
-                                "\n" + t(doc.locale, "cover.yourProofs.title"),
-                            font: "ROSansBold",
-                            size: fontSizeStandard,
-                            position: [marginX, null],
-                            width: textWidth,
-                            lineGap: 2,
-                        });
                     }),
                     structList(doc, {
                         items: formatEuProofEvents(euProofs, doc.locale),
@@ -106,25 +99,21 @@ export function addDccCoverPage(doc, proofs, createdAt) {
                     }),
                 ]),
                 doc.pdf.struct("Sect", [
-                    doc.pdf.struct("H2", function () {
-                        drawText(doc, {
-                            text: "\n" + t(doc.locale, "cover.whichCode.title"),
-                            font: "ROSansBold",
-                            size: fontSizeStandard,
-                            position: [marginX, null],
-                            width: textWidth,
-                            lineGap: 2,
-                        });
+                    structText(doc, "H2", {
+                        text: "\n" + t(doc.locale, "cover.whichCode.title"),
+                        font: "ROSansBold",
+                        size: fontSizeStandard,
+                        position: [marginX, null],
+                        width: textWidth,
+                        lineGap: 2,
                     }),
-                    doc.pdf.struct("P", function () {
-                        drawText(doc, {
-                            text: t(doc.locale, "cover.whichCode.text"),
-                            font: "ROSansRegular",
-                            size: fontSizeStandard,
-                            position: [marginX, null],
-                            width: textWidth,
-                            lineGap: 2,
-                        });
+                    structText(doc, "P", {
+                        text: t(doc.locale, "cover.whichCode.text"),
+                        font: "ROSansRegular",
+                        size: fontSizeStandard,
+                        position: [marginX, null],
+                        width: textWidth,
+                        lineGap: 2,
                     }),
                 ]),
             ]),
