@@ -74,6 +74,7 @@ var fontSizeFooter = 8;
  */
 export function addProofPage(doc, proof, createdAt, args) {
     var selfPrinted = args && args.selfPrinted;
+    var structProof = proof.territory === "nl" ? structNlProof : structEuProof;
     doc.addPart(function () {
         return qrDataToSvg(
             proof.qr,
@@ -94,9 +95,7 @@ export function addProofPage(doc, proof, createdAt, args) {
             doc.loadFont("ROSansBold", ROSansWebTextBold);
             doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
-                proof.territory === "nl"
-                    ? structNlProof(doc, qrSvg, proof, createdAt, selfPrinted)
-                    : structEuProof(doc, qrSvg, proof, createdAt),
+                structProof(doc, qrSvg, proof, createdAt, selfPrinted),
             ]);
         });
     });
@@ -137,7 +136,7 @@ function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     return doc.pdf.struct("Sect", content);
 }
 
-function structEuProof(doc, qrSvg, proof, createdAt) {
+function structEuProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     var instructionsContent = [
         structInstructionsHeading(doc),
         structFoldInstructions(doc),
@@ -149,7 +148,7 @@ function structEuProof(doc, qrSvg, proof, createdAt) {
     if (proof.eventType === "vaccination") {
         instructionsContent.push(
             structValidUntil(doc, proof.validUntil),
-            structValidUntilInstructions(doc)
+            structEuValidUntilInstructions(doc, selfPrinted)
         );
     }
 
@@ -482,9 +481,12 @@ function structValidUntil(doc, validUntil) {
     ]);
 }
 
-function structValidUntilInstructions(doc) {
+function structEuValidUntilInstructions(doc, selfPrinted) {
     return structText(doc, "P", {
-        text: t(doc.locale, "eu.createNew"),
+        text: t(
+            doc.locale,
+            "eu.createNew." + (selfPrinted ? "selfPrinted" : "prePrinted")
+        ),
         font: "ROSansRegular",
         size: fontSizeStandard,
         position: [rightPartLeft, null],
