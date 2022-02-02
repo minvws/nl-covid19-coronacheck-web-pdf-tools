@@ -2,7 +2,9 @@ export default {
     "eu.instructions":
         "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het bewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
     "eu.validUntil": "Dit papieren bewijs is geldig tot:",
-    "eu.createNew":
+    "eu.createNew.prePrinted":
+        "Daarna kan je bellen naar 0800-1421 om een nieuw bewijs aan te vragen.",
+    "eu.createNew.selfPrinted":
         "Daarna kan je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print).",
     "eu.negativetest.title": "Internationaal testbewijs",
     "eu.negativetest.qrTitle": "Testbewijs",
@@ -59,7 +61,9 @@ export default {
         "Geldig vanaf: %{validFrom}\nGeldig tot: %{validUntil}",
     "nl.issuedOn": "Geprint op %{date}",
     "nl.keyId": "Sleutelnummer: %{keyId}",
-    "nl.maxValidityExplanation":
+    "nl.maxValidityExplanation.prePrinted":
+        "* Dit papieren bewijs is maximaal %{days} dagen geldig. Hierna kun je bellen naar 0800-1421 om een nieuw bewijs aan te vragen (zolang je vaccinatie of herstel nog geldig is). Kijk op [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs) voor meer informatie over de eisen en geldigheid van coronabewijzen.",
+    "nl.maxValidityExplanation.selfPrinted":
         "* Dit papieren bewijs is maximaal %{days} dagen geldig. Hierna kun je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print) (zolang je vaccinatie of herstel nog geldig is). Kijk op [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs) voor meer informatie over de eisen en geldigheid van coronabewijzen.",
     "nl.maxValidity": "Maximaal %{days} dagen geldig*",
     instructions: "Instructies",
