@@ -118,7 +118,7 @@ function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     var proofContent = [
         structProofTitle(doc, "nl.qrTitle"),
         structNlQrSection(doc, qrSvg),
-        structNlDetailsSection(doc, proof, createdAt),
+        structNlDetailsSection(doc, proof, createdAt, selfPrinted),
     ];
 
     var content = [
@@ -495,7 +495,7 @@ function structEuValidUntilInstructions(doc, selfPrinted) {
     });
 }
 
-function structNlDetailsSection(doc, proof, createdAt) {
+function structNlDetailsSection(doc, proof, createdAt, selfPrinted) {
     var contents = [
         structText(doc, "H2", {
             text: t(doc.locale, "nl.propertiesLabel"),
@@ -543,9 +543,14 @@ function structNlDetailsSection(doc, proof, createdAt) {
         if (!proof.validAtMost25Hours) {
             contents.push(
                 structText(doc, "P", {
-                    text: t(doc.locale, "nl.maxValidityExplanation", {
-                        days: "90",
-                    }),
+                    text: t(
+                        doc.locale,
+                        "nl.maxValidityExplanation." +
+                            (selfPrinted ? "selfPrinted" : "prePrinted"),
+                        {
+                            days: "90",
+                        }
+                    ),
                     font: "ROSansRegular",
                     size: fontSizeStandard,
                     lineGap: 1,
