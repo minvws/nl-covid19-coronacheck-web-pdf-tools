@@ -273,7 +273,7 @@ function structLetterBody(doc, args) {
             );
             heading("Internationaal bewijs", 5);
             paragraph(
-                "U krijg een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat uw bezoekt door te kijken op www.wijsopreis.nl of te bellen naar +31 247 247 247.",
+                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat uw bezoekt door te kijken op www.wijsopreis.nl of te bellen naar +31 247 247 247.",
                 null,
                 null,
                 5
