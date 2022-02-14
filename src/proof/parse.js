@@ -72,7 +72,7 @@ export function parseDomesticProof(data, locale) {
 
         keyIdentifier: data.keyIdentifier || null,
 
-        validAtMost25Hours: parseInt(data.attributes.validForHours, 10) <= 25,
+        validAtMost15Days: parseInt(data.attributes.validForHours, 10) <= 360,
     };
 }
 
