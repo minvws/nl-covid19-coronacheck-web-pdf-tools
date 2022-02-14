@@ -102,7 +102,7 @@ export function addProofPage(doc, proof, createdAt, args) {
 }
 
 function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
-    var instructionsVariant = proof.validAtMost25Hours
+    var instructionsVariant = proof.validAtMost15Days
         ? "test"
         : selfPrinted
         ? "selfPrinted"
@@ -129,7 +129,7 @@ function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
         doc.pdf.struct("Sect", proofContent),
     ];
 
-    if (proof.keyIdentifier && !proof.validAtMost25Hours) {
+    if (proof.keyIdentifier && !proof.validAtMost15Days) {
         content.push(structNlFooterText(doc));
     }
 
@@ -540,7 +540,7 @@ function structNlDetailsSection(doc, proof, createdAt, selfPrinted) {
         }),
     ];
     if (proof.keyIdentifier) {
-        if (!proof.validAtMost25Hours) {
+        if (!proof.validAtMost15Days) {
             contents.push(
                 structText(doc, "P", {
                     text: t(

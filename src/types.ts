@@ -101,7 +101,7 @@ type DomesticProof = {
     validFrom: string;
     validUntil: string;
     keyIdentifier: string | null;
-    validAtMost25Hours?: boolean;
+    validAtMost15Days?: boolean;
 };
 
 export type EuropeanProof =
