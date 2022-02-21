@@ -32,3 +32,15 @@ export function findNameByCode(arr, code) {
     var found = arr.find((item) => item.code === code);
     return found && found.name;
 }
+
+/**
+ * @param {Object} holderConfig
+ * @return {import("./types").DisclosurePolicy}
+ */
+export function getDisclosurePolicy(holderConfig) {
+    return Array.isArray(holderConfig.disclosurePolicy) &&
+        holderConfig.disclosurePolicy.length === 1 &&
+        holderConfig.disclosurePolicy[0].toUpperCase() === "1G"
+        ? "1G"
+        : "3G";
+}

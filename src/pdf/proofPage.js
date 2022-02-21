@@ -103,7 +103,7 @@ export function addProofPage(doc, proof, createdAt, args) {
 
 function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     var instructionsVariant = proof.validAtMost15Days
-        ? "test"
+        ? "test." + proof.disclosurePolicy
         : selfPrinted
         ? "selfPrinted"
         : "prePrinted";
@@ -122,8 +122,8 @@ function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     ];
 
     var content = [
-        structNlTitle(doc),
-        structIntro(doc, "nl"),
+        structNlTitle(doc, proof.disclosurePolicy),
+        structIntro(doc, "nl", proof.disclosurePolicy),
         structFlag(doc, "nl"),
         doc.pdf.struct("Sect", instructionsContent),
         doc.pdf.struct("Sect", proofContent),
@@ -171,9 +171,9 @@ function structEuProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     ]);
 }
 
-function structNlTitle(doc) {
+function structNlTitle(doc, disclosurePolicy) {
     return structText(doc, "H1", {
-        text: t(doc.locale, "nl.title"),
+        text: t(doc.locale, "nl." + disclosurePolicy + ".title"),
         font: "MontserratBold",
         size: fontSizeH1,
         color: titleColor,
@@ -202,9 +202,12 @@ function structEuTitle(doc, proof) {
     });
 }
 
-function structIntro(doc, territory) {
+function structIntro(doc, territory, disclosurePolicy) {
+    var key = territory;
+    if (disclosurePolicy) key += "." + disclosurePolicy;
+    key += ".intro";
     return structText(doc, "P", {
-        text: "\n" + t(doc.locale, territory + ".intro"),
+        text: "\n" + t(doc.locale, key),
         font: "ROSansRegular",
         size: fontSizeStandard,
         position: [marginLeftIntro, null],

@@ -91,6 +91,8 @@ type RecoveryCredential = BaseCredentials & {
 
 export type Proof = DomesticProof | EuropeanProof;
 
+export type DisclosurePolicy = "3G" | "1G";
+
 type DomesticProof = {
     proofType: "domestic";
     territory: "nl";
@@ -102,6 +104,7 @@ type DomesticProof = {
     validUntil: string;
     keyIdentifier: string | null;
     validAtMost15Days?: boolean;
+    disclosurePolicy: DisclosurePolicy;
 };
 
 export type EuropeanProof =
