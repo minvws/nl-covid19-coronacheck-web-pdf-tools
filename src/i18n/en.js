@@ -20,16 +20,19 @@ export default {
     "eu.alt.flag": "Flag of the European Union with the letters NL on it",
     "eu.qrTitle": "International QR-code",
     "nl.instructions.test":
-        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance",
+        "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nShow your certificate and proof of identity at the entrance",
     "nl.instructions.prePrinted":
         "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance\n\nRequest a new certificate if this one is expired",
     "nl.instructions.selfPrinted":
         "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity to the activity you’re visiting \n\nShow the certificate and proof of identity at the entrance\n\nPrint a new certificate if this one is expired",
     "nl.propertiesLabel": "Your credentials:",
     "nl.validityLabel": "Certificate validity:",
-    "nl.title": "Certificate for the Netherlands",
-    "nl.intro":
+    "nl.3G.title": "Certificate for the Netherlands",
+    "nl.1G.title": "Dutch test certificate",
+    "nl.3G.intro":
         "Visiting locations or activities within the Netherlands? Then use this certificate.",
+    "nl.1G.intro":
+        "Visiting locations or activities within the Netherlands where 1G access applies? Then use this certificate.",
     "nl.alt.flag": "Dutch flag",
     "eu.travelWarning":
         "This certificate is not a travel document. The scientific evidence regarding COVID-19 vaccinations, testing and recovery continues to evolve, also with regard to new variants of concern. Before traveling, please check which public health measures and associated restrictions apply at the destination.",

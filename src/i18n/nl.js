@@ -44,16 +44,19 @@ export default {
     "eu.userData.validUntil": "Geldig tot",
     "eu.userData.certificateNumber": "UNIEK CERTIFICAATNUMMER",
     "nl.instructions.test":
-        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang",
+        "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang",
     "nl.instructions.prePrinted":
         "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang\n\nVraag een nieuw bewijs aan als deze is verlopen",
     "nl.instructions.selfPrinted":
         "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee naar de plek die je bezoekt\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang\n\nPrint een nieuw bewijs uit als deze is verlopen",
     "nl.propertiesLabel": "Jouw gegevens:",
     "nl.validityLabel": "Geldigheid bewijs:",
-    "nl.title": "Bewijs voor in Nederland",
-    "nl.intro":
+    "nl.3G.title": "Bewijs voor in Nederland",
+    "nl.1G.title": "Nederlands\ntestbewijs",
+    "nl.3G.intro":
         "Bezoek je plekken of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
+    "nl.1G.intro":
+        "Bezoek je plekken of activiteiten in Nederland waar 1G-toegang wordt gegeven? Gebruik dan dit coronabewijs.",
     "nl.alt.flag": "Nederlandse vlag",
     "nl.qrTitle": "Coronatoegangs-\nbewijs",
     "nl.userData": "Initialen: %{initials}\nGeboortedag: %{dateOfBirth}",

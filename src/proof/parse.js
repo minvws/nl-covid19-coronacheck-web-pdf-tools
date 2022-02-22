@@ -10,6 +10,7 @@ import {
     getTestManufacturer,
     getVaccineManufacturer,
     getVaccineType,
+    getDisclosurePolicy,
 } from "../holder.js";
 
 /**
@@ -23,7 +24,9 @@ export function parseProofData(proofData, holderConfig, locale) {
     var proofs = [];
 
     if (proofData.domestic) {
-        proofs.push(parseDomesticProof(proofData.domestic, locale));
+        proofs.push(
+            parseDomesticProof(proofData.domestic, holderConfig, locale)
+        );
     }
     if (proofData.european) {
         proofs = proofs.concat(
@@ -36,10 +39,11 @@ export function parseProofData(proofData, holderConfig, locale) {
 
 /**
  * @param {import("../types").DomesticProofData} data
+ * @param {import("../types").TODO} holderConfig
  * @param {import("../types").Locale} [locale]
  * @return {import("../types").Proof}
  */
-export function parseDomesticProof(data, locale) {
+export function parseDomesticProof(data, holderConfig, locale) {
     var validFromDate = parseInt(data.attributes.validFrom, 10) * 1000;
     return {
         proofType: "domestic",
@@ -73,6 +77,8 @@ export function parseDomesticProof(data, locale) {
         keyIdentifier: data.keyIdentifier || null,
 
         validAtMost15Days: parseInt(data.attributes.validForHours, 10) <= 360,
+
+        disclosurePolicy: getDisclosurePolicy(holderConfig),
     };
 }
 
