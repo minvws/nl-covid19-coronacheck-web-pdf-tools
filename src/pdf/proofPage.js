@@ -103,7 +103,7 @@ export function addProofPage(doc, proof, createdAt, args) {
 
 function structNlProof(doc, qrSvg, proof, createdAt, selfPrinted) {
     var instructionsVariant = proof.validAtMost15Days
-        ? "test." + proof.disclosurePolicy
+        ? "test"
         : selfPrinted
         ? "selfPrinted"
         : "prePrinted";
