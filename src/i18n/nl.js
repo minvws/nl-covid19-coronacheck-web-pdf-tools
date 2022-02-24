@@ -52,7 +52,7 @@ export default {
     "nl.propertiesLabel": "Jouw gegevens:",
     "nl.validityLabel": "Geldigheid bewijs:",
     "nl.3G.title": "Bewijs voor in Nederland",
-    "nl.1G.title": "Nederlands\ntestbewijs",
+    "nl.1G.title": "Nederlands testbewijs",
     "nl.3G.intro":
         "Bezoek je plekken of activiteiten binnen Nederland? Gebruik dan dit coronabewijs.",
     "nl.1G.intro":
