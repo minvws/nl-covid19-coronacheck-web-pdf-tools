@@ -102,6 +102,7 @@ export function parseEuropeanProofs(data, holderConfig) {
     if (data.dcc.v) {
         for (i = 0; i < data.dcc.v.length; i++) {
             var vaccination = data.dcc.v[i];
+
             proofs.push({
                 proofType: "european-vaccination",
 
@@ -113,7 +114,7 @@ export function parseEuropeanProofs(data, holderConfig) {
 
                 credential: vaccination,
 
-                fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
+                fullName: parseEuropeanFullName(data),
 
                 birthDateString: formatDate(data.dcc.dob),
 
@@ -162,7 +163,7 @@ export function parseEuropeanProofs(data, holderConfig) {
 
                 credential: test,
 
-                fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
+                fullName: parseEuropeanFullName(data),
 
                 birthDateString: formatDate(data.dcc.dob),
 
@@ -204,7 +205,7 @@ export function parseEuropeanProofs(data, holderConfig) {
 
                 credential: recovery,
 
-                fullName: data.dcc.nam.fn + ", " + data.dcc.nam.gn,
+                fullName: parseEuropeanFullName(data),
 
                 birthDateString: formatDate(data.dcc.dob),
 
@@ -223,4 +224,15 @@ export function parseEuropeanProofs(data, holderConfig) {
         }
     }
     return proofs;
+}
+
+/**
+ * @param {import("../types").EuropeanProofData|import("../types").EuropeanProofData} data
+ * @return {string}
+ */
+function parseEuropeanFullName(data) {
+    var parts = [];
+    if (data.dcc.nam.fn) parts.push(data.dcc.nam.fn);
+    if (data.dcc.nam.gn) parts.push(data.dcc.nam.gn);
+    return parts.length ? parts.join(", ") : "";
 }
