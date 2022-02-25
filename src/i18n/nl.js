@@ -43,6 +43,7 @@ export default {
     "eu.userData.validFrom": "Geldig vanaf",
     "eu.userData.validUntil": "Geldig tot",
     "eu.userData.certificateNumber": "UNIEK CERTIFICAATNUMMER",
+    "eu.negativeTestResult": "Negatief (geen Corona)",
     "nl.instructions.test":
         "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nLaat je coronabewijs en identiteitsbewijs zien bij de ingang",
     "nl.instructions.prePrinted":

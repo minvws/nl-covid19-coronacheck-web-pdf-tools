@@ -59,6 +59,7 @@ export default {
     "eu.userData.validFrom": "Valid from",
     "eu.userData.validUntil": "Valid to",
     "eu.userData.certificateNumber": "UNIQUE CERTIFICATE IDENTIFIER",
+    "eu.negativeTestResult": "Negative (no Corona)",
     "nl.qrTitle": "Coronavirus pass",
     "nl.userData": "Initials: %{initials}\nDay of birth: %{dateOfBirth}",
     "nl.validityDetails":

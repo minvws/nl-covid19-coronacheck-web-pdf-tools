@@ -1,8 +1,11 @@
+import { t } from "../i18n/index.js";
+
 /**
  * @param {import("../types").EuropeanProof} proof
+ * @param {import("../types").Locale} locale
  * @return {string[][]}
  */
-export function getProofDetails(proof) {
+export function getProofDetails(proof, locale) {
     if (proof.eventType === "vaccination") {
         return [
             ["name", proof.fullName],
@@ -25,7 +28,7 @@ export function getProofDetails(proof) {
             ["testType", proof.testType],
             ["testName", proof.testName],
             ["testDate", proof.dateOfTest],
-            ["testResult", "Negative (no Corona)"],
+            ["testResult", t(locale, "eu.negativeTestResult")],
             ["testLocation", proof.testLocation],
             ["testManufacturer", proof.testManufacturer],
             ["countryOfTest", proof.countryOfTest],
