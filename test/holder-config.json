@@ -1,30 +1,47 @@
 {
-  "androidMinimumVersion": 1851,
-  "androidRecommendedVersion": 2137,
+  "androidMinimumVersion": 3249,
+  "androidRecommendedVersion": 3734,
   "androidMinimumVersionMessage": "Om de app te gebruiken heb je de laatste versie uit de store nodig.",
   "playStoreURL": "https://play.google.com/store/apps/details?id=nl.rijksoverheid.ctr.holder",
-  "iosMinimumVersion": "2.2.2",
-  "iosRecommendedVersion": "2.3.1",
+  "iosMinimumVersion": "2.7.1",
+  "iosRecommendedVersion": "3.0.1",
   "iosMinimumVersionMessage": "Om de app te gebruiken heb je de laatste versie uit de store nodig.",
   "iosAppStoreURL": "https://apps.apple.com/nl/app/coronacheck/id1548269870",
   "appDeactivated": false,
-  "configTTL": 864000,
+  "mijnCnEnabled": false,
+  "configTTL": 1209600,
+  "configMinimumIntervalSeconds": 43200,
+  "configAlmostOutOfDateWarningSeconds": 86400,
   "upgradeRecommendationInterval": 24,
   "maxValidityHours": 24,
   "informationURL": "https://coronacheck.nl",
+  "androidEnableVerificationPolicyVersion": 0,
+  "iOSEnableVerificationPolicyVersion": "0",
   "requireUpdateBefore": 1620781181,
   "ggdEnabled": true,
   "euLaunchDate": "2021-06-30T22:00:00Z",
+  "recoveryGreencardRevisedValidityLaunchDate": "2021-11-30T01:00:00Z",
   "temporarilyDisabled": false,
+  "vaccinationAssessmentEventValidityDays": 14,
+  "visitorPassEnabled": false,
+  "showNewValidityInfoCard": true,
   "vaccinationEventValidity": 14600,
+  "vaccinationEventValidityDays": 1095,
   "recoveryEventValidity": 8760,
+  "recoveryEventValidityDays": 1095,
   "recoveryExpirationDays": 180,
-  "testEventValidity": 96,
+  "testEventValidity": 336,
+  "testEventValidityHours": 336,
   "domesticCredentialValidity": 24,
-  "credentialRenewalDays": 5,
+  "credentialRenewalDays": 4,
   "clockDeviationThresholdSeconds": 30,
   "domesticQRRefreshSeconds": 30,
+  "internationalQRRelevancyDays": 28,
   "luhnCheckEnabled": false,
+  "proofSerializationVersion": "2",
+  "disclosurePolicy": [
+    "1G"
+  ],
   "euTestResults": [
     {
       "code": "260415000",
@@ -45,7 +62,7 @@
     },
     {
       "code": "2924536",
-      "name": "Moderna (COVID-19 Vaccin Moderna)",
+      "name": "Moderna (COVID-19 Vaccin Moderna 0,50ML)",
       "vp": "1119349007",
       "mp": "EU/1/20/1507",
       "ma": "ORG-100031184"
@@ -63,6 +80,41 @@
       "vp": "J07BX03",
       "mp": "EU/1/20/1525",
       "ma": "ORG-100001417"
+    },
+    {
+      "code": "93540101",
+      "name": "COVID-19 TRIAL VACCIN AKS-452 INJVLST 0,5ML SC VB",
+      "vp": "J07BX03",
+      "mp": "NL:AKS-452-VB",
+      "ma": "NL:AKS"
+    },
+    {
+      "code": "93550101",
+      "name": "COVID-19 TRIAL VACCIN AKS-452 INJVLST 0,5ML SC HB",
+      "vp": "J07BX03",
+      "mp": "NL:AKS-452-HB",
+      "ma": "NL:AKS"
+    },
+    {
+      "code": "2978636",
+      "name": "Moderna (COVID-19 Vaccin Moderna 0,25ML)",
+      "vp": "1119349007",
+      "mp": "EU/1/20/1507",
+      "ma": "ORG-100031184"
+    },
+    {
+      "code": "2984911",
+      "name": "COVID-19 VACCIN PFIZER INJVLST 0,2ML",
+      "vp": "1119349007",
+      "mp": "EU/1/20/1528",
+      "ma": "ORG-100030215"
+    },
+    {
+      "code": "93550102",
+      "name": "COVID-19 TRIAL VACCIN JANSSEN INJVLST 0,5ML HB",
+      "vp": "J07BX03",
+      "mp": "NL:AKS-452-HB",
+      "ma": "NL:AKS"
     }
   ],
   "euBrands": [
@@ -87,6 +139,10 @@
       "name": "CVnCoV"
     },
     {
+      "code": "NVX-CoV2373",
+      "name": "Nuvaxovid / Covovax (Novavax)"
+    },
+    {
       "code": "Sputnik-V",
       "name": "Sputnik-V"
     },
@@ -104,7 +160,7 @@
     },
     {
       "code": "Inactivated-SARS-CoV-2-Vero-Cell",
-      "name": "Inactivated SARS-CoV-2 (Vero Cell)"
+      "name": "Inactivated SARS-CoV-2 (Vero Cell) (deprecated)"
     },
     {
       "code": "CoronaVac",
@@ -117,6 +173,70 @@
     {
       "code": "Covishield",
       "name": "Covishield (ChAdOx1_nCoV-19)"
+    },
+    {
+      "code": "Covid-19-recombinant",
+      "name": "Covid-19 (recombinant)"
+    },
+    {
+      "code": "R-COVI",
+      "name": "R-COVI"
+    },
+    {
+      "code": "CoviVac",
+      "name": "CoviVac"
+    },
+    {
+      "code": "Sputnik-Light",
+      "name": "Sputnik Light"
+    },
+    {
+      "code": "Hayat-Vax",
+      "name": "Hayat-Vax"
+    },
+    {
+      "code": "Abdala",
+      "name": "Abdala"
+    },
+    {
+      "code": "WIBP-CorV",
+      "name": "WIBP-CorV"
+    },
+    {
+      "code": "MVC-COV1901",
+      "name": "MVC COVID-19 vaccine"
+    },
+    {
+      "code": "EU/1/21/1618",
+      "name": "Nuvaxovid / Covovax (Novavax)"
+    },
+    {
+      "code": "Covovax",
+      "name": "Covovax"
+    },
+    {
+      "code": "Vidprevtyn",
+      "name": "Vidprevtyn"
+    },
+    {
+      "code": "VLA2001",
+      "name": "VLA2001"
+    },
+    {
+      "code": "EpiVacCorona-N",
+      "name": "EpiVacCorona-N"
+    },
+    {
+      "code": "Sputnik-M",
+      "name": "Sputnik M"
+    },
+    {
+      "code": "NL:AKS-452-VB",
+      "name": "AKS-452 (VB)"
+    },
+    {
+      "code": "NL:AKS-452-HB",
+      "name": "AKS-452 (HB)"
     }
   ],
   "nlTestTypes": [
@@ -190,7 +310,7 @@
     },
     {
       "code": "ORG-100032020",
-      "name": "Novavax CZ AS"
+      "name": "Novavax CZ a.s."
     },
     {
       "code": "Gamaleya-Research-Institute",
@@ -211,6 +331,46 @@
     {
       "code": "ORG-100001981",
       "name": "Serum Institute Of India Private Limited"
+    },
+    {
+      "code": "Fiocruz",
+      "name": "Fiocruz"
+    },
+    {
+      "code": "ORG-100007893",
+      "name": "R-Pharm CJSC"
+    },
+    {
+      "code": "Chumakov-Federal-Scientific-Center",
+      "name": "Chumakov Federal Scientific Center for Research and Development of Immune-and-Biological Products"
+    },
+    {
+      "code": "ORG-100023050",
+      "name": "Gulf Pharmaceutical Industries"
+    },
+    {
+      "code": "CIGB",
+      "name": "Center for Genetic Engineering and Biotechnology"
+    },
+    {
+      "code": "Sinopharm-WIBP",
+      "name": "Sinopharm - Wuhan Institute of Biological Products"
+    },
+    {
+      "code": "ORG-100033914",
+      "name": "Medigen Vaccine Biologics Corporation"
+    },
+    {
+      "code": "ORG-100000788",
+      "name": "Sanofi Pasteur"
+    },
+    {
+      "code": "ORG-100036422",
+      "name": "Valneva France"
+    },
+    {
+      "code": "NL:AKS",
+      "name": "NL:AKS"
     }
   ],
   "euTestTypes": [
@@ -227,12 +387,8 @@
       "name": "Breathomix, Spironose"
     },
     {
-      "code": "NL:BIKKER",
-      "name": "Amendment Bikker test type"
-    },
-    {
       "code": "NL:AGOB",
-      "name": "Antigen"
+      "name": "Onbekend / Unknown (behandeld als antigeen)"
     }
   ],
   "euTestManufacturers": [
@@ -358,7 +514,7 @@
     },
     {
       "code": "1343",
-      "name": "Zhezhiang Orient Gene Biotech Co."
+      "name": "Zhejiang Orient Gene Biotech Co."
     },
     {
       "code": "2035",
@@ -542,11 +698,11 @@
     },
     {
       "code": "2078",
-      "name": "ArcDia International Oy Ltd"
+      "name": "ArcDia International Ltd"
     },
     {
       "code": "1263",
-      "name": "Humasis"
+      "name": "Humasis Co."
     },
     {
       "code": "2350",
@@ -674,7 +830,7 @@
     },
     {
       "code": "2079",
-      "name": "ArcDia International Oy Ltd"
+      "name": "ArcDia International Ltd"
     },
     {
       "code": "2090",
@@ -795,6 +951,1128 @@
     {
       "code": "1604",
       "name": "Roche (SD BIOSENSOR)"
+    },
+    {
+      "code": "2374",
+      "name": "Abioteq GmbH"
+    },
+    {
+      "code": "2579",
+      "name": "AccuBioTech Co."
+    },
+    {
+      "code": "2089",
+      "name": "Anhui Formaster Biosci Co."
+    },
+    {
+      "code": "2494",
+      "name": "Beijing O&D Biotech Co."
+    },
+    {
+      "code": "1691",
+      "name": "Chil Tıbbi Malzeme Sanayi ve Ticaret Limited Şirketi"
+    },
+    {
+      "code": "2150",
+      "name": "Chongqing M&D Biotechnology Co. Ltd"
+    },
+    {
+      "code": "1960",
+      "name": "DiaSorin S.p.A"
+    },
+    {
+      "code": "2273",
+      "name": "Dräger Safety AG & Co. KGaA"
+    },
+    {
+      "code": "2533",
+      "name": "Dynamiker Biotechnology（Tianjin) Co."
+    },
+    {
+      "code": "1929",
+      "name": "Hoyotek Biomedical Co."
+    },
+    {
+      "code": "1801",
+      "name": "Innova Medical Group"
+    },
+    {
+      "code": "2278",
+      "name": "Innovation Biotech (Beijing) Co."
+    },
+    {
+      "code": "2419",
+      "name": "InTec PRODUCTS"
+    },
+    {
+      "code": "2144",
+      "name": "Jiangsu Well Biotech Co."
+    },
+    {
+      "code": "2156",
+      "name": "ROCHE Diagnostics"
+    },
+    {
+      "code": "2415",
+      "name": "Shenzhen Dymind Biotechnology Co."
+    },
+    {
+      "code": "2414",
+      "name": "Shenzhen Huian Biosci Technology Co."
+    },
+    {
+      "code": "1813",
+      "name": "Shenzhen Kisshealth Biotechnology Co."
+    },
+    {
+      "code": "2026",
+      "name": "Shenzhen Reagent Technology Co."
+    },
+    {
+      "code": "2297",
+      "name": "SureScreen Diagnostics"
+    },
+    {
+      "code": "2143",
+      "name": "Wuxi Biohermes Bio & Medical Technology Co."
+    },
+    {
+      "code": "1902",
+      "name": "Zhuhai Encode Medical Engineering Co."
+    },
+    {
+      "code": "2282",
+      "name": "Becton Dickinson"
+    },
+    {
+      "code": "2506",
+      "name": "Nanjing Norman Biological Technology Co."
+    },
+    {
+      "code": "1880",
+      "name": "NG Biotech"
+    },
+    {
+      "code": "2230",
+      "name": "Biohit Healthcare (Hefei) Co."
+    },
+    {
+      "code": "2642",
+      "name": "Genobio Pharmaceutical Co."
+    },
+    {
+      "code": "1876",
+      "name": "Hangzhou Biotest Biotech Co."
+    },
+    {
+      "code": "1945",
+      "name": "Hangzhou Sejoy Electronics&Instruments Co."
+    },
+    {
+      "code": "2555",
+      "name": "IEDAU INTERNATIONAL GMBH"
+    },
+    {
+      "code": "2586",
+      "name": "Jiangsu Mole Bioscience CO."
+    },
+    {
+      "code": "2640",
+      "name": "Mologic Ltd"
+    },
+    {
+      "code": "2301",
+      "name": "Nanjing Liming Bio-Products Co."
+    },
+    {
+      "code": "2271",
+      "name": "Pantest SA"
+    },
+    {
+      "code": "2152",
+      "name": "Shenzhen CAS-Envision Medical Technology Co."
+    },
+    {
+      "code": "1228",
+      "name": "Shenzhen Microprofit Biotech Co."
+    },
+    {
+      "code": "1347",
+      "name": "SHENZHEN YHLO BIOTECH CO."
+    },
+    {
+      "code": "2256",
+      "name": "Sigmed Sp. z o.o."
+    },
+    {
+      "code": "2684",
+      "name": "Zhejiang Gene Science Co."
+    },
+    {
+      "code": "1778",
+      "name": "Beijing Kewei Clinical Diagnostic Reagent Inc"
+    },
+    {
+      "code": "2696",
+      "name": "Cesna Biyoteknoloji Araştırma Geliştirme Laboratuvar Sist.İnş.Müh.Dan.San.Tic.Ltd.Şti."
+    },
+    {
+      "code": "2746",
+      "name": "Cesna Biyoteknoloji Araştırma Geliştirme Laboratuvar Sist.İnş.Müh.Dan.San.Tic.Ltd.Şti."
+    },
+    {
+      "code": "2695",
+      "name": "Glallergen CO."
+    },
+    {
+      "code": "2629",
+      "name": "Hangzhou DIAN Biotechnology Co."
+    },
+    {
+      "code": "1353",
+      "name": "Linkcare Health Services (Diagnos BT)"
+    },
+    {
+      "code": "2741",
+      "name": "OSANG Healthcare Co."
+    },
+    {
+      "code": "2754",
+      "name": "Qingdao Hightop Biotech Co."
+    },
+    {
+      "code": "2097",
+      "name": "Sansure Biotech Inc."
+    },
+    {
+      "code": "2584",
+      "name": "Türklab Tibbi Mal. San. ve Tic. A.S."
+    },
+    {
+      "code": "2100",
+      "name": "VivaChek Biotech (Hangzhou) Co."
+    },
+    {
+      "code": "2807",
+      "name": "Beijing Hotgen Biotech Co."
+    },
+    {
+      "code": "2380",
+      "name": "BioSpeedia International"
+    },
+    {
+      "code": "2756",
+      "name": "DNA Diagnostic"
+    },
+    {
+      "code": "2164",
+      "name": "Nanjing Synthgene Medical Technology Co."
+    },
+    {
+      "code": "2763",
+      "name": "ScheBo Biotech"
+    },
+    {
+      "code": "1942",
+      "name": "Surge Medical Inc."
+    },
+    {
+      "code": "1751",
+      "name": "Türklab Tibbi Mal. San. ve Tic. A.S."
+    },
+    {
+      "code": "1689",
+      "name": "Türklab Tibbi Mal. San. ve Tic. A.S."
+    },
+    {
+      "code": "1722",
+      "name": "Türklab Tibbi Mal. San. ve Tic. A.S."
+    },
+    {
+      "code": "1865",
+      "name": "Acon Biotech (Hangzhou) Co."
+    },
+    {
+      "code": "2853",
+      "name": "GenSure Biotech Inc"
+    },
+    {
+      "code": "1899",
+      "name": "Jiangsu Konsung Bio-Medical Science And Technology Co."
+    },
+    {
+      "code": "2151",
+      "name": "JINAN BABIO BIOTECHNOLOGY CO."
+    },
+    {
+      "code": "2260",
+      "name": "Multi-G bvba"
+    },
+    {
+      "code": "1573",
+      "name": "Nantong Egens Biotechnology Co."
+    },
+    {
+      "code": "2608",
+      "name": "Neo-nostics (Suzhou) Bioengineering Co."
+    },
+    {
+      "code": "1200",
+      "name": "Ortho Clinical Diagnostics"
+    },
+    {
+      "code": "NL:VWS",
+      "name": "VWS Approved"
+    },
+    {
+      "code": "NL:BMSN",
+      "name": "VWS Approved BMSN"
+    },
+    {
+      "code": "NL:UNKNOWN",
+      "name": "Unknown"
+    }
+  ],
+  "euTestNames": [
+    {
+      "code": "1341",
+      "name": "SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1065",
+      "name": "BD Veritor™ System for Rapid Detection of SARS CoV 2"
+    },
+    {
+      "code": "1581",
+      "name": "OnSite COVID-19 Ag Rapid Test"
+    },
+    {
+      "code": "2031",
+      "name": "Coronavirus Ag Rapid Test Cassette (Swab)"
+    },
+    {
+      "code": "1180",
+      "name": "MEDsan SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1855",
+      "name": "GA CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1216",
+      "name": "2019-nCoV Ag Rapid Detection Kit (Immuno-Chromatography)"
+    },
+    {
+      "code": "2029",
+      "name": "SARS-CoV-2 Antigen Rapid Test Cassette"
+    },
+    {
+      "code": "1215",
+      "name": "LYHER Novel Coronavirus (COVID-19) Antigen Test Kit(Colloidal Gold)"
+    },
+    {
+      "code": "1457",
+      "name": "Flowflex SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1456",
+      "name": "SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1610",
+      "name": "COVID-19 Antigen Rapid Test Cassette"
+    },
+    {
+      "code": "1333",
+      "name": "COVID-19 Rapid Antigen Test (Colloidal Gold)"
+    },
+    {
+      "code": "2147",
+      "name": "ESPLINE SARS-CoV-2"
+    },
+    {
+      "code": "1574",
+      "name": "Zhenrui ®COVID-19 Antigen Test Cassette"
+    },
+    {
+      "code": "1178",
+      "name": "SARS-CoV-2 Spike Protein Test Kit (Colloidal Gold Chromatographic Immunoassay)"
+    },
+    {
+      "code": "1331",
+      "name": "SARS-CoV-2 Antigen Rapid Test Kit (Colloidal Gold Immunochromatography)"
+    },
+    {
+      "code": "1739",
+      "name": "EBS SARS-CoV-2 Ag Rapid Test"
+    },
+    {
+      "code": "1618",
+      "name": "Artron COVID-19 Antigen Test"
+    },
+    {
+      "code": "1736",
+      "name": "COVID-19 (SARS-CoV-2) Antigen Test Kit(Colloidal Gold)"
+    },
+    {
+      "code": "1218",
+      "name": "CLINITEST Rapid Covid-19 Antigen Test"
+    },
+    {
+      "code": "1190",
+      "name": "mö-screen Corona Antigen Test"
+    },
+    {
+      "code": "1197",
+      "name": "SARS-CoV-2 Antigen Kit (Colloidal Gold)"
+    },
+    {
+      "code": "2317",
+      "name": "SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1501",
+      "name": "COVID-19 Antigen Detection Kit"
+    },
+    {
+      "code": "1468",
+      "name": "Flowflex SARS-CoV-2 Antigen rapid test"
+    },
+    {
+      "code": "1225",
+      "name": "Test Rapid Covid-19 Antigen (tampon nazofaringian)"
+    },
+    {
+      "code": "1466",
+      "name": "TODA CORONADIAG Ag"
+    },
+    {
+      "code": "1465",
+      "name": "SARS-CoV-2 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "1223",
+      "name": "BIOSYNEX COVID-19 Ag BSS"
+    },
+    {
+      "code": "1343",
+      "name": "Coronavirus Ag Rapid Test Cassette (Swab)"
+    },
+    {
+      "code": "2035",
+      "name": "SARS-CoV-2 Ag Rapid Test"
+    },
+    {
+      "code": "1906",
+      "name": "COVID-19 Antigen Rapid Test Device"
+    },
+    {
+      "code": "768",
+      "name": "mariPOC SARS-CoV-2"
+    },
+    {
+      "code": "1747",
+      "name": "2019-nCoV Antigen Test Kit (colloidal gold method)"
+    },
+    {
+      "code": "1989",
+      "name": "AFIAS COVID-19 Ag"
+    },
+    {
+      "code": "2290",
+      "name": "LIAISON® Quick Detect Covid Ag Assay"
+    },
+    {
+      "code": "1919",
+      "name": "Coretests COVID-19 Ag Test"
+    },
+    {
+      "code": "1363",
+      "name": "Covid-19 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "1242",
+      "name": "NowCheck COVID-19 Ag Test"
+    },
+    {
+      "code": "1484",
+      "name": "WANTAI SARS-CoV-2 Ag Rapid Test (FIA)"
+    },
+    {
+      "code": "1481",
+      "name": "Rapid SARS-CoV-2 Antigen Test Card"
+    },
+    {
+      "code": "1360",
+      "name": "COVID-19 Ag Test Kit"
+    },
+    {
+      "code": "2052",
+      "name": "STANDARD Q COVID-19 Ag Test Nasal"
+    },
+    {
+      "code": "770",
+      "name": "ECOTEST COVID-19 Antigen Rapid Test Device"
+    },
+    {
+      "code": "1357",
+      "name": "V-Chek SARS-CoV-2 Rapid Ag Test (colloidal gold)"
+    },
+    {
+      "code": "1236",
+      "name": "Rapid Response COVID-19 Antigen Rapid Test"
+    },
+    {
+      "code": "1599",
+      "name": "Biomerica COVID-19 Antigen Rapid Test (nasopharyngeal swab)"
+    },
+    {
+      "code": "1114",
+      "name": "SGTi-flex COVID-19 Ag"
+    },
+    {
+      "code": "1199",
+      "name": "CAT"
+    },
+    {
+      "code": "2200",
+      "name": "NanoRepro SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1870",
+      "name": "Novel Coronavirus 2019-nCoV Antigen Test (Colloidal Gold)"
+    },
+    {
+      "code": "1232",
+      "name": "Panbio Covid-19 Ag Rapid Test"
+    },
+    {
+      "code": "1759",
+      "name": "SARS-CoV-2 Antigen Test Kit"
+    },
+    {
+      "code": "1495",
+      "name": "Rapid Test Ag 2019-nCov"
+    },
+    {
+      "code": "1253",
+      "name": "GenSure COVID-19 Antigen Rapid Kit"
+    },
+    {
+      "code": "2067",
+      "name": "SARS-CoV-2 Antigen Test Kit (colloidal gold method)"
+    },
+    {
+      "code": "1494",
+      "name": "BIOSYNEX COVID-19 Ag+ BSS"
+    },
+    {
+      "code": "1097",
+      "name": "Sofia SARS Antigen FIA"
+    },
+    {
+      "code": "1490",
+      "name": "Multi-Respiratory Virus Antigen Test Kit(Swab) (Influenza A+B/ COVID-19)"
+    },
+    {
+      "code": "2183",
+      "name": "One Step Test for SARS-CoV-2 Antigen (Colloidal Gold)"
+    },
+    {
+      "code": "1767",
+      "name": "Coronavirus Ag Rapid Test Cassette"
+    },
+    {
+      "code": "1800",
+      "name": "Ksmart® SARS-COV2 Antigen Rapid Test"
+    },
+    {
+      "code": "1920",
+      "name": "COVID-19 Antigen Rapid Test Cassette (Colloidal Gold)"
+    },
+    {
+      "code": "1489",
+      "name": "COVID-19 Antigen Rapid Test Kit (Swab)"
+    },
+    {
+      "code": "1764",
+      "name": "SARS-CoV-2 Antigen Rapid Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1884",
+      "name": "SARS-CoV-2 Antigen Rapid Test (Colloidal Gold)"
+    },
+    {
+      "code": "1763",
+      "name": "COVID-19 Antigen Rapid Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1762",
+      "name": "SARS CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "1365",
+      "name": "COVID-19/Influenza A+B Antigen Combo Rapid Test"
+    },
+    {
+      "code": "1244",
+      "name": "GenBody COVID-19 Ag"
+    },
+    {
+      "code": "1243",
+      "name": "ActivXpress+ COVID-19 Antigen Complete Testing Kit"
+    },
+    {
+      "code": "1485",
+      "name": "WANTAI SARS-CoV-2 Ag Rapid Test (Colloidal Gold)"
+    },
+    {
+      "code": "308",
+      "name": "PCL COVID19 Ag Rapid FIA"
+    },
+    {
+      "code": "1769",
+      "name": "SARS-CoV-2 Ag Diagnostic Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1768",
+      "name": "SARS-CoV-2 Ag Diagnostic Test Kit (Immuno-fluorescence)"
+    },
+    {
+      "code": "2078",
+      "name": "mariPOC Respi+"
+    },
+    {
+      "code": "1263",
+      "name": "Humasis COVID-19 Ag Test"
+    },
+    {
+      "code": "2350",
+      "name": "ECOTEST COVID-19 Antigen Rapid Test Device"
+    },
+    {
+      "code": "2074",
+      "name": "SARS-CoV-2 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "2072",
+      "name": "Novel Coronavirus (SARS-CoV-2) Antigen Rapid Test Kit"
+    },
+    {
+      "code": "2108",
+      "name": "AESKU.RAPID SARS-CoV-2"
+    },
+    {
+      "code": "2228",
+      "name": "SARS-CoV-2 Rapid Antigen Test Nasal"
+    },
+    {
+      "code": "2107",
+      "name": "Novel Corona Virus (SARS-CoV-2) Ag Rapid Test Kit"
+    },
+    {
+      "code": "1775",
+      "name": "MEXACARE COVID-19 Antigen Rapid Test"
+    },
+    {
+      "code": "1654",
+      "name": "Asan Easy Test COVID-19 Ag"
+    },
+    {
+      "code": "2104",
+      "name": "NADAL COVID-19 Ag + Influenza A/B Test"
+    },
+    {
+      "code": "1257",
+      "name": "SARS-CoV-2 Antigen Rapid Test (COVID-19 Antigen Rapid Test) (Swab)"
+    },
+    {
+      "code": "1773",
+      "name": "The SARS-CoV-2 Antigen Assay Kit (Immunochromatography)"
+    },
+    {
+      "code": "2103",
+      "name": "VivaDiag Pro SARS CoV 2 Ag Rapid Test"
+    },
+    {
+      "code": "1375",
+      "name": "DIAQUICK COVID-19 Ag Cassette"
+    },
+    {
+      "code": "2101",
+      "name": "COVID-19 Antigen Rapid Test Card"
+    },
+    {
+      "code": "1815",
+      "name": "COVID-19 (SARS-CoV-2) Antigen Test Kit (Colloidal Gold) - Nasal Swab"
+    },
+    {
+      "code": "1934",
+      "name": "Coronavirus (SARS-CoV 2) Antigen - Oral Fluid"
+    },
+    {
+      "code": "2109",
+      "name": "Green Spring SARS-CoV-2 Antigen-Rapid test-Set"
+    },
+    {
+      "code": "2243",
+      "name": "PCL COVID19 Ag Gold"
+    },
+    {
+      "code": "2242",
+      "name": "COVID-19 Antigen Detection Kit"
+    },
+    {
+      "code": "2241",
+      "name": "MARESKIT"
+    },
+    {
+      "code": "1271",
+      "name": "Exdia COVID-19 Ag"
+    },
+    {
+      "code": "1392",
+      "name": "COVID-19 Antigen Test Cassette"
+    },
+    {
+      "code": "1822",
+      "name": "Rapid COVID-19 Antigen Test (Colloidal Gold)"
+    },
+    {
+      "code": "1304",
+      "name": "AMP Rapid Test SARS-CoV-2 Ag"
+    },
+    {
+      "code": "1820",
+      "name": "SARS-CoV-2 Antigen (Colloidal Gold)"
+    },
+    {
+      "code": "2116",
+      "name": "SARS-CoV-2 Antigen Detection Kit (Colloidal Gold Immunochromatographic Assay)"
+    },
+    {
+      "code": "1268",
+      "name": "LumiraDx SARS-CoV-2 Ag Test"
+    },
+    {
+      "code": "1267",
+      "name": "QuickProfile COVID-19 Antigen Test"
+    },
+    {
+      "code": "1420",
+      "name": "FREND COVID-19 Ag"
+    },
+    {
+      "code": "1266",
+      "name": "SARS-CoV-2 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "1144",
+      "name": "GENEDIA W COVID-19 Ag"
+    },
+    {
+      "code": "2079",
+      "name": "mariPOC Quick Flu+"
+    },
+    {
+      "code": "2090",
+      "name": "SARS-CoV-2 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "2012",
+      "name": "SARS-CoV-2 Antigen Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1286",
+      "name": "SARS-CoV-2 Antigen Rapid Test Kit (Fluorescence Immunochromatography)"
+    },
+    {
+      "code": "2098",
+      "name": "COVID-19 (SARS-CoV-2) Antigen Test Kit"
+    },
+    {
+      "code": "2010",
+      "name": "NOVA Test® SARS-CoV-2 Antigen Rapid Test Kit (Colloidal Gold Immunochromatography)"
+    },
+    {
+      "code": "1162",
+      "name": "NADAL COVID-19 Ag Test"
+    },
+    {
+      "code": "2130",
+      "name": "TestNOW® - COVID-19 Antigen Test"
+    },
+    {
+      "code": "1437",
+      "name": "Wondfo 2019-nCoV Antigen Test (Lateral Flow Method)"
+    },
+    {
+      "code": "1833",
+      "name": "COVID-VIRO"
+    },
+    {
+      "code": "2128",
+      "name": "PocRoc®SARS-CoV-2 Antigen Rapid Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "2006",
+      "name": "SARS-CoV-2 antigen Test Kit (LFIA)"
+    },
+    {
+      "code": "2247",
+      "name": "CoviGnost AG Test Device 1x20"
+    },
+    {
+      "code": "1278",
+      "name": "Rapid SARS-CoV-2 Antigen Test Card"
+    },
+    {
+      "code": "1957",
+      "name": "COVID-19 Antigen Detection Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1319",
+      "name": "V-Chek SARS-CoV-2 Ag Rapid Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1296",
+      "name": "Andlucky™ COVID-19 Antigen Rapid Test"
+    },
+    {
+      "code": "1295",
+      "name": "reOpenTest COVID-19 Antigen Rapid Test"
+    },
+    {
+      "code": "1173",
+      "name": "CerTest SARS-CoV-2 Card test"
+    },
+    {
+      "code": "1844",
+      "name": "Immunobio SARS-CoV-2 Antigen ANTERIOR NASAL Rapid Test Kit (minimal invasive)"
+    },
+    {
+      "code": "2139",
+      "name": "COVID-19 Antigen Rapid Test Device（Colloidal Gold）"
+    },
+    {
+      "code": "2017",
+      "name": "SARS-CoV-2 Antigen Test Kit"
+    },
+    {
+      "code": "344",
+      "name": "STANDARD F COVID-19 Ag FIA"
+    },
+    {
+      "code": "1324",
+      "name": "2019-nCoV Ag Rapid Test Kit (Immunochromatography)"
+    },
+    {
+      "code": "345",
+      "name": "STANDARD Q COVID-19 Ag Test"
+    },
+    {
+      "code": "1443",
+      "name": "RapidFor SARS-CoV-2 Rapid Ag Test"
+    },
+    {
+      "code": "1201",
+      "name": "ScheBo SARS CoV-2 Quick Antigen"
+    },
+    {
+      "code": "2013",
+      "name": "biotical SARS-CoV-2 Ag Card"
+    },
+    {
+      "code": "1606",
+      "name": "BIOCREDIT COVID-19 Ag - SARS-CoV 2 Antigen test"
+    },
+    {
+      "code": "1967",
+      "name": "SARS-CoV-2 Antigen Test Kit (Colloidal Gold Chromatographic Immunoassay)"
+    },
+    {
+      "code": "1604",
+      "name": "SARS-CoV-2 Rapid Antigen Test"
+    },
+    {
+      "code": "2374",
+      "name": "Cora Gentest-19"
+    },
+    {
+      "code": "2579",
+      "name": "Accu-Tell SARS-CoV-2 Ag Cassette"
+    },
+    {
+      "code": "2089",
+      "name": "New Coronavirus (COVID-19) Antigen Rapid Test"
+    },
+    {
+      "code": "2494",
+      "name": "COVID-19 Antigen Rapid Test"
+    },
+    {
+      "code": "1691",
+      "name": "CHIL COVID-19 Antigen Rapid Test (Nasopharyngeal / Oropharyngeal Swab-Casette)"
+    },
+    {
+      "code": "2150",
+      "name": "2019-nCoV Antigen Test Kit"
+    },
+    {
+      "code": "1960",
+      "name": "LIAISON® SARS-CoV-2 Ag"
+    },
+    {
+      "code": "2273",
+      "name": "Dräger Antigen Test SARS-CoV-2"
+    },
+    {
+      "code": "2533",
+      "name": "Dynamiker SARS-CoV-2 Ag Rapid Test"
+    },
+    {
+      "code": "1929",
+      "name": "Corona Virus (COVID-19) Antigen Rapid Test (Colloidal Gold)"
+    },
+    {
+      "code": "1801",
+      "name": "Innova SARS CoV-2 Antigen Rapid Qualitative Test"
+    },
+    {
+      "code": "2278",
+      "name": "Novel Coronavirus (SARS-Cov-2) Antigen Rapid Test Cassette (swab)"
+    },
+    {
+      "code": "2419",
+      "name": "Rapid SARS-CoV-2 Antigen Test (nasopharyngeal specimen)"
+    },
+    {
+      "code": "2144",
+      "name": "COVID-19 Ag Rapid Test Device"
+    },
+    {
+      "code": "2156",
+      "name": "Elecsys® SARS-CoV-2 Antigen"
+    },
+    {
+      "code": "2415",
+      "name": "Sars-CoV-2 antigen test kit (colloidal gold)"
+    },
+    {
+      "code": "2414",
+      "name": "SARS-CoV-2 Antigen Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1813",
+      "name": "SARS-CoV-2 Antigen Test Kit (GICA)"
+    },
+    {
+      "code": "2026",
+      "name": "SARS-CoV-2 antigen IVD kit SWAB"
+    },
+    {
+      "code": "2297",
+      "name": "SARS-CoV-2 Rapid Antigen Test Cassette"
+    },
+    {
+      "code": "2143",
+      "name": "SARS-CoV-2 Antigen Test Kit（Lateral Flow Assay）"
+    },
+    {
+      "code": "1902",
+      "name": "ENCODE SARS-COV-2 Antigen rapid Test Device"
+    },
+    {
+      "code": "2282",
+      "name": "BD Kit For Rapid Detection of SARS-CoV-2"
+    },
+    {
+      "code": "2506",
+      "name": "Novel Coronavirus (2019-nCoV) Antigen Testing Kit (Colloidal Gold)"
+    },
+    {
+      "code": "1880",
+      "name": "Ninonasal"
+    },
+    {
+      "code": "2230",
+      "name": "SARS-CoV-2 Antigen Rapid Test (Colloidal Gold Method)"
+    },
+    {
+      "code": "2642",
+      "name": "Virusee® SARS-CoV-2 Antigen Rapid Test (Colloidal Gold)"
+    },
+    {
+      "code": "1876",
+      "name": "COVID-19 Antigen Rapid Test Cassette(Nasal Swab)"
+    },
+    {
+      "code": "1945",
+      "name": "SARS-CoV-2 Antigen Rapid Test Cassette"
+    },
+    {
+      "code": "2555",
+      "name": "Covid-19 Antigen Schnelltest (Colloidales Gold)"
+    },
+    {
+      "code": "2586",
+      "name": "SARS-CoV-2 Antigen Test Cassette"
+    },
+    {
+      "code": "2640",
+      "name": "COVIOS Ag COVID-19 Antigen Rapid Diagnostic Test"
+    },
+    {
+      "code": "2301",
+      "name": "StrongStep® SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "2271",
+      "name": "Pantest Coronavirus Ag (Nasopharyngeal Swab)"
+    },
+    {
+      "code": "2152",
+      "name": "SARS-CoV-2 Antigen Rapid Detection Kit"
+    },
+    {
+      "code": "1228",
+      "name": "SARS-CoV-2 Spike Protein Test Kit (Fluorescence Immunoassay)"
+    },
+    {
+      "code": "1347",
+      "name": "GLINE-2019-nCoV Ag"
+    },
+    {
+      "code": "2256",
+      "name": "Redtest Professional Sars-CoV-2 Antigen Rapid Test (Covid-19 Ag)"
+    },
+    {
+      "code": "2684",
+      "name": "Novel Coronavirus (COVID-19) Antigen Detection Kit"
+    },
+    {
+      "code": "1778",
+      "name": "COVID19 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "2696",
+      "name": "CHECK UP SARS-COV-2 NASAL ANTIGEN RAPID TEST"
+    },
+    {
+      "code": "2746",
+      "name": "CHECK UP SARS-COV-2 NASOPHARYNGEAL ANTIGEN TEST"
+    },
+    {
+      "code": "2695",
+      "name": "Novel Coronavirus (2019-nCoV) Antigen Test Kit (Colloidal gold immunochromatography)"
+    },
+    {
+      "code": "2629",
+      "name": "COVID-19 Antigen Test Cassette"
+    },
+    {
+      "code": "1353",
+      "name": "Covid-19 Antigen Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "2741",
+      "name": "GeneFinder COVID-19 Ag Plus Rapid Test"
+    },
+    {
+      "code": "2754",
+      "name": "SARS-CoV-2/Flu A+B/RSV Antigen Rapid Test"
+    },
+    {
+      "code": "2097",
+      "name": "SARS-CoV-2 Rapid Antigen Test (Colloidal Gold Method)"
+    },
+    {
+      "code": "2584",
+      "name": "INFO Covid-19 Ag Test"
+    },
+    {
+      "code": "2100",
+      "name": "Verino Pro SARS CoV 2 Ag Rapid Test"
+    },
+    {
+      "code": "2807",
+      "name": "Coronavirus (2019-nCoV)-Antigentest"
+    },
+    {
+      "code": "2380",
+      "name": "COVID19Speed-Antigen Test BSD_0503"
+    },
+    {
+      "code": "2756",
+      "name": "SARS-CoV-2 Antigen Rapid Test"
+    },
+    {
+      "code": "2164",
+      "name": "SARS-COV-2 Nucleocapsid (N) Antigen Rapid Detection Kit (Colloidal gold method)"
+    },
+    {
+      "code": "2763",
+      "name": "ScheBo SARS CoV-2 Quick ANTIGEN (Colloidal Gold Method)"
+    },
+    {
+      "code": "1942",
+      "name": "COVID-19 Antigen Test Kit"
+    },
+    {
+      "code": "1751",
+      "name": "RAPIDAN TESTER Covid-19 Ag Test"
+    },
+    {
+      "code": "1689",
+      "name": "TEST IT Covid-19 Ag Test"
+    },
+    {
+      "code": "1722",
+      "name": "TOYO Covid-19 Ag Test"
+    },
+    {
+      "code": "1865",
+      "name": "Flowflex SARS-CoV-2 Antigen Rapid Test (Nasal/Saliva)"
+    },
+    {
+      "code": "2853",
+      "name": "GenSure COVID-19 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "1899",
+      "name": "COVID-19 Antigen Rapid Test Kit (Colloidal Gold)"
+    },
+    {
+      "code": "2151",
+      "name": "SARS-CoV-2 Antigen Rapid Detection Kit (Colloidal Gold Method)"
+    },
+    {
+      "code": "2260",
+      "name": "Covid19Check-NAS"
+    },
+    {
+      "code": "1573",
+      "name": "COVID-19 Antigen Rapid Test Kit"
+    },
+    {
+      "code": "2608",
+      "name": "COVID 19 Antigen Test Kit (Colloidal Gold Method)"
+    },
+    {
+      "code": "1200",
+      "name": "VITROS Immunodiagnostic Products SARS-CoV-2 Antigen"
+    },
+    {
+      "code": "NL:VWS",
+      "name": "VWS Approved"
+    },
+    {
+      "code": "NL:BMSN",
+      "name": "VWS Approved BMSN"
+    },
+    {
+      "code": "NL:UNKNOWN",
+      "name": "Unknown"
     }
   ],
   "providerIdentifiers": [
@@ -941,6 +2219,10 @@
     {
       "name": "GGD",
       "code": "GGD"
+    },
+    {
+      "name": "ZKVI",
+      "code": "ZKV"
     }
   ],
   "universalLinkDomains": [
@@ -951,6 +2233,18 @@
     {
       "url": "www.ajax.nl",
       "name": "Ajax app"
+    },
+    {
+      "url": "shop.simpleticket.eu",
+      "name": "SimpleTicket app"
+    },
+    {
+      "url": "coronacheck.nl",
+      "name": "CoronaCheck app"
+    },
+    {
+      "url": "api.rafzone.nl",
+      "name": "RAF Sport app"
     }
   ]
 }
