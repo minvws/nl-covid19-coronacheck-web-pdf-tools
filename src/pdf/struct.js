@@ -18,7 +18,7 @@ export function structFigure(doc, options, fn) {
     var x = options.x * dpmm;
     var y = options.y * dpmm;
     var width = options.width * dpmm;
-    var height = options.width * dpmm;
+    var height = options.height * dpmm;
     var pageHeight = (options.pageHeight || defaultPageHeight) * dpmm;
     var bbox = [x, pageHeight - y - height, x + width, pageHeight - y];
     var figure = doc.pdf.struct("Figure", { alt: options.alt }, fn);
@@ -27,6 +27,8 @@ export function structFigure(doc, options, fn) {
         O: String("Layout"),
         BBox: bbox,
         Placement: String("Block"),
+        Width: width,
+        Height: height,
     });
     figure.dictionary.data.A.end();
     return figure;
