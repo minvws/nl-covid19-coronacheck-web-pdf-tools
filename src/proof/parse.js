@@ -11,7 +11,10 @@ import {
     getVaccineManufacturer,
     getVaccineType,
     getDisclosurePolicy,
+    getEuTestName,
 } from "../holder.js";
+
+var RAT = "LP217198-3";
 
 /**
  * @param {import("../types").ProofData} proofData
@@ -172,7 +175,7 @@ export function parseEuropeanProofs(data, holderConfig) {
 
                 testType: getEuTestType(holderConfig, test.tt) || "",
 
-                testName: test.nm,
+                testName: parseEuropeanTestName(test, holderConfig),
 
                 dateOfTest: formatLocalDateTime(test.sc),
 
@@ -223,4 +226,24 @@ export function parseEuropeanProofs(data, holderConfig) {
         }
     }
     return proofs;
+}
+
+/**
+ * @param {string} testType
+ * @return {boolean}
+ */
+export function isRAT(testType) {
+    return testType === RAT;
+}
+
+/**
+ * @param {import("../types").EuTestCredential} test
+ * @param {import("../types").TODO} holderConfig
+ * @return {string}
+ */
+export function parseEuropeanTestName(test, holderConfig) {
+    if (isRAT(test.tt) && test.ma) {
+        return getEuTestName(holderConfig, test.ma) || test.nm;
+    }
+    return test.nm;
 }

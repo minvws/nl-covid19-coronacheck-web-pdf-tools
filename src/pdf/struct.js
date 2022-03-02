@@ -193,7 +193,11 @@ export function structDynamicList(doc, options) {
                     doc.pdf.font(options.font);
                     doc.pdf.fillColor(options.color || "#000000");
                     doc.pdf.fontSize(options.size);
-                    doc.pdf.moveDown(options.itemGap || 1);
+                    doc.pdf.moveDown(
+                        typeof options.itemGap === "undefined"
+                            ? 1
+                            : options.itemGap
+                    );
                 }),
             ]);
         })

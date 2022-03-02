@@ -51,7 +51,7 @@ var months = [
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
- * @param {1|2} [args.version]
+ * @param {1|2|3} [args.version]
  */
 export function addCkvpCoverPage(doc, args) {
     doc.addPart(function () {
@@ -195,7 +195,7 @@ function structLetterHeading(doc, createdAt) {
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
- * @param {1|2} [args.version]
+ * @param {1|2|3} [args.version]
  */
 function structLetterBody(doc, args) {
     function paragraph(text, top, space, indent) {
@@ -221,7 +221,7 @@ function structLetterBody(doc, args) {
         });
     }
 
-    function list(items) {
+    function list(items, itemGap) {
         doc.pdf.addStructure(
             structDynamicList(doc, {
                 font: "LiberationSansRegular",
@@ -230,7 +230,8 @@ function structLetterBody(doc, args) {
                 position: [marginLeft, null],
                 width: bodyWidth,
                 lineGap: 1,
-                itemGap: lineSpace / 2,
+                itemGap:
+                    typeof itemGap === "undefined" ? lineSpace / 2 : itemGap,
                 drawLabel: function (_n, x, y) {
                     doc.pdf.font("LiberationSansRegular");
                     doc.pdf.fillColor("#000000");
@@ -260,7 +261,7 @@ function structLetterBody(doc, args) {
             paragraph(
                 "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
             );
-        } else if (args.proofsFound) {
+        } else if (args.proofsFound && args.version === 2) {
             paragraph(
                 "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
             );
@@ -292,7 +293,32 @@ function structLetterBody(doc, args) {
             paragraph(
                 "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
             );
-        } else {
+        } else if (args.proofsFound) {
+            paragraph(
+                "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
+            );
+            paragraph(
+                "Het coronatoegangsbewijs voor toegang in Nederland wordt op dit moment niet meer gebruikt. Daarom ontvangt u alleen een internationaal bewijs om mee te reizen."
+            );
+            heading("Internationaal bewijs om mee te reizen", 5);
+            paragraph(
+                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt op www.wijsopreis.nl. Of u kunt bellen naar +31 247 247 247.",
+                null,
+                null,
+                5
+            );
+            heading("CoronaCheck-app");
+            paragraph(
+                "U kunt uw bewijs ook in de CoronaCheck-app op uw telefoon zetten. Bij deze brief zit een pagina met een lettercombinatie en uitleg. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
+            );
+            heading("Kloppen uw gegevens niet?");
+            paragraph(
+                "Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken."
+            );
+            paragraph(
+                "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
+            );
+        } else if (args.version <= 2) {
             paragraph(
                 "U heeft ons gevraagd uw coronabewijzen per post op te sturen. We kunnen u helaas geen coronabewijzen toesturen. In deze brief leggen we uit hoe dat komt. "
             );
@@ -393,6 +419,137 @@ function structLetterBody(doc, args) {
                     doc.pdf.moveDown(lineSpace / 2);
                 },
             ]);
+        } else {
+            paragraph(
+                "U heeft ons gevraagd uw coronabewijzen per post op te sturen. We kunnen u helaas geen coronabewijzen toesturen. In deze brief leggen we uit hoe dat komt. ",
+                null,
+                lineSpace / 2
+            );
+            heading("Waarom ontvangt u geen coronabewijzen?");
+            paragraph(
+                "Het coronatoegangsbewijs voor toegang tot plekken in Nederland wordt op dit moment niet meer gebruikt. Daarom ontvangt u geen Nederlands bewijs. Dat u ook geen internationaal bewijs ontvangt kan de volgende redenen hebben:",
+                null,
+                lineSpace / 2
+            );
+
+            list(
+                [
+                    function (x, y, width) {
+                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.text(
+                            "U bent niet gevaccineerd, en u bent niet positief getest op corona.",
+                            x,
+                            y,
+                            { width: width, lineGap: rawLineGap }
+                        );
+                    },
+                    function (x, y, width) {
+                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.text(
+                            "U bent niet gevaccineerd. U bent wél hersteld van corona, maar de positieve PCR test is langer dan 180 dagen geleden afgenomen. ",
+                            x,
+                            y,
+                            {
+                                width: width,
+                                continued: true,
+                                lineGap: rawLineGap,
+                            }
+                        );
+                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.text(
+                            "De test is niet meer geldig. Deze kunt u dus niet gebruiken voor de aanvraag van uw coronabewijzen.",
+                            { width: width, lineGap: rawLineGap }
+                        );
+                    },
+                    function (x, y, width) {
+                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.text(
+                            "U bent in de afgelopen 3 dagen gevaccineerd. Of u bent in de afgelopen 30 uur positief getest op corona met een PCR test. ",
+                            x,
+                            y,
+                            {
+                                width: width,
+                                continued: true,
+                                lineGap: rawLineGap,
+                            }
+                        );
+                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.text(
+                            "Hierdoor staan uw gegevens misschien nog niet in het systeem. Vraag over een paar dagen opnieuw uw coronabewijzen aan.",
+                            { width: width, lineGap: rawLineGap }
+                        );
+
+                        doc.pdf.moveDown(lineSpace / 2);
+                    },
+                ],
+                lineSpace / 4
+            );
+            heading("Gelden de redenen hierboven niet voor u?");
+            paragraph(
+                "Misschien staan uw gegevens dan niet goed in het systeem. De oplossing hiervoor hangt af van uw situatie. Welke situatie geldt voor u?",
+                null,
+                lineSpace / 2
+            );
+            list(
+                [
+                    function (x, y, width) {
+                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.text(
+                            "U bent door de GGD gevaccineerd. ",
+                            x,
+                            y,
+                            {
+                                width: width,
+                                continued: true,
+                                lineGap: rawLineGap,
+                            }
+                        );
+                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.text(
+                            "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
+                            { width: width, lineGap: rawLineGap }
+                        );
+                    },
+                    function (x, y, width) {
+                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.text(
+                            "U bent door iemand anders dan de GGD gevaccineerd. ",
+                            x,
+                            y,
+                            {
+                                width: width,
+                                continued: true,
+                                lineGap: rawLineGap,
+                            }
+                        );
+                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.text(
+                            "Neem contact op met de zorgverlener die u heeft gevaccineerd. Dat kan uw huisarts, arts van het ziekenhuis of een zorginstelling zijn. Zij controleren of uw gegevens goed staan en helpen u verder.",
+                            { width: width, lineGap: rawLineGap }
+                        );
+                    },
+                    function (x, y, width) {
+                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.text(
+                            "U bent positief getest op corona. ",
+                            x,
+                            y,
+                            {
+                                width: width,
+                                continued: true,
+                                lineGap: rawLineGap,
+                            }
+                        );
+                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.text(
+                            "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
+                            { width: width, lineGap: rawLineGap }
+                        );
+                        doc.pdf.moveDown(lineSpace / 2);
+                    },
+                ],
+                lineSpace / 4
+            );
         }
         heading("Heeft u nog vragen over corona? ");
         paragraph(
