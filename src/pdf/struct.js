@@ -1,6 +1,7 @@
 import { parseMarkdownLinks } from "../util.js";
 
 var dpmm = 72 / 25.4; // dots per mm at 72dpi
+var defaultPageHeight = 297;
 
 /**
  * @param {import("./document").Document} doc
@@ -10,20 +11,24 @@ var dpmm = 72 / 25.4; // dots per mm at 72dpi
  * @param {number} options.y
  * @param {number} options.width
  * @param {number} options.height
+ * @param {number} [options.pageHeight] Defaults to A4
  * @param {() => void} fn
  */
 export function structFigure(doc, options, fn) {
     var x = options.x * dpmm;
     var y = options.y * dpmm;
     var width = options.width * dpmm;
-    var height = options.width * dpmm;
-    var bbox = [x, y, x + width, y + height];
+    var height = options.height * dpmm;
+    var pageHeight = (options.pageHeight || defaultPageHeight) * dpmm;
+    var bbox = [x, pageHeight - y - height, x + width, pageHeight - y];
     var figure = doc.pdf.struct("Figure", { alt: options.alt }, fn);
     figure.dictionary.data.BBox = bbox;
     figure.dictionary.data.A = doc.pdf.ref({
         O: String("Layout"),
         BBox: bbox,
         Placement: String("Block"),
+        Width: width,
+        Height: height,
     });
     figure.dictionary.data.A.end();
     return figure;

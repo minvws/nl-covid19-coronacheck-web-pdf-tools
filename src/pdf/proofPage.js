@@ -306,7 +306,7 @@ function structLogoRijksoverheid(doc) {
     var x = pageWidth / 4 - 4.55;
     var y = 0;
     var width = 9.1;
-    var height = 39;
+    var height = 18.2;
     var alt = t(doc.locale, "alt.logoRijksoverheid");
     var image = logoRijksoverheidA5;
     return structFigure(
