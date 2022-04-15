@@ -86,7 +86,9 @@ export function addProofPage(doc, proof, createdAt, args) {
                 if (proof.keyIdentifier) {
                     drawNlFooterBar(doc);
                 }
-                doc.pdf.outline.addItem(t(doc.locale, "nl." + proof.disclosurePolicy + ".title"));
+                doc.pdf.outline.addItem(
+                    t(doc.locale, "nl." + proof.disclosurePolicy + ".title")
+                );
             } else {
                 doc.pdf.outline.addItem(t(doc.locale, euTitleText(proof, doc)));
             }
@@ -202,9 +204,9 @@ function structEuTitle(doc, proof) {
 function euTitleText(proof, doc) {
     return proof.eventType == "vaccination"
         ? t(doc.locale, "eu.vaccination.title", {
-            doseNumber: proof.doseNumber,
-            totalDoses: proof.totalDoses
-        })
+              doseNumber: proof.doseNumber,
+              totalDoses: proof.totalDoses,
+          })
         : t(doc.locale, "eu." + proof.eventType + ".title");
 }
 
