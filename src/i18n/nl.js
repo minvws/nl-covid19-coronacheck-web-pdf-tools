@@ -113,4 +113,9 @@ export default {
     "cover.whichCode.title": "Welke QR-code moet ik gebruiken?",
     "cover.whichCode.text":
         "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Controleer daarom altijd voor vertrek op [wijsopreis.nl](https://wijsopreis.nl) welk bewijs je nodig hebt.",
+
+    "cover.totalDoseExplanation.title":
+        "Wat betekent het nummer achter mijn vaccinatie-dosis?",
+    "cover.totalDoseExplanation.text":
+        "Het eerste getal staat voor het aantal prikken dat je hebt gehad. Het tweede getal staat voor het aantal prikken dat jij nodig hebt voor volledige vaccinatie. Kijk voor meer informatie op  [coronacheck.nl/dosis](https://coronacheck.nl/dosis).",
 };

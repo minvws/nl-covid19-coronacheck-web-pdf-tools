@@ -114,4 +114,8 @@ export default {
     "cover.whichCode.title": "Which QR code should I use?",
     "cover.whichCode.text":
         "Which QR code you have to show depends on the demands of the country you're visiting.  Before leaving, please always check which certificate you need at your destination at [netherlandsworldwide.nl](https://netherlandsworldwide.nl).",
+    "cover.totalDoseExplanation.title":
+        "What does the number after my vaccination dose mean?",
+    "cover.totalDoseExplanation.text":
+        "The first number indicates the number of vaccinations you’ve had. The second number indicates how many vaccinations you need to be considered fully vaccinated. For more information please visit [coronacheck.nl/en/dose](https://coronacheck.nl/en/dose).",
 };
