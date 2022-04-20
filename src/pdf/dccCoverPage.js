@@ -45,117 +45,159 @@ export function addDccCoverPage(doc, proofs, createdAt) {
         doc.pdf.outline.addItem(t(doc.locale, "cover.title"));
 
         doc.addStruct("Art", [
+            sectContents(doc, euProofs),
+            sectLogo(doc),
+            sectIssuedOn(doc, createdAt),
+        ]);
+    });
+}
+
+function sectContents(doc, euProofs) {
+    var showTotalDoseExplanation = euProofs.some(function (proof) {
+        return (
+            proof.eventType === "vaccination" &&
+            proof.doseNumber > proof.totalDoses
+        );
+    });
+    var contents = [
+        structFigure(
+            doc,
+            {
+                x: pageWidth / 2 - 6.5,
+                y: 0,
+                width: 13,
+                height: 39,
+                alt: t(doc.locale, "alt.logoRijksoverheid"),
+            },
+            function () {
+                drawImage(doc, {
+                    x: pageWidth / 2 - 6.5,
+                    y: 0,
+                    width: 13,
+                    image: logoRijksoverheidA4,
+                });
+            }
+        ),
+        structText(doc, "H1", {
+            text: t(doc.locale, "cover.title"),
+            font: "MontserratBold",
+            size: fontSizeH1,
+            color: titleColor,
+            position: [marginX, textStart],
+            width: textWidth,
+            lineGap: 2,
+        }),
+        structText(doc, "P", {
+            text: "\n" + t(doc.locale, "cover.intro"),
+            font: "ROSansRegular",
+            size: fontSizeStandard,
+            position: [marginX, null],
+            width: textWidth,
+            lineGap: 2,
+        }),
+        doc.pdf.struct("Sect", [
+            structText(doc, "H2", {
+                text: "\n" + t(doc.locale, "cover.yourProofs.title"),
+                font: "ROSansBold",
+                size: fontSizeStandard,
+                position: [marginX, null],
+                width: textWidth,
+                lineGap: 2,
+            }),
+            structList(doc, {
+                items: formatEuProofEvents(euProofs, doc.locale),
+                font: "ROSansRegular",
+                size: fontSizeStandard,
+                position: [marginX + 3, null],
+                label: "•",
+                indent: 6,
+                lineGap: 1,
+            }),
+        ]),
+    ];
+    if (showTotalDoseExplanation) {
+        contents.push(
             doc.pdf.struct("Sect", [
-                structFigure(
-                    doc,
-                    {
-                        x: pageWidth / 2 - 6.5,
-                        y: 0,
-                        width: 13,
-                        height: 39,
-                        alt: t(doc.locale, "alt.logoRijksoverheid"),
-                    },
-                    function () {
-                        drawImage(doc, {
-                            x: pageWidth / 2 - 6.5,
-                            y: 0,
-                            width: 13,
-                            image: logoRijksoverheidA4,
-                        });
-                    }
-                ),
-                structText(doc, "H1", {
-                    text: t(doc.locale, "cover.title"),
-                    font: "MontserratBold",
-                    size: fontSizeH1,
-                    color: titleColor,
-                    position: [marginX, textStart],
+                structText(doc, "H2", {
+                    text:
+                        "\n" +
+                        t(doc.locale, "cover.totalDoseExplanation.title"),
+                    font: "ROSansBold",
+                    size: fontSizeStandard,
+                    position: [marginX, null],
                     width: textWidth,
                     lineGap: 2,
                 }),
                 structText(doc, "P", {
-                    text: "\n" + t(doc.locale, "cover.intro"),
+                    text: t(doc.locale, "cover.totalDoseExplanation.text"),
                     font: "ROSansRegular",
                     size: fontSizeStandard,
                     position: [marginX, null],
                     width: textWidth,
                     lineGap: 2,
                 }),
-                doc.pdf.struct("Sect", [
-                    structText(doc, "H2", {
-                        text: "\n" + t(doc.locale, "cover.yourProofs.title"),
-                        font: "ROSansBold",
-                        size: fontSizeStandard,
-                        position: [marginX, null],
-                        width: textWidth,
-                        lineGap: 2,
-                    }),
-                    structList(doc, {
-                        items: formatEuProofEvents(euProofs, doc.locale),
-                        font: "ROSansRegular",
-                        size: fontSizeStandard,
-                        position: [marginX + 3, null],
-                        label: "•",
-                        indent: 6,
-                        lineGap: 1,
-                    }),
-                ]),
-                doc.pdf.struct("Sect", [
-                    structText(doc, "H2", {
-                        text: "\n" + t(doc.locale, "cover.whichCode.title"),
-                        font: "ROSansBold",
-                        size: fontSizeStandard,
-                        position: [marginX, null],
-                        width: textWidth,
-                        lineGap: 2,
-                    }),
-                    structText(doc, "P", {
-                        text: t(doc.locale, "cover.whichCode.text"),
-                        font: "ROSansRegular",
-                        size: fontSizeStandard,
-                        position: [marginX, null],
-                        width: textWidth,
-                        lineGap: 2,
-                    }),
-                ]),
-            ]),
-            structFigure(
-                doc,
-                {
-                    x: marginX,
-                    y: pageHeight - marginY - 9,
-                    width: 46,
-                    height: 9,
-                    alt: t(doc.locale, "alt.logoCoronacheck"),
-                },
-                function () {
-                    var x = marginX;
-                    var y = pageHeight - marginY - 9;
-                    drawLogoCoronaCheck(doc, x, y, 9);
-                    drawText(doc, {
-                        text: "CoronaCheck",
-                        font: "MontserratBold",
-                        size: 14,
-                        color: titleColor,
-                        position: [x + 12, y + 4.5],
-                        baseline: "middle",
-                    });
-                }
-            ),
+            ])
+        );
+    }
+    contents.push(
+        doc.pdf.struct("Sect", [
+            structText(doc, "H2", {
+                text: "\n" + t(doc.locale, "cover.whichCode.title"),
+                font: "ROSansBold",
+                size: fontSizeStandard,
+                position: [marginX, null],
+                width: textWidth,
+                lineGap: 2,
+            }),
             structText(doc, "P", {
-                text: t(doc.locale, "cover.issuedOn", {
-                    date: formatLocalDate(createdAt),
-                }),
+                text: t(doc.locale, "cover.whichCode.text"),
                 font: "ROSansRegular",
                 size: fontSizeStandard,
-                width: 50,
-                align: "right",
-                position: [
-                    pageWidth - marginX - 50,
-                    pageHeight - marginY - 4.5,
-                ],
-                baseline: "middle",
+                position: [marginX, null],
+                width: textWidth,
+                lineGap: 2,
             }),
-        ]);
+        ])
+    );
+    return doc.pdf.struct("Sect", contents);
+}
+
+function sectLogo(doc) {
+    return structFigure(
+        doc,
+        {
+            x: marginX,
+            y: pageHeight - marginY - 9,
+            width: 46,
+            height: 9,
+            alt: t(doc.locale, "alt.logoCoronacheck"),
+        },
+        function () {
+            var x = marginX;
+            var y = pageHeight - marginY - 9;
+            drawLogoCoronaCheck(doc, x, y, 9);
+            drawText(doc, {
+                text: "CoronaCheck",
+                font: "MontserratBold",
+                size: 14,
+                color: titleColor,
+                position: [x + 12, y + 4.5],
+                baseline: "middle",
+            });
+        }
+    );
+}
+
+function sectIssuedOn(doc, createdAt) {
+    return structText(doc, "P", {
+        text: t(doc.locale, "cover.issuedOn", {
+            date: formatLocalDate(createdAt),
+        }),
+        font: "ROSansRegular",
+        size: fontSizeStandard,
+        width: 50,
+        align: "right",
+        position: [pageWidth - marginX - 50, pageHeight - marginY - 4.5],
+        baseline: "middle",
     });
 }
