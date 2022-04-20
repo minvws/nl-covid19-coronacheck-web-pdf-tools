@@ -42,6 +42,8 @@ export function addDccCoverPage(doc, proofs, createdAt) {
         doc.loadFont("ROSansRegular", ROSansWebTextRegular);
         doc.loadFont("ROSansBold", ROSansWebTextBold);
 
+        doc.pdf.outline.addItem(t(doc.locale, "cover.title"));
+
         doc.addStruct("Art", [
             doc.pdf.struct("Sect", [
                 structFigure(

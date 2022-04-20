@@ -86,6 +86,11 @@ export function addProofPage(doc, proof, createdAt, args) {
                 if (proof.keyIdentifier) {
                     drawNlFooterBar(doc);
                 }
+                doc.pdf.outline.addItem(
+                    t(doc.locale, "nl." + proof.disclosurePolicy + ".title")
+                );
+            } else {
+                doc.pdf.outline.addItem(t(doc.locale, euTitleText(proof, doc)));
             }
             drawFoldLineHorizontal(doc);
             drawFoldLineVertical(doc);
@@ -184,13 +189,7 @@ function structNlTitle(doc, disclosurePolicy) {
 }
 
 function structEuTitle(doc, proof) {
-    var text =
-        proof.eventType == "vaccination"
-            ? t(doc.locale, "eu.vaccination.title", {
-                  doseNumber: proof.doseNumber,
-                  totalDoses: proof.totalDoses,
-              })
-            : t(doc.locale, "eu." + proof.eventType + ".title");
+    var text = euTitleText(proof, doc);
     return structText(doc, "H1", {
         text: text,
         font: "MontserratBold",
@@ -200,6 +199,15 @@ function structEuTitle(doc, proof) {
         width: partWidthIntro,
         align: "center",
     });
+}
+
+function euTitleText(proof, doc) {
+    return proof.eventType == "vaccination"
+        ? t(doc.locale, "eu.vaccination.title", {
+              doseNumber: proof.doseNumber,
+              totalDoses: proof.totalDoses,
+          })
+        : t(doc.locale, "eu." + proof.eventType + ".title");
 }
 
 function structIntro(doc, territory, disclosurePolicy) {
