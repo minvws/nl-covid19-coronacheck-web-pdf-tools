@@ -41,6 +41,9 @@ export function addCouplingCodePage(doc, couplingCode) {
         doc.loadFont("MontserratBold", MontserratBold);
         doc.loadFont("ROSansRegular", ROSansWebTextRegular);
         doc.loadFont("ROSansBold", ROSansWebTextBold);
+
+        doc.pdf.outline.addItem("Deze bewijzen op uw telefoon gebruiken?");
+
         doc.addStruct("Art", [
             doc.pdf.struct("Sect", [
                 structText(doc, "H1", {
