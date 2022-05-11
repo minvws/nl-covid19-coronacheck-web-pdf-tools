@@ -1,5 +1,6 @@
 import { t } from "../i18n/index.js";
 import {
+    LiberationSansBold,
     MontserratBold,
     RobotoBold,
     ROSansWebTextRegular,
@@ -98,6 +99,7 @@ export function addProofPage(doc, proof, createdAt, args) {
             doc.loadFont("RobotoBold", RobotoBold);
             doc.loadFont("ROSansRegular", ROSansWebTextRegular);
             doc.loadFont("ROSansBold", ROSansWebTextBold);
+            doc.loadFont("LiberationSansBold", LiberationSansBold);
             doc.addStruct("Art", [
                 structLogoRijksoverheid(doc),
                 structProof(doc, qrSvg, proof, createdAt, selfPrinted),
@@ -642,7 +644,7 @@ function structEuDetailsSection(doc, details, certificateNumber) {
                         doc.pdf.struct("Lbl", label),
                         structText(doc, "LBody", {
                             text: item[1],
-                            font: "ROSansBold",
+                            font: "LiberationSansBold",
                             size: 10,
                             align: "right",
                             position: [rightPartRight - userDataColWidth, y],
