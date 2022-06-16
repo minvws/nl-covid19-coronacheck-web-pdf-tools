@@ -100,23 +100,13 @@ export function addCouplingCodePage(doc, couplingCode) {
                                 doc.pdf
                                     .text("Ga naar ", x, y, { continued: true })
                                     .font("ROSansBold")
-                                    .text("‘Papieren bewijs toevoegen’");
+                                    .text("‘Coronabewijs inscannen’");
                             },
                             function (x, y, width) {
                                 doc.pdf
-                                    .text("Vul uw ", x, y, {
+                                    .text("Scan de ", x, y, {
                                         continued: true,
                                         width: width,
-                                        lineGap: 1 * dpmm,
-                                    })
-                                    .font("ROSansBold")
-                                    .text("lettercombinatie", {
-                                        continued: true,
-                                        lineGap: 1 * dpmm,
-                                    })
-                                    .font("ROSansRegular")
-                                    .text(" in en scan de ", {
-                                        continued: true,
                                         lineGap: 1 * dpmm,
                                     })
                                     .font("ROSansBold")
@@ -125,8 +115,18 @@ export function addCouplingCodePage(doc, couplingCode) {
                                         lineGap: 1 * dpmm,
                                     })
                                     .font("ROSansRegular")
+                                    .text(". Vul daarna uw ", {
+                                        continued: true,
+                                        lineGap: 1 * dpmm,
+                                    })
+                                    .font("ROSansBold")
+                                    .text("lettercombinatie", {
+                                        continued: true,
+                                        lineGap: 1 * dpmm,
+                                    })
+                                    .font("ROSansRegular")
                                     .text(
-                                        ". Heeft u meerdere internationale QR codes? Scan de QR-code van de vaccinatie-dosis die u in de app wilt hebben.",
+                                        " in. Heeft u meerdere internationale QR-codes? Herhaal dan de stappen hierboven voor elk bewijs dat u in de app wilt hebben.",
                                         {
                                             lineGap: 1 * dpmm,
                                         }
