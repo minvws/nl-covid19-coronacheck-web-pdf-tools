@@ -25,8 +25,14 @@ var titleColor = "#383836";
  * @param {import("./document.js").Document} doc
  * @param {import("../types").Proof[]} proofs
  * @param {Date|number} createdAt
+ * @param {boolean} [internationalProofScanned] - Adapt intro text on DCC cover page if user has scanned an international DCC. NB: `false` and `undefined` have different results.
  */
-export function addDccCoverPage(doc, proofs, createdAt) {
+export function addDccCoverPage(
+    doc,
+    proofs,
+    createdAt,
+    internationalProofScanned
+) {
     var euProofs = getEuropeanProofs(proofs);
     var vaccinationStatus = getVaccinationStatus(euProofs, createdAt);
     if (
@@ -45,20 +51,28 @@ export function addDccCoverPage(doc, proofs, createdAt) {
         doc.pdf.outline.addItem(t(doc.locale, "cover.title"));
 
         doc.addStruct("Art", [
-            sectContents(doc, euProofs),
+            sectContents(doc, euProofs, internationalProofScanned),
             sectLogo(doc),
             sectIssuedOn(doc, createdAt),
         ]);
     });
 }
 
-function sectContents(doc, euProofs) {
+function sectContents(doc, euProofs, internationalProofScanned) {
     var showTotalDoseExplanation = euProofs.some(function (proof) {
         return (
             proof.eventType === "vaccination" &&
             proof.doseNumber > proof.totalDoses
         );
     });
+    var introText = t(
+        doc.locale,
+        internationalProofScanned
+            ? "cover.intro.internationalProofScanned"
+            : internationalProofScanned === false
+            ? "cover.intro.noInternationalProofScanned"
+            : "cover.intro.maybeInternationalProofScanned"
+    );
     var contents = [
         structFigure(
             doc,
@@ -88,7 +102,7 @@ function sectContents(doc, euProofs) {
             lineGap: 2,
         }),
         structText(doc, "P", {
-            text: "\n" + t(doc.locale, "cover.intro"),
+            text: "\n" + introText,
             font: "ROSansRegular",
             size: fontSizeStandard,
             position: [marginX, null],
