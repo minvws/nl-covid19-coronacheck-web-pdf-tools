@@ -96,9 +96,9 @@ export default {
     "cover.issuedOn": "Uitgegeven op %{date}",
     "cover.title": "Over jouw internationale bewijzen",
     "cover.intro.internationalProofScanned":
-        "In dit document vind je meerdere internationale vaccinatiebewijzen met elk een aparte QR-code. Het bewijs van je vaccinatie uit het buitenland zit niet in dit document. Die kun je gewoon apart gebruiken. De telling van je vaccinaties is mogelijk wel aangepast.",
+        "In dit document vind je meerdere internationale coronabewijzen met elk een aparte QR-code. Jouw bewijs uit het buitenland zit niet in dit document. Die kun je gewoon apart gebruiken. De telling van je vaccinaties is mogelijk wel aangepast.",
     "cover.intro.maybeInternationalProofScanned":
-        "In dit document vind je meerdere internationale vaccinatiebewijzen met elk een aparte QR-code. Bewijzen die zijn uitgegeven in het buitenland zitten niet in dit document. Je kunt die gewoon apart gebruiken. De telling van je vaccinaties is mogelijk wel aangepast.",
+        "In dit document vind je meerdere internationale coronabewijzen met elk een aparte QR-code. Bewijzen die zijn uitgegeven in het buitenland zitten niet in dit document. Je kunt die gewoon apart gebruiken. De telling van je vaccinaties is mogelijk wel aangepast.",
     "cover.intro.noInternationalProofScanned":
         "In dit document vind je meerdere internationale coronabewijzen met elk een aparte QR-code.",
     "cover.yourProofs.title": "Je hebt een bewijs met QR-code voor jouw:",

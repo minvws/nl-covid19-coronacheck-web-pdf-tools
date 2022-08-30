@@ -97,9 +97,9 @@ export default {
     "cover.issuedOn": "Issued on %{date}",
     "cover.title": "About your international certificates",
     "cover.intro.internationalProofScanned":
-        "In this document, you find multiple international vaccination certificates, each with a different QR code. Your foreign vaccination certificate is not included in this document. You can just use it separately. The count of your vaccinations may have been adjusted.",
-    "cover.intro.maybeInternationalProofScanned": "In this document, you find multiple international vaccination certificates, each with a different QR code. Certificates issued abroad are not included in this document. You can just use them separately. The count of your vaccinations may have been adjusted.",
-    "cover.intro.noInternationalProofScanned": "In this document, you find multiple international vaccination certificates, each with a different QR code.",
+        "In this document, you find multiple international corona certificates, each with a different QR code. Your foreign certificate is not included in this document. You can just use it separately. The count of your vaccinations may have been adjusted.",
+    "cover.intro.maybeInternationalProofScanned": "In this document, you find multiple international corona certificates, each with a different QR code. Certificates issued abroad are not included in this document. You can just use them separately. The count of your vaccinations may have been adjusted.",
+    "cover.intro.noInternationalProofScanned": "In this document, you find multiple international corona certificates, each with a different QR code.",
     "cover.yourProofs.title": "You have a certificate with a QR code for your:",
     "cover.vaccination.1": "first vaccination dose",
     "cover.vaccination.2": "second vaccination dose",
