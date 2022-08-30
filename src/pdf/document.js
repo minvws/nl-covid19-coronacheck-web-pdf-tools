@@ -162,7 +162,12 @@ export function getDocument(args) {
         author: args.author || (args.metadata && args.metadata.author),
         createdAt: args.createdAt,
     });
-    addDccCoverPage(doc, args.proofs, args.createdAt, args.internationalProofScanned);
+    addDccCoverPage(
+        doc,
+        args.proofs,
+        args.createdAt,
+        args.internationalProofScanned
+    );
     args.proofs.forEach(function (proof) {
         addProofPage(doc, proof, args.createdAt, { selfPrinted: true });
     });
