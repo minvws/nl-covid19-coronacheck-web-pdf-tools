@@ -142,6 +142,7 @@ export function createDocument(locale, args) {
  * @param {import("../types").Proof[]} args.proofs
  * @param {"en"|"nl"} args.locale
  * @param {Date|number} args.createdAt - Date or timestamp in ms
+ * @param {boolean} [args.internationalProofScanned] - Adapt intro text on DCC cover page if user has scanned an international DCC. NB: `false` and `undefined` have different results.
  * @param {string} [args.title]
  * @param {string} [args.author]
  * @param {number} [args.qrSizeInCm] DEPRECATED
@@ -161,7 +162,12 @@ export function getDocument(args) {
         author: args.author || (args.metadata && args.metadata.author),
         createdAt: args.createdAt,
     });
-    addDccCoverPage(doc, args.proofs, args.createdAt);
+    addDccCoverPage(
+        doc,
+        args.proofs,
+        args.createdAt,
+        args.internationalProofScanned
+    );
     args.proofs.forEach(function (proof) {
         addProofPage(doc, proof, args.createdAt, { selfPrinted: true });
     });
