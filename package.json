@@ -29,7 +29,7 @@
         "eslint": "^8.7.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-compat": "^4.0.2",
-        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-prettier": "^4.2.1",
         "file-saver": "^2.0.5",
         "husky": "^7.0.4",
         "jest": "^27.4.7",
