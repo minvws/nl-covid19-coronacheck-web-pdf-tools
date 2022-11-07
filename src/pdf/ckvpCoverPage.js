@@ -274,7 +274,7 @@ function structLetterBody(doc, args) {
             );
             heading("Internationaal bewijs", 5);
             paragraph(
-                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt door te kijken op www.coronacheck.nl/reizen of te bellen naar +31 247 247 247.",
+                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt door te kijken op coronacheck.nl/reizen of te bellen naar +31 247 247 247.",
                 null,
                 null,
                 5
@@ -302,7 +302,7 @@ function structLetterBody(doc, args) {
             );
             heading("Internationaal bewijs om mee te reizen", 5);
             paragraph(
-                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt op www.coronacheck.nl/reizen. Of u kunt bellen naar +31 247 247 247.",
+                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt op coronacheck.nl/reizen. Of u kunt bellen naar +31 247 247 247.",
                 null,
                 null,
                 5
