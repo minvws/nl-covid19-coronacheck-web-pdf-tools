@@ -252,7 +252,7 @@ function structLetterBody(doc, args) {
                 "Bij de brief zit ook een pagina met een lettercombinatie. Daarmee kunt u de papieren bewijzen in de CoronaCheck-app zetten. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
             );
             paragraph(
-                "Heeft u nog maar 1 vaccinatie gekregen met Pfizer of Moderna? Dan bent u vaak nog niet volledig gevaccineerd. U ontvangt dan alleen een coronabewijs dat u in sommige gevallen al kunt gebruiken voor reizen binnen Europa. Op wijsopreis.nl vindt u alle reisadviezen per land die nu gelden. Een corona-toegangsbewijs dat geldig is in Nederland, krijgt u pas als u volledig gevaccineerd bent."
+                "Heeft u nog maar 1 vaccinatie gekregen met Pfizer of Moderna? Dan bent u vaak nog niet volledig gevaccineerd. U ontvangt dan alleen een coronabewijs dat u in sommige gevallen al kunt gebruiken voor reizen binnen Europa. Op coronacheck.nl/reizen vindt u alle reisadviezen per land die nu gelden. Een corona-toegangsbewijs dat geldig is in Nederland, krijgt u pas als u volledig gevaccineerd bent."
             );
             heading("Kloppen uw gegevens niet?");
             paragraph(
@@ -274,7 +274,7 @@ function structLetterBody(doc, args) {
             );
             heading("Internationaal bewijs", 5);
             paragraph(
-                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt door te kijken op www.wijsopreis.nl of te bellen naar +31 247 247 247.",
+                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt door te kijken op www.coronacheck.nl/reizen of te bellen naar +31 247 247 247.",
                 null,
                 null,
                 5
@@ -302,7 +302,7 @@ function structLetterBody(doc, args) {
             );
             heading("Internationaal bewijs om mee te reizen", 5);
             paragraph(
-                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt op www.wijsopreis.nl. Of u kunt bellen naar +31 247 247 247.",
+                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt op www.coronacheck.nl/reizen. Of u kunt bellen naar +31 247 247 247.",
                 null,
                 null,
                 5
