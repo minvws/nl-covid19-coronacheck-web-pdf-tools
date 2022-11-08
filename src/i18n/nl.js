@@ -16,7 +16,7 @@ export default {
     "eu.recovery.title": "Internationaal herstelbewijs",
     "eu.recovery.qrTitle": "Herstelbewijs",
     "eu.intro":
-        "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Bekijk voor vertrek welk bewijs je nodig hebt in het land dat je bezoekt op [wijsopreis.nl](https://wijsopreis.nl).",
+        "Ben je in het buitenland of ga je de grens over? Gebruik dan dit EU Digitaal Corona Certificaat (DCC). Bekijk voor vertrek welk bewijs je nodig hebt in het land dat je bezoekt op [coronacheck.nl/reizen](https://coronacheck.nl/reizen).",
     "eu.alt.flag": "Vlag van de Europese Unie met de letters NL erop",
     "eu.travelWarning":
         "Dit certificaat is geen reisdocument. Het wetenschappelijk bewijs met betrekking tot COVID-19-vaccinaties, -tests en -herstel blijft zich verder ontwikkelen, ook met betrekking tot nieuwe zorgwekkende varianten. Gelieve alvorens een reis te maken, te controleren welke volksgezondheidsmaatregelen en bijbehorende beperkingen op de plaats van bestemming van toepassing zijn.",
@@ -116,7 +116,7 @@ export default {
     "cover.otherProof": "testbewijs",
     "cover.whichCode.title": "Welke QR-code moet ik gebruiken?",
     "cover.whichCode.text":
-        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Controleer daarom altijd voor vertrek op [wijsopreis.nl](https://wijsopreis.nl) welk bewijs je nodig hebt.",
+        "Welke QR-code je moet laten zien hangt af van de eisen van het land dat je bezoekt. Controleer daarom altijd voor vertrek op [coronacheck.nl/reizen](https://coronacheck.nl/reizen) welk bewijs je nodig hebt.",
 
     "cover.totalDoseExplanation.title":
         "Wat betekent het nummer achter mijn vaccinatie-dosis?",
