@@ -1,5 +1,5 @@
 {
-    "name": "nl-covid19-coronacheck-web-pdf-tools",
+    "name": "@minvws/coronacheck-web-pdf-tools",
     "license": "EUPL-1.2",
     "version": "3.9.2",
     "private": true,
