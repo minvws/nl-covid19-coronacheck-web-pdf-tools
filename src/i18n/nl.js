@@ -69,6 +69,7 @@ export default {
     "nl.maxValidityExplanation.selfPrinted":
         "* Dit papieren bewijs is maximaal %{days} dagen geldig. Hierna kun je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print) (zolang je vaccinatie of herstel nog geldig is). Kijk op [rijksoverheid.nl/coronabewijs](https://rijksoverheid.nl/coronabewijs) voor meer informatie over de eisen en geldigheid van coronabewijzen.",
     "nl.maxValidity": "Maximaal %{days} dagen geldig*",
+    "nl.pagination": "Pagina %{pageNumber} van %{totalPages}",
     instructions: "Instructies",
     "alt.foldInstructions":
         "Vouwinstructies. Vouw eerst in de breedte doormidden, met de geprinte kant naar buiten. Vouw daarna opnieuw doormidden met deze instructies aan de binnenzijde.",
@@ -102,6 +103,10 @@ export default {
     "cover.intro.noInternationalProofScanned":
         "In dit document vind je meerdere internationale coronabewijzen met elk een aparte QR-code.",
     "cover.yourProofs.title": "Je hebt een bewijs met QR-code voor jouw:",
+    "cover.multiPackage.yourProofs.title":
+        "In dit pakket zitten bewijzen met QR-code voor jouw:",
+    "cover.multiPackage.allProofs.title":
+        "In andere pakketten die je van ons ontvangt zitten bewijzen met QR-code voor jouw:",
     "cover.vaccination.1": "eerste vaccinatie-dosis",
     "cover.vaccination.2": "tweede vaccinatie-dosis",
     "cover.vaccination.3": "derde vaccinatie-dosis",

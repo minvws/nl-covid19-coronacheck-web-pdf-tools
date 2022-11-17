@@ -18,7 +18,7 @@ var RAT = "LP217198-3";
 
 /**
  * @param {import("../types").ProofData} proofData
- * @param {import("../types").TODO} holderConfig
+ * @param {import("../types").HolderConfig} holderConfig
  * @param {import("../types").Locale} [locale]
  * @return {import("../types").Proof[]}
  */
@@ -42,7 +42,7 @@ export function parseProofData(proofData, holderConfig, locale) {
 
 /**
  * @param {import("../types").DomesticProofData} data
- * @param {import("../types").TODO} holderConfig
+ * @param {import("../types").HolderConfig} holderConfig
  * @param {import("../types").Locale} [locale]
  * @return {import("../types").Proof}
  */
@@ -87,7 +87,7 @@ export function parseDomesticProof(data, holderConfig, locale) {
 
 /**
  * @param {import("../types").EuropeanProofData|import("../types").EuropeanProofData[]} data
- * @param {any} holderConfig
+ * @param {import("../types").HolderConfig} holderConfig
  * @return {import("../types").Proof[]}
  */
 export function parseEuropeanProofs(data, holderConfig) {
@@ -238,7 +238,7 @@ export function isRAT(testType) {
 
 /**
  * @param {import("../types").EuTestCredential} test
- * @param {import("../types").TODO} holderConfig
+ * @param {import("../types").HolderConfig} holderConfig
  * @return {string}
  */
 export function parseEuropeanTestName(test, holderConfig) {

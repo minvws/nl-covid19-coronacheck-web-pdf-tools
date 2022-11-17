@@ -1,9 +1,9 @@
 import { t } from "../i18n/index.js";
 import {
-    LiberationSansRegular,
-    LiberationSansBold,
-    LiberationSansItalic,
     kix,
+    ROSansWebTextRegular,
+    ROSansWebTextBold,
+    ROSansWebTextItalic,
 } from "../assets/fonts.js";
 import { formatSalutation, formatAddress, formatKixCode } from "../postal.js";
 import { drawText, drawLogoMinVwsA4 } from "./draw.js";
@@ -11,7 +11,7 @@ import { structDynamicList } from "./struct.js";
 
 // var pageHeight = 297;
 var pageWidth = 210;
-var marginLeft = 25;
+var marginLeft = 20;
 var addressTop = 57;
 var retourAddressLeft = 150;
 var retourAddressTop = 61.5;
@@ -19,12 +19,13 @@ var retourAddressWidth = 40;
 var metaTop = 108;
 var bodyTop = 126;
 var bodyWidth = pageWidth - 2 * marginLeft;
-var pageNumberTop = 273.75;
-var pageNumberLeft = 150;
+var pageNumberTop = 275;
+var pageNumberLeft = pageWidth - marginLeft - 30;
 
-var fontSizeStandard = 9;
+var fontSizeStandard = 10;
 var fontSizeSmall = 6.5;
 var fontSizeKix = 10;
+var fontSizePagination = 9;
 
 var lineSpace = 1;
 var dpmm = 72 / 25.4; // dots per mm at 72dpi
@@ -51,20 +52,24 @@ var months = [
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
+ * @param {number} [args.packageNumber]
+ * @param {number} [args.totalPackages]
+ * @param {number} [args.pageNumber]
+ * @param {number} [args.totalPages]
  * @param {1|2|3} [args.version]
  */
 export function addCkvpCoverPage(doc, args) {
     doc.addPart(function () {
-        doc.loadFont("LiberationSansRegular", LiberationSansRegular);
-        doc.loadFont("LiberationSansBold", LiberationSansBold);
-        doc.loadFont("LiberationSansItalic", LiberationSansItalic);
+        doc.loadFont("ROSansRegular", ROSansWebTextRegular);
+        doc.loadFont("ROSansBold", ROSansWebTextBold);
+        doc.loadFont("ROSansItalic", ROSansWebTextItalic);
         doc.loadFont("kix", kix);
         doc.pdf.addStructure(structLogo(doc));
         doc.pdf.addStructure(structAddress(doc, args.address));
         doc.pdf.addStructure(structRetourAddress(doc));
-        doc.pdf.addStructure(structLetterHeading(doc, args.createdAt));
+        doc.pdf.addStructure(structLetterHeading(doc, args));
         doc.pdf.addStructure(structLetterBody(doc, args));
-        doc.pdf.addStructure(structPageNumber(doc));
+        doc.pdf.addStructure(structPageNumber(doc, args));
     });
 }
 
@@ -89,9 +94,9 @@ function structAddress(doc, address) {
     return doc.pdf.struct("Sect", function () {
         drawText(doc, {
             text: "> Retouradres Postbus 3175 6401 DR Heerlen",
-            font: "LiberationSansRegular",
+            font: "ROSansRegular",
             size: fontSizeSmall,
-            position: [marginLeft, addressTop],
+            position: [marginLeft + 5, addressTop],
             lineGap: 1,
         });
         doc.pdf.moveDown(0.2);
@@ -99,9 +104,9 @@ function structAddress(doc, address) {
         for (var i = 0; i < addressLines.length; i++) {
             drawText(doc, {
                 text: addressLines[i],
-                font: "LiberationSansRegular",
+                font: "ROSansRegular",
                 size: fontSizeStandard,
-                position: [marginLeft, null],
+                position: [marginLeft + 5, null],
                 lineGap: 1,
             });
         }
@@ -110,7 +115,7 @@ function structAddress(doc, address) {
             text: formatKixCode(address),
             font: "kix",
             size: fontSizeKix,
-            position: [marginLeft, null],
+            position: [marginLeft + 5, null],
         });
     });
 }
@@ -122,7 +127,7 @@ function structRetourAddress(doc) {
     return doc.pdf.struct("Sect", function () {
         drawText(doc, {
             text: "Ministerie van Volksgezondheid, Welzijn en Sport",
-            font: "LiberationSansBold",
+            font: "ROSansBold",
             size: fontSizeSmall,
             position: [retourAddressLeft, retourAddressTop],
             width: retourAddressWidth,
@@ -131,7 +136,7 @@ function structRetourAddress(doc) {
         doc.pdf.moveDown();
         drawText(doc, {
             text: "t.a.v. ScanPlaza, kamer 4.031\nPostbus 20350\n2500 EJ  Den Haag",
-            font: "LiberationSansRegular",
+            font: "ROSansRegular",
             size: fontSizeSmall,
             position: [retourAddressLeft, null],
             width: retourAddressWidth,
@@ -141,7 +146,7 @@ function structRetourAddress(doc) {
         doc.pdf.moveDown();
         drawText(doc, {
             text: "Correspondentie uitsluitend richten aan het hierboven vermelde postadres met vermelding van de datum en het kenmerk van deze brief.",
-            font: "LiberationSansItalic",
+            font: "ROSansItalic",
             size: fontSizeSmall,
             position: [retourAddressLeft, null],
             width: retourAddressWidth,
@@ -152,28 +157,31 @@ function structRetourAddress(doc) {
 
 /**
  * @param {import("./document.js").Document} doc
- * @param {Date|number} createdAt
+ * @param {Object} args
+ * @param {Date|number} args.createdAt
+ * @param {number} [args.packageNumber]
+ * @param {number} [args.totalPackages]
  */
-function structLetterHeading(doc, createdAt) {
+function structLetterHeading(doc, args) {
     return doc.pdf.struct("Sect", function () {
         drawText(doc, {
             text: "Datum",
-            font: "LiberationSansRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             position: [marginLeft, metaTop],
             continued: true,
             lineGap: 1,
         });
         drawText(doc, {
-            text: dateString(new Date(createdAt)),
-            font: "LiberationSansRegular",
+            text: dateString(new Date(args.createdAt)),
+            font: "ROSansRegular",
             size: fontSizeStandard,
             position: [marginLeft + 20, null],
             lineGap: 1,
         });
         drawText(doc, {
             text: "Betreft",
-            font: "LiberationSansRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             position: [marginLeft, null],
             continued: true,
@@ -181,11 +189,28 @@ function structLetterHeading(doc, createdAt) {
         });
         drawText(doc, {
             text: "Coronabewijzen",
-            font: "LiberationSansRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             position: [marginLeft + 20, null],
             lineGap: 1,
         });
+        if (args.totalPackages && args.totalPackages > 1) {
+            drawText(doc, {
+                text: "Deel",
+                font: "ROSansRegular",
+                size: fontSizeStandard,
+                position: [marginLeft, null],
+                continued: true,
+                lineGap: 1,
+            });
+            drawText(doc, {
+                text: args.packageNumber + " van " + args.totalPackages,
+                font: "ROSansRegular",
+                size: fontSizeStandard,
+                position: [marginLeft + 23.5, null],
+                lineGap: 1,
+            });
+        }
     });
 }
 
@@ -195,13 +220,15 @@ function structLetterHeading(doc, createdAt) {
  * @param {import("../postal.js").Address} args.address
  * @param {boolean} args.proofsFound
  * @param {Date|number} args.createdAt
+ * @param {number} [args.packageNumber]
+ * @param {number} [args.totalPackages]
  * @param {1|2|3} [args.version]
  */
 function structLetterBody(doc, args) {
     function paragraph(text, top, space, indent) {
         drawText(doc, {
             text: text,
-            font: "LiberationSansRegular",
+            font: "ROSansRegular",
             size: fontSizeStandard,
             position: [marginLeft + (indent || 0), top || null],
             width: bodyWidth - (indent || 0),
@@ -213,7 +240,7 @@ function structLetterBody(doc, args) {
     function heading(text, indent) {
         drawText(doc, {
             text: text,
-            font: "LiberationSansBold",
+            font: "ROSansBold",
             size: fontSizeStandard,
             position: [marginLeft + (indent || 0), null],
             width: bodyWidth - (indent || 0),
@@ -224,7 +251,7 @@ function structLetterBody(doc, args) {
     function list(items, itemGap) {
         doc.pdf.addStructure(
             structDynamicList(doc, {
-                font: "LiberationSansRegular",
+                font: "ROSansRegular",
                 size: fontSizeStandard,
                 indent: 5,
                 position: [marginLeft, null],
@@ -233,7 +260,7 @@ function structLetterBody(doc, args) {
                 itemGap:
                     typeof itemGap === "undefined" ? lineSpace / 2 : itemGap,
                 drawLabel: function (_n, x, y) {
-                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.font("ROSansRegular");
                     doc.pdf.fillColor("#000000");
                     doc.pdf.text("  •  ", x, y);
                 },
@@ -265,19 +292,13 @@ function structLetterBody(doc, args) {
             paragraph(
                 "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
             );
-            heading("Nederlands bewijs", 5);
+            heading("Nederlands bewijs");
             paragraph(
-                "In Nederland krijgt u een vaccinatiebewijs als u in de afgelopen 270 dagen volledig bent gevaccineerd, of als u een boostervaccinatie heeft gehad. Een Nederlands herstelbewijs krijgt u alleen als u in de afgelopen 180 dagen een positieve test heeft gehad.",
-                null,
-                null,
-                5
+                "In Nederland krijgt u een vaccinatiebewijs als u in de afgelopen 270 dagen volledig bent gevaccineerd, of als u een boostervaccinatie heeft gehad. Een Nederlands herstelbewijs krijgt u alleen als u in de afgelopen 180 dagen een positieve test heeft gehad."
             );
-            heading("Internationaal bewijs", 5);
+            heading("Internationaal bewijs");
             paragraph(
-                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt door te kijken op coronacheck.nl/reizen of te bellen naar +31 247 247 247.",
-                null,
-                null,
-                5
+                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. En een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt door te kijken op coronacheck.nl/reizen of te bellen naar +31 247 247 247."
             );
             heading("Geldigheid van uw papieren coronabewijs");
             paragraph(
@@ -298,25 +319,28 @@ function structLetterBody(doc, args) {
                 "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
             );
             paragraph(
-                "Het coronatoegangsbewijs voor toegang in Nederland wordt op dit moment niet meer gebruikt. Daarom ontvangt u alleen een internationaal bewijs om mee te reizen."
+                "Het coronatoegangsbewijs voor toegang in Nederland wordt op dit moment niet meer gebruikt. Daarom ontvangt u alleen uw internationale bewijzen om mee te reizen."
             );
-            heading("Internationaal bewijs om mee te reizen", 5);
+            heading("Internationaal bewijs om mee te reizen");
             paragraph(
-                "U krijgt een internationaal bewijs voor uw laatste vaccinatie-dosis. Of een herstelbewijs als u in de afgelopen 180 dagen positief bent getest met een PCR test. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt op coronacheck.nl/reizen. Of u kunt bellen naar +31 247 247 247.",
-                null,
-                null,
-                5
+                "U krijgt internationale bewijzen voor al uw vaccinaties. En herstelbewijzen als u in de afgelopen 180 dagen positief bent getest. Controleer altijd voor vertrek welk bewijs u nodig heeft in het land dat u bezoekt op \n coronacheck.nl/reizen. Of u kunt bellen naar +31 247 247 247."
             );
             heading("CoronaCheck-app");
             paragraph(
-                "U kunt uw bewijs ook in de CoronaCheck-app op uw telefoon zetten. Bij deze brief zit een pagina met een lettercombinatie en uitleg. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
+                "U kunt uw bewijzen ook in de CoronaCheck-app op uw telefoon zetten. Bij deze brief zit een pagina met een lettercombinatie en uitleg. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen."
             );
+            if (args.totalPackages && args.totalPackages > 1) {
+                heading("Meer dan 3 bewijzen?");
+                paragraph(
+                    "Staan er in totaal meer dan 3 bewijzen geregistreerd? Dan kan het zijn dat wij de bewijzen in twee (of meerdere) delen naar u toesturen."
+                );
+            }
             heading("Kloppen uw gegevens niet?");
             paragraph(
-                "Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken."
+                "Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en de bewijzen op papier aan te vragen."
             );
             paragraph(
-                "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
+                "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijzen opnieuw op te sturen."
             );
         } else if (args.version <= 2) {
             paragraph(
@@ -331,7 +355,7 @@ function structLetterBody(doc, args) {
 
             list([
                 function (x, y, width) {
-                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.font("ROSansItalic");
                     doc.pdf.text(
                         "U bent niet gevaccineerd, en u bent niet positief getest op corona.",
                         x,
@@ -340,28 +364,28 @@ function structLetterBody(doc, args) {
                     );
                 },
                 function (x, y, width) {
-                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.font("ROSansItalic");
                     doc.pdf.text(
                         "U bent niet gevaccineerd. U bent wél hersteld van corona, maar de positieve test is langer dan 180 dagen geleden afgenomen. ",
                         x,
                         y,
                         { width: width, continued: true, lineGap: rawLineGap }
                     );
-                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.font("ROSansRegular");
                     doc.pdf.text(
                         "De test is niet meer geldig. Deze kunt u dus niet gebruiken voor de aanvraag van uw coronabewijzen.",
                         { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
-                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.font("ROSansItalic");
                     doc.pdf.text(
                         "U bent in de afgelopen 3 dagen gevaccineerd. Of u bent in de afgelopen 30 uur positief op corona getest. ",
                         x,
                         y,
                         { width: width, continued: true, lineGap: rawLineGap }
                     );
-                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.font("ROSansRegular");
                     doc.pdf.text(
                         "Hierdoor staan uw gegevens misschien nog niet in het systeem. Vraag over een paar dagen opnieuw uw coronabewijzen aan.",
                         { width: width, lineGap: rawLineGap }
@@ -378,40 +402,40 @@ function structLetterBody(doc, args) {
             );
             list([
                 function (x, y, width) {
-                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.font("ROSansItalic");
                     doc.pdf.text("U bent door de GGD gevaccineerd. ", x, y, {
                         width: width,
                         continued: true,
                         lineGap: rawLineGap,
                     });
-                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.font("ROSansRegular");
                     doc.pdf.text(
                         "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
                         { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
-                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.font("ROSansItalic");
                     doc.pdf.text(
                         "U bent door iemand anders dan de GGD gevaccineerd. ",
                         x,
                         y,
                         { width: width, continued: true, lineGap: rawLineGap }
                     );
-                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.font("ROSansRegular");
                     doc.pdf.text(
                         "Neem contact op met de zorgverlener die u heeft gevaccineerd. Dat kan uw huisarts, arts van het ziekenhuis of een zorginstelling zijn. Zij controleren of uw gegevens goed staan en helpen u verder.",
                         { width: width, lineGap: rawLineGap }
                     );
                 },
                 function (x, y, width) {
-                    doc.pdf.font("LiberationSansItalic");
+                    doc.pdf.font("ROSansItalic");
                     doc.pdf.text("U bent positief getest op corona. ", x, y, {
                         width: width,
                         continued: true,
                         lineGap: rawLineGap,
                     });
-                    doc.pdf.font("LiberationSansRegular");
+                    doc.pdf.font("ROSansRegular");
                     doc.pdf.text(
                         "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
                         { width: width, lineGap: rawLineGap }
@@ -435,7 +459,7 @@ function structLetterBody(doc, args) {
             list(
                 [
                     function (x, y, width) {
-                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.font("ROSansItalic");
                         doc.pdf.text(
                             "U bent niet gevaccineerd, en u bent niet positief getest op corona.",
                             x,
@@ -444,7 +468,7 @@ function structLetterBody(doc, args) {
                         );
                     },
                     function (x, y, width) {
-                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.font("ROSansItalic");
                         doc.pdf.text(
                             "U bent niet gevaccineerd. U bent wél hersteld van corona, maar de positieve PCR test is langer dan 180 dagen geleden afgenomen. ",
                             x,
@@ -455,14 +479,14 @@ function structLetterBody(doc, args) {
                                 lineGap: rawLineGap,
                             }
                         );
-                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.font("ROSansRegular");
                         doc.pdf.text(
                             "De test is niet meer geldig. Deze kunt u dus niet gebruiken voor de aanvraag van uw coronabewijzen.",
                             { width: width, lineGap: rawLineGap }
                         );
                     },
                     function (x, y, width) {
-                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.font("ROSansItalic");
                         doc.pdf.text(
                             "U bent in de afgelopen 3 dagen gevaccineerd. Of u bent in de afgelopen 30 uur positief getest op corona met een PCR test. ",
                             x,
@@ -473,7 +497,7 @@ function structLetterBody(doc, args) {
                                 lineGap: rawLineGap,
                             }
                         );
-                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.font("ROSansRegular");
                         doc.pdf.text(
                             "Hierdoor staan uw gegevens misschien nog niet in het systeem. Vraag over een paar dagen opnieuw uw coronabewijzen aan.",
                             { width: width, lineGap: rawLineGap }
@@ -493,7 +517,7 @@ function structLetterBody(doc, args) {
             list(
                 [
                     function (x, y, width) {
-                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.font("ROSansItalic");
                         doc.pdf.text(
                             "U bent door de GGD gevaccineerd. ",
                             x,
@@ -504,14 +528,14 @@ function structLetterBody(doc, args) {
                                 lineGap: rawLineGap,
                             }
                         );
-                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.font("ROSansRegular");
                         doc.pdf.text(
                             "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
                             { width: width, lineGap: rawLineGap }
                         );
                     },
                     function (x, y, width) {
-                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.font("ROSansItalic");
                         doc.pdf.text(
                             "U bent door iemand anders dan de GGD gevaccineerd. ",
                             x,
@@ -522,14 +546,14 @@ function structLetterBody(doc, args) {
                                 lineGap: rawLineGap,
                             }
                         );
-                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.font("ROSansRegular");
                         doc.pdf.text(
                             "Neem contact op met de zorgverlener die u heeft gevaccineerd. Dat kan uw huisarts, arts van het ziekenhuis of een zorginstelling zijn. Zij controleren of uw gegevens goed staan en helpen u verder.",
                             { width: width, lineGap: rawLineGap }
                         );
                     },
                     function (x, y, width) {
-                        doc.pdf.font("LiberationSansItalic");
+                        doc.pdf.font("ROSansItalic");
                         doc.pdf.text(
                             "U bent positief getest op corona. ",
                             x,
@@ -540,7 +564,7 @@ function structLetterBody(doc, args) {
                                 lineGap: rawLineGap,
                             }
                         );
-                        doc.pdf.font("LiberationSansRegular");
+                        doc.pdf.font("ROSansRegular");
                         doc.pdf.text(
                             "Bel de GGD via 0800 - 5090. Zij controleren of uw gegevens goed staan en helpen u verder.",
                             { width: width, lineGap: rawLineGap }
@@ -551,27 +575,41 @@ function structLetterBody(doc, args) {
                 lineSpace / 4
             );
         }
-        heading("Heeft u nog vragen over corona? ");
+        heading("Heeft u nog vragen over corona?");
         paragraph(
-            "Bel ons via 0800 - 1351. Dit nummer is iedere dag open van 08.00 tot 20.00 uur. Wij helpen u graag verder. "
+            "Bel ons via 0800 - 1351. Dit nummer is iedere dag open van 08.00 tot 20.00 uur. Wij helpen u graag verder."
         );
     });
 }
 
 /**
  * @param {import("./document.js").Document} doc
+ * @param {Object} args
+ * @param {number} [args.pageNumber]
+ * @param {number} [args.totalPages]
  */
-function structPageNumber(doc) {
+function structPageNumber(doc, args) {
+    const pageNumber = args.pageNumber ? args.pageNumber : 1;
+    const totalPages = args.totalPages ? args.totalPages : 1;
     return doc.pdf.struct("Sect", function () {
         drawText(doc, {
-            text: "Pagina 1 van 1",
-            font: "LiberationSansRegular",
-            size: fontSizeSmall,
+            text: t(doc.locale, "nl.pagination", {
+                pageNumber: pageNumber.toString(),
+                totalPages: totalPages.toString(),
+            }),
+            width: 30,
+            align: "right",
+            font: "ROSansRegular",
+            size: fontSizePagination,
             position: [pageNumberLeft, pageNumberTop],
         });
     });
 }
 
+/**
+ * @param {Date} date
+ * @returns {string}
+ */
 function dateString(date) {
     return months[date.getMonth()] + " " + date.getFullYear();
 }
