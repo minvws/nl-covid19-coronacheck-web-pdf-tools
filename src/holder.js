@@ -1,11 +1,26 @@
+/**
+ * @param {import("./types").HolderConfig} holderConfig
+ * @param {string} euBrandCode
+ * @return {string}
+ */
 export function getEuBrand(holderConfig, euBrandCode) {
     return findNameByCode(holderConfig.euBrands, euBrandCode);
 }
 
+/**
+ * @param {import("./types").HolderConfig} holderConfig
+ * @param {string} testTypeCode
+ * @return {string}
+ */
 export function getEuTestType(holderConfig, testTypeCode) {
     return findNameByCode(holderConfig.euTestTypes, testTypeCode);
 }
 
+/**
+ * @param {import("./types").HolderConfig} holderConfig
+ * @param {string} testManufacturerCode
+ * @return {string}
+ */
 export function getTestManufacturer(holderConfig, testManufacturerCode) {
     return findNameByCode(
         holderConfig.euTestManufacturers,
@@ -13,10 +28,20 @@ export function getTestManufacturer(holderConfig, testManufacturerCode) {
     );
 }
 
+/**
+ * @param {import("./types").HolderConfig} holderConfig
+ * @param {string} vaccineTypeCode
+ * @return {string}
+ */
 export function getVaccineType(holderConfig, vaccineTypeCode) {
     return findNameByCode(holderConfig.euVaccinations, vaccineTypeCode);
 }
 
+/**
+ * @param {import("./types").HolderConfig} holderConfig
+ * @param {string} vaccineManufacturerCode
+ * @return {string}
+ */
 export function getVaccineManufacturer(holderConfig, vaccineManufacturerCode) {
     return findNameByCode(
         holderConfig.euManufacturers,
@@ -24,6 +49,11 @@ export function getVaccineManufacturer(holderConfig, vaccineManufacturerCode) {
     );
 }
 
+/**
+ * @param {import("./types").HolderConfig} holderConfig
+ * @param {string} testTypeCode
+ * @return {string}
+ */
 export function getNlTestType(holderConfig, testTypeCode) {
     return findNameByCode(holderConfig.euTestTypes, testTypeCode);
 }
@@ -40,7 +70,7 @@ export function findNameByCode(arr, code) {
 }
 
 /**
- * @param {import("./types").TODO} holderConfig
+ * @param {import("./types").HolderConfig} holderConfig
  * @return {import("./types").DisclosurePolicy}
  */
 export function getDisclosurePolicy(holderConfig) {
@@ -52,7 +82,7 @@ export function getDisclosurePolicy(holderConfig) {
 }
 
 /**
- * @param {import("./types").TODO} holderConfig
+ * @param {import("./types").HolderConfig} holderConfig
  * @param {string} code
  * @return {string}
  */

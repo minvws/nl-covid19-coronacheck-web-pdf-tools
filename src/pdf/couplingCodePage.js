@@ -26,15 +26,21 @@ var fontSizeStandard = 10;
 var fontSizeH1 = 22;
 var fontSizeH2 = 14;
 var fontSizeWarning = 12;
+var fontSizePagination = 9;
 var titleColor = "#383836";
 var warningBackgroundColor = "#F2F2F7";
+var pageNumberTop = 275;
+var pageNumberLeft = pageWidth - marginLeft - 30;
 var dpmm = 72 / 25.4; // dots per mm at 72dpi
 
 /**
  * @param {import("./document.js").Document} doc
- * @param {string} couplingCode
+ * @param {Object} args
+ * @param {string} args.couplingCode
+ * @param {number} [args.pageNumber]
+ * @param {number} [args.totalPages]
  */
-export function addCouplingCodePage(doc, couplingCode) {
+export function addCouplingCodePage(doc, args) {
     doc.addPart(function () {
         drawCodeBoxBorder(doc);
         drawWarningBoxBackground(doc);
@@ -146,7 +152,7 @@ export function addCouplingCodePage(doc, couplingCode) {
                             baseline: "middle",
                         }),
                         structText(doc, "Span", {
-                            text: couplingCode,
+                            text: args.couplingCode,
                             font: "ROSansRegular",
                             size: 28,
                             position: [
@@ -192,9 +198,13 @@ export function addCouplingCodePage(doc, couplingCode) {
                 }
             ),
         ]);
+        doc.pdf.addStructure(structPageNumber(doc, args));
     });
 }
 
+/**
+ * @param {import("./document.js").Document} doc
+ */
 function drawCodeBoxBorder(doc) {
     doc.pdf.markContent("Artifact", { type: "Layout" });
     doc.pdf
@@ -210,6 +220,9 @@ function drawCodeBoxBorder(doc) {
     doc.pdf.endMarkedContent();
 }
 
+/**
+ * @param {import("./document.js").Document} doc
+ */
 function drawWarningBoxBackground(doc) {
     doc.pdf.markContent("Artifact", { type: "Layout" });
     doc.pdf
@@ -223,4 +236,28 @@ function drawWarningBoxBackground(doc) {
         )
         .fill();
     doc.pdf.endMarkedContent();
+}
+
+/**
+ * @param {import("./document.js").Document} doc
+ * @param {Object} args
+ * @param {number} [args.pageNumber]
+ * @param {number} [args.totalPages]
+ */
+function structPageNumber(doc, args) {
+    const pageNumber = args.pageNumber ? args.pageNumber : 1;
+    const totalPages = args.totalPages ? args.totalPages : 1;
+    return doc.pdf.struct("Sect", function () {
+        drawText(doc, {
+            text: t(doc.locale, "nl.pagination", {
+                pageNumber: pageNumber.toString(),
+                totalPages: totalPages.toString(),
+            }),
+            width: 30,
+            align: "right",
+            font: "ROSansRegular",
+            size: fontSizePagination,
+            position: [pageNumberLeft, pageNumberTop],
+        });
+    });
 }

@@ -70,6 +70,7 @@ export default {
     "nl.maxValidityExplanation.selfPrinted":
         "* This paper certificate is valid for a maximum of %{days} days. After this you can print a new certificate via [coronacheck.nl/en/print](https://coronacheck.nl/en/print) (as long as your vaccination or recovery is still valid). For more information on the requirements and validity of certificates, please visit [government.nl/covid-certificate](https://government.nl/covid-certificate).",
     "nl.maxValidity": "Valid for a maximum of %{days} days*",
+    "nl.pagination": "Page %{pageNumber} of %{totalPages}",
     instructions: "Instructions",
     "alt.foldInstructions":
         "Folding instructions. First fold in half widthwise, with the printed side out. Then fold in half again with these instructions on the inside.",

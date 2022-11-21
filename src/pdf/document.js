@@ -11,7 +11,8 @@ import { addXmp } from "./xmp.js";
  * @typedef {Object} Document
  * @property {import("../types").Locale} locale
  * @property {(name: string, data: string) => void} loadFont
- * @property {(fn: () => void|Promise<void>, sides?: number) => void} addPart
+ * @property {(fn: () => void|Promise<void>) => void} addPart
+ * @property {(fn: () => void|Promise<void>) => void} queueBlankPage
  * @property {(type: string, contents: (() => void) | any[]) => void} addStruct
  * @property {(destination: WritableStream) => WritableStream} pipe
  * @property {PDFDocument} pdf Internal pdfkit PDFDocument instance
@@ -85,13 +86,22 @@ export function createDocument(locale, args) {
         pdf.page.dictionary.data.Tabs = "S";
     }
 
+    function queueBlankPage() {
+        if (finalized) {
+            throw new Error(
+                "Cannot queueBlankPage, document already finalized"
+            );
+        }
+        pageQueue = pageQueue.then(addPage);
+    }
+
     function addPart(fn, sides) {
         if (finalized) {
-            throw new Error("Cannot _addPart, document already finalized");
+            throw new Error("Cannot addPart, document already finalized");
         }
         pageQueue = pageQueue.then(addPage).then(fn);
         if (doubleSided && (sides == null || sides % 2)) {
-            pageQueue = pageQueue.then(addPage);
+            queueBlankPage();
         }
     }
 
@@ -125,16 +135,15 @@ export function createDocument(locale, args) {
 
     var pageQueue = Promise.resolve();
     var finalized = false;
-    var doc = {
+    return {
         locale: locale,
         loadFont: loadFont,
         addPart: addPart,
+        queueBlankPage: queueBlankPage,
         addStruct: addStruct,
         pipe: pipe,
         pdf: pdf,
     };
-
-    return doc;
 }
 
 /**
@@ -162,12 +171,12 @@ export function getDocument(args) {
         author: args.author || (args.metadata && args.metadata.author),
         createdAt: args.createdAt,
     });
-    addDccCoverPage(
-        doc,
-        args.proofs,
-        args.createdAt,
-        args.internationalProofScanned
-    );
+    addDccCoverPage(doc, {
+        proofs: args.proofs,
+        allProofs: args.proofs,
+        createdAt: args.createdAt,
+        internationalProofScanned: args.internationalProofScanned,
+    });
     args.proofs.forEach(function (proof) {
         addProofPage(doc, proof, args.createdAt, { selfPrinted: true });
     });
@@ -207,6 +216,7 @@ export function documentToBlob(doc) {
 /**
  * NB: using this will finalize the document, making it impossible to add further pages.
  * @param {Document} doc
+ * @param {string} filename
  * @return {Promise<void>}
  */
 export function saveDocument(doc, filename) {

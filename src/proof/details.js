@@ -47,6 +47,10 @@ export function getProofDetails(proof) {
     throwOnUnhandledEventType(proof);
 }
 
+/**
+ * @param {string} issuer
+ * @returns {string}
+ */
 function normalizeIssuer(issuer) {
     return issuer === "Ministry of Health Welfare and Sport"
         ? "Ministry of Health,\nWelfare and Sport"
