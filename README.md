@@ -29,6 +29,10 @@ const { parseProofData, getDocument } = require("nl-covid19-coronacheck-web-pdf-
 
 Note: when using ES modules, it's important to use the async `import()`, as static `import`s would cause the code to be evaluated at load time, before the polyfills are installed.
 
+## Upgrade
+
+Please refer to the [upgrade guide](documentation/upgrade_guide.md)
+
 ## License
 
 This project is licensed under the `EUPL-1.2`. See [LICENSE](./LICENSE).
