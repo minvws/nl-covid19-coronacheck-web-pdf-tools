@@ -16539,7 +16539,7 @@ function structLetterBody(doc, args) {
       }], lineSpace / 4);
     }
     heading("Heeft u nog vragen over corona?");
-    paragraph("Bel ons via 0800 - 1351. Dit nummer is iedere dag open van 08.00 tot 20.00 uur. Wij helpen u graag verder.");
+    paragraph("Heeft u nog vragen over corona?Bel ons via 0800 - 1421. Dit nummer is iedere werkdag open van 08.00 tot 18.00 uur. Wij helpen u graag verder");
   });
 }
 
