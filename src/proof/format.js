@@ -13,7 +13,7 @@ export function formatEuProofEvents(proofs, locale) {
                 t(
                     locale,
                     "cover.vaccination." +
-                        (proof.doseNumber > 9 ? "extra" : proof.doseNumber)
+                        (proof.doseNumber > 25 ? "extra" : proof.doseNumber)
                 ) +
                 " (" +
                 proof.doseNumber +

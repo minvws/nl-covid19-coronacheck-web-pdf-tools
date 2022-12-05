@@ -94,6 +94,22 @@ var en = {
   "cover.vaccination.7": "seventh vaccination dose",
   "cover.vaccination.8": "eighth vaccination dose",
   "cover.vaccination.9": "ninth vaccination dose",
+  "cover.vaccination.10": "tenth vaccination dose",
+  "cover.vaccination.11": "eleventh vaccination dose",
+  "cover.vaccination.12": "twelfth vaccination dose",
+  "cover.vaccination.13": "thirteenth vaccination dose",
+  "cover.vaccination.14": "fourteenth vaccination dose",
+  "cover.vaccination.15": "fifteenth vaccination dose",
+  "cover.vaccination.16": "sixteenth vaccination dose",
+  "cover.vaccination.17": "seventeenth vaccination dose",
+  "cover.vaccination.18": "eighteenth vaccination dose",
+  "cover.vaccination.19": "nineteenth vaccination dose",
+  "cover.vaccination.20": "twentieth vaccination dose",
+  "cover.vaccination.21": "twenty-first vaccination dose",
+  "cover.vaccination.22": "twenty-second vaccination dose",
+  "cover.vaccination.23": "twenty-third vaccination dose",
+  "cover.vaccination.24": "twenty-fourth vaccination dose",
+  "cover.vaccination.25": "twenty-fifth vaccination dose",
   "cover.vaccination.extra": "extra vaccination dose",
   "cover.recoveryProof": "recovery from coronavirus",
   "cover.otherProof": "other coronavirus-related event",
@@ -200,6 +216,22 @@ var nl = {
   "cover.vaccination.7": "zevende vaccinatie-dosis",
   "cover.vaccination.8": "achtste vaccinatie-dosis",
   "cover.vaccination.9": "negende vaccinatie-dosis",
+  "cover.vaccination.10": "tiende vaccinatie-dosis",
+  "cover.vaccination.11": "elfde vaccinatie-dosis",
+  "cover.vaccination.12": "twaalfde vaccinatie-dosis",
+  "cover.vaccination.13": "dertiende vaccinatie-dosis",
+  "cover.vaccination.14": "viertiende vaccinatie-dosis",
+  "cover.vaccination.15": "vijftiende vaccinatie-dosis",
+  "cover.vaccination.16": "zestiende vaccinatie-dosis",
+  "cover.vaccination.17": "zeventiende vaccinatie-dosis",
+  "cover.vaccination.18": "achttiende vaccinatie-dosis",
+  "cover.vaccination.19": "negentiende vaccinatie-dosis",
+  "cover.vaccination.20": "twintigste vaccinatie-dosis",
+  "cover.vaccination.21": "eenentwintigste vaccinatie-dosis",
+  "cover.vaccination.22": "tweeëntwintigste vaccinatie-dosis",
+  "cover.vaccination.23": "drieëntwintigste vaccinatie-dosis",
+  "cover.vaccination.24": "vierentwintigste vaccinatie-dosis",
+  "cover.vaccination.25": "vijfentwintigste vaccinatie-dosis",
   "cover.vaccination.extra": "extra vaccinatie-dosis",
   "cover.recoveryProof": "herstel van corona",
   "cover.otherProof": "testbewijs",
@@ -14950,7 +14982,7 @@ function isRecovery(proof) {
 function formatEuProofEvents(proofs, locale) {
   return proofs.map(function (proof) {
     if (isVaccination(proof)) {
-      return t(locale, "cover.vaccination." + (proof.doseNumber > 9 ? "extra" : proof.doseNumber)) + " (" + proof.doseNumber + "/" + proof.totalDoses + ")";
+      return t(locale, "cover.vaccination." + (proof.doseNumber > 25 ? "extra" : proof.doseNumber)) + " (" + proof.doseNumber + "/" + proof.totalDoses + ")";
     }
     if (isRecovery(proof)) {
       return t(locale, "cover.recoveryProof");
