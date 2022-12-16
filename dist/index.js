@@ -31,20 +31,20 @@ var en = {
   "eu.userData.disease": "DISEASE TARGETED",
   "eu.userData.diseaseRecoveredFrom": "Disease recovered from",
   "eu.userData.vaccineBrand": "VACCINE",
-  "eu.userData.vaccineType": "VACCINE MEDICINAL PRODUCT",
+  "eu.userData.vaccineType": "VACCINE TYPE",
   "eu.userData.vaccineManufacturer": "VACCINE MANUFACTURER",
-  "eu.userData.vaccinationDate": "DATE OF VACCINATION (DD-MM-YYYY)",
-  "eu.userData.vaccinationCountry": "COUNTRY OF VACCINATION",
+  "eu.userData.vaccinationDate": "VACCINATION DATE (DD-MM-YYYY)",
+  "eu.userData.vaccinationCountry": "VACCINATED IN",
   "eu.userData.doses": "NUMBER IN SERIES OF DOSES",
-  "eu.userData.dateOfVaccination": "DATE OF VACCINATION (DD-MM-YYYY)",
+  "eu.userData.dateOfVaccination": "VACCINATION DATE (DD-MM-YYYY)",
   "eu.userData.certificateIssuer": "CERTIFICATE ISSUER",
   "eu.userData.testType": "TYPE OF TEST",
   "eu.userData.testName": "TEST NAME",
   "eu.userData.testDate": "TEST DATE (DD-MM-YYYY)",
   "eu.userData.testResult": "TEST RESULT",
-  "eu.userData.testLocation": "TESTING CENTRE",
+  "eu.userData.testLocation": "TEST LOCATION",
   "eu.userData.testManufacturer": "TEST MANUFACTURER",
-  "eu.userData.countryOfTest": "MEMBER STATE OF TEST",
+  "eu.userData.countryOfTest": "TESTED IN",
   "eu.userData.validFrom": "Valid from",
   "eu.userData.validUntil": "Valid to",
   "eu.userData.certificateNumber": "UNIQUE CERTIFICATE IDENTIFIER",
@@ -142,7 +142,7 @@ var nl = {
   "eu.userData.diseaseRecoveredFrom": "Ziekte waarvan hersteld",
   "eu.userData.vaccineBrand": "VACCIN",
   "eu.userData.vaccineType": "TYPE VACCIN",
-  "eu.userData.vaccineManufacturer": "PRODUCENT",
+  "eu.userData.vaccineManufacturer": "VACCINPRODUCENT",
   "eu.userData.vaccinationDate": "VACCINATIEDATUM",
   "eu.userData.vaccinationCountry": "GEVACCINEERD IN",
   "eu.userData.doses": "DOSIS",
@@ -153,7 +153,7 @@ var nl = {
   "eu.userData.testDate": "TESTDATUM",
   "eu.userData.testResult": "TESTUITSLAG",
   "eu.userData.testLocation": "TESTLOCATIE",
-  "eu.userData.testManufacturer": "PRODUCENT",
+  "eu.userData.testManufacturer": "TEST PRODUCENT",
   "eu.userData.countryOfTest": "GETEST IN",
   "eu.userData.validFrom": "Geldig vanaf",
   "eu.userData.validUntil": "Geldig tot",
@@ -261,6 +261,14 @@ function t(locale, segment, data) {
   }
   return translation;
 }
+var regionNames = {
+  en: new Intl.DisplayNames(["en"], {
+    type: "region"
+  }),
+  nl: new Intl.DisplayNames(["nl"], {
+    type: "region"
+  })
+};
 
 var NUM = /^\d+$/;
 var MARKDOWN_LINKS = /(\[[^[]+?\]\([^(]+?\)\s?)/g;
@@ -683,33 +691,6 @@ function parseEuropeanTestName(test, holderConfig) {
   return test.nm;
 }
 
-function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-    return _arr;
-  }
-}
 function _regeneratorRuntime() {
   _regeneratorRuntime = function () {
     return exports;
@@ -845,9 +826,14 @@ function _regeneratorRuntime() {
     };
   }
   function maybeInvokeDelegate(delegate, context) {
-    var methodName = context.method,
-      method = delegate.iterator[methodName];
-    if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel;
+    var method = delegate.iterator[context.method];
+    if (undefined === method) {
+      if (context.delegate = null, "throw" === context.method) {
+        if (delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel;
+        context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+      return ContinueSentinel;
+    }
     var record = tryCatch(method, delegate.iterator, context.arg);
     if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
     var info = record.arg;
@@ -1031,7 +1017,7 @@ function _defineProperties(target, props) {
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
+    Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
 function _createClass(Constructor, protoProps, staticProps) {
@@ -1043,7 +1029,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -1139,6 +1124,30 @@ function _arrayWithHoles(arr) {
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _s, _e;
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
   if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -1209,20 +1218,6 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
     }
   };
 }
-function _toPrimitive(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (hint === "string" ? String : Number)(input);
-}
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
-  return typeof key === "symbol" ? key : String(key);
-}
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1233,13 +1228,7 @@ function getDefaultExportFromCjs (x) {
 function getAugmentedNamespace(n) {
   var f = n.default;
 	if (typeof f == "function") {
-		var a = function a () {
-			if (this instanceof a) {
-				var args = [null];
-				args.push.apply(args, arguments);
-				var Ctor = Function.bind.apply(f, args);
-				return new Ctor();
-			}
+		var a = function () {
 			return f.apply(this, arguments);
 		};
 		a.prototype = f.prototype;
@@ -6614,206 +6603,137 @@ var UnicodeTrie,inflate;inflate=require('tiny-inflate');UnicodeTrie=function(){v
 	 */function config(name){// accessing global.localStorage can trigger a DOMException in sandboxed iframes
 try{if(!global.localStorage)return false;}catch(_){return false;}var val=global.localStorage[name];if(null==val)return false;return String(val).toLowerCase()==='true';}}).call(this);}).call(this,typeof commonjsGlobal!=="undefined"?commonjsGlobal:typeof self!=="undefined"?self:typeof window!=="undefined"?window:{});},{}],306:[function(require,module,exports){arguments[4][4][0].apply(exports,arguments);},{"dup":4}],307:[function(require,module,exports){arguments[4][5][0].apply(exports,arguments);},{"./support/isBuffer":306,"_process":261,"dup":5,"inherits":240}]},{},[1])(1);});})(pdfkit_standalone);var PDFDocument = /*@__PURE__*/getDefaultExportFromCjs(pdfkit_standalone.exports);
 
-var domain;
+var events = {exports: {}};
 
-// This constructor is used to store event handlers. Instantiating this is
-// faster than explicitly calling `Object.create(null)` to get a "clean" empty
-// object (tested with v8 v4.9).
-function EventHandlers() {}
-EventHandlers.prototype = Object.create(null);
-
+var R = (typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === 'object' ? Reflect : null;
+var ReflectApply = R && typeof R.apply === 'function' ? R.apply : function ReflectApply(target, receiver, args) {
+  return Function.prototype.apply.call(target, receiver, args);
+};
+var ReflectOwnKeys;
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys;
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target).concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+};
 function EventEmitter() {
   EventEmitter.init.call(this);
 }
+events.exports = EventEmitter;
+events.exports.once = once$1;
 
-// nodejs oddity
-// require('events') === require('events').EventEmitter
+// Backwards-compat with node 0.10.x
 EventEmitter.EventEmitter = EventEmitter;
-
-EventEmitter.usingDomains = false;
-
-EventEmitter.prototype.domain = undefined;
 EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
 EventEmitter.prototype._maxListeners = undefined;
 
 // By default EventEmitters will print a warning if more than 10 listeners are
 // added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;
-
-EventEmitter.init = function() {
-  this.domain = null;
-  if (EventEmitter.usingDomains) {
-    // if there is an active domain, then attach to it.
-    if (domain.active ) ;
+var defaultMaxListeners = 10;
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + _typeof(listener));
   }
-
-  if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
-    this._events = new EventHandlers();
+}
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function get() {
+    return defaultMaxListeners;
+  },
+  set: function set(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+    defaultMaxListeners = arg;
+  }
+});
+EventEmitter.init = function () {
+  if (this._events === undefined || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
     this._eventsCount = 0;
   }
-
   this._maxListeners = this._maxListeners || undefined;
 };
 
 // Obviously not all Emitters should be limited to 10. This function allows
 // that to be increased. Set to zero for unlimited.
 EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
-  if (typeof n !== 'number' || n < 0 || isNaN(n))
-    throw new TypeError('"n" argument must be a positive number');
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
   this._maxListeners = n;
   return this;
 };
-
-function $getMaxListeners(that) {
-  if (that._maxListeners === undefined)
-    return EventEmitter.defaultMaxListeners;
+function _getMaxListeners(that) {
+  if (that._maxListeners === undefined) return EventEmitter.defaultMaxListeners;
   return that._maxListeners;
 }
-
 EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
-  return $getMaxListeners(this);
+  return _getMaxListeners(this);
 };
-
-// These standalone emit* functions are used to optimize calling of event
-// handlers for fast cases because emit() itself often has a variable number of
-// arguments and can be deoptimized because of that. These functions always have
-// the same number of arguments and thus do not get deoptimized, so the code
-// inside them can execute faster.
-function emitNone(handler, isFn, self) {
-  if (isFn)
-    handler.call(self);
-  else {
-    var len = handler.length;
-    var listeners = arrayClone(handler, len);
-    for (var i = 0; i < len; ++i)
-      listeners[i].call(self);
-  }
-}
-function emitOne(handler, isFn, self, arg1) {
-  if (isFn)
-    handler.call(self, arg1);
-  else {
-    var len = handler.length;
-    var listeners = arrayClone(handler, len);
-    for (var i = 0; i < len; ++i)
-      listeners[i].call(self, arg1);
-  }
-}
-function emitTwo(handler, isFn, self, arg1, arg2) {
-  if (isFn)
-    handler.call(self, arg1, arg2);
-  else {
-    var len = handler.length;
-    var listeners = arrayClone(handler, len);
-    for (var i = 0; i < len; ++i)
-      listeners[i].call(self, arg1, arg2);
-  }
-}
-function emitThree(handler, isFn, self, arg1, arg2, arg3) {
-  if (isFn)
-    handler.call(self, arg1, arg2, arg3);
-  else {
-    var len = handler.length;
-    var listeners = arrayClone(handler, len);
-    for (var i = 0; i < len; ++i)
-      listeners[i].call(self, arg1, arg2, arg3);
-  }
-}
-
-function emitMany(handler, isFn, self, args) {
-  if (isFn)
-    handler.apply(self, args);
-  else {
-    var len = handler.length;
-    var listeners = arrayClone(handler, len);
-    for (var i = 0; i < len; ++i)
-      listeners[i].apply(self, args);
-  }
-}
-
 EventEmitter.prototype.emit = function emit(type) {
-  var er, handler, len, args, i, events, domain;
-  var doError = (type === 'error');
-
-  events = this._events;
-  if (events)
-    doError = (doError && events.error == null);
-  else if (!doError)
-    return false;
-
-  domain = this.domain;
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) {
+    args.push(arguments[i]);
+  }
+  var doError = type === 'error';
+  var events = this._events;
+  if (events !== undefined) doError = doError && events.error === undefined;else if (!doError) return false;
 
   // If there is no 'error' event listener then throw.
   if (doError) {
-    er = arguments[1];
-    if (domain) {
-      if (!er)
-        er = new Error('Uncaught, unspecified "error" event');
-      er.domainEmitter = this;
-      er.domain = domain;
-      er.domainThrown = false;
-      domain.emit('error', er);
-    } else if (er instanceof Error) {
+    var er;
+    if (args.length > 0) er = args[0];
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
       throw er; // Unhandled 'error' event
-    } else {
-      // At least give some kind of context to the user
-      var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
-      err.context = er;
-      throw err;
     }
-    return false;
+    // At least give some kind of context to the user
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
   }
 
-  handler = events[type];
-
-  if (!handler)
-    return false;
-
-  var isFn = typeof handler === 'function';
-  len = arguments.length;
-  switch (len) {
-    // fast cases
-    case 1:
-      emitNone(handler, isFn, this);
-      break;
-    case 2:
-      emitOne(handler, isFn, this, arguments[1]);
-      break;
-    case 3:
-      emitTwo(handler, isFn, this, arguments[1], arguments[2]);
-      break;
-    case 4:
-      emitThree(handler, isFn, this, arguments[1], arguments[2], arguments[3]);
-      break;
-    // slower
-    default:
-      args = new Array(len - 1);
-      for (i = 1; i < len; i++)
-        args[i - 1] = arguments[i];
-      emitMany(handler, isFn, this, args);
+  var handler = events[type];
+  if (handler === undefined) return false;
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i) {
+      ReflectApply(listeners[i], this, args);
+    }
   }
-
   return true;
 };
-
 function _addListener(target, type, listener, prepend) {
   var m;
   var events;
   var existing;
-
-  if (typeof listener !== 'function')
-    throw new TypeError('"listener" argument must be a function');
-
+  checkListener(listener);
   events = target._events;
-  if (!events) {
-    events = target._events = new EventHandlers();
+  if (events === undefined) {
+    events = target._events = Object.create(null);
     target._eventsCount = 0;
   } else {
     // To avoid recursion in the case that type === "newListener"! Before
     // adding it to the listeners, first emit "newListener".
-    if (events.newListener) {
-      target.emit('newListener', type,
-                  listener.listener ? listener.listener : listener);
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type, listener.listener ? listener.listener : listener);
 
       // Re-assign `events` because a newListener handler could have caused the
       // this._events to be assigned to a new object
@@ -6821,269 +6741,254 @@ function _addListener(target, type, listener, prepend) {
     }
     existing = events[type];
   }
-
-  if (!existing) {
+  if (existing === undefined) {
     // Optimize the case of one listener. Don't need the extra array object.
     existing = events[type] = listener;
     ++target._eventsCount;
   } else {
     if (typeof existing === 'function') {
       // Adding the second element, need to change to array.
-      existing = events[type] = prepend ? [listener, existing] :
-                                          [existing, listener];
-    } else {
+      existing = events[type] = prepend ? [listener, existing] : [existing, listener];
       // If we've already got an array, just append.
-      if (prepend) {
-        existing.unshift(listener);
-      } else {
-        existing.push(listener);
-      }
+    } else if (prepend) {
+      existing.unshift(listener);
+    } else {
+      existing.push(listener);
     }
 
     // Check for listener leak
-    if (!existing.warned) {
-      m = $getMaxListeners(target);
-      if (m && m > 0 && existing.length > m) {
-        existing.warned = true;
-        var w = new Error('Possible EventEmitter memory leak detected. ' +
-                            existing.length + ' ' + type + ' listeners added. ' +
-                            'Use emitter.setMaxListeners() to increase limit');
-        w.name = 'MaxListenersExceededWarning';
-        w.emitter = target;
-        w.type = type;
-        w.count = existing.length;
-        emitWarning(w);
-      }
+    m = _getMaxListeners(target);
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true;
+      // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+      var w = new Error('Possible EventEmitter memory leak detected. ' + existing.length + ' ' + String(type) + ' listeners ' + 'added. Use emitter.setMaxListeners() to ' + 'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
     }
   }
-
   return target;
-}
-function emitWarning(e) {
-  typeof console.warn === 'function' ? console.warn(e) : console.log(e);
 }
 EventEmitter.prototype.addListener = function addListener(type, listener) {
   return _addListener(this, type, listener, false);
 };
-
 EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-
-EventEmitter.prototype.prependListener =
-    function prependListener(type, listener) {
-      return _addListener(this, type, listener, true);
-    };
-
-function _onceWrap(target, type, listener) {
-  var fired = false;
-  function g() {
-    target.removeListener(type, g);
-    if (!fired) {
-      fired = true;
-      listener.apply(target, arguments);
-    }
+EventEmitter.prototype.prependListener = function prependListener(type, listener) {
+  return _addListener(this, type, listener, true);
+};
+function onceWrapper() {
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
+    if (arguments.length === 0) return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
   }
-  g.listener = listener;
-  return g;
 }
-
+function _onceWrap(target, type, listener) {
+  var state = {
+    fired: false,
+    wrapFn: undefined,
+    target: target,
+    type: type,
+    listener: listener
+  };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
 EventEmitter.prototype.once = function once(type, listener) {
-  if (typeof listener !== 'function')
-    throw new TypeError('"listener" argument must be a function');
+  checkListener(listener);
   this.on(type, _onceWrap(this, type, listener));
   return this;
 };
-
-EventEmitter.prototype.prependOnceListener =
-    function prependOnceListener(type, listener) {
-      if (typeof listener !== 'function')
-        throw new TypeError('"listener" argument must be a function');
-      this.prependListener(type, _onceWrap(this, type, listener));
-      return this;
-    };
-
-// emits a 'removeListener' event iff the listener was removed
-EventEmitter.prototype.removeListener =
-    function removeListener(type, listener) {
-      var list, events, position, i, originalListener;
-
-      if (typeof listener !== 'function')
-        throw new TypeError('"listener" argument must be a function');
-
-      events = this._events;
-      if (!events)
-        return this;
-
-      list = events[type];
-      if (!list)
-        return this;
-
-      if (list === listener || (list.listener && list.listener === listener)) {
-        if (--this._eventsCount === 0)
-          this._events = new EventHandlers();
-        else {
-          delete events[type];
-          if (events.removeListener)
-            this.emit('removeListener', type, list.listener || listener);
-        }
-      } else if (typeof list !== 'function') {
-        position = -1;
-
-        for (i = list.length; i-- > 0;) {
-          if (list[i] === listener ||
-              (list[i].listener && list[i].listener === listener)) {
-            originalListener = list[i].listener;
-            position = i;
-            break;
-          }
-        }
-
-        if (position < 0)
-          return this;
-
-        if (list.length === 1) {
-          list[0] = undefined;
-          if (--this._eventsCount === 0) {
-            this._events = new EventHandlers();
-            return this;
-          } else {
-            delete events[type];
-          }
-        } else {
-          spliceOne(list, position);
-        }
-
-        if (events.removeListener)
-          this.emit('removeListener', type, originalListener || listener);
-      }
-
-      return this;
-    };
-    
-// Alias for removeListener added in NodeJS 10.0
-// https://nodejs.org/api/events.html#events_emitter_off_eventname_listener
-EventEmitter.prototype.off = function(type, listener){
-    return this.removeListener(type, listener);
+EventEmitter.prototype.prependOnceListener = function prependOnceListener(type, listener) {
+  checkListener(listener);
+  this.prependListener(type, _onceWrap(this, type, listener));
+  return this;
 };
 
-EventEmitter.prototype.removeAllListeners =
-    function removeAllListeners(type) {
-      var listeners, events;
-
-      events = this._events;
-      if (!events)
-        return this;
-
-      // not listening for removeListener, no need to emit
-      if (!events.removeListener) {
-        if (arguments.length === 0) {
-          this._events = new EventHandlers();
-          this._eventsCount = 0;
-        } else if (events[type]) {
-          if (--this._eventsCount === 0)
-            this._events = new EventHandlers();
-          else
-            delete events[type];
-        }
-        return this;
+// Emits a 'removeListener' event if and only if the listener was removed.
+EventEmitter.prototype.removeListener = function removeListener(type, listener) {
+  var list, events, position, i, originalListener;
+  checkListener(listener);
+  events = this._events;
+  if (events === undefined) return this;
+  list = events[type];
+  if (list === undefined) return this;
+  if (list === listener || list.listener === listener) {
+    if (--this._eventsCount === 0) this._events = Object.create(null);else {
+      delete events[type];
+      if (events.removeListener) this.emit('removeListener', type, list.listener || listener);
+    }
+  } else if (typeof list !== 'function') {
+    position = -1;
+    for (i = list.length - 1; i >= 0; i--) {
+      if (list[i] === listener || list[i].listener === listener) {
+        originalListener = list[i].listener;
+        position = i;
+        break;
       }
+    }
+    if (position < 0) return this;
+    if (position === 0) list.shift();else {
+      spliceOne(list, position);
+    }
+    if (list.length === 1) events[type] = list[0];
+    if (events.removeListener !== undefined) this.emit('removeListener', type, originalListener || listener);
+  }
+  return this;
+};
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+EventEmitter.prototype.removeAllListeners = function removeAllListeners(type) {
+  var listeners, events, i;
+  events = this._events;
+  if (events === undefined) return this;
 
-      // emit removeListener for all listeners on all events
-      if (arguments.length === 0) {
-        var keys = Object.keys(events);
-        for (var i = 0, key; i < keys.length; ++i) {
-          key = keys[i];
-          if (key === 'removeListener') continue;
-          this.removeAllListeners(key);
-        }
-        this.removeAllListeners('removeListener');
-        this._events = new EventHandlers();
-        this._eventsCount = 0;
-        return this;
-      }
-
-      listeners = events[type];
-
-      if (typeof listeners === 'function') {
-        this.removeListener(type, listeners);
-      } else if (listeners) {
-        // LIFO order
-        do {
-          this.removeListener(type, listeners[listeners.length - 1]);
-        } while (listeners[0]);
-      }
-
-      return this;
-    };
-
-EventEmitter.prototype.listeners = function listeners(type) {
-  var evlistener;
-  var ret;
-  var events = this._events;
-
-  if (!events)
-    ret = [];
-  else {
-    evlistener = events[type];
-    if (!evlistener)
-      ret = [];
-    else if (typeof evlistener === 'function')
-      ret = [evlistener.listener || evlistener];
-    else
-      ret = unwrapListeners(evlistener);
+  // not listening for removeListener, no need to emit
+  if (events.removeListener === undefined) {
+    if (arguments.length === 0) {
+      this._events = Object.create(null);
+      this._eventsCount = 0;
+    } else if (events[type] !== undefined) {
+      if (--this._eventsCount === 0) this._events = Object.create(null);else delete events[type];
+    }
+    return this;
   }
 
-  return ret;
+  // emit removeListener for all listeners on all events
+  if (arguments.length === 0) {
+    var keys = Object.keys(events);
+    var key;
+    for (i = 0; i < keys.length; ++i) {
+      key = keys[i];
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners('removeListener');
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+    return this;
+  }
+  listeners = events[type];
+  if (typeof listeners === 'function') {
+    this.removeListener(type, listeners);
+  } else if (listeners !== undefined) {
+    // LIFO order
+    for (i = listeners.length - 1; i >= 0; i--) {
+      this.removeListener(type, listeners[i]);
+    }
+  }
+  return this;
 };
-
-EventEmitter.listenerCount = function(emitter, type) {
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+  if (events === undefined) return [];
+  var evlistener = events[type];
+  if (evlistener === undefined) return [];
+  if (typeof evlistener === 'function') return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+  return unwrap ? unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
+};
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
+};
+EventEmitter.listenerCount = function (emitter, type) {
   if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount$1.call(emitter, type);
   }
 };
-
 EventEmitter.prototype.listenerCount = listenerCount$1;
 function listenerCount$1(type) {
   var events = this._events;
-
-  if (events) {
+  if (events !== undefined) {
     var evlistener = events[type];
-
     if (typeof evlistener === 'function') {
       return 1;
-    } else if (evlistener) {
+    } else if (evlistener !== undefined) {
       return evlistener.length;
     }
   }
-
   return 0;
 }
-
 EventEmitter.prototype.eventNames = function eventNames() {
-  return this._eventsCount > 0 ? Reflect.ownKeys(this._events) : [];
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
 };
-
-// About 1.5x faster than the two-arg version of Array#splice().
-function spliceOne(list, index) {
-  for (var i = index, k = i + 1, n = list.length; k < n; i += 1, k += 1)
-    list[i] = list[k];
-  list.pop();
-}
-
-function arrayClone(arr, i) {
-  var copy = new Array(i);
-  while (i--)
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i) {
     copy[i] = arr[i];
+  }
   return copy;
 }
-
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++) {
+    list[index] = list[index + 1];
+  }
+  list.pop();
+}
 function unwrapListeners(arr) {
   var ret = new Array(arr.length);
   for (var i = 0; i < ret.length; ++i) {
     ret[i] = arr[i].listener || arr[i];
   }
   return ret;
+}
+function once$1(emitter, name) {
+  return new Promise(function (resolve, reject) {
+    function errorListener(err) {
+      emitter.removeListener(name, resolver);
+      reject(err);
+    }
+    function resolver() {
+      if (typeof emitter.removeListener === 'function') {
+        emitter.removeListener('error', errorListener);
+      }
+      resolve([].slice.call(arguments));
+    }
+    eventTargetAgnosticAddListener(emitter, name, resolver, {
+      once: true
+    });
+    if (name !== 'error') {
+      addErrorHandlerIfEventEmitter(emitter, errorListener, {
+        once: true
+      });
+    }
+  });
+}
+function addErrorHandlerIfEventEmitter(emitter, handler, flags) {
+  if (typeof emitter.on === 'function') {
+    eventTargetAgnosticAddListener(emitter, 'error', handler, flags);
+  }
+}
+function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
+  if (typeof emitter.on === 'function') {
+    if (flags.once) {
+      emitter.once(name, listener);
+    } else {
+      emitter.on(name, listener);
+    }
+  } else if (typeof emitter.addEventListener === 'function') {
+    // EventTarget does not have `error` event semantics like Node
+    // EventEmitters, we do not listen for `error` events here.
+    emitter.addEventListener(name, function wrapListener(arg) {
+      // IE does not have builtin `{ once: true }` support so we
+      // have to do it manually.
+      if (flags.once) {
+        emitter.removeEventListener(name, wrapListener);
+      }
+      listener(arg);
+    });
+  } else {
+    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + _typeof(emitter));
+  }
 }
 
 var global$1 = (typeof global !== "undefined" ? global :
@@ -10152,7 +10057,7 @@ function base64DetectIncompleteChar(buffer) {
 Readable.ReadableState = ReadableState;
 
 var debug = debuglog('stream');
-inherits$1(Readable, EventEmitter);
+inherits$1(Readable, events.exports);
 
 function prependListener(emitter, event, fn) {
   // Sadly this is not cacheable as some libraries bundle their own
@@ -10252,7 +10157,7 @@ function Readable(options) {
 
   if (options && typeof options.read === 'function') this._read = options.read;
 
-  EventEmitter.call(this);
+  events.exports.call(this);
 }
 
 // Manually shove something into the read() buffer.
@@ -10760,7 +10665,7 @@ Readable.prototype.unpipe = function (dest) {
 // set up data events if they are asked for
 // Ensure readable listeners eventually get something
 Readable.prototype.on = function (ev, fn) {
-  var res = EventEmitter.prototype.on.call(this, ev, fn);
+  var res = events.exports.prototype.on.call(this, ev, fn);
 
   if (ev === 'data') {
     // Start flowing on next tick if stream isn't explicitly paused
@@ -11038,7 +10943,7 @@ function indexOf(xs, x) {
 
 // A bit simpler than readable streams.
 Writable.WritableState = WritableState;
-inherits$1(Writable, EventEmitter);
+inherits$1(Writable, events.exports.EventEmitter);
 
 function nop() {}
 
@@ -11173,7 +11078,7 @@ function Writable(options) {
     if (typeof options.writev === 'function') this._writev = options.writev;
   }
 
-  EventEmitter.call(this);
+  events.exports.EventEmitter.call(this);
 }
 
 // Otherwise people can pipe Writable streams, which is just wrong.
@@ -11686,7 +11591,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-inherits$1(Stream, EventEmitter);
+inherits$1(Stream, events.exports);
 Stream.Readable = Readable;
 Stream.Writable = Writable;
 Stream.Duplex = Duplex;
@@ -11700,7 +11605,7 @@ Stream.Stream = Stream;
 // part of this class) is overridden in the Readable class.
 
 function Stream() {
-  EventEmitter.call(this);
+  events.exports.call(this);
 }
 
 Stream.prototype.pipe = function(dest, options) {
@@ -11750,7 +11655,7 @@ Stream.prototype.pipe = function(dest, options) {
   // don't leave dangling pipes when there are errors.
   function onerror(er) {
     cleanup();
-    if (EventEmitter.listenerCount(this, 'error') === 0) {
+    if (events.exports.listenerCount(this, 'error') === 0) {
       throw er; // Unhandled stream error in pipe.
     }
   }
@@ -15236,17 +15141,18 @@ function structPageNumber$2(doc, args) {
 
 /**
  * @param {import("../types").EuropeanProof} proof
+ * @param {import("../pdf/document.js").Document} doc
  * @return {string[][]}
  */
-function getProofDetails(proof) {
+function getProofDetails(proof, doc) {
   if (proof.eventType === "vaccination") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["vaccineBrand", proof.vaccineBrand], ["vaccineType", proof.vaccineType], ["vaccineManufacturer", proof.vaccineManufacturer], ["doses", proof.doses], ["vaccinationDate", proof.vaccinationDate], ["vaccinationCountry", proof.vaccinationCountry], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["vaccineBrand", proof.vaccineBrand], ["vaccineType", proof.vaccineType], ["vaccineManufacturer", proof.vaccineManufacturer], ["doses", proof.doses], ["vaccinationDate", proof.vaccinationDate], ["vaccinationCountry", regionNames[doc.locale].of(proof.vaccinationCountry)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
   }
   if (proof.eventType === "negativetest") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["testType", proof.testType], ["testName", proof.testName], ["testDate", proof.dateOfTest], ["testResult", "Negative (no Corona)"], ["testLocation", proof.testLocation], ["testManufacturer", proof.testManufacturer], ["countryOfTest", proof.countryOfTest], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["testType", proof.testType], ["testName", proof.testName], ["testDate", proof.dateOfTest], ["testResult", "Negative (no coronavirus detected)"], ["testLocation", proof.testLocation], ["testManufacturer", proof.testManufacturer], ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
   }
   if (proof.eventType === "recovery") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["diseaseRecoveredFrom", "COVID-19"], ["testDate", proof.dateOfTest], ["countryOfTest", proof.countryOfTest], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)], ["validFrom", proof.validFrom], ["validUntil", proof.validUntil]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["diseaseRecoveredFrom", "COVID-19"], ["testDate", proof.dateOfTest], ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)], ["validFrom", proof.validFrom], ["validUntil", proof.validUntil]];
   }
   throwOnUnhandledEventType(proof);
 }
@@ -15361,7 +15267,7 @@ function structEuProof(doc, qrSvg, proof, createdAt, selfPrinted) {
   if (proof.eventType === "vaccination") {
     instructionsContent.push(structValidUntil(doc, proof.validUntil), structEuValidUntilInstructions(doc, selfPrinted));
   }
-  var proofContent = [structProofTitle(doc, proof), structEuQrSection(doc, qrSvg, createdAt), structEuDetailsSection(doc, getProofDetails(proof), proof.certificateNumber)];
+  var proofContent = [structProofTitle(doc, proof), structEuQrSection(doc, qrSvg, createdAt), structEuDetailsSection(doc, getProofDetails(proof, doc), proof.certificateNumber)];
   return doc.pdf.struct("Sect", [structEuTitle(doc, proof), structIntro(doc, "eu"), structFlag(doc, "eu"), doc.pdf.struct("Sect", instructionsContent), doc.pdf.struct("Sect", proofContent)]);
 }
 function structNlTitle(doc, disclosurePolicy) {
