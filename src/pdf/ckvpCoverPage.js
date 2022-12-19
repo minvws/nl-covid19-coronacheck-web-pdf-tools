@@ -288,7 +288,11 @@ function structLetterBody(doc, args) {
             paragraph(
                 "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
             );
-        } else if (args.allProofs && args.allProofs.length && args.version === 2) {
+        } else if (
+            args.allProofs &&
+            args.allProofs.length &&
+            args.version === 2
+        ) {
             paragraph(
                 "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
             );
