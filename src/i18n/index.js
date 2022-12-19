@@ -17,3 +17,8 @@ export function t(locale, segment, data) {
     }
     return translation;
 }
+
+export const regionNames = {
+    en: new Intl.DisplayNames(["en"], { type: "region" }),
+    nl: new Intl.DisplayNames(["nl"], { type: "region" }),
+};

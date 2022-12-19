@@ -1,8 +1,10 @@
+import { regionNames } from "../i18n/index.js";
 /**
  * @param {import("../types").EuropeanProof} proof
+ * @param {import("../pdf/document.js").Document} doc
  * @return {string[][]}
  */
-export function getProofDetails(proof) {
+export function getProofDetails(proof, doc) {
     if (proof.eventType === "vaccination") {
         return [
             ["name", proof.fullName],
@@ -13,7 +15,10 @@ export function getProofDetails(proof) {
             ["vaccineManufacturer", proof.vaccineManufacturer],
             ["doses", proof.doses],
             ["vaccinationDate", proof.vaccinationDate],
-            ["vaccinationCountry", proof.vaccinationCountry],
+            [
+                "vaccinationCountry",
+                regionNames[doc.locale].of(proof.vaccinationCountry),
+            ],
             ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)],
         ];
     }
@@ -25,10 +30,10 @@ export function getProofDetails(proof) {
             ["testType", proof.testType],
             ["testName", proof.testName],
             ["testDate", proof.dateOfTest],
-            ["testResult", "Negative (no Corona)"],
+            ["testResult", "Negative (no coronavirus detected)"],
             ["testLocation", proof.testLocation],
             ["testManufacturer", proof.testManufacturer],
-            ["countryOfTest", proof.countryOfTest],
+            ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)],
             ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)],
         ];
     }
@@ -38,7 +43,7 @@ export function getProofDetails(proof) {
             ["dateOfBirth", proof.birthDateString],
             ["diseaseRecoveredFrom", "COVID-19"],
             ["testDate", proof.dateOfTest],
-            ["countryOfTest", proof.countryOfTest],
+            ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)],
             ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)],
             ["validFrom", proof.validFrom],
             ["validUntil", proof.validUntil],

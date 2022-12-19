@@ -164,7 +164,7 @@ function structEuProof(doc, qrSvg, proof, createdAt, selfPrinted) {
         structEuQrSection(doc, qrSvg, createdAt),
         structEuDetailsSection(
             doc,
-            getProofDetails(proof),
+            getProofDetails(proof, doc),
             proof.certificateNumber
         ),
     ];

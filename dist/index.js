@@ -31,20 +31,20 @@ var en = {
   "eu.userData.disease": "DISEASE TARGETED",
   "eu.userData.diseaseRecoveredFrom": "Disease recovered from",
   "eu.userData.vaccineBrand": "VACCINE",
-  "eu.userData.vaccineType": "VACCINE MEDICINAL PRODUCT",
+  "eu.userData.vaccineType": "VACCINE TYPE",
   "eu.userData.vaccineManufacturer": "VACCINE MANUFACTURER",
-  "eu.userData.vaccinationDate": "DATE OF VACCINATION (DD-MM-YYYY)",
-  "eu.userData.vaccinationCountry": "COUNTRY OF VACCINATION",
+  "eu.userData.vaccinationDate": "VACCINATION DATE (DD-MM-YYYY)",
+  "eu.userData.vaccinationCountry": "VACCINATED IN",
   "eu.userData.doses": "NUMBER IN SERIES OF DOSES",
-  "eu.userData.dateOfVaccination": "DATE OF VACCINATION (DD-MM-YYYY)",
+  "eu.userData.dateOfVaccination": "VACCINATION DATE (DD-MM-YYYY)",
   "eu.userData.certificateIssuer": "CERTIFICATE ISSUER",
   "eu.userData.testType": "TYPE OF TEST",
   "eu.userData.testName": "TEST NAME",
   "eu.userData.testDate": "TEST DATE (DD-MM-YYYY)",
   "eu.userData.testResult": "TEST RESULT",
-  "eu.userData.testLocation": "TESTING CENTRE",
+  "eu.userData.testLocation": "TEST LOCATION",
   "eu.userData.testManufacturer": "TEST MANUFACTURER",
-  "eu.userData.countryOfTest": "MEMBER STATE OF TEST",
+  "eu.userData.countryOfTest": "TESTED IN",
   "eu.userData.validFrom": "Valid from",
   "eu.userData.validUntil": "Valid to",
   "eu.userData.certificateNumber": "UNIQUE CERTIFICATE IDENTIFIER",
@@ -142,7 +142,7 @@ var nl = {
   "eu.userData.diseaseRecoveredFrom": "Ziekte waarvan hersteld",
   "eu.userData.vaccineBrand": "VACCIN",
   "eu.userData.vaccineType": "TYPE VACCIN",
-  "eu.userData.vaccineManufacturer": "PRODUCENT",
+  "eu.userData.vaccineManufacturer": "VACCINPRODUCENT",
   "eu.userData.vaccinationDate": "VACCINATIEDATUM",
   "eu.userData.vaccinationCountry": "GEVACCINEERD IN",
   "eu.userData.doses": "DOSIS",
@@ -153,7 +153,7 @@ var nl = {
   "eu.userData.testDate": "TESTDATUM",
   "eu.userData.testResult": "TESTUITSLAG",
   "eu.userData.testLocation": "TESTLOCATIE",
-  "eu.userData.testManufacturer": "PRODUCENT",
+  "eu.userData.testManufacturer": "TEST PRODUCENT",
   "eu.userData.countryOfTest": "GETEST IN",
   "eu.userData.validFrom": "Geldig vanaf",
   "eu.userData.validUntil": "Geldig tot",
@@ -261,6 +261,14 @@ function t(locale, segment, data) {
   }
   return translation;
 }
+var regionNames = {
+  en: new Intl.DisplayNames(["en"], {
+    type: "region"
+  }),
+  nl: new Intl.DisplayNames(["nl"], {
+    type: "region"
+  })
+};
 
 var NUM = /^\d+$/;
 var MARKDOWN_LINKS = /(\[[^[]+?\]\([^(]+?\)\s?)/g;
@@ -1231,6 +1239,7 @@ function getDefaultExportFromCjs (x) {
 }
 
 function getAugmentedNamespace(n) {
+  if (n.__esModule) return n;
   var f = n.default;
 	if (typeof f == "function") {
 		var a = function a () {
@@ -1261,7 +1270,11 @@ function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
 
-var pdfkit_standalone = {exports: {}};
+var pdfkit_standaloneExports = {};
+var pdfkit_standalone = {
+  get exports(){ return pdfkit_standaloneExports; },
+  set exports(v){ pdfkit_standaloneExports = v; },
+};
 
 (function(module,exports){(function(f){{module.exports=f();}})(function(){return function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof commonjsRequire&&commonjsRequire;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a;}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r);},p,p.exports,r,e,n,t);}return n[i].exports;}for(var u="function"==typeof commonjsRequire&&commonjsRequire,i=0;i<t.length;i++){o(t[i]);}return o;}return r;}()({1:[function(require,module,exports){(function(Buffer){(function(){var stream=require('stream');var fs=require('fs');var zlib=require('zlib');var CryptoJS=require('crypto-js');var fontkit=require('fontkit');var events=require('events');var LineBreaker=require('linebreak');var PNG=require('png-js');/*
 	PDFAbstractReference - abstract class for PDF reference
@@ -6612,7 +6625,7 @@ var UnicodeTrie,inflate;inflate=require('tiny-inflate');UnicodeTrie=function(){v
 	 * @returns {Boolean}
 	 * @api private
 	 */function config(name){// accessing global.localStorage can trigger a DOMException in sandboxed iframes
-try{if(!global.localStorage)return false;}catch(_){return false;}var val=global.localStorage[name];if(null==val)return false;return String(val).toLowerCase()==='true';}}).call(this);}).call(this,typeof commonjsGlobal!=="undefined"?commonjsGlobal:typeof self!=="undefined"?self:typeof window!=="undefined"?window:{});},{}],306:[function(require,module,exports){arguments[4][4][0].apply(exports,arguments);},{"dup":4}],307:[function(require,module,exports){arguments[4][5][0].apply(exports,arguments);},{"./support/isBuffer":306,"_process":261,"dup":5,"inherits":240}]},{},[1])(1);});})(pdfkit_standalone);var PDFDocument = /*@__PURE__*/getDefaultExportFromCjs(pdfkit_standalone.exports);
+try{if(!global.localStorage)return false;}catch(_){return false;}var val=global.localStorage[name];if(null==val)return false;return String(val).toLowerCase()==='true';}}).call(this);}).call(this,typeof commonjsGlobal!=="undefined"?commonjsGlobal:typeof self!=="undefined"?self:typeof window!=="undefined"?window:{});},{}],306:[function(require,module,exports){arguments[4][4][0].apply(exports,arguments);},{"dup":4}],307:[function(require,module,exports){arguments[4][5][0].apply(exports,arguments);},{"./support/isBuffer":306,"_process":261,"dup":5,"inherits":240}]},{},[1])(1);});})(pdfkit_standalone);var PDFDocument = /*@__PURE__*/getDefaultExportFromCjs(pdfkit_standaloneExports);
 
 var domain;
 
@@ -11926,7 +11939,11 @@ BlobStream.prototype.toBlobURL = function (type) {
 };
 var blobStream = BlobStream;
 
-var FileSaver_min = {exports: {}};
+var FileSaver_minExports = {};
+var FileSaver_min = {
+  get exports(){ return FileSaver_minExports; },
+  set exports(v){ FileSaver_minExports = v; },
+};
 
 (function (module, exports) {
   (function (a, b) {
@@ -12005,7 +12022,7 @@ var FileSaver_min = {exports: {}};
     f.saveAs = g.saveAs = g, (module.exports = g);
   });
 })(FileSaver_min);
-var FileSaver = FileSaver_min.exports;
+var FileSaver = FileSaver_minExports;
 
 // Generated by scripts/convert-assets.js
 // DO NOT EDIT THIS FILE MANUALLY
@@ -13394,7 +13411,11 @@ KanjiData.prototype.write = function (bitBuffer) {
 };
 var kanjiData = KanjiData;
 
-var dijkstra = {exports: {}};
+var dijkstraExports = {};
+var dijkstra = {
+  get exports(){ return dijkstraExports; },
+  set exports(v){ dijkstraExports = v; },
+};
 
 (function (module) {
 
@@ -13554,7 +13575,7 @@ var dijkstra = {exports: {}};
   var KanjiData = kanjiData;
   var Regex = regex;
   var Utils = utils$1;
-  var dijkstra$1 = dijkstra.exports;
+  var dijkstra = dijkstraExports;
 
   /**
    * Returns UTF8 byte length
@@ -13840,7 +13861,7 @@ var dijkstra = {exports: {}};
     var segs = getSegmentsFromString(data, Utils.isKanjiModeEnabled());
     var nodes = buildNodes(segs);
     var graph = buildGraph(nodes, version);
-    var path = dijkstra$1.find_path(graph.map, 'start', 'end');
+    var path = dijkstra.find_path(graph.map, 'start', 'end');
     var optimizedSegs = [];
     for (var i = 1; i < path.length - 1; i++) {
       optimizedSegs.push(graph.table[path[i]].node);
@@ -15236,17 +15257,18 @@ function structPageNumber$2(doc, args) {
 
 /**
  * @param {import("../types").EuropeanProof} proof
+ * @param {import("../pdf/document.js").Document} doc
  * @return {string[][]}
  */
-function getProofDetails(proof) {
+function getProofDetails(proof, doc) {
   if (proof.eventType === "vaccination") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["vaccineBrand", proof.vaccineBrand], ["vaccineType", proof.vaccineType], ["vaccineManufacturer", proof.vaccineManufacturer], ["doses", proof.doses], ["vaccinationDate", proof.vaccinationDate], ["vaccinationCountry", proof.vaccinationCountry], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["vaccineBrand", proof.vaccineBrand], ["vaccineType", proof.vaccineType], ["vaccineManufacturer", proof.vaccineManufacturer], ["doses", proof.doses], ["vaccinationDate", proof.vaccinationDate], ["vaccinationCountry", regionNames[doc.locale].of(proof.vaccinationCountry)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
   }
   if (proof.eventType === "negativetest") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["testType", proof.testType], ["testName", proof.testName], ["testDate", proof.dateOfTest], ["testResult", "Negative (no Corona)"], ["testLocation", proof.testLocation], ["testManufacturer", proof.testManufacturer], ["countryOfTest", proof.countryOfTest], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["testType", proof.testType], ["testName", proof.testName], ["testDate", proof.dateOfTest], ["testResult", "Negative (no coronavirus detected)"], ["testLocation", proof.testLocation], ["testManufacturer", proof.testManufacturer], ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
   }
   if (proof.eventType === "recovery") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["diseaseRecoveredFrom", "COVID-19"], ["testDate", proof.dateOfTest], ["countryOfTest", proof.countryOfTest], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)], ["validFrom", proof.validFrom], ["validUntil", proof.validUntil]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["diseaseRecoveredFrom", "COVID-19"], ["testDate", proof.dateOfTest], ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)], ["validFrom", proof.validFrom], ["validUntil", proof.validUntil]];
   }
   throwOnUnhandledEventType(proof);
 }
@@ -15361,7 +15383,7 @@ function structEuProof(doc, qrSvg, proof, createdAt, selfPrinted) {
   if (proof.eventType === "vaccination") {
     instructionsContent.push(structValidUntil(doc, proof.validUntil), structEuValidUntilInstructions(doc, selfPrinted));
   }
-  var proofContent = [structProofTitle(doc, proof), structEuQrSection(doc, qrSvg, createdAt), structEuDetailsSection(doc, getProofDetails(proof), proof.certificateNumber)];
+  var proofContent = [structProofTitle(doc, proof), structEuQrSection(doc, qrSvg, createdAt), structEuDetailsSection(doc, getProofDetails(proof, doc), proof.certificateNumber)];
   return doc.pdf.struct("Sect", [structEuTitle(doc, proof), structIntro(doc, "eu"), structFlag(doc, "eu"), doc.pdf.struct("Sect", instructionsContent), doc.pdf.struct("Sect", proofContent)]);
 }
 function structNlTitle(doc, disclosurePolicy) {
@@ -16352,14 +16374,14 @@ function structLetterBody(doc, args) {
   }
   return doc.pdf.struct("Sect", function () {
     paragraph(formatSalutation(args.address) + ",", bodyTop);
-    if (args.allProofs.length && args.version === 1) {
+    if (args.allProofs && args.allProofs.length && args.version === 1) {
       paragraph("Bij deze brief zitten de coronabewijzen die u bij ons heeft aangevraagd.");
       paragraph("Bij de brief zit ook een pagina met een lettercombinatie. Daarmee kunt u de papieren bewijzen in de CoronaCheck-app zetten. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen.");
       paragraph("Heeft u nog maar 1 vaccinatie gekregen met Pfizer of Moderna? Dan bent u vaak nog niet volledig gevaccineerd. U ontvangt dan alleen een coronabewijs dat u in sommige gevallen al kunt gebruiken voor reizen binnen Europa. Op coronacheck.nl/reizen vindt u alle reisadviezen per land die nu gelden. Een corona-toegangsbewijs dat geldig is in Nederland, krijgt u pas als u volledig gevaccineerd bent.");
       heading("Kloppen uw gegevens niet?");
       paragraph("Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken.");
       paragraph("Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen.");
-    } else if (args.allProofs.length && args.version === 2) {
+    } else if (args.allProofs && args.allProofs.length && args.version === 2) {
       paragraph("Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd.");
       heading("Nederlands bewijs");
       paragraph("In Nederland krijgt u een vaccinatiebewijs als u in de afgelopen 270 dagen volledig bent gevaccineerd, of als u een boostervaccinatie heeft gehad. Een Nederlands herstelbewijs krijgt u alleen als u in de afgelopen 180 dagen een positieve test heeft gehad.");
@@ -16371,7 +16393,7 @@ function structLetterBody(doc, args) {
       heading("Kloppen uw gegevens niet?");
       paragraph("Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken.");
       paragraph("Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen.");
-    } else if (args.allProofs.length) {
+    } else if (args.allProofs && args.allProofs.length) {
       paragraph("Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd.");
       paragraph("Het coronatoegangsbewijs voor toegang in Nederland wordt op dit moment niet meer gebruikt. Daarom ontvangt u alleen uw internationale bewijzen om mee te reizen.");
       heading("Internationaal bewijs om mee te reizen");
