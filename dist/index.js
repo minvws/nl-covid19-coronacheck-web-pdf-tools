@@ -16045,7 +16045,7 @@ var months = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "A
  * @param {import("./document.js").Document} doc
  * @param {Object} args
  * @param {import("../postal.js").Address} args.address
- * @param {boolean} args.proofsFound
+ * @param {import("../types").Proof[]} args.allProofs
  * @param {Date|number} args.createdAt
  * @param {number} [args.packageNumber]
  * @param {number} [args.totalPackages]
@@ -16211,7 +16211,7 @@ function structLetterHeading(doc, args) {
  * @param {import("./document.js").Document} doc
  * @param {Object} args
  * @param {import("../postal.js").Address} args.address
- * @param {boolean} args.proofsFound
+ * @param {import("../types").Proof[]} args.allProofs
  * @param {Date|number} args.createdAt
  * @param {number} [args.packageNumber]
  * @param {number} [args.totalPackages]
@@ -16258,14 +16258,14 @@ function structLetterBody(doc, args) {
   }
   return doc.pdf.struct("Sect", function () {
     paragraph(formatSalutation(args.address) + ",", bodyTop);
-    if (args.proofsFound && args.version === 1) {
+    if (args.allProofs.length && args.version === 1) {
       paragraph("Bij deze brief zitten de coronabewijzen die u bij ons heeft aangevraagd.");
       paragraph("Bij de brief zit ook een pagina met een lettercombinatie. Daarmee kunt u de papieren bewijzen in de CoronaCheck-app zetten. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen.");
       paragraph("Heeft u nog maar 1 vaccinatie gekregen met Pfizer of Moderna? Dan bent u vaak nog niet volledig gevaccineerd. U ontvangt dan alleen een coronabewijs dat u in sommige gevallen al kunt gebruiken voor reizen binnen Europa. Op coronacheck.nl/reizen vindt u alle reisadviezen per land die nu gelden. Een corona-toegangsbewijs dat geldig is in Nederland, krijgt u pas als u volledig gevaccineerd bent.");
       heading("Kloppen uw gegevens niet?");
       paragraph("Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken.");
       paragraph("Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen.");
-    } else if (args.proofsFound && args.version === 2) {
+    } else if (args.allProofs.length && args.version === 2) {
       paragraph("Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd.");
       heading("Nederlands bewijs");
       paragraph("In Nederland krijgt u een vaccinatiebewijs als u in de afgelopen 270 dagen volledig bent gevaccineerd, of als u een boostervaccinatie heeft gehad. Een Nederlands herstelbewijs krijgt u alleen als u in de afgelopen 180 dagen een positieve test heeft gehad.");
@@ -16277,7 +16277,7 @@ function structLetterBody(doc, args) {
       heading("Kloppen uw gegevens niet?");
       paragraph("Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en een bewijs op papier te maken.");
       paragraph("Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen.");
-    } else if (args.proofsFound) {
+    } else if (args.allProofs.length) {
       paragraph("Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd.");
       paragraph("Het coronatoegangsbewijs voor toegang in Nederland wordt op dit moment niet meer gebruikt. Daarom ontvangt u alleen uw internationale bewijzen om mee te reizen.");
       heading("Internationaal bewijs om mee te reizen");
@@ -16286,7 +16286,7 @@ function structLetterBody(doc, args) {
       paragraph("U kunt uw bewijzen ook in de CoronaCheck-app op uw telefoon zetten. Bij deze brief zit een pagina met een lettercombinatie en uitleg. Bewaar de pagina met de lettercombinatie goed, veilig en gescheiden van uw bewijzen.");
       if (args.totalPackages && args.totalPackages > 1) {
         heading("Meer dan 3 bewijzen?");
-        paragraph("Staan er in totaal meer dan 3 bewijzen geregistreerd? Dan kan het zijn dat wij de bewijzen in twee (of meerdere) delen naar u toesturen.");
+        paragraph("U heeft " + args.allProofs.length + " bewijzen aangevraagd, deze worden in " + args.totalPackages + " delen verzonden.");
       }
       heading("Kloppen uw gegevens niet?");
       paragraph("Neem dan contact op met de zorgverlener die u geprikt of getest heeft. Dat kan de GGD, uw huisarts of arts van uw zorginstelling zijn. Zij kunnen u helpen uw gegevens te wijzigingen en de bewijzen op papier aan te vragen.");
