@@ -50,7 +50,7 @@ var months = [
  * @param {import("./document.js").Document} doc
  * @param {Object} args
  * @param {import("../postal.js").Address} args.address
- * @param {boolean} args.proofsFound
+ * @param {import("../types").Proof[]} args.allProofs
  * @param {Date|number} args.createdAt
  * @param {number} [args.packageNumber]
  * @param {number} [args.totalPackages]
@@ -218,7 +218,7 @@ function structLetterHeading(doc, args) {
  * @param {import("./document.js").Document} doc
  * @param {Object} args
  * @param {import("../postal.js").Address} args.address
- * @param {boolean} args.proofsFound
+ * @param {import("../types").Proof[]} args.allProofs
  * @param {Date|number} args.createdAt
  * @param {number} [args.packageNumber]
  * @param {number} [args.totalPackages]
@@ -271,7 +271,7 @@ function structLetterBody(doc, args) {
 
     return doc.pdf.struct("Sect", function () {
         paragraph(formatSalutation(args.address) + ",", bodyTop);
-        if (args.proofsFound && args.version === 1) {
+        if (args.allProofs.length && args.version === 1) {
             paragraph(
                 "Bij deze brief zitten de coronabewijzen die u bij ons heeft aangevraagd."
             );
@@ -288,7 +288,7 @@ function structLetterBody(doc, args) {
             paragraph(
                 "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
             );
-        } else if (args.proofsFound && args.version === 2) {
+        } else if (args.allProofs.length && args.version === 2) {
             paragraph(
                 "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
             );
@@ -314,7 +314,7 @@ function structLetterBody(doc, args) {
             paragraph(
                 "Bent u geprikt door de GGD? Dan kunt u hiervoor bellen naar 0800 - 5090. Zij kunnen helpen uw gegevens te wijzigen en uw bewijs opnieuw op te sturen."
             );
-        } else if (args.proofsFound) {
+        } else if (args.allProofs.length) {
             paragraph(
                 "Bij deze brief zitten de papieren coronabewijzen die u bij ons heeft aangevraagd."
             );
@@ -332,7 +332,11 @@ function structLetterBody(doc, args) {
             if (args.totalPackages && args.totalPackages > 1) {
                 heading("Meer dan 3 bewijzen?");
                 paragraph(
-                    "Staan er in totaal meer dan 3 bewijzen geregistreerd? Dan kan het zijn dat wij de bewijzen in twee (of meerdere) delen naar u toesturen."
+                    "U heeft " +
+                        args.allProofs.length +
+                        " bewijzen aangevraagd, deze worden in " +
+                        args.totalPackages +
+                        " delen verzonden."
                 );
             }
             heading("Kloppen uw gegevens niet?");
