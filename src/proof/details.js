@@ -17,7 +17,7 @@ export function getProofDetails(proof, doc) {
             ["vaccinationDate", proof.vaccinationDate],
             [
                 "vaccinationCountry",
-                regionNames[doc.locale].of(proof.vaccinationCountry),
+                countryNameTranslation(proof.vaccinationCountry, doc.locale),
             ],
             ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)],
         ];
@@ -33,7 +33,10 @@ export function getProofDetails(proof, doc) {
             ["testResult", "Negative (no coronavirus detected)"],
             ["testLocation", proof.testLocation],
             ["testManufacturer", proof.testManufacturer],
-            ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)],
+            [
+                "countryOfTest",
+                countryNameTranslation(proof.countryOfTest, doc.locale),
+            ],
             ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)],
         ];
     }
@@ -43,13 +46,35 @@ export function getProofDetails(proof, doc) {
             ["dateOfBirth", proof.birthDateString],
             ["diseaseRecoveredFrom", "COVID-19"],
             ["testDate", proof.dateOfTest],
-            ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)],
+            [
+                "countryOfTest",
+                countryNameTranslation(proof.countryOfTest, doc.locale),
+            ],
             ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)],
             ["validFrom", proof.validFrom],
             ["validUntil", proof.validUntil],
         ];
     }
     throwOnUnhandledEventType(proof);
+}
+
+/**
+ *
+ * @param ISO3166
+ * @param locale
+ * @returns {*}
+ */
+function countryNameTranslation(ISO3166, locale = "en") {
+    // Force English country translations as per specification
+    locale = "en";
+
+    let countryName = regionNames[locale].of(ISO3166);
+    if (ISO3166.toLowerCase() === "nl") {
+        // Because js intl does not provide article country names, we have to manually add this
+        countryName = "The " + countryName;
+    }
+
+    return countryName;
 }
 
 /**
