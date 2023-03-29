@@ -15262,15 +15262,33 @@ function structPageNumber$2(doc, args) {
  */
 function getProofDetails(proof, doc) {
   if (proof.eventType === "vaccination") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["vaccineBrand", proof.vaccineBrand], ["vaccineType", proof.vaccineType], ["vaccineManufacturer", proof.vaccineManufacturer], ["doses", proof.doses], ["vaccinationDate", proof.vaccinationDate], ["vaccinationCountry", regionNames[doc.locale].of(proof.vaccinationCountry)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["vaccineBrand", proof.vaccineBrand], ["vaccineType", proof.vaccineType], ["vaccineManufacturer", proof.vaccineManufacturer], ["doses", proof.doses], ["vaccinationDate", proof.vaccinationDate], ["vaccinationCountry", countryNameTranslation(proof.vaccinationCountry, doc.locale)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
   }
   if (proof.eventType === "negativetest") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["testType", proof.testType], ["testName", proof.testName], ["testDate", proof.dateOfTest], ["testResult", "Negative (no coronavirus detected)"], ["testLocation", proof.testLocation], ["testManufacturer", proof.testManufacturer], ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["disease", "COVID-19"], ["testType", proof.testType], ["testName", proof.testName], ["testDate", proof.dateOfTest], ["testResult", "Negative (no coronavirus detected)"], ["testLocation", proof.testLocation], ["testManufacturer", proof.testManufacturer], ["countryOfTest", countryNameTranslation(proof.countryOfTest, doc.locale)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)]];
   }
   if (proof.eventType === "recovery") {
-    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["diseaseRecoveredFrom", "COVID-19"], ["testDate", proof.dateOfTest], ["countryOfTest", regionNames[doc.locale].of(proof.countryOfTest)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)], ["validFrom", proof.validFrom], ["validUntil", proof.validUntil]];
+    return [["name", proof.fullName], ["dateOfBirth", proof.birthDateString], ["diseaseRecoveredFrom", "COVID-19"], ["testDate", proof.dateOfTest], ["countryOfTest", countryNameTranslation(proof.countryOfTest, doc.locale)], ["certificateIssuer", normalizeIssuer(proof.certificateIssuer)], ["validFrom", proof.validFrom], ["validUntil", proof.validUntil]];
   }
   throwOnUnhandledEventType(proof);
+}
+
+/**
+ *
+ * @param ISO3166
+ * @param locale
+ * @returns {*}
+ */
+function countryNameTranslation(ISO3166) {
+  var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en";
+  // Force English country translations as per specification
+  locale = "en";
+  var countryName = regionNames[locale].of(ISO3166);
+  if (ISO3166.toLowerCase() === "nl") {
+    // Because js intl does not provide article country names, we have to manually add this
+    countryName = "The " + countryName;
+  }
+  return countryName;
 }
 
 /**
