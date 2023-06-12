@@ -1,8 +1,8 @@
 var en = {
   "eu.instructions": "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity on your travels\n\nShow your certificate at the border, or upon request",
   "eu.validUntil": "This paper certificate is valid until:",
-  "eu.createNew.prePrinted": "After this you can call 0800-1421 to request a new certificate.",
-  "eu.createNew.selfPrinted": "After this you can print a new certificate via [coronacheck.nl/en/print](https://coronacheck.nl/en/print).",
+  "eu.createNew.prePrinted": " ",
+  "eu.createNew.selfPrinted": " ",
   "eu.negativetest.title": "International test certificate",
   "eu.negativetest.qrTitle": "Test certificate",
   "eu.negativetest.propertiesLabel": "Negative test details",
@@ -122,8 +122,8 @@ var en = {
 var nl = {
   "eu.instructions": "Zorg dat dit coronabewijs op A4 is geprint (mag in zwart-wit)\n\nNeem een geldig identiteitsbewijs mee op reis\n\nLaat het bewijs zien aan de buitenlandse grens of als er in andere landen om gevraagd wordt",
   "eu.validUntil": "Dit papieren bewijs is geldig tot:",
-  "eu.createNew.prePrinted": "Daarna kan je bellen naar 0800-1421 om een nieuw bewijs aan te vragen.",
-  "eu.createNew.selfPrinted": "Daarna kan je een nieuw bewijs printen via [coronacheck.nl/print](https://coronacheck.nl/print).",
+  "eu.createNew.prePrinted": " ",
+  "eu.createNew.selfPrinted": " ",
   "eu.negativetest.title": "Internationaal testbewijs",
   "eu.negativetest.qrTitle": "Testbewijs",
   "eu.negativetest.propertiesLabel": "Gegevens negatieve test",
