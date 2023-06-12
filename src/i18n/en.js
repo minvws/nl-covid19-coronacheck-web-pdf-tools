@@ -3,9 +3,9 @@ export default {
         "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity on your travels\n\nShow your certificate at the border, or upon request",
     "eu.validUntil": "This paper certificate is valid until:",
     "eu.createNew.prePrinted":
-        "After this you can call 0800-1421 to request a new certificate.",
+        " ",
     "eu.createNew.selfPrinted":
-        "After this you can print a new certificate via [coronacheck.nl/en/print](https://coronacheck.nl/en/print).",
+        " ",
     "eu.negativetest.title": "International test certificate",
     "eu.negativetest.qrTitle": "Test certificate",
     "eu.negativetest.propertiesLabel": "Negative test details",
