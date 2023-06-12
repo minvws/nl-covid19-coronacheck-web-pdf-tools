@@ -13,3 +13,7 @@ export { addCkvpCoverPage } from "./pdf/ckvpCoverPage.js";
 export { addCouplingCodePage } from "./pdf/couplingCodePage.js";
 export { addDccCoverPage } from "./pdf/dccCoverPage.js";
 export { addProofPage } from "./pdf/proofPage.js";
+
+export function helloWorld() {
+	return "Hello World!!!11"
+}

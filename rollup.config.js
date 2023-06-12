@@ -7,7 +7,7 @@ import pkg from "./package.json";
 
 export default {
     input: "src/index.js",
-    output: { file: pkg.main },
+    output: { file: pkg.main, format: "iife", name: "pdfTools" },
     plugins: [
         resolve({ preferBuiltins: false, browser: true }),
         commonjs(),

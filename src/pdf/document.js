@@ -1,6 +1,6 @@
 import PDFDocument from "pdfkit/js/pdfkit.standalone.js";
 import blobStream from "blob-stream";
-import FileSaver from "file-saver";
+// import FileSaver from "file-saver";
 import { t } from "../i18n/index.js";
 import { base64ToBuffer, blobToDataURI } from "../util.js";
 import { addDccCoverPage } from "./dccCoverPage.js";
@@ -15,6 +15,7 @@ import { addXmp } from "./xmp.js";
  * @property {(fn: () => void|Promise<void>) => void} queueBlankPage
  * @property {(type: string, contents: (() => void) | any[]) => void} addStruct
  * @property {(destination: WritableStream) => WritableStream} pipe
+ * @property {() => Promise<string>} read
  * @property {PDFDocument} pdf Internal pdfkit PDFDocument instance
  */
 
@@ -133,6 +134,25 @@ export function createDocument(locale, args) {
         return destination;
     }
 
+    function read() {
+        if (finalized) {
+            throw new Error("Cannot pipe(), document already finalized.");
+        }
+        return pageQueue
+            .then(function () {
+                finalized = true;
+                documentStruct && documentStruct.end();
+                pdf.end();
+
+                // return pdf.read();
+                return 'omgwtf';
+            })
+            .catch(function (error) {
+                console.error("Error adding page(s)", error);
+                return 'could not add page: ' + error + ' --> ' + error.stack;
+            });
+    }
+
     var pageQueue = Promise.resolve();
     var finalized = false;
     return {
@@ -142,6 +162,7 @@ export function createDocument(locale, args) {
         queueBlankPage: queueBlankPage,
         addStruct: addStruct,
         pipe: pipe,
+        read: read,
         pdf: pdf,
     };
 }
@@ -180,19 +201,34 @@ export function getDocument(args) {
     args.proofs.forEach(function (proof) {
         addProofPage(doc, proof, args.createdAt, { selfPrinted: true });
     });
-    return documentToBlob(doc).then(function (blob) {
-        return blobToDataURI(blob).then(function (dataURI) {
-            return {
-                output: function () {
-                    return dataURI;
-                },
-                save: function (filename) {
-                    FileSaver.saveAs(blob, filename);
-                },
-                blob: blob,
-            };
-        });
-    });
+
+    return doc.read();
+
+    // return documentToBlob(doc).then(function (blob) {
+    //     return blob.text();
+    // })
+
+    // return new Promise((resolve) => {
+    //     resolve({
+    //         // output: function() { return '' },
+    //         // save: function() { return '' },
+    //         // // blob: new Blob(),
+    //     });
+    // });
+
+    // return documentToBlob(doc).then(function (blob) {
+    //     return blobToDataURI(blob).then(function (dataURI) {
+    //         return {
+    //             output: function () {
+    //                 return dataURI;
+    //             },
+    //             save: function (filename) {
+    //                 // FileSaver.saveAs(blob, filename);
+    //             },
+    //             blob: blob,
+    //         };
+    //     });
+    // });
 }
 
 /**

@@ -19,6 +19,6 @@ export function t(locale, segment, data) {
 }
 
 export const regionNames = {
-    en: new Intl.DisplayNames(["en"], { type: "region" }),
-    nl: new Intl.DisplayNames(["nl"], { type: "region" }),
+    en: "en", // new Intl.DisplayNames(["en"], { type: "region" }),
+    nl: "nl", // new Intl.DisplayNames(["nl"], { type: "region" }),
 };

@@ -40,16 +40,16 @@ function pad(n) {
     return n < 10 ? "0" + n : "" + n;
 }
 
-var formatter =
-    typeof Intl !== "undefined" &&
-    new Intl.DateTimeFormat("nl-NL", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        timeZoneName: "short",
-    });
+var formatter = null;
+    // typeof Intl !== "undefined" &&
+    // new Intl.DateTimeFormat("nl-NL", {
+    //     year: "numeric",
+    //     month: "2-digit",
+    //     day: "2-digit",
+    //     hour: "2-digit",
+    //     minute: "2-digit",
+    //     timeZoneName: "short",
+    // });
 
 /**
  * @param {Date|number|string} datetime - Date instance, timestamp in ms, or ISO8601 string
