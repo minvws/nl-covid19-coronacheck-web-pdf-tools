@@ -2,7 +2,7 @@ export default {
     "eu.instructions":
         "Make sure this certificate is printed on A4 (black-and-white allowed)\n\nBring a valid proof of identity on your travels\n\nShow your certificate at the border, or upon request",
     "eu.validUntil": "This paper certificate is valid until:",
-    "eu.createNew.prePrinted":  " ",
+    "eu.createNew.prePrinted": " ",
     "eu.createNew.selfPrinted": " ",
     "eu.negativetest.title": "International test certificate",
     "eu.negativetest.qrTitle": "Test certificate",
