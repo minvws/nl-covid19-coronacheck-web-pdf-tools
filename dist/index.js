@@ -15231,7 +15231,7 @@ function sectContents(doc, euProofs, euAllProofs, internationalProofScanned) {
       font: "ROSansRegular",
       size: fontSizeStandard$3,
       position: [marginX + 3, null],
-      label: "•",
+      label: "-",
       indent: 6,
       lineGap: 1
     })]));
@@ -15248,7 +15248,7 @@ function sectContents(doc, euProofs, euAllProofs, internationalProofScanned) {
       font: "ROSansRegular",
       size: fontSizeStandard$3,
       position: [marginX + 3, null],
-      label: "•",
+      label: "-",
       indent: 6,
       lineGap: 1
     })]), doc.pdf.struct("Sect", [structText(doc, "H2", {
@@ -15265,7 +15265,7 @@ function sectContents(doc, euProofs, euAllProofs, internationalProofScanned) {
       font: "ROSansRegular",
       size: fontSizeStandard$3,
       position: [marginX + 3, null],
-      label: "•",
+      label: "-",
       indent: 6,
       lineGap: 1
     })]));
